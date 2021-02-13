@@ -118,3 +118,4 @@ int main() {
 
 	Window_mgr m;
 }
+:q

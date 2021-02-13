@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "sales_data.h"
+#include "struct_sales_data.h"
 
 
 int main() {
