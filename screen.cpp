@@ -68,6 +68,8 @@ class Window_mgr {
 	public:
 		// location ID for each screen on the window
 		using ScreenIndex = std::vector<Screen>::size_type;
+		// add a Screen to the window and returns its index
+		ScreenIndex addScreen(const Screen&);
 		// reset the Screen at the given position to all blanks
 		void clear(ScreenIndex);
 	private:
@@ -78,6 +80,12 @@ void Window_mgr::clear(ScreenIndex i) {
 	Screen &s = screens[i];
 	// reset the contents of that Screen to all blanks
 	s.contents = string(s.height * s.width, ' ');
+}
+// return type is see before we're in the scope of Window mgr - Primer 7.4
+Window_mgr::ScreenIndex
+Window_mgr::addScreen(const Screen &s) {
+	screens.push_back(s);
+	return screens.size() - 1;
 }
 
 int main() {
@@ -118,3 +126,4 @@ int main() {
 
 	Window_mgr m;
 }
+

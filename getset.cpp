@@ -51,11 +51,6 @@ int main (int argc, char *argv[])
 	Foo2 f;
 	f.x() = 5;
 	cout << f.x() << endl;
-
+}
 
 	
-
-
-
-
-}
