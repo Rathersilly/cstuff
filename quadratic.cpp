@@ -9,6 +9,10 @@ using namespace std;
 // Quadratic equation - doesnt work for cmplex roots though yet
 
 vector<double> quad(double a, double b, double c) {
+	if ((b*b - 4 * a * c) < 0) {
+		throw(range_error("will be complex roots"));
+	}
+	
 	// x = -b +- root(b*2 - 4ac)
 	// over 2a
 	vector<double> x;
@@ -47,14 +51,19 @@ int main() {
 	int a, b, c;
 	vector<double> results;
 	a = 2;
-	b = 1;
-	c = 1;
+	b = -5;
+	c = 2;
 
 	//while(cin >> a, cin >> b, cin >> c) {
+	try {
 		results = quad(a, b,  c);
-	//}
-	for(auto p = results.begin();p != results.end();p++) {
-		cout << *p << endl;
+	
+		for(auto p = results.begin();p != results.end();p++) {
+			cout << *p << endl;
+		}
+	}
+	catch (range_error &e) {
+		cout << "exception: " << e.what() << endl;
 	}
 
 

@@ -7,9 +7,21 @@
 #include "goo.h"
 using namespace std;
 
+class Token {
+	public:
+		char kind;
+		double value;
+};
 
 
 int main() {
-	cout << foo();
+	
+	string expression;
+	cout << "Expression: ";
+	cin >> expression;
+
+
+
+
 
 }
