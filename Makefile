@@ -11,6 +11,9 @@ OBJFILES = foo.cpp goo.cpp
 # the build target executable:
 TARGET = a.out
 
+# all is a convention - when ran with 0 args, make will run the first thing it sees,
+# which by convention is all
+# http://www.gnu.org/software/make/manual/html_node/Standard-Targets.html#Standard-Targets
 all: $(TARGET)
 
 $(TARGET): $(OBJFILES)
