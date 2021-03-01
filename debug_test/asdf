@@ -1,0 +1,60 @@
+
+
+function SibAnnotateAll(scope)
+function <SNR>3_new_window()
+function <SNR>8_SynSet()
+function fzf#vim#colors(...)
+function remote#define#FunctionOnChannel(channel, method, sync, name, opts)
+function <SNR>3_reload_plugins()
+function <SNR>32_cmd_ok(cmd) abort
+function <SNR>3_last_non_empty_line(lines)
+function <SNR>3_bang(cmd, ...)
+function GdbHandleEvent(...)
+function <SNR>3_checkout(spec)
+function ale#events#LintOnEnter(buffer) abort
+function <SNR>45_LocalBrowse(dirname)
+function <SNR>58_format_win(tab, win, buf)
+function remote#host#Require(name) abort
+function provider#pythonx#DetectByModule(module, major_version) abort
+function <SNR>58_csi(color, fg)
+function AirlineWebDevIcons(...)
+function nerdtree#and(x, y) abort
+function fzf#vim#command_history(...)
+function ale#util#SetBufferContents(buffer, lines) abort
+function <SNR>44_DoMatchParen()
+function GdbInit(...)
+function <SNR>58_ag_to_qf(line, has_column)
+function <SNR>3_system(cmd, ...)
+function fzf#exec(...)
+function <SNR>29_openVSplit(target) abort
+function ale#linter#Get(original_filetypes) abort
+function remote#host#LoadErrorForHost(host, log) abort
+function fzf#vim#windows(...)
+function <SNR>11_defaults()
+function <SNR>58_action_for(key, ...)
+function <SNR>3_status_update() range
+function <SNR>58_complete_trigger()
+function <SNR>56_Lint(buffer, should_lint_file, timer_id) abort
+function WebDevIconsNERDTreeMapOpenRecursively(node)
+function <SNR>3_plug_fnamemodify(fname, mods)
+function nerdtree#runningCygwin() abort
+function <SNR>29_activateFileNode(node) abort
+function <SNR>38_CursorHoldUpdate()
+function <SNR>3_do(pull, force, todo)
+function nerdtree#ui_glue#openBookmark(name) abort
+function <SNR>3_find_name(lnum)
+function <SNR>11_version_requirement(val, min)
+function NERDTreeAddKeyMap(options)
+function <SNR>58_tags_sink(lines)
+function <SNR>3_log4(name, msg)
+function <SNR>12_fzf_restore_colors()
+function ale#events#QuitRecently(buffer) abort
+function <SNR>11_execute(dict, command, use_height, temps) abort
+function <SNR>29_jumpToPrevSibling(node) abort
+function NERDTreeAddMenuSeparator(...)
+function NERDTreeMoveNode()
+function NERDTreeCopyPath()
+function nerdtree#deprecated(func, ...) abort
+function <SNR>11_fzf_fnamemodify(fname, mods)
+function <SNR>58_function(name)
+function <SNR>58_prepend_opts(dict, eopts)
