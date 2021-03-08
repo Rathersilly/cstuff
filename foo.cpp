@@ -1,20 +1,35 @@
+
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <list>
+//#include <vector>
+//#include <deque>
+//#include <list>
+#include <forward_list>
 #include <cmath>
 using namespace std;
 
+// doing ch9 of C++ Primer - containers stuff
+// erase is doing wonkythings - segfault
+void display(forward_list<int> x){
+
+	for(auto i = x.begin(); i != x.end();i++) {
+		cout << *i << " ";
+	}
+	cout << endl;
+
+}
 
 
 int main() {
-	double a = 2;
-	double b = 0;
-	cout << a/b;
+	forward_list<int> a {1,2,3,4};
+	a.insert_after(a.begin(),5);
+	
+	display(a);
+	cout << *a.begin() << endl;
 
-	int c = 3;
-	int d = 0;
-	//cout << c/d;
+
+
+
 
 }
