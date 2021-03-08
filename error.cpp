@@ -85,14 +85,10 @@ int main ()
 
 	cout <<   a << " " << b << endl;
 	cout <<   c << " " << d << endl;
-	//cout <<  i  << " " << j << endl;
-
-
 
 	cout << "hi" << endl;
 
 	cout <<	divide(3,4) << endl;
-
 	cout <<	divide(3,0) << endl;
 	
 	cout << endl;
