@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 
 using namespace std;
@@ -21,11 +22,21 @@ double primary();
 vector<Token> tok;
 
 int main() {
-	try {
+	string ex = "2 + 3+4";
+	stringstream exstr(ex);
+	string t;
 
+	try {
 		cout << "please enter expression: " << endl;
-		while (cin) {
-			cout << expression() << '\n';
+		while (exstr >> t) {
+			if (t== "+") {
+				tok.push_back(Token('+'));
+			}
+			else if (t== "2") {
+				tok.push_back(Token('n', stoi(t)));
+			}
+
+		cout << t << endl;
 		}
 	}
 	//string exp = "3+4*3";
@@ -33,12 +44,10 @@ int main() {
 		cerr << e.what() << endl;
 		return 1;
 	}
-	catch (...) {
+	/*catch (...) {
 		cerr << "exception \n";
 		return 2;
-	}
-
-	
+	}*/
 
 
 
@@ -66,6 +75,7 @@ double expression() {
 	}
 }
 double term() {
+	cout << "in term" << endl;
 	double left = primary();
 	Token t = get_token();
 	while(true) {
@@ -89,6 +99,7 @@ double term() {
 	}
 }
 double primary() {
+	cout << "in prim" << endl;
 	Token t = get_token();
 	switch(t.kind) {
 		case '(':
