@@ -1,0 +1,7 @@
+{ year 1990 }
+{ year 1991 { month jun }}
+{ year 1992 { month mar (1 0 62.2)}{ month jun(1 0 62.2) }}
+{ year 2000
+	{ month mar (1 0 62.2)(1 0 62.2)(1 0 62.2)}
+	{ month jun (1 0 62.2)}
+}

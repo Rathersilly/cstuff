@@ -1,0 +1,12 @@
+hi there
+this
+is
+a file
+of input
+data
+1
+2
+3
+4
+5
+bye!
