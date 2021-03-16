@@ -20,6 +20,7 @@ istream& operator>>(istream& is, Reading& r)
 	int h;
 	double t;
 	is >> d >> h >> t >> ch2;
+	cout << ch1 << " " << d << " " << h << " " << t << " " << ch2 << endl;
 	if (!is || ch2!=')') throw runtime_error("bad reading");
 	r.day = d;
 	r.hour = h;
@@ -44,24 +45,25 @@ istream& operator>>(istream& is, Month& m)
 	m.month = month_to_int(mm);
 	cout << "in month: ";
 	cout << m.month << endl;
-	cout << m.day[0].hour[0] << endl;
+	//cout << m.day[0].hour[0] << endl;
 
 	Reading r;
 	int duplicates = 0;
 	int invalids = 0;
 	//cout << "r: ";
 	while (is >> r) {
-			cout << r.day << " " << r.hour << endl;
+			//cout << r.day << " " << r.hour << endl;
 			if (is_valid(r)) {
 				if (m.day[r.day].hour[r.hour] != not_a_reading) {
 					++duplicates;
 				}
 				m.day[r.day].hour[r.hour] = r.temp;
+				cout << "back in month";
+				cout << r.day << " " << r.hour << " " << r.temp << endl;
 			}
 			else
 				++invalids;
 	}
-	cout << r.day << endl;
 	//cout << m.day << endl;
 	//if(invalids) throw runtime_error("invalid readings in a month");
 	//if(duplicates) throw runtime_error("duplicate readings in a month");
@@ -91,7 +93,7 @@ istream& operator>>(istream& is, Year& y)
 	while(true) {
 		Month m; 		// get a clean m each time around;
 		if(!(is>>m)) break;
-		cout << "y" << m.month << endl;
+		//cout << "y" << m.month << endl;
 		y.month[m.month] = m;
 	}
 	end_of_loop(is,'}',"bad end of year");
