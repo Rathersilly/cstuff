@@ -10,15 +10,19 @@
 //#include <unistd.h>
 //#include <climits>          /// INT_MAX
 //#include <algorithm>
+//#include <temp.h>
 #include "temp.h"
 using namespace std;
 
 // Reading PPP ch 10 - iostreams
 
-const int not_a_reading = -7777;		// less than absolute 0
-const int not_a_month = -1;
-const int implausible_min = -200;
-const int implausible_max = 200;
+Day::Day() : hour(24) {
+	for (int i = 0; i<hour.size(); ++i) {
+		hour[i] = not_a_reading;
+	}
+}
+Month::Month() : month(not_a_month), day(32) {}
+Year::Year() : month(12) {}
 
 void end_of_loop(istream& is, char term, const string& message) {
 	if (is.fail()) {
@@ -59,36 +63,6 @@ int month_to_int(string s)
 	for (int i=0;i<12;i++) if(month_input_tbl[i]==s) return i;
 	return -1;
 }
-struct Day {
-	vector<double> hour;
-	Day();
-};
-
-Day::Day() : hour(24) {
-	for (int i = 0; i<hour.size(); ++i) {
-		hour[i] = not_a_reading;
-	}
-}
-
-struct Month {
-	int month;
-	vector<Day> day;
-	Month() : month(not_a_month), day(32) {}
-};
-
-struct Year {
-	int year;
-	vector<Month> month;
-	Year() : month(12) {}
-};
-
-
-struct Reading {
-	int day;
-	int hour;
-	double temp;
-	// Reading(int h, double t) :hour(h), temp(t) {}
-};
 bool is_valid(const Reading& r) {
 	if(r.day < 1 || 31 < r.day) return false;
 	if(r.hour < 1 || 23 < r.hour) return false;
