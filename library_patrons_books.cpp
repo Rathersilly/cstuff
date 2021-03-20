@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 // PPP ch 9 exercises
 
@@ -99,6 +100,8 @@ int main() {
 	lib.list_books();
 
 
+		ofstream ofs{"output.txt"};
+		ofs <<  b;
 
 
 
