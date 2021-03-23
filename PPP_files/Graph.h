@@ -116,7 +116,6 @@ typedef double Fct(double);
 class Shape  {	// deals with color and style, and holds sequence of lines
 protected:
 	Shape() { }
-	Shape(initializer_list<Point> lst);  // add() the Points to this Shape
 
 //	Shape() : lcolor(fl_color()),
 //		ls(0),
@@ -125,6 +124,7 @@ protected:
 	void add(Point p){ points.push_back(p); }
 	void set_point(int i, Point p) { points[i] = p; }
 public:
+	Shape(initializer_list<Point> lst);  // add() the Points to this Shape
 	void draw() const;					// deal with color and draw_lines
 protected:
 	virtual void draw_lines() const;	// simply draw the appropriate lines
