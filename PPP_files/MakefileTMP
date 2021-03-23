@@ -10,25 +10,19 @@ LDFLAGS = -lfltk -lXext -lX11 -lm -lfltk_images
 
 OBJDIR = obj
 OBJFILES = foo.o Graph.o GUI.o Window.o
-OBJECTS = $(patsubst %,$(OBJDIR)/%,$(OBJFILES))
+# OBJFILES = foo.cpp Graph.cpp GUI.cpp Window.cpp
 # the build target executable:
 TARGET = a.out
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS) 
-
-$(OBJDIR)/%.o: %.cpp
-	@mkdir -p $(OBJDIR)
-	$(CC) -c -o $(OBJDIR)/$*.o $*.cpp
-
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS) 
 clean:
-	$(RM) -f $(OBJECTS) $(TARGET) *~
+	$(RM) -f $(OBJFILES) $(TARGET) *~
 
 
 
 # g++ -w -Wall -std=c++11 Graph.cpp Window.cpp GUI.cpp Simple_window.cpp foo.cpp `fltk-config --ldflags --use-images`
-# g++ -w -Wall -std=c++11 Graph.cpp Window.cpp GUI.cpp foo.cpp `fltk-config --ldflags --use-images`
 
 # https://www.fltk.org/doc-1.3/basics.html

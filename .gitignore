@@ -41,4 +41,4 @@
 *.app
 
 # Obj directory
-obj/
+*obj/
