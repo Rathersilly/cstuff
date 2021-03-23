@@ -7,6 +7,8 @@ CC = g++
 
 CFLAGS  = -g -Wall
 LDFLAGS = -lfltk -lXext -lX11 -lm -lfltk_images
+
+OBJDIR = obj
 OBJFILES = foo.cpp Graph.cpp GUI.cpp Window.cpp
 # the build target executable:
 TARGET = a.out
