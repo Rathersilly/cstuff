@@ -126,7 +126,7 @@ protected:
 public:
 	Shape(initializer_list<Point> lst);  // add() the Points to this Shape
 	void draw() const;					// deal with color and draw_lines
-protected:
+public:
 	virtual void draw_lines() const;	// simply draw the appropriate lines
 public:
 	virtual void move(int dx, int dy);	// move the shape +=dx and +=dy
@@ -197,7 +197,7 @@ struct Rectangle : Shape {
 		if (h<=0 || w<=0) error("Bad rectangle: first point is not top left");
 		add(x);
 	}
-	void draw_lines() const;
+	virtual void draw_lines() const;
 
 //	void set_fill_color(Color col) { fcolor = col; }
 //	Color fill_color() { return fcolor; }

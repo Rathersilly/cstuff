@@ -22,7 +22,7 @@ struct Smiley : Circle {
 
 		leye->draw_lines();
 		reye->draw_lines();
-	}
+	} 
 
 	Mark *leye;
 	Mark *reye;
