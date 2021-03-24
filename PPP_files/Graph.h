@@ -283,13 +283,14 @@ struct Circle : Shape {
 		add(Point{ p.x - r, p.y - r });
 	}
 
-	void draw_lines() const;
+	virtual void draw_lines() const;
 
 	Point center() const { return { point(0).x + r, point(0).y + r }; }
 
 	void set_radius(int rr) { r=rr; }
 	int radius() const { return r; }
-private:
+	// making this public for brevity's sake
+//private:
 	int r;
 };
 
@@ -336,6 +337,8 @@ struct Marks : Marked_polyline {
 
 struct Mark : Marks {
 	Mark(Point xy, char c) : Marks(string(1,c)) {add(xy); }
+	Mark() : Marks(string(1,'X')) {};
+	void operator=(Mark& m);
 };
 
 /*

@@ -13,35 +13,28 @@
 //#include <algorithm>
 using namespace std;
 struct A {
-	virtual void v() {cout << "Av" << endl;}
-	void f() {cout << "Af" << endl;}
+	A() {};
+	A (int rr):r(rr) {
 
-	//virtual void pv() = 0;
+		cout << r;
+	}
+	int r;
 
 };
-struct B : A {
-	void v() {cout << "Bv" << endl;}
-	void f() {cout << "Bf" << endl;}
+struct B : public A {
+	B(int rr) : A(rr) { cout << r; }
 };
-struct C : A{
-	void v() const{cout << "Cv" << endl;}
-	void f() {cout << "Cf" << endl;}
-};
-void call(A& x) {
-	x.v();
-	x.f();
-}
-
+//struct C : A{
+//};
 
 
 int main() {
 
-	A a;
-	B b;
-	C c;
-	call(a);
-	call(b);
-	call(c);
+	A a(1);
+	B b(4);
+	//C c(3);
+	b.r = 5;
+	cout << b.r;
 
 	
 
