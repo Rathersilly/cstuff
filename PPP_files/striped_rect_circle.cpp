@@ -2,7 +2,7 @@
 #include "Graph.h"// get access to our graphics library facilities
 using namespace Graph_lib;// our graphics facilities are in Graph_lib
 
-// ch 14 ex: striped rectangle and circle
+// ch 14 ex striped rectangle and circle
 
 struct Immobile_Circle : Circle {
 	Immobile_Circle (Point p, int rr) : Circle(p, rr) {}

@@ -22,7 +22,7 @@ struct A {
 
 };
 struct B : public A {
-	B(int rr) : A(rr) { cout << r; }
+	//B(int rr) : A(rr) { cout << r; }
 };
 //struct C : A{
 //};
