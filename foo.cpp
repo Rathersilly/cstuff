@@ -12,30 +12,19 @@
 //#include <climits>          /// INT_MAX
 //#include <algorithm>
 using namespace std;
-struct A {
-	A() {};
-	A (int rr):r(rr) {
-
-		cout << r;
-	}
-	int r;
-
-};
-struct B : public A {
-	//B(int rr) : A(rr) { cout << r; }
-};
-//struct C : A{
-//};
 
 
 int main() {
+	try {
+		throw runtime_error("hello");
+	}
+	catch (exception &e){
 
-	A a(1);
-	B b(4);
-	//C c(3);
-	b.r = 5;
-	cout << b.r;
+		cout << "hi" << endl;
+		cout << e.what() << endl;
+	}
 
-	
+
+		
 
 }
