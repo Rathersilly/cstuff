@@ -56,8 +56,7 @@ struct Striped_Circle : Circle {
 	}
 };
 
-int main()
-{
+int main() {
 
 	Point pt {100,100};
 

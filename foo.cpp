@@ -1,4 +1,5 @@
 #include <string>
+#include <string.h>
 //#include <sstream>
 #include <iostream>
 #include <fstream>
@@ -11,18 +12,18 @@
 //#include <unistd.h>
 //#include <climits>          /// INT_MAX
 //#include <algorithm>
+#include <unistd.h> 		// usleep
 using namespace std;
+
+struct God {
+	string name;
+	string mythology;
+	string weapon;
+}
+
 
 
 int main() {
+	
 
-
-
-	int x = 4;
-	auto y = [&r = x, x = x + 1]()->int
-	{
-		r += 2;
-		return x * x;
-	}(); // updates ::x to 6 and initializes y to 25.
-	cout << y;
 }
