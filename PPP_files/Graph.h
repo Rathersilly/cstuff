@@ -111,6 +111,10 @@ public:
 	int size() const { return v.size(); }
 };
 
+// Consider changing this so that it can accept a lambda with arguments
+// https://groups.google.com/g/ppp-public/c/WBHYlwS6m3g
+//typedef std::function<double (double)> Fct;
+
 typedef double Fct(double);
 
 class Shape  {	// deals with color and style, and holds sequence of lines
