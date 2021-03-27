@@ -7,7 +7,7 @@ CC = g++
 
 CFLAGS  = -g -Wall
 LDFLAGS =
-OBJFILES = foo.cpp goo.cpp
+OBJFILES = foo.cpp #goo.cpp
 # the build target executable:
 TARGET = a.out
 
