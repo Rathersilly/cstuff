@@ -15,15 +15,13 @@
 #include <unistd.h> 		// usleep
 using namespace std;
 
-struct God {
-	string name;
-	string mythology;
-	string weapon;
-}
 
 
 
 int main() {
+	for(int i = 0;i<10;i++) {
+		cout << i << endl;
+	}
 	
 
 }

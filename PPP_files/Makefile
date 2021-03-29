@@ -5,12 +5,15 @@ CC = g++
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
 
-CFLAGS  = -g -Wall
+CFLAGS  = -g -ggdb -Wall
 LDFLAGS = -lfltk -lXext -lX11 -lm -lfltk_images
 
 OBJDIR = obj
 OBJFILES = foo.o Graph.o GUI.o Window.o
+# -ggdb doesnt work here:
 OBJECTS = $(patsubst %,$(OBJDIR)/%,$(OBJFILES))
+# -ggdb adds symbols if this is objects:
+#OBJECTS = foo.cpp
 # the build target executable:
 TARGET = a.out
 
@@ -21,7 +24,7 @@ $(TARGET): $(OBJECTS)
 
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(OBJDIR)
-	$(CC) -c -o $(OBJDIR)/$*.o $*.cpp
+	$(CC) $(CFLAGS) -c -o $(OBJDIR)/$*.o $*.cpp
 
 clean:
 	$(RM) -f $(OBJECTS) $(TARGET) *~
