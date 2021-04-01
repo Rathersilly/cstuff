@@ -1,5 +1,6 @@
 //#define INFO cout << '\t' << __PRETTY_FUNCTION__ << " - " << __FILE__ << " - "<< __DATE__ << endl;
 #define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
+#define {{ cout << "\t" << __PRETTY_FUNCTION__ << endl;
 #include <iostream>
 #include <string>
 #include <string.h>
@@ -20,6 +21,7 @@ using namespace std;
 class vector {
 	int sz;
 	double* elem; 					
+	int space;
 public:
 	vector() {INFO sz = 0;elem=nullptr;} 		// default constructor
 	vector(int s) :sz(s), elem{new double[s]} {INFO}
@@ -47,13 +49,44 @@ public:
 	double& operator[](int n) {INFO return elem[n];}
 	double operator[](int n) const {INFO return elem[n];}
 
+	void reserve(int newalloc)
+	{
+		if(newalloc<=space) return;
+		double* p = new double[newalloc];
+		for(int i=0;i<sz;++i) { p[i] = elem[i];}
+		delete[] elem;
+		elem = p;
+		space = newalloc;
+	}
+	int capacity() const { return space;}o
+	void resize(int newsize);
+		// make the vector have newsize elements
+		// initialze each new element with the default value 0.0
+		reserve(newsize);
+		for(int i=sz;i<newsize,++i;) elem[i] = 0;
+		sz = newsize;
+	}
+	void push_back(double d)
+		// increase vector size by one; initialize the new element with d
+	{
+		if(space==0) {reserve(8);}
+		else if (sz==space) {reserve(2*space);}		// double the space
+		elem[sz] = d;								
+		++sz;
+	}
+
+
+
+
 };
+
 vector::vector(const vector& arg)
 	// allocate elements, then initialize them by copying
 	:sz{arg.sz},elem{new double[arg.sz]}
 {INFO
 	copy(arg.elem,&arg.elem[sz],elem); 	//std::copy()
 }
+
 vector& vector::operator=(const vector& a)
 	// make this vector a copy of a
 {INFO
@@ -64,15 +97,16 @@ vector& vector::operator=(const vector& a)
 	sz = a.sz;
 	return *this;
 }
+
 vector::vector(vector&& a)
 	:sz{a.sz},elem{a.elem} 				// copy a's elem and sz
 {INFO
 	a.sz = 0;							// make a the empty vector
 	a.elem = nullptr;
 }
+
 vector& vector::operator=(vector&& a) 	// move a to this vector
-{
-	INFO
+{ INFO
 	delete[] elem;						// deallocate old space
 	elem = a.elem;						// copy a's elem and sz
 	sz = a.sz;
@@ -82,49 +116,10 @@ vector& vector::operator=(vector&& a) 	// move a to this vector
 }
 
 vector letsmove()
-{
-	INFO
+{ INFO
 	vector res{1,2,3,4,5};
 	return res;
 }
-
-bool is_palindrome(const string& s) {
-	int first = 0;
-	int last = s.size()-1;
-	while(first < last) {
-		if (s[first] != s[last]) { return false;}
-		first += 1;
-		last -= 1;
-	}
-	return true;
-	//throw runtime_error("hmmmmm something went wrong");
-}
-bool is_palindrome(const char* first,const char* last) {
-	while(first < last) {
-		if(*first!=*last) { return false; }
-		++first;
-		--last;
-	}
-	return true;
-}
-bool is_palindrome_rec(const char* first,const char* last) {
-	while(first<last) {
-		if(*first!=*last) { return false;}
-		return is_palindrome_rec(first+1,last-1);
-	}
-	return true;
-}
-
-istream& read_word(istream& is,char* buffer,int max) {
-	is.width(max);
-	is.getline(buffer,max);
-	//is >> buffer;
-	cout <<"sup" << endl;
-	return is;
-}
-
-
-
 
 int main() {
 
@@ -169,17 +164,4 @@ int main() {
 	v4[3] = 9.3;
 	cout << v4[1] << " " <<v4[3] << endl;
 
-	cout << is_palindrome("tenet") << " " << is_palindrome("abcd") << endl;
-	cout << is_palindrome("anna") << " " << is_palindrome("pananananan") << endl;
-
-	constexpr int max = 10;
-	char word[max];
-	// IDK why this doesnt work
-	//read_word(cin,word,max);
-	//cout << word;
-	char* w1 = "tenet";
-	cout << is_palindrome(&w1[0],&w1[strlen(w1)-1]) << " " << is_palindrome("pananananan") << endl;
-	cout << is_palindrome_rec(&w1[0],&w1[strlen(w1)-1]) << " " << is_palindrome("pananananan") << endl;
-
-	
 }

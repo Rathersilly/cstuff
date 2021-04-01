@@ -24,16 +24,15 @@ using namespace std;
 // - move assignment
 // - destructor
 
-template<typename T>
 class vector {
 	int sz;
-	T* elem; 					
+	double* elem; 					
 	int space;
 public:
 	vector() {INFO sz = 0;elem=nullptr;} 		// default constructor
-	vector(int s) :sz(s), elem{new T[s]} {INFO}
-	vector(initializer_list<T> lst)	// constructor from args
-		:sz{lst.size()},elem{new T[sz]}
+	vector(int s) :sz(s), elem{new double[s]} {INFO}
+	vector(initializer_list<double> lst)	// constructor from args
+		:sz{lst.size()},elem{new double[sz]}
 	{INFO
 		copy(lst.begin(),lst.end(),elem);
 	}
@@ -51,16 +50,16 @@ public:
 	int size() const {INFO return sz; }
 	int capacity() const { return space;}
 
-	T get(int n) {INFO return elem[n]; }
-	T set(int n,T v) {INFO elem[n] = v;}
-	T& operator[](int n) {INFO return elem[n];}
-	T operator[](int n) const {INFO return elem[n];}
+	double get(int n) {INFO return elem[n]; }
+	double set(int n,double v) {INFO elem[n] = v;}
+	double& operator[](int n) {INFO return elem[n];}
+	double operator[](int n) const {INFO return elem[n];}
 	void print();
 
 	void reserve(int newalloc)
 	{
 		if(newalloc<=space) return;
-		T* p = new T[newalloc];
+		double* p = new double[newalloc];
 		for(int i=0;i<sz;++i) { p[i] = elem[i];}
 		delete[] elem;
 		elem = p;
@@ -76,28 +75,26 @@ public:
 		sz = newsize;
 	}
 
-	void push_back(T d)
+	void push_back(double d)
 		// increase vector size by one; initialize the new element with d
 	{
 		if(space==0) {reserve(8);}
-		else if (sz==space) {reserve(2*space);}		// T the space
+		else if (sz==space) {reserve(2*space);}		// double the space
 		elem[sz] = d;								
 		++sz;
 	}
 
 };
 
-template<typename T>
-vector<T>::vector(const vector& arg)				// copy constructor
+vector::vector(const vector& arg)				// copy constructor
 	// allocate elements,
 	// then initialize them by copying
-	:sz{arg.sz},elem{new T[arg.sz]}
+	:sz{arg.sz},elem{new double[arg.sz]}
 {INFO
 	copy(arg.elem,&arg.elem[sz],elem); 	//std::copy()
 }
 
-template<typename T>
-vector<T>& vector<T>::operator=(const vector& a) 		// copy assignment
+vector& vector::operator=(const vector& a) 		// copy assignment
 	// make this vector a copy of a
 {INFO
 	if (this==&a) return *this;			// self-assignment, no work needed
@@ -106,7 +103,7 @@ vector<T>& vector<T>::operator=(const vector& a) 		// copy assignment
 		sz = a.sz;
 		return *this;
 	}
-	T* p = new T[a.sz];
+	double* p = new double[a.sz];
 	copy(a.elem,&a.elem[sz],p);
 	delete[] elem;
 	space = sz = a.sz;
@@ -114,16 +111,14 @@ vector<T>& vector<T>::operator=(const vector& a) 		// copy assignment
 	return *this;
 }
 
-template<typename T>
-vector<T>::vector(vector&& a)				// move constructor
+vector::vector(vector&& a)				// move constructor
 	:sz{a.sz},elem{a.elem} 				
 {INFO
 	a.sz = 0;							// make a an empty vector
 	a.elem = nullptr;					// (it will be destructed soon probs)
 }
 
-template<typename T>
-vector<T>& vector<T>::operator=(vector&& a) 	// move assignment
+vector& vector::operator=(vector&& a) 	// move assignment
 { INFO
 	delete[] elem;						// deallocate old space
 	elem = a.elem;						// copy a's elem and sz
@@ -133,8 +128,13 @@ vector<T>& vector<T>::operator=(vector&& a) 	// move assignment
 	return *this;						// return a self-reference
 }
 
-template<typename T>
-void vector<T>::print()
+vector letsmove()
+{ INFO
+	vector res{1,2,3,4,5};
+	return res;
+}
+
+void vector::print()
 {
 	for(int i=0;i<sz;++i) {
 		cout << setw(4) << elem[i];
@@ -142,16 +142,9 @@ void vector<T>::print()
 	cout << endl;
 }
 
-template<typename T>
-vector<T> letsmove()
-{ INFO
-	vector<T> res{1,2,3,4,5};
-	return res;
-}
-
 int main() {
 
-	vector<double> v1{4};
+	vector v1{4};
 
 	v1.set(4,5.5);
 	cout << GREEN << "get and set" << RESET << endl;
@@ -161,16 +154,16 @@ int main() {
 
 
 	// these 2 seem equal? ya it seems optional - S18.2
-	//vector<double> v2 = {1.2,4.7,8.8, 10.5,44.4};
+	//vector v2 = {1.2,4.7,8.8, 10.5,44.4};
 	cout << GREEN << "list initialization" << RESET << endl;
-	vector<double> v2 {1.2,4.7,8.8, 10.5,44.4};
+	vector v2 {1.2,4.7,8.8, 10.5,44.4};
 	cout << v2.get(4) << endl;
 	cout << v2.get(3) << endl;
 	cout << v2.get(2) << endl;
 
 	cout << GREEN << "copy constructor" << RESET << endl;
-	vector<double> v3 = v2;
-	// equivalent to vector<double> v3 {v2};
+	vector v3 = v2;
+	// equivalent to vector v3 {v2};
 	cout << v3.get(4) << endl;
 	v2.set(4,99.9);
 	cout << v2.get(4) << endl;
@@ -186,13 +179,13 @@ int main() {
 	cout << v2.get(4) << endl;
 
 	cout << GREEN << "move constructor" << RESET << endl;
-	vector<double> v4 = letsmove<double>();
+	vector v4 = letsmove();
 	v4[3] = 9.3;
 	cout << v4[1] << " " <<v4[3] << endl;
 
 	cout << GREEN << "move assignment" << RESET << endl;
 
-	v2 = letsmove<double>();
+	v2 = letsmove();
 	cout << v2.get(4) << endl;
 
 	cout << GREEN << "copy constructor (now with SPACE!)" << RESET << endl;

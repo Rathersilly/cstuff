@@ -12,7 +12,7 @@
 #include <string.h>
 using namespace std;
 
-// ch 18 vector class
+// ch 19 vector class - with template / space included
 //
 // 7 essential operations to consider:
 //
