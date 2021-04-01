@@ -53,6 +53,10 @@ struct Group : public Shape{
 
 
 };
+int random_color() {
+	
+}
+
 int main()
 {
 
