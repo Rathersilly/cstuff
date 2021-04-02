@@ -7,12 +7,14 @@
 #define BLUE    "\033[34m"      /* Blue */
 #include <iostream>
 #include <iomanip>				// setw()
-
+#include <stdexcept>			// std::out_of_range()
 #include <string>
 #include <string.h>
 using namespace std;
 
 // ch 19 vector class part 2 - allocator
+// NOTE: stl vector provides ranged checked at() and unchecked operator[]()
+//
 // NOTE: construct and destroy are deprecated in c++17 and will be removed in c++ 20
 // look up allocator_traits for info
 //
@@ -28,6 +30,7 @@ using namespace std;
 //
 // T* allocate(size_t n);
 // 		// allocates enough storage to store n instances
+// 		
 // 		// and returns a pointer to it
 //
 // void deallocate(T* p, size_t n);
@@ -40,6 +43,12 @@ using namespace std;
 // 		// calls the destructor of the object where p points to
 //
 // allocator#allocate differs from new in that 
+
+struct Range_error : out_of_range {
+	// add an index that we can inspect 
+	int index;
+	Range_error(int i) : out_of_range{"Range error"},index(i){}
+};
 
 template<typename T, typename A = allocator<T>>
 class vector {
@@ -69,10 +78,26 @@ public:
 	int size() const {INFO return sz; }
 	int capacity() const { return space;}
 
-	T get(int n) {INFO return elem[n]; }
-	void set(int n,T v) {INFO elem[n] = v;}
-	T& operator[](int n) {INFO return elem[n];}
-	T operator[](int n) const {INFO return elem[n];}
+	T at(int n)
+	{INFO
+		cout << n << " " << sz << endl;
+		//if(n<0||n>sz) throw out_of_range("hi");
+		if(n<0||n>sz) throw Range_error{n};
+		return elem[n];
+	}
+	void set(int n,T v)
+	{INFO
+		if(n<0||n>sz) throw out_of_range("hi");
+		elem[n] = v;
+	}
+	T& operator[](int n)
+	{INFO
+		return elem[n];
+	}
+	T operator[](int n) const
+	{INFO
+		return elem[n];
+	}
 	void print();
 
 	// outside class def, this function def would be:
@@ -115,20 +140,6 @@ public:
 	}
 
 };
-
-/*
- * 				CONSTRUCTORS
-
-vector()
-{INFO
-	alloc
-	sz = 0;
-	elem=nullptr; 		// default constructor
-}
-
-
- * 				END OF CONSTRUCTORS
- */
 
 //template<typename T>//, typename A>// = allocator<T>>
 template<typename T, typename A>
@@ -195,39 +206,43 @@ vector<T> letsmove()
 
 int main() {
 
-	vector<double> v1{4};
+	vector<double> v1(4);
 
-	v1.set(4,5.5);
-	cout << GREEN << "get and set" << RESET << endl;
-	cout << v1.get(4) << endl;
-	cout << v1.get(3) << endl;
-	cout << v1.get(2) << endl;
-
+	try{v1.set(4,5.5);}catch(...){}
+	cout << GREEN << "at and set" << RESET << endl;
+	//cout << v1.at(4) << endl;
+	cout << v1.at(3) << endl;
+	cout << v1.at(2) << endl;
+	cout << v1[3] << endl;
+	cout << v1[2] << endl;
+	cout << v1[6] << endl;
+	try { cout << v1.at(10) << endl;}
+	catch (Range_error& e) {cout << RED <<  e.what() << ", index:  " << e.index << RESET << endl;}
 
 	// these 2 seem equal? ya it seems optional - S18.2
 	//vector<double> v2 = {1.2,4.7,8.8, 10.5,44.4};
 	cout << GREEN << "list initialization" << RESET << endl;
 	vector<double> v2 {1.2,4.7,8.8, 10.5,44.4};
-	cout << v2.get(4) << endl;
-	cout << v2.get(3) << endl;
-	cout << v2.get(2) << endl;
+	cout << v2.at(4) << endl;
+	cout << v2.at(3) << endl;
+	cout << v2.at(2) << endl;
 
 	cout << GREEN << "copy constructor" << RESET << endl;
 	vector<double> v3 = v2;
 	// equivalent to vector<double> v3 {v2};
-	cout << v3.get(4) << endl;
+	cout << v3.at(4) << endl;
 	v2.set(4,99.9);
-	cout << v2.get(4) << endl;
-	cout << v3.get(4) << endl;
+	cout << v2.at(4) << endl;
+	cout << v3.at(4) << endl;
 
 	cout << GREEN << "copy assignment" << RESET << endl;
 	v2 = v1;
-	cout << v1.get(4) << endl;
-	cout << v2.get(4) << endl;
+	cout << v1.at(4) << endl;
+	cout << v2.at(4) << endl;
 
 	v2.set(4,99.9);
-	cout << v1.get(4) << endl;
-	cout << v2.get(4) << endl;
+	cout << v1.at(4) << endl;
+	cout << v2.at(4) << endl;
 
 	cout << GREEN << "move constructor" << RESET << endl;
 	vector<double> v4 = letsmove<double>();
@@ -237,7 +252,7 @@ int main() {
 	cout << GREEN << "move assignment" << RESET << endl;
 
 	v2 = letsmove<double>();
-	cout << v2.get(4) << endl;
+	cout << v2.at(4) << endl;
 
 	cout << GREEN << "copy constructor (now with SPACE!)" << RESET << endl;
 	v2 = v2;
