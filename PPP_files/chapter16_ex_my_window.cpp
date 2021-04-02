@@ -10,7 +10,8 @@
 using namespace std;
 using namespace Graph_lib;
 
-// ch 16 exercise - My_window
+// ch 16 exercise - My_window - TODO: uh, pretty sure the shape vector
+// will slice up your rectangles - should fix
 
 class My_window : public Graph_lib::Window {
 public:
