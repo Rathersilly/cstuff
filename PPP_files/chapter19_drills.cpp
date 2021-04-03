@@ -20,7 +20,7 @@ struct S {
 	S(T t) : val(t) {}
 
 	T& get();
-	const T cget(); 		// cant overload with just return type
+	const T cget(); 		// cant overload get with just return type
 	const T get() const;	// but can with const function
 	void set(T);
 	void operator=(T t);
