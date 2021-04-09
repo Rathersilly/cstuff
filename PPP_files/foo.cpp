@@ -15,36 +15,78 @@
 #include <vector>
 using namespace std;
 
-// ppp ch19 ex 12 - file handle class
-
-// file handle class
-struct FH {
-	string fname;
-	ofstream ofs;
-	FH(string s) : fname(s) {
-		ofs.open(fname);
-	}
-	~FH() {ofs.close();}
-
-
-
+// ppp ch20 List class
+template<class Elem>
+struct Link {
+	Link* prev;
+	Link* succ;
+	Elem val;
 };
 
-FH& operator<<(FH& fh, int x)
+
+template<class Elem>
+class List {
+	public:
+		class Iterator;
+		Link<Elem>* first;
+		Link<Elem>* last;
+		List(Elem* e) {
+			first = new Link<Elem>;
+			last = new Link<Elem>;
+			first->prev = nullptr;
+			first->succ = last;
+			first->val = *e;
+			last->prev = first;
+			last->succ = nullptr;
+			last->val = 0;
+		}
+
+
+
+		Iterator begin();
+		Iterator end();
+
+		Iterator insert(Iterator p, const Elem& v);
+		Iterator erase(Iterator p);
+
+		void push_back(const Elem& v);
+		void push_front(const Elem& v);
+		void pop_front();
+		void pop_back();
+
+		Elem& front() { return *begin(); }
+		Elem& back() { return *end().prev;}
+
+};
+template<class Elem>
+class List<Elem>::Iterator {
+};
+
+/*
+		Iterator insert(Iterator p, const Elem& v);
+		Iterator erase(Iterator p);
+		void push_back(const Elem& v);
+		void push_front(const Elem& v);
+		void pop_front();
+		void pop_back();
+
+		Elem& front();
+		Elem& back();
+
+		*/
+
+int main()
 {
-	fh.ofs << x;
-	return fh;
-}
+	int a = 10;
+	int b = 20;
+	List<int> l {&a};
+	//cout << *l.first << endl;
 
 
 
-
-int main() {
-	FH fh("age_data.txt");
-	int x = 5;
-	fh << x;
-	cout << x;
 
 
 }
+
+
 
