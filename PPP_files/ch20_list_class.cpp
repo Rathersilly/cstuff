@@ -26,11 +26,22 @@ struct Link {
 
 template<class Elem>
 class List {
-	public:
-		class Iterator;
 		Link<Elem>* first;
 		Link<Elem>* last;
-		List(Elem* e) {
+	public:
+		class Iterator;
+		List()
+		{
+			first = new Link<Elem>;
+			last = first;
+			first->prev = nullptr;
+			first->succ = last;
+			last->prev = first;
+			last->succ = nullptr;
+		}
+
+		List(Elem* e)
+		{
 			first = new Link<Elem>;
 			last = new Link<Elem>;
 			first->prev = nullptr;
@@ -41,14 +52,14 @@ class List {
 			//last->val = 0;
 		}
 
-
-
-		Iterator begin() {
+		Iterator begin() 
+		{
 			Iterator i;
 			i.link = first;
 			return i;
 		}
-		Iterator end() {
+		Iterator end()
+		{
 			Iterator i;
 			i.link = last;
 			return i;
@@ -81,7 +92,7 @@ class List<Elem>::Iterator {
 			return *this;
 		}
 		Iterator& operator--() {
-			link = link.prev;	
+			link = link->prev;	
 			return *this;
 		}
 
@@ -92,8 +103,8 @@ class List<Elem>::Iterator {
 		Link<Elem> operator=(Iterator i) {
 			return *i.link;
 		}
-		Link<Elem> operator*() {
-			return link;
+		Elem operator*() {
+			return link->val;
 		}
 
 };
@@ -119,12 +130,13 @@ typename List<Elem>::Iterator List<Elem>::insert(Iterator p, const Elem& v)
 void List<Elem>::push_back(const Elem& v)
 {
 	Link<Elem>* new_end = new Link<Elem>;
-	new_end->succ = nullptr;
-	new_end->val = v;
+	last->val = v;
 	last->succ = new_end;
+	cout << "pushback" << last->val << endl;
+	new_end->prev =last;
+	new_end->succ = nullptr;
 	last = new_end;
 }
-
 
 	template<typename Elem>
 void List<Elem>::push_front(const Elem& v)
@@ -132,6 +144,7 @@ void List<Elem>::push_front(const Elem& v)
 	Link<Elem>* new_beg = new Link<Elem>;
 	new_beg->val = v;
 	new_beg->succ = first;
+	first->prev = new_beg;
 	first = new_beg;
 	new_beg->prev = nullptr;
 }
@@ -162,12 +175,44 @@ int main()
 	int a = 10;
 	int b = 20;
 	List<int> l {&a};
+	print(l);
+	cout << *l.begin() << endl;
 	//cout << *l.first << endl;
-	for(int i=0;i<10;++i) {
+
+	cout << endl << "test push_back and push_front" << endl;
+	//for(int i=0;i<10;++i) {
+	for(int i=0;i<12;++i) {
 		l.push_back(i);
+	}
+	print(l);
+	cout << endl << "test iteration" << endl;
+	for(auto a = l.begin();a != l.end();++a) {
+		cout << *a << " ";
 	}
 	l.push_front(66);
 
+	cout << endl << "test iteration" << endl;
+	for(auto a = l.begin();a != l.end();++a) {
+		cout << *a<< " ";
+	}
+
+	cout << endl << "test empty list" << endl;
+	List<int> m;
+	for(auto a = m.begin();a != m.end();++a) {
+		cout << *a<< " ";
+	}
+	cout << endl << "test backwards iteration" << endl;
+	auto x = l.end();
+	while(x != nullptr){
+		cout << *x<< " ";
+		--x;
+	}
+
+
+
+
+	cout << endl << "tests over" << endl;
+	cout << endl;
 	print(l);
 
 
