@@ -120,7 +120,6 @@ int main()
 	else {
 		cout << "not found" << endl;
 	}
-
 	thing = find(v.begin(),v.end(),17);
 	if (thing != v.end()) {
 		cout << "found: " << *thing << endl;
