@@ -7,7 +7,6 @@
 #include <cstring>
 #include <array>
 #include <algorithm>
-#include <functional>		// std::function
 using namespace std;
 
 // PPP ch21 21.4.2 - Predicates on class members
@@ -66,51 +65,4 @@ int main()
 	sort(vr.begin(),vr.end(),Cmp_by_name());
 	print(vr);
 
-	cout << endl << "sorting by name (with lambda): " << endl;
-	sort(vr.begin(),vr.end(),
-			[](const Record& a, const Record& b)
-			{ return a.name < b.name; }
-		);
-	print(vr);
-
-	cout << endl << "sorting by address (with lambda) (implicit return type): " << endl;
-	sort(vr.begin(),vr.end(),
-			[](const Record& a, const Record& b)
-			{ return strncmp(a.addr,b.addr,24) < 0; }
-		);
-	print(vr);
-
-	cout << endl << "sorting by address (with lambda) (auto return type): " << endl;
-	sort(vr.begin(),vr.end(),
-			[](const Record& a, const Record& b) -> auto
-			{ return strncmp(a.addr,b.addr,24) < 0; }
-		);
-	print(vr);
-
-	// lol why does asdf get set to 1?
-	auto asdf = []() -> int { return 5; };
-	cout << asdf << endl;
-
-	auto add = [](int a,int b) {return a+b;};
-	cout << add(3,6) << endl;
-
-	// has to be compiled with std=c++17 at least
-	// or will require template args
-	std::function add2 {[](int a,int b) {return a+b;}};
-	cout << add2(3,6) << endl;
-	cout << __cplusplus << endl;
-
-	// https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/
-	//   // A regular function pointer.
-	//   // Only works with an empty capture clause.
-	double (*addNumbers1)(double, double){
-		[](double a, double b) {
-			return (a + b);
-		}
-	};
-
-	cout << addNumbers1(1, 2) << endl;
 }
-
-
-

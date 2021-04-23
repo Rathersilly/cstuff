@@ -4,8 +4,9 @@ CC = g++
 # compiler flags:
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
+#  -std=c14 by default, it seems
 
-CFLAGS  = -g -ggdb -Wall
+CFLAGS  = -g -ggdb -Wall -std=c++17
 LDFLAGS = -lfltk -lXext -lX11 -lm -lfltk_images
 
 OBJDIR = obj
