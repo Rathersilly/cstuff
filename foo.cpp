@@ -4,7 +4,7 @@
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */
 #define BLUE    "\033[34m"      /* Blue */
-// #include <string>
+#include <string>
 // #include <string.h>
 // #include <sstream>
 // #include <fstream>
@@ -25,42 +25,91 @@
 
 using namespace std;
 
-// honestly, compile time feels the same with any of these
-//#include <Eigen/Dense>
-#include <Eigen/Core>
-//#include <Eigen/Sparse>
+char* strdup(const char* c)
+{
+	int n = 0;
+	while(c[n]) {
+		n += 1;
+	}
 
-// MatrixXd type is X dimensional matrix of type double
-using Eigen::MatrixXd;
-// how to make alias
-using matrix = Eigen::MatrixXd;
+	char* newstr = new char[n];
+	for(int i = 0; i < n;++i) {
+		newstr[i] = c[i];
+	}
 
-using namespace Eigen;
+	return newstr;
+		
+}
+
+char* findx(char* s,const char* x)
+{
+	int n = 0;
+	while(s[n]) {
+		if (s[n] == x[0]) {
+			// loop until either chars or not equal, or reach end of one of the strings
+			int i = 0;
+			while(s[n + i] && x[i] && s[n+i] == x[i]) {
+				++i;
+				if (!x[i]) {
+					return s + n;
+				}
+			}
+		}
+		++n;
+	}
+	return nullptr;
+}
+
+int strcmp(const char* s1, const char* s2)
+{
+	int i = 0;
+	while(s1[i]) {
+		if (!s2[i]) { return 1; }
+		else if (s1[i] < s2[i]) { return -1; }
+		else if (s2[i] < s1[i]) { return 1; }
+		++i;
+	}
+	if (s2[i]) { return -1;}
+	return 0;
+}
+
+
+
+
+string catdot(const string& s1,const string& s2,char separator = '.')
+{
+	string memo = s1 + separator + s2;
+
+
+	return memo;
+}
+
+
+
 
 
 int main()
 {
-	//MatrixXd m(2,2);
-	// matrix m(2,2);
-	// m(0,0) = 3;
-	// m(1,0) = 2.5;
-	// m(0,1) = -1;
-	// m(1,1) = m(1,0) + m(0,1);
-	// std::cout << m << std::endl;
+	char str[] = "hello";
+	char* newstr = strdup(str);
+	cout << str << endl;
+	cout << newstr << endl;
+	newstr[3] = 'x';
+	
+	cout << "***" << endl;
+	cout << str << endl;
+	cout << "###" << endl;
+	cout << newstr << endl;
 
+	char s[] = "ll";
+	char* found = findx(str,s);
+	cout << found  << endl;
+	char str2[] = "hello";
+	cout << strcmp(str,str2)  << endl;
+	cout << strcmp(str,s)  << endl;
 
-	MatrixXd m = MatrixXd::Random(3,3);
-	m = (m + MatrixXd::Constant(3,3,1.2)) * 50;
-	cout << "m =" << endl << m << endl;
-	VectorXd v(3);
-	v << 1, 2, 3;
-	cout << "m * v =" << endl << m * v << endl;
-
-	MatrixXd n = MatrixXd::Random(3,3);
-	cout << "n =" << endl << n << endl;
-
-	cout << m(1,1);
-
+	string s1 = "hello";
+	string s2 = "world";
+	cout << s1.length() << endl;
+	cout << catdot(s1,s2,'X') << endl;
 }
-
-
