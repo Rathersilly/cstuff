@@ -5,9 +5,9 @@ CC = g++
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
 
-CFLAGS  = -g -Wall
+CFLAGS  = -g -ggdb -Wall -std=c++17
 LDFLAGS =
-OBJFILES = temp.o temp_operators.o
+OBJFILES = c++17_test.cpp #goo.cpp
 # the build target executable:
 TARGET = a.out
 
@@ -19,7 +19,6 @@ all: $(TARGET)
 $(TARGET): $(OBJFILES)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS) 
 clean:
-	#$(RM) -f $(OBJFILES) $(TARGET) *~
-	$(RM) -f *.o
-
+	$(RM) -f  $(TARGET) *~
+	# $(RM) -f $(OBJFILES) $(TARGET) *~
 
