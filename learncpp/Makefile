@@ -7,7 +7,8 @@ CC = g++
 
 CFLAGS  = -g -ggdb -Wall -std=c++17
 LDFLAGS =
-OBJFILES = c++17_test.cpp #goo.cpp
+# OBJFILES = goo.cpp#c++17_test.cpp #goo.cpp
+OBJFILES = main.cpp Vector3d.cpp Point3d.cpp
 # the build target executable:
 TARGET = a.out
 

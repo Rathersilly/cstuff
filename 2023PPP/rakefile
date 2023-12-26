@@ -1,0 +1,69 @@
+# frozen_string_literal: true
+
+require 'colorize'
+
+CXX = 'g++'
+PROJECT_ROOT = '/home/rsil/cstuff/2023PPP'
+IMGUI_DIR = 'imgui'
+OBJ_DIR = 'obj'
+
+LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm '\
+          '-lglfw -lGL -ldl -I/usr/include/SDL2 '\
+          "-I. -I.. -Iimgui -Iimgui/backends -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
+          "-I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends"
+CFLAGS =  '`sdl2-config --cxxflags` -g -ggdb -Wall '\
+          " -std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends  -I/usr/include/SDL2"
+
+SRC_FILES = Rake::FileList.new
+SRC_FILES.include 'main.cpp'
+SRC_FILES.include 'setup_window.cpp'
+SRC_FILES.include "#{IMGUI_DIR}/imgui*.cpp"
+SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp"
+SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp"
+SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_glfw.cpp"
+puts "SRC_FILES : #{SRC_FILES}".light_green
+
+OBJ_FILES = SRC_FILES.pathmap('obj/%X.o')
+puts "OBJ_FILES : #{OBJ_FILES}".light_green
+
+OBJ_FILES.each.with_index do |objfile, i|
+  srcfile = SRC_FILES[i]
+  rule objfile => srcfile do |t|
+    puts 'IN RULE'.yellow
+    p objfile
+    p t
+    sh "g++ -c #{srcfile} #{CFLAGS} #{LDFLAGS}"
+    sh "mkdir -p #{objfile.pathmap('%d')}"
+    sh "mv #{objfile.pathmap('%f')} #{objfile}"
+  end
+end
+
+# CXXFLAGS = "-std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends "
+# CXXFLAGS += '-g -Wall -Wformat'
+
+# task binary: OBJ_FILES do
+task binary: OBJ_FILES do
+  puts 'in binary'.light_blue
+  sh "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
+  # sh "g++ #{OBJ_FILES}"
+end
+# task binary: OBJ_FILES do
+#
+#   puts "LDFLAGS: #{LDFLAGS}".light_green
+#   puts "CFLAGS: #{CFLAGS}".light_green
+#   puts "object files: #{OBJ_FILES}".light_green
+#   # sh "#{CXX}  #{OBJ_FILES}  #{LDFLAGS}"
+#   # sh "g++ #{OBJ_FILES} -o a.out"
+# end
+
+# rule '.o' => '.cpp' do |task|
+#   puts 'in rule'.light_blue
+#   sh "echo 'IN RULE'"
+#   sh "#{CXX} -c #{task.source}  #{CFLAGS} #{LDFLAGS}"
+# end
+task default: :binary
+
+task :clean do
+  sh 'rm -rf ./obj'
+  sh 'rm *.o'
+end

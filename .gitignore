@@ -1,6 +1,8 @@
 # mostly from C++ sample gitignore from here:
 # https://github.com/github/gitignore/blob/master/C%2B%2B.gitignore
 
+# dear imgui
+2023PPP/imgui
 # vscode configs
 .vscode/
 
@@ -42,3 +44,5 @@
 
 # Obj directory
 *obj/
+
+

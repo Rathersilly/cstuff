@@ -1,0 +1,53 @@
+# consider using thor as a rake alternative
+# it apparently has super sick option parsing
+# https://github.com/rails/thor/wiki/Getting-Started
+#
+# when running rake --tasks(-T), will show desc of each task
+
+file = ''
+
+desc 'compile foo.cpp'
+task :default do
+  file = 'foo.cpp' if file.empty?
+  sh "g++ #{file}"
+end
+
+# rakefile arguments
+# from command line : $ something fltk[3, "hello"]
+task :something, [:arg1, :arg2] do
+  puts :arg1, :arg2
+  p t
+  p args
+  p args[:arg1]
+end
+
+# running rake tasks in rake
+# https://stackoverflow.com/questions/577944/how-to-run-rake-tasks-from-within-rake-tasks
+if ARGV.size > 0
+  task ARGV[0].to_sym do
+    # file = ARGV[0]
+    # Rake::Task[:default].invoke
+    # execute works too, but doesnt run dependencies
+    # Rake::Task[:default].execute
+  end
+
+  # alternatively
+  if ARGV[0].include?('.cpp')
+    file = ARGV[0]
+    Rake::Task[:default].invoke
+  end
+end
+
+desc 'add 2 numbers'
+# task :add, [:a, :b] do |t, args|
+#   p t
+#   puts args[:a].to_i + args[:b].to_i
+# end
+task :add do
+  p ARGV # ["add", 1, 2]
+
+  # converting to symols so rake doesnt give "don't know how to build task" error
+  ARGV.each { |a| task a.to_sym }
+
+  puts ARGV[1].to_i + ARGV[2].to_i
+end
