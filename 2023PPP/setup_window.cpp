@@ -32,6 +32,7 @@ int setup_window() {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 #endif
+  app.glsl_version = glsl_version;
 
   // From 2.0.18: Enable native IME.
 #ifdef SDL_HINT_IME_SHOW_UI
@@ -45,16 +46,16 @@ int setup_window() {
   SDL_WindowFlags window_flags =
       (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE |
                         SDL_WINDOW_ALLOW_HIGHDPI);
-  SDL_Window *window = SDL_CreateWindow(
-      "Dear ImGui SDL2+OpenGL3 example", SDL_WINDOWPOS_CENTERED,
-      SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
-  if (window == nullptr) {
+  app.win = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example",
+                             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                             1280, 720, window_flags);
+  if (app.win == nullptr) {
     printf("Error: SDL_CreateWindow(): %s\n", SDL_GetError());
     return -1;
   }
 
-  SDL_GLContext gl_context = SDL_GL_CreateContext(window);
-  SDL_GL_MakeCurrent(window, gl_context);
+  app.gl_context = SDL_GL_CreateContext(app.win);
+  SDL_GL_MakeCurrent(app.win, app.gl_context);
   SDL_GL_SetSwapInterval(1); // Enable vsync
 
   return 1;

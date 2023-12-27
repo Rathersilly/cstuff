@@ -1,0 +1,16 @@
+  -lSDL2
+  -lSDL2_image
+  -lXext
+  -lX11
+  -lm
+  -lglfw
+  -lGL
+  -ldl
+  -I/usr/include/SDL3
+  -I.
+  -I..
+  -I/home/rsil/cstuff/2023PPP/imgui
+  -I/home/rsil/cstuff/2023PPP/imgui/backends
+  -I/home/rsil/cstuff/2023PPP/imgui
+  -I/home/rsil/cstuff/2023PPP/imgui/backends
+
