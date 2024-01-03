@@ -1,0 +1,5 @@
+SRC = 'linked_list.cpp'
+SRC = 'foo.cpp'
+task :default do
+  sh "g++ #{SRC} -g3 -O0"
+end

@@ -1,22 +1,30 @@
 # frozen_string_literal: true
 
 require 'colorize'
+require 'json'
 
 CXX = 'g++'
 PROJECT_ROOT = '/home/rsil/cstuff/2023PPP'
 IMGUI_DIR = 'imgui'
 OBJ_DIR = 'obj'
+DEBUG_STR = '-g3 -O0'
+debugging = true
 
 LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm '\
           '-lglfw -lGL -ldl -I/usr/include/SDL2 '\
           "-I. -I.. -Iimgui -Iimgui/backends -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
           "-I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends"
-CFLAGS =  '`sdl2-config --cxxflags` -g -ggdb -Wall '\
+# when debugging, include -g3 -O0, according to this:
+# https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
+
+CFLAGS =  "`sdl2-config --cxxflags` #{DEBUG_STR if debugging} -Wall "\
           " -std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends  -I/usr/include/SDL2"
 
 SRC_FILES = Rake::FileList.new
 SRC_FILES.include 'main.cpp'
 SRC_FILES.include 'setup_window.cpp'
+SRC_FILES.include 'setup_imgui.cpp'
+SRC_FILES.include 'cleanup.cpp'
 SRC_FILES.include "#{IMGUI_DIR}/imgui*.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp"
@@ -38,12 +46,15 @@ OBJ_FILES.each.with_index do |objfile, i|
   end
 end
 
+COMMAND = "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
 # CXXFLAGS = "-std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends "
 # CXXFLAGS += '-g -Wall -Wformat'
 
 # task binary: OBJ_FILES do
 task binary: OBJ_FILES do
   puts 'in binary'.light_blue
+  str = "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
+  COMMAND = str
   sh "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
   # sh "g++ #{OBJ_FILES}"
 end
@@ -62,6 +73,18 @@ end
 #   sh "#{CXX} -c #{task.source}  #{CFLAGS} #{LDFLAGS}"
 # end
 task default: :binary
+
+# clangd config - generate compile_commands.json"
+task :cconfig do
+  puts 'cconfig'.blue
+  foo = {}
+  foo['directory'] = PROJECT_ROOT
+  foo['command'] = COMMAND
+  goo = JSON.pretty_generate(foo)
+  File.open('compile_commands.json', 'w') do |f|
+    f.write JSON.pretty_generate([foo])
+  end
+end
 
 task :clean do
   sh 'rm -rf ./obj'

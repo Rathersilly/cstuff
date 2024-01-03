@@ -1,0 +1,6 @@
+# https://clangd.llvm.org/config
+CompileFlags:                     # Tweak the parse settings
+  # Add: [-xc++, -Wall]             # treat all files as C++, enable more warnings
+  Add: [-lSDL2 -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl -I/usr/include/SDL3 -I. -I.. -I/home/rsil/cstuff/2023PPP/imgui -I/home/rsil/cstuff/2023PPP/imgui/backends -I/home/rsil/cstuff/2023PPP/imgui -I/home/rsil/cstuff/2023PPP/imgui/backends]
+  Compiler: clang++               # Change argv[0] of compile flags to `clang++`
+  # Compiler: g++               # Change argv[0] of compile flags to `clang++`

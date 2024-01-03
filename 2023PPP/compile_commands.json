@@ -1,0 +1,6 @@
+[
+  {
+    "directory": "/home/rsil/cstuff/2023PPP",
+    "command": "g++ obj/main.o obj/setup_window.o obj/setup_imgui.o obj/cleanup.o obj/imgui/imgui.o obj/imgui/imgui_demo.o obj/imgui/imgui_draw.o obj/imgui/imgui_tables.o obj/imgui/imgui_widgets.o obj/imgui/backends/imgui_impl_sdl2.o obj/imgui/backends/imgui_impl_opengl3.o obj/imgui/backends/imgui_impl_glfw.o `sdl2-config --cxxflags` -g3 -O0 -Wall  -std=c++11 -Iimgui -Iimgui/backends  -I/usr/include/SDL2  `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl -I/usr/include/SDL2 -I. -I.. -Iimgui -Iimgui/backends -I/home/rsil/cstuff/2023PPP/imgui -I/home/rsil/cstuff/2023PPP/imgui/backends"
+  }
+]

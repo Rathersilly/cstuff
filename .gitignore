@@ -45,4 +45,6 @@
 # Obj directory
 *obj/
 
+# Temporary files
+*tmp*
 

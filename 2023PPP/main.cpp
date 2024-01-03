@@ -1,22 +1,17 @@
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
-#include "imgui_impl_sdl2.h"
+/* #include "setup_imgui.h" */
+#include "cleanup.h"
 #include "setup_window.h"
-#include <SDL.h>
-#include <stdio.h>
-#if defined(IMGUI_IMPL_OPENGL_ES2)
-#include <SDL_opengles2.h>
-#else
-#include <SDL_opengl.h>
-#endif
+// These are in the imgui example file
+// - thought they would suppress clangd errors but nope
+/* #pragma clang diagnostic ignored "-Wunknown-warning-option" */
+/* #pragma clang diagnostic ignored "-Wunknown-pragmas" */
 
 App app;
 
 // Main code
 int main(int, char **) {
   setup_window();
-
-  // Setup Dear ImGui context
+  /* setup_imgui(); */
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
@@ -35,37 +30,9 @@ int main(int, char **) {
   // Setup Platform/Renderer backends
   ImGui_ImplSDL2_InitForOpenGL(app.win, app.gl_context);
   ImGui_ImplOpenGL3_Init(app.glsl_version);
-
-  // Load Fonts
-  // - If no fonts are loaded, dear imgui will use the default font. You can
-  // also load multiple fonts and use ImGui::PushFont()/PopFont() to select
-  // them.
-  // - AddFontFromFileTTF() will return the ImFont* so you can store it if you
-  // need to select the font among multiple.
-  // - If the file cannot be loaded, the function will return a nullptr. Please
-  // handle those errors in your application (e.g. use an assertion, or display
-  // an error and quit).
-  // - The fonts will be rasterized at a given size (w/ oversampling) and stored
-  // into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which
-  // ImGui_ImplXXXX_NewFrame below will call.
-  // - Use '#define IMGUI_ENABLE_FREETYPE' in your imconfig file to use Freetype
-  // for higher quality font rendering.
-  // - Read 'docs/FONTS.md' for more instructions and details.
-  // - Remember that in C/C++ if you want to include a backslash \ in a string
-  // literal you need to write a double backslash \\ !
-  // - Our Emscripten build process allows embedding fonts to be accessible at
-  // runtime from the "fonts/" folder. See Makefile.emscripten for details.
-  // io.Fonts->AddFontDefault();
-  // io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
-  // io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
-  // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
-  // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-  // ImFont* font =
-  // io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f,
-  // nullptr, io.Fonts->GetGlyphRangesJapanese()); IM_ASSERT(font != nullptr);
-
   // Our state
   bool show_demo_window = true;
+  show_demo_window = false;
   bool show_another_window = false;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
@@ -135,6 +102,7 @@ int main(int, char **) {
                   1000.0f / io.Framerate, io.Framerate);
       ImGui::End();
     }
+    mygui();
 
     // 3. Show another simple window.
     if (show_another_window) {
@@ -158,18 +126,8 @@ int main(int, char **) {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     SDL_GL_SwapWindow(app.win);
   }
-#ifdef __EMSCRIPTEN__
-  EMSCRIPTEN_MAINLOOP_END;
-#endif
 
-  // Cleanup
-  ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplSDL2_Shutdown();
-  ImGui::DestroyContext();
-
-  SDL_GL_DeleteContext(app.gl_context);
-  SDL_DestroyWindow(app.win);
-  SDL_Quit();
+  cleanup();
 
   return 0;
 }
