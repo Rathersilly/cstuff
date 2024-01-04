@@ -5,5 +5,5 @@
 
 extern App app;
 void setup_imgui();
-
+void change_style();
 #endif // !SETUP_IMGUI_H

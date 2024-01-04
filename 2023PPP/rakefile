@@ -24,6 +24,7 @@ SRC_FILES = Rake::FileList.new
 SRC_FILES.include 'main.cpp'
 SRC_FILES.include 'setup_window.cpp'
 SRC_FILES.include 'setup_imgui.cpp'
+SRC_FILES.include 'setup_imgui_style.cpp'
 SRC_FILES.include 'cleanup.cpp'
 SRC_FILES.include "#{IMGUI_DIR}/imgui*.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp"
@@ -58,14 +59,6 @@ task binary: OBJ_FILES do
   sh "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
   # sh "g++ #{OBJ_FILES}"
 end
-# task binary: OBJ_FILES do
-#
-#   puts "LDFLAGS: #{LDFLAGS}".light_green
-#   puts "CFLAGS: #{CFLAGS}".light_green
-#   puts "object files: #{OBJ_FILES}".light_green
-#   # sh "#{CXX}  #{OBJ_FILES}  #{LDFLAGS}"
-#   # sh "g++ #{OBJ_FILES} -o a.out"
-# end
 
 # rule '.o' => '.cpp' do |task|
 #   puts 'in rule'.light_blue
@@ -77,12 +70,11 @@ task default: :binary
 # clangd config - generate compile_commands.json"
 task :cconfig do
   puts 'cconfig'.blue
-  foo = {}
-  foo['directory'] = PROJECT_ROOT
-  foo['command'] = COMMAND
-  goo = JSON.pretty_generate(foo)
+  config_string = {}
+  config_string['directory'] = PROJECT_ROOT
+  config_string['command'] = COMMAND
   File.open('compile_commands.json', 'w') do |f|
-    f.write JSON.pretty_generate([foo])
+    f.write JSON.pretty_generate([config_string])
   end
 end
 

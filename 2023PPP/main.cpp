@@ -1,5 +1,6 @@
 /* #include "setup_imgui.h" */
 #include "cleanup.h"
+#include "setup_imgui_style.h"
 #include "setup_window.h"
 // These are in the imgui example file
 // - thought they would suppress clangd errors but nope
@@ -26,6 +27,16 @@ int main(int, char **) {
   // Setup Dear ImGui style
   ImGui::StyleColorsDark();
   // ImGui::StyleColorsLight();
+  ImGuiStyle &style = ImGui::GetStyle();
+
+  // light style from Pacôme Danhiez (user itamago)
+  // https://github.com/ocornut/imgui/pull/511#issuecomment-175719267
+  style.Alpha = 1.0f;
+  style.FrameRounding = 3.0f;
+  style.Colors[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
+  style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
+  style.Colors[ImGuiCol_WindowBg] = ImVec4(0.94f, 0.94f, 0.94f, 0.94f);
+  SetupImGuiStyle();
 
   // Setup Platform/Renderer backends
   ImGui_ImplSDL2_InitForOpenGL(app.win, app.gl_context);

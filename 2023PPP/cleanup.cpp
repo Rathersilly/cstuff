@@ -11,7 +11,9 @@ void cleanup() {
   SDL_Quit();
 }
 void mygui() {
-  ImGui::Begin("MY WINDOW");
+  bool showx = true;
+  ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
+  ImGui::Begin("MY WINDOW", &showx);
   ImGui::Text("HIIIIIIIIIIIIIIIII");
   ImGui::End();
 }
