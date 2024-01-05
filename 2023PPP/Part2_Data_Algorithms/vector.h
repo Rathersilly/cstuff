@@ -1,11 +1,15 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#define GREEN "\033[32m" /* Green */
 #define RESET "\033[0m"
+#define RED "\033[31m"    /* Red */
+#define GREEN "\033[32m"  /* Green */
+#define YELLOW "\033[33m" /* Yellow */
+#define BLUE "\033[34m"   /* Blue */
 #define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
 /* #define INFO */
 
+#include "allocator.h"
 #include <algorithm>
 #include <cstddef>
 #include <iostream>
@@ -20,21 +24,25 @@ template <typename T> void copy(T *from, int sz, T *to) {
     to[i] = from[i];
   }
 }
-template <typename T> class vector;
-template <typename T> void print_vector(const vector<T> &v) {
+/* template <typename T, typename A = allocator<T>> class vector; */
+template <typename T, typename A = allocator<T>> class vector;
+template <typename T, typename A = allocator<T>>
+void print_vector(const vector<T> &v) {
   for (auto i = 0; i < v.size(); ++i) {
     std::cout << v[i] << " ";
   }
   cout << endl;
 }
 
-template <typename T> class vector {
+template <typename T, typename A> class vector {
+  /* template <typename T, typename A = allocator<T>> class vector { */
   /* invariant:
      if 0<=n<sz, elem[n] is element n
      sz <= space_
      if sz < space_ thre is space for (space-sz) doubles after elem[sz-1]
   */
 
+  A alloc;
   size_t sz;
   T *elem;
   size_t space_;
@@ -131,6 +139,28 @@ public:
 
   ///////////////////
   //// Space
+  // reserve function using custom allocator
+  void reserve_with_allocator(size_t newalloc) {
+    INFO;
+    if (newalloc <= space_) {
+      return;
+    }
+    T *p = alloc.allocate(newalloc);
+    /* T *p = new T[newalloc]; */
+    for (size_t i = 0; i < sz; ++i) {
+      alloc.construct(&p[i], elem[i]);
+      /* p[i] = elem[i]; */
+    }
+    for (size_t i = 0; i < sz; ++i) {
+      alloc.destroy(&elem[i]);
+    }
+    alloc.deallocate(elem, space_);
+
+    elem = p;
+    space_ = newalloc;
+  }
+  // from before creating an allocator class
+  /* void reserve_without_alloc( */
   void reserve(size_t newalloc) {
     INFO;
     if (newalloc <= space_) {
@@ -145,7 +175,7 @@ public:
     space_ = newalloc;
   }
 
-  void resize(size_t newsize, T default_ = T()) {
+  void resize(size_t newsize) {
     reserve(newsize);
     for (auto i = sz; i < newsize; ++i) {
       elem[i] = 0;

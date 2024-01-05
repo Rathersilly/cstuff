@@ -35,6 +35,9 @@ int main(int argc, char *argv[]) {
   print_vector<int>(a);
   a.push_back(23);
   print_vector<int>(a);
+  a.reserve_with_allocator(30);
+  print_vector<int>(a);
+  cout << a.capacity() << endl;
 
   return 0;
 }
