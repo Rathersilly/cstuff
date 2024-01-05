@@ -1,39 +1,45 @@
 # frozen_string_literal: true
 
+# rake --help to show compile_commands
+#
+
 require 'colorize'
 require 'json'
+
+# TODO: add task to update ctags based on SRC_FILES maybe
 
 CXX = 'g++'
 PROJECT_ROOT = '/home/rsil/cstuff/2023PPP'
 IMGUI_DIR = 'imgui'
 OBJ_DIR = 'obj'
+#
+# when debugging, include -g3 -O0, according to this:
+# https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
 DEBUG_STR = '-g3 -O0'
 debugging = true
-
+SRC_FILES.include
 LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm '\
           '-lglfw -lGL -ldl -I/usr/include/SDL2 '\
           "-I. -I.. -Iimgui -Iimgui/backends -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
           "-I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends"
-# when debugging, include -g3 -O0, according to this:
-# https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
 
 CFLAGS =  "`sdl2-config --cxxflags` #{DEBUG_STR if debugging} -Wall "\
           " -std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends  -I/usr/include/SDL2"
 
 SRC_FILES = Rake::FileList.new
 SRC_FILES.include 'main.cpp'
-SRC_FILES.include 'setup_window.cpp'
-SRC_FILES.include 'setup_imgui.cpp'
-SRC_FILES.include 'setup_imgui_style.cpp'
+SRC_FILES.include 'init_window.cpp'
+SRC_FILES.include 'init_imgui.cpp'
+SRC_FILES.include 'init_imgui_style.cpp'
 SRC_FILES.include 'cleanup.cpp'
 SRC_FILES.include "#{IMGUI_DIR}/imgui*.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_glfw.cpp"
-puts "SRC_FILES : #{SRC_FILES}".light_green
+# puts "SRC_FILES : #{SRC_FILES}".light_green
 
 OBJ_FILES = SRC_FILES.pathmap('obj/%X.o')
-puts "OBJ_FILES : #{OBJ_FILES}".light_green
+# puts "OBJ_FILES : #{OBJ_FILES}".light_green
 
 OBJ_FILES.each.with_index do |objfile, i|
   srcfile = SRC_FILES[i]
@@ -54,9 +60,7 @@ COMMAND = "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
 # task binary: OBJ_FILES do
 task binary: OBJ_FILES do
   puts 'in binary'.light_blue
-  str = "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
-  COMMAND = str
-  sh "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
+  sh COMMAND
   # sh "g++ #{OBJ_FILES}"
 end
 
@@ -65,9 +69,11 @@ end
 #   sh "echo 'IN RULE'"
 #   sh "#{CXX} -c #{task.source}  #{CFLAGS} #{LDFLAGS}"
 # end
+desc 'compile main program'
 task default: :binary
 
 # clangd config - generate compile_commands.json"
+desc 'clangd config - generate compile_commands.json'
 task :cconfig do
   puts 'cconfig'.blue
   config_string = {}
@@ -78,6 +84,7 @@ task :cconfig do
   end
 end
 
+desc 'remove object files and directory'
 task :clean do
   sh 'rm -rf ./obj'
   sh 'rm *.o'

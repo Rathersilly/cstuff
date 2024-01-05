@@ -11,10 +11,10 @@ int main(int argc, char *argv[]) {
   print_vector<int>(a);
   vector<int> b = a;
   print_vector<int>(b);
-  b.elem[1] = 7;
+  b[1] = 7;
   print_vector<int>(a);
   print_vector<int>(b);
-  a.elem[1] = 9;
+  a[1] = 9;
   b = a;
   print_vector<int>(a);
   print_vector<int>(b);
@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
   std::cout << v[1];
   const vector<int> d{1, 2, 3};
   int e = d[2];
-  cout << a.sz << endl;
-  cout << a.space << endl;
+  cout << a.size() << endl;
+  cout << a.capacity() << endl;
   a.reserve(20);
-  cout << a.sz << endl;
-  cout << a.space << endl;
+  cout << a.size() << endl;
+  cout << a.capacity() << endl;
   cout << a.capacity() << endl;
   a.resize(3);
   print_vector<int>(a);

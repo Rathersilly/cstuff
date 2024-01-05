@@ -1,6 +1,6 @@
 #include "setup_imgui_style.h"
 
-void SetupImGuiStyle() {
+void imgui_cherry_style() {
   // Soft Cherry style by Patitotective from ImThemes
   ImGuiStyle &style = ImGui::GetStyle();
 

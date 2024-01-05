@@ -11,7 +11,8 @@ App app;
 
 // Main code
 int main(int, char **) {
-  setup_window();
+  init_window();
+
   /* setup_imgui(); */
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -27,16 +28,7 @@ int main(int, char **) {
   // Setup Dear ImGui style
   ImGui::StyleColorsDark();
   // ImGui::StyleColorsLight();
-  ImGuiStyle &style = ImGui::GetStyle();
-
-  // light style from Pacôme Danhiez (user itamago)
-  // https://github.com/ocornut/imgui/pull/511#issuecomment-175719267
-  style.Alpha = 1.0f;
-  style.FrameRounding = 3.0f;
-  style.Colors[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-  style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
-  style.Colors[ImGuiCol_WindowBg] = ImVec4(0.94f, 0.94f, 0.94f, 0.94f);
-  SetupImGuiStyle();
+  imgui_cherry_style();
 
   // Setup Platform/Renderer backends
   ImGui_ImplSDL2_InitForOpenGL(app.win, app.gl_context);
