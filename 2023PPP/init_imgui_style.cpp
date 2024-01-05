@@ -1,4 +1,11 @@
-#include "setup_imgui_style.h"
+#include "init_imgui_style.h"
+
+void imgui_dark_style() {
+  ImGui::StyleColorsDark();
+  // ImGui::StyleColorsLight();
+  //
+  //
+}
 
 void imgui_cherry_style() {
   // Soft Cherry style by Patitotective from ImThemes

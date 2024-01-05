@@ -1,7 +1,0 @@
-[
-{ "directory": "/home/rsil/cstuff/2023PPP",
-  "command:" = "-lSDL2 -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl -I/usr/include/SDL2 -I. -I.. -I/home/rsil/cstuff/2023PPP/imgui -I/home/rsil/cstuff/2023PPP/imgui/backends"
-}
-
-]
-

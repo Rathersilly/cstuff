@@ -1,4 +1,4 @@
-#include "setup_window.h"
+#include "init_window.h"
 int init_window() {
   // Setup SDL
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) !=

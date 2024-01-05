@@ -1,7 +1,7 @@
 /* #include "setup_imgui.h" */
 #include "cleanup.h"
-#include "setup_imgui_style.h"
-#include "setup_window.h"
+#include "init_imgui_style.h"
+#include "init_window.h"
 // These are in the imgui example file
 // - thought they would suppress clangd errors but nope
 /* #pragma clang diagnostic ignored "-Wunknown-warning-option" */

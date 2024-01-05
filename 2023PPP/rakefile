@@ -17,7 +17,6 @@ OBJ_DIR = 'obj'
 # https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
 DEBUG_STR = '-g3 -O0'
 debugging = true
-SRC_FILES.include
 LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm '\
           '-lglfw -lGL -ldl -I/usr/include/SDL2 '\
           "-I. -I.. -Iimgui -Iimgui/backends -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\

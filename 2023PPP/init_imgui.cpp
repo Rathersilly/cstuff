@@ -1,6 +1,11 @@
-#include "setup_imgui.h"
+#include "init_imgui.h"
 
-void setup_imgui() {
+extern App app;
+
+void init_imgui() {
+  /* setup_imgui(); */
+  //
+  /* ImGuiIO &imgui_io = ImGui::GetIO(); */
   // Setup Dear ImGui context
   /* IMGUI_CHECKVERSION(); */
   /* ImGui::CreateContext(); */
