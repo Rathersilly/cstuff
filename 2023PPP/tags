@@ -69,7 +69,6 @@ $(WEB_DIR)	imgui/examples/example_emscripten_wgpu/Makefile	/^$(WEB_DIR):$/;"	t
 0	.vscode/tasks.json	/^                "$gcc"$/;"	s	array:tasks.0.problemMatcher
 0	.vscode/tasks.json	/^                "-fdiagnostics-color=always",$/;"	s	array:tasks.0.args
 0	.vscode/tasks.json	/^        {$/;"	o	array:tasks
-0	__compile_commands.json	/^{ "directory": "\/home\/rsil\/cstuff\/2023PPP",$/;"	o
 0	compile_commands.json	/^  {$/;"	o
 1	.vscode/tasks.json	/^                "-g",$/;"	s	array:tasks.0.args
 2	.vscode/tasks.json	/^                "${file}",$/;"	s	array:tasks.0.args
@@ -172,8 +171,6 @@ AddTriangleFilled	imgui/imgui_draw.cpp	/^void ImDrawList::AddTriangleFilled(cons
 AddWindowToDrawData	imgui/imgui.cpp	/^static void AddWindowToDrawData(ImGuiWindow* window, int layer)$/;"	f	typeref:typename:void	file:
 AddWindowToSortBuffer	imgui/imgui.cpp	/^static void AddWindowToSortBuffer(ImVector<ImGuiWindow*>* out_sorted_windows, ImGuiWindow* windo/;"	f	typeref:typename:void	file:
 AddedByTestEngine	imgui/imgui_internal.h	/^    bool                            AddedByTestEngine;$/;"	m	struct:ImGuiInputEvent	typeref:typename:bool
-Address	GUI.h	/^typedef void *Address; \/\/ Address is a synonym for void*$/;"	t	namespace:Graph_lib	typeref:typename:void *
-Address	Gui.h	/^typedef void* Address;$/;"	t	namespace:Graph_lib	typeref:typename:void *
 AdvanceX	imgui/imgui.h	/^    float           AdvanceX;           \/\/ Distance to next character (= data from font + ImFo/;"	m	struct:ImFontGlyph	typeref:typename:float
 AdvanceX	imgui/misc/freetype/imgui_freetype.cpp	/^        float       AdvanceX;           \/\/ The distance from the origin to the origin of the n/;"	m	struct:__anon76bbacac0110::GlyphInfo	typeref:typename:float	file:
 AlignTextToFramePadding	imgui/imgui_widgets.cpp	/^void ImGui::AlignTextToFramePadding()$/;"	f	class:ImGui	typeref:typename:void
@@ -232,8 +229,6 @@ AutoFitSingleColumn	imgui/imgui_internal.h	/^    ImGuiTableColumnIdx         Aut
 AutoPosLastDirection	imgui/imgui_internal.h	/^    ImGuiDir                AutoPosLastDirection;$/;"	m	struct:ImGuiWindow	typeref:typename:ImGuiDir
 AutoScroll	imgui/imgui_demo.cpp	/^    bool                  AutoScroll;$/;"	m	struct:ExampleAppConsole	typeref:typename:bool	file:
 AutoScroll	imgui/imgui_demo.cpp	/^    bool                AutoScroll;  \/\/ Keep scrolling if already at the bottom.$/;"	m	struct:ExampleAppLog	typeref:typename:bool	file:
-Axis	Graph.cpp	/^Axis::Axis(Orientation d, Point xy, int length, int n, string lab)$/;"	f	class:Graph_lib::Axis
-Axis	Graph.h	/^struct Axis : Shape {$/;"	s	namespace:Graph_lib
 BACKUP_DX10_STATE	imgui/backends/imgui_impl_dx10.cpp	/^    struct BACKUP_DX10_STATE$/;"	s	function:ImGui_ImplDX10_RenderDrawData	file:
 BACKUP_DX11_STATE	imgui/backends/imgui_impl_dx11.cpp	/^    struct BACKUP_DX11_STATE$/;"	s	function:ImGui_ImplDX11_RenderDrawData	file:
 BLUE	Part1_The_Basics/ch6-calc-2.cc	/^#define BLUE /;"	d	file:
@@ -272,8 +267,6 @@ BackupPrevLineTextBaseOffset	imgui/imgui_internal.h	/^    float           Backup
 BackupSDLRendererState	imgui/backends/imgui_impl_sdlrenderer2.cpp	/^    struct BackupSDLRendererState$/;"	s	function:ImGui_ImplSDLRenderer2_RenderDrawData	file:
 BackupSDLRendererState	imgui/backends/imgui_impl_sdlrenderer3.cpp	/^    struct BackupSDLRendererState$/;"	s	function:ImGui_ImplSDLRenderer3_RenderDrawData	file:
 BackupValue	imgui/imgui_internal.h	/^    ImVec4          BackupValue;$/;"	m	struct:ImGuiColorMod	typeref:typename:ImVec4
-Bad_image	Graph.h	/^  Bad_image(int h, int w) : Fl_Image(h, w, 0) {}$/;"	f	struct:Graph_lib::Bad_image
-Bad_image	Graph.h	/^struct Bad_image : Fl_Image {$/;"	s	namespace:Graph_lib
 BarRect	imgui/imgui_internal.h	/^    ImRect              BarRect;$/;"	m	struct:ImGuiTabBar	typeref:typename:ImRect
 BasePtr	imgui/imgui_internal.h	/^    char*   BasePtr;$/;"	m	struct:ImSpanAllocator	typeref:typename:char *
 Begin	imgui/imgui.cpp	/^bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)$/;"	f	class:ImGui	typeref:typename:bool
@@ -374,10 +367,6 @@ BuildWorkOffsetMin	imgui/imgui_internal.h	/^    ImVec2              BuildWorkOff
 Bullet	imgui/imgui_widgets.cpp	/^void ImGui::Bullet()$/;"	f	class:ImGui	typeref:typename:void
 BulletText	imgui/imgui_widgets.cpp	/^void ImGui::BulletText(const char* fmt, ...)$/;"	f	class:ImGui	typeref:typename:void
 BulletTextV	imgui/imgui_widgets.cpp	/^void ImGui::BulletTextV(const char* fmt, va_list args)$/;"	f	class:ImGui	typeref:typename:void
-Button	GUI.h	/^  Button(Point xy, int w, int h, const string &label, Callback cb)$/;"	f	struct:Graph_lib::Button
-Button	GUI.h	/^struct Button : Widget {$/;"	s	namespace:Graph_lib
-Button	Gui.h	/^	Button(Point xy, int ww, int hh, const string& s, Callback cb)$/;"	f	class:Graph_lib::Button
-Button	Gui.h	/^class Button : public Widget {$/;"	c	namespace:Graph_lib
 Button	imgui/imgui_internal.h	/^struct ImGuiInputEventMouseButton   { int Button; bool Down; ImGuiMouseSource MouseSource; };$/;"	m	struct:ImGuiInputEventMouseButton	typeref:typename:int
 Button	imgui/imgui_widgets.cpp	/^bool ImGui::Button(const char* label, const ImVec2& size_arg)$/;"	f	class:ImGui	typeref:typename:bool
 ButtonBehavior	imgui/imgui_widgets.cpp	/^bool ImGui::ButtonBehavior(const ImRect& bb, ImGuiID id, bool* out_hovered, bool* out_held, ImGu/;"	f	class:ImGui	typeref:typename:bool
@@ -480,8 +469,6 @@ CalcWorkRectPos	imgui/imgui_internal.h	/^    ImVec2  CalcWorkRectPos(const ImVec
 CalcWorkRectSize	imgui/imgui_internal.h	/^    ImVec2  CalcWorkRectSize(const ImVec2& off_min, const ImVec2& off_max) const    { return ImV/;"	f	struct:ImGuiViewportP	typeref:typename:ImVec2
 CalcWrapWidthForPos	imgui/imgui.cpp	/^float ImGui::CalcWrapWidthForPos(const ImVec2& pos, float wrap_pos_x)$/;"	f	class:ImGui	typeref:typename:float
 CallContextHooks	imgui/imgui.cpp	/^void ImGui::CallContextHooks(ImGuiContext* ctx, ImGuiContextHookType hook_type)$/;"	f	class:ImGui	typeref:typename:void
-Callback	GUI.h	/^typedef void (*Callback)($/;"	t	namespace:Graph_lib	typeref:typename:void (*)(Address,Address)
-Callback	Gui.h	/^typedef void (*Callback)(Address,Address);	\/\/ FLTK's required function type for all callbacks$/;"	t	namespace:Graph_lib	typeref:typename:void (*)(Address,Address)
 Callback	imgui/imgui_internal.h	/^    ImGuiContextHookCallback    Callback;$/;"	m	struct:ImGuiContextHook	typeref:typename:ImGuiContextHookCallback
 CallbacksChainForAllWindows	imgui/backends/imgui_impl_glfw.cpp	/^    bool                    CallbacksChainForAllWindows;$/;"	m	struct:ImGui_ImplGlfw_Data	typeref:typename:bool	file:
 CannotSkipItemsQueue	imgui/imgui_internal.h	/^    ImU8                    CannotSkipItemsQueue;           \/\/ Queue of 8 values for the next /;"	m	struct:ImGuiTableColumn	typeref:typename:ImU8
@@ -519,8 +506,6 @@ ChildIdx	imgui/imgui_demo.cpp	/^                int             ChildIdx;$/;"	m	
 ChildRounding	imgui/imgui.h	/^    float       ChildRounding;              \/\/ Radius of child window corners rounding. Set to/;"	m	struct:ImGuiStyle	typeref:typename:float
 ChildWindowComparer	imgui/imgui.cpp	/^static int IMGUI_CDECL ChildWindowComparer(const void* lhs, const void* rhs)$/;"	f	typeref:typename:int IMGUI_CDECL	file:
 ChildWindows	imgui/imgui_internal.h	/^    ImVector<ImGuiWindow*>  ChildWindows;$/;"	m	struct:ImGuiWindowTempData	typeref:typename:ImVector<ImGuiWindow * >
-Circle	Graph.h	/^  Circle(Point p, int rr) \/\/ center and radius$/;"	f	struct:Graph_lib::Circle
-Circle	Graph.h	/^struct Circle : Shape {$/;"	s	namespace:Graph_lib
 CircleSegmentCounts	imgui/imgui_internal.h	/^    ImU8            CircleSegmentCounts[64];    \/\/ Precomputed segment count for given radius /;"	m	struct:ImDrawListSharedData	typeref:typename:ImU8[64]
 CircleSegmentMaxError	imgui/imgui_internal.h	/^    float           CircleSegmentMaxError;      \/\/ Number of circle segments to use per pixel /;"	m	struct:ImDrawListSharedData	typeref:typename:float
 CircleTessellationMaxError	imgui/imgui.h	/^    float       CircleTessellationMaxError; \/\/ Maximum error (in pixels) allowed when using Ad/;"	m	struct:ImGuiStyle	typeref:typename:float
@@ -609,7 +594,6 @@ CloseFont	imgui/misc/freetype/imgui_freetype.cpp	/^    void FreeTypeFont::CloseF
 ClosePopupToLevel	imgui/imgui.cpp	/^void ImGui::ClosePopupToLevel(int remaining, bool restore_focus_to_window_under_popup)$/;"	f	class:ImGui	typeref:typename:void
 ClosePopupsExceptModals	imgui/imgui.cpp	/^void ImGui::ClosePopupsExceptModals()$/;"	f	class:ImGui	typeref:typename:void
 ClosePopupsOverWindow	imgui/imgui.cpp	/^void ImGui::ClosePopupsOverWindow(ImGuiWindow* ref_window, bool restore_focus_to_window_under_po/;"	f	class:ImGui	typeref:typename:void
-Closed_polyline	Graph.h	/^struct Closed_polyline : Open_polyline { \/\/ closed sequence of lines$/;"	s	namespace:Graph_lib
 CmdBuffer	imgui/imgui.h	/^    ImVector<ImDrawCmd>     CmdBuffer;          \/\/ Draw commands. Typically 1 command = 1 GPU /;"	m	struct:ImDrawList	typeref:typename:ImVector<ImDrawCmd>
 CmdLists	imgui/imgui.h	/^    ImVector<ImDrawList*> CmdLists;         \/\/ Array of ImDrawList* to render. The ImDrawLists/;"	m	struct:ImDrawData	typeref:typename:ImVector<ImDrawList * >
 CmdListsCount	imgui/imgui.h	/^    int                 CmdListsCount;      \/\/ Number of ImDrawList* to render (should always /;"	m	struct:ImDrawData	typeref:typename:int
@@ -624,11 +608,6 @@ CollapsedCond	imgui/imgui_internal.h	/^    ImGuiCond                   Collapsed
 CollapsedVal	imgui/imgui_internal.h	/^    bool                        CollapsedVal;$/;"	m	struct:ImGuiNextWindowData	typeref:typename:bool
 CollapsingHeader	imgui/imgui_widgets.cpp	/^bool ImGui::CollapsingHeader(const char* label, ImGuiTreeNodeFlags flags)$/;"	f	class:ImGui	typeref:typename:bool
 CollapsingHeader	imgui/imgui_widgets.cpp	/^bool ImGui::CollapsingHeader(const char* label, bool* p_visible, ImGuiTreeNodeFlags flags)$/;"	f	class:ImGui	typeref:typename:bool
-Color	Graph.h	/^  Color(Color_type cc) : c(Fl_Color(cc)), v(visible) {}$/;"	f	struct:Graph_lib::Color
-Color	Graph.h	/^  Color(Color_type cc, Transparency vv) : c(Fl_Color(cc)), v(vv) {}$/;"	f	struct:Graph_lib::Color
-Color	Graph.h	/^  Color(Transparency vv) : c(Fl_Color()), v(vv) {}$/;"	f	struct:Graph_lib::Color
-Color	Graph.h	/^  Color(int cc) : c(Fl_Color(cc)), v(visible) {}$/;"	f	struct:Graph_lib::Color
-Color	Graph.h	/^struct Color {$/;"	s	namespace:Graph_lib
 Color	imgui/imgui_demo.cpp	/^    ImVec4      Color;      \/\/ An arbitrary variable associated to the document$/;"	m	struct:MyDocument	typeref:typename:ImVec4	file:
 ColorAttachmentFormat	imgui/backends/imgui_impl_vulkan.h	/^    VkFormat                        ColorAttachmentFormat;  \/\/ Required for dynamic rendering$/;"	m	struct:ImGui_ImplVulkan_InitInfo	typeref:typename:VkFormat
 ColorButton	imgui/imgui_widgets.cpp	/^bool ImGui::ColorButton(const char* desc_id, const ImVec4& col, ImGuiColorEditFlags flags, const/;"	f	class:ImGui	typeref:typename:bool
@@ -654,7 +633,6 @@ ColorPickerOptionsPopup	imgui/imgui_widgets.cpp	/^void ImGui::ColorPickerOptions
 ColorPickerRef	imgui/imgui_internal.h	/^    ImVec4                  ColorPickerRef;                     \/\/ Initial\/reference color at/;"	m	struct:ImGuiContext	typeref:typename:ImVec4
 ColorStack	imgui/imgui_internal.h	/^    ImVector<ImGuiColorMod>     ColorStack;                     \/\/ Stack for PushStyleColor()\//;"	m	struct:ImGuiContext	typeref:typename:ImVector<ImGuiColorMod>
 ColorTooltip	imgui/imgui_widgets.cpp	/^void ImGui::ColorTooltip(const char* text, const float* col, ImGuiColorEditFlags flags)$/;"	f	class:ImGui	typeref:typename:void
-Color_type	Graph.h	/^  enum Color_type {$/;"	g	struct:Graph_lib::Color
 Colored	imgui/imgui.h	/^    unsigned int    Colored : 1;        \/\/ Flag to indicate glyph is colored and should genera/;"	m	struct:ImFontGlyph	typeref:typename:unsigned int:1
 Colorful glyphs/emojis	imgui/misc/freetype/README.md	/^### Colorful glyphs\/emojis$/;"	S
 Colors	imgui/imgui.h	/^    ImVec4      Colors[ImGuiCol_COUNT];$/;"	m	struct:ImGuiStyle	typeref:typename:ImVec4[]
@@ -811,6 +789,7 @@ DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE	imgui/backends/imgui_impl_win32.cpp	/^#d
 DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2	imgui/backends/imgui_impl_win32.cpp	/^#define DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 /;"	d	file:
 DRAGDROP_HOLD_TO_OPEN_TIMER	imgui/imgui_widgets.cpp	/^static const float          DRAGDROP_HOLD_TO_OPEN_TIMER = 0.70f;    \/\/ Time for drag-hold to a/;"	v	typeref:typename:const float	file:
 DRAG_MOUSE_THRESHOLD_FACTOR	imgui/imgui_widgets.cpp	/^static const float          DRAG_MOUSE_THRESHOLD_FACTOR = 0.50f;    \/\/ Multiplier for the defa/;"	v	typeref:typename:const float	file:
+DRAW_H	draw.h	/^#define DRAW_H$/;"	d
 DRAW_VERT_IMGUI_TO_ALLEGRO	imgui/backends/imgui_impl_allegro5.cpp	/^#define DRAW_VERT_IMGUI_TO_ALLEGRO(/;"	d	file:
 DX12_ENABLE_DEBUG_LAYER	imgui/examples/example_win32_directx12/main.cpp	/^#define DX12_ENABLE_DEBUG_LAYER$/;"	d	file:
 Data	imgui/imgui.h	/^    ImVector<ImGuiStoragePair>      Data;$/;"	m	struct:ImGuiStorage	typeref:typename:ImVector<ImGuiStoragePair>
@@ -1085,8 +1064,6 @@ Element_Earth	imgui/imgui_demo.cpp	/^            enum Element { Element_Fire, El
 Element_Fire	imgui/imgui_demo.cpp	/^            enum Element { Element_Fire, Element_Earth, Element_Air, Element_Water, Element_COUN/;"	e	enum:ShowDemoWindowWidgets::Element	file:
 Element_Water	imgui/imgui_demo.cpp	/^            enum Element { Element_Fire, Element_Earth, Element_Air, Element_Water, Element_COUN/;"	e	enum:ShowDemoWindowWidgets::Element	file:
 ElementsHandle	imgui/backends/imgui_impl_opengl3.cpp	/^    unsigned int    VboHandle, ElementsHandle;$/;"	m	struct:ImGui_ImplOpenGL3_Data	typeref:typename:unsigned int	file:
-Ellipse	Graph.h	/^  Ellipse(Point p, int ww, int hh) \/\/ center, min, and max distance from center$/;"	f	struct:Graph_lib::Ellipse
-Ellipse	Graph.h	/^struct Ellipse : Shape {$/;"	s	namespace:Graph_lib
 EllipsisChar	imgui/imgui.h	/^    ImWchar                     EllipsisChar;       \/\/ 2     \/\/ out \/\/ = '...'\/'.'\/\/ Ch/;"	m	struct:ImFont	typeref:typename:ImWchar
 EllipsisChar	imgui/imgui.h	/^    ImWchar         EllipsisChar;           \/\/ -1       \/\/ Explicitly specify unicode codepo/;"	m	struct:ImFontConfig	typeref:typename:ImWchar
 EllipsisCharCount	imgui/imgui.h	/^    short                       EllipsisCharCount;  \/\/ 1     \/\/ out \/\/ 1 or 3$/;"	m	struct:ImFont	typeref:typename:short
@@ -1103,7 +1080,6 @@ Enabled	imgui/backends/imgui_impl_opengl3.cpp	/^    GLint   Enabled, Size, Type,
 EnabledMaskByDisplayOrder	imgui/imgui_internal.h	/^    ImBitArrayPtr               EnabledMaskByDisplayOrder;  \/\/ Column DisplayOrder -> IsEnable/;"	m	struct:ImGuiTable	typeref:typename:ImBitArrayPtr
 EnabledMaskByIndex	imgui/imgui_internal.h	/^    ImBitArrayPtr               EnabledMaskByIndex;         \/\/ Column Index -> IsEnabled map (/;"	m	struct:ImGuiTable	typeref:typename:ImBitArrayPtr
 Encode85Byte	imgui/misc/fonts/binary_to_compressed_c.cpp	/^char Encode85Byte(unsigned int x)$/;"	f	typeref:typename:char
-Encoding	Graph.h	/^  enum Encoding { none, jpg, gif, bmp };$/;"	g	struct:Graph_lib::Suffix
 End	imgui/imgui.cpp	/^void ImGui::End()$/;"	f	class:ImGui	typeref:typename:void
 End	imgui/imgui.cpp	/^void ImGuiListClipper::End()$/;"	f	class:ImGuiListClipper	typeref:typename:void
 EndChild	imgui/imgui.cpp	/^void ImGui::EndChild()$/;"	f	class:ImGui	typeref:typename:void
@@ -1151,7 +1127,6 @@ Exit	std_lib_facilities.h	/^struct Exit : runtime_error {$/;"	s
 Expand	imgui/imgui_internal.h	/^    void        Expand(const ImVec2& amount)        { Min.x -= amount.x; Min.y -= amount.y; Max./;"	f	struct:ImRect	typeref:typename:void
 Expand	imgui/imgui_internal.h	/^    void        Expand(const float amount)          { Min.x -= amount;   Min.y -= amount;   Max./;"	f	struct:ImRect	typeref:typename:void
 FAQ (Frequently Asked Questions)	imgui/docs/FAQ.md	/^# FAQ (Frequently Asked Questions)$/;"	c
-FLTK_GUARD	fltk.h	/^#define FLTK_GUARD /;"	d
 FONT_ATLAS_DEFAULT_TEX_CURSOR_DATA	imgui/imgui_draw.cpp	/^static const ImVec2 FONT_ATLAS_DEFAULT_TEX_CURSOR_DATA[ImGuiMouseCursor_COUNT][3] =$/;"	v	typeref:typename:const ImVec2[][3]	file:
 FONT_ATLAS_DEFAULT_TEX_DATA_H	imgui/imgui_draw.cpp	/^const int FONT_ATLAS_DEFAULT_TEX_DATA_H = 27;$/;"	v	typeref:typename:const int
 FONT_ATLAS_DEFAULT_TEX_DATA_PIXELS	imgui/imgui_draw.cpp	/^static const char FONT_ATLAS_DEFAULT_TEX_DATA_PIXELS[FONT_ATLAS_DEFAULT_TEX_DATA_W * FONT_ATLAS_/;"	v	typeref:typename:const char[]	file:
@@ -1163,9 +1138,6 @@ FallbackChar	imgui/imgui.h	/^    ImWchar                     FallbackChar;      
 FallbackGlyph	imgui/imgui.h	/^    const ImFontGlyph*          FallbackGlyph;      \/\/ 4-8   \/\/ out \/\/ = FindGlyph(FontFal/;"	m	struct:ImFont	typeref:typename:const ImFontGlyph *
 Fence	imgui/backends/imgui_impl_vulkan.h	/^    VkFence             Fence;$/;"	m	struct:ImGui_ImplVulkanH_Frame	typeref:typename:VkFence
 FenceValue	imgui/examples/example_win32_directx12/main.cpp	/^    UINT64                  FenceValue;$/;"	m	struct:FrameContext	typeref:typename:UINT64	file:
-Fill	Graph.h	/^  Fill() : no_fill(true), fcolor(0) {}$/;"	f	struct:Graph_lib::Fill
-Fill	Graph.h	/^  Fill(Color c) : no_fill(false), fcolor(c) {}$/;"	f	struct:Graph_lib::Fill
-Fill	Graph.h	/^struct Fill {$/;"	s	namespace:Graph_lib
 Filter	imgui/imgui_demo.cpp	/^    ImGuiTextFilter       Filter;$/;"	m	struct:ExampleAppConsole	typeref:typename:ImGuiTextFilter	file:
 Filter	imgui/imgui_demo.cpp	/^    ImGuiTextFilter     Filter;$/;"	m	struct:ExampleAppLog	typeref:typename:ImGuiTextFilter	file:
 FilterCasingSwap	imgui/imgui_demo.cpp	/^                static int FilterCasingSwap(ImGuiInputTextCallbackData* data)$/;"	f	struct:ShowDemoWindowWidgets::TextFilters	typeref:typename:int	file:
@@ -1220,9 +1192,6 @@ FocusWindow	imgui/imgui.cpp	/^void ImGui::FocusWindow(ImGuiWindow* window, ImGui
 FocusableItemRegister	imgui/imgui_internal.h	/^    inline bool     FocusableItemRegister(ImGuiWindow* window, ImGuiID id)              { IM_ASS/;"	f	namespace:ImGui	typeref:typename:bool
 FocusableItemUnregister	imgui/imgui_internal.h	/^    inline void     FocusableItemUnregister(ImGuiWindow* window)                        { IM_ASS/;"	f	namespace:ImGui	typeref:typename:void
 Focused	imgui/imgui_internal.h	/^struct ImGuiInputEventAppFocused    { bool Focused; };$/;"	m	struct:ImGuiInputEventAppFocused	typeref:typename:bool
-Font	Graph.h	/^  Font(Font_type ff) : f(ff) {}$/;"	f	class:Graph_lib::Font
-Font	Graph.h	/^  Font(int ff) : f(ff) {}$/;"	f	class:Graph_lib::Font
-Font	Graph.h	/^class Font {$/;"	c	namespace:Graph_lib
 Font	imgui/imgui.h	/^    ImFont*         Font;           \/\/ Input    \/\/ For custom font glyphs only: target font$/;"	m	struct:ImFontAtlasCustomRect	typeref:typename:ImFont *
 Font	imgui/imgui_internal.h	/^    ImFont*                 Font;                               \/\/ (Shortcut) == FontStack.emp/;"	m	struct:ImGuiContext	typeref:typename:ImFont *
 Font	imgui/imgui_internal.h	/^    ImFont*         Font;                       \/\/ Current\/default font (optional, for simpli/;"	m	struct:ImDrawListSharedData	typeref:typename:ImFont *
@@ -1262,7 +1231,6 @@ FontTexture	imgui/backends/imgui_impl_wgpu.cpp	/^    WGPUTexture         FontTex
 FontTextureView	imgui/backends/imgui_impl_wgpu.cpp	/^    WGPUTextureView     FontTextureView = nullptr;      \/\/ Texture view for font texture$/;"	m	struct:RenderResources	typeref:typename:WGPUTextureView	file:
 FontView	imgui/backends/imgui_impl_vulkan.cpp	/^    VkImageView                 FontView;$/;"	m	struct:ImGui_ImplVulkan_Data	typeref:typename:VkImageView	file:
 FontWindowScale	imgui/imgui_internal.h	/^    float                   FontWindowScale;                    \/\/ User scale multiplier per-w/;"	m	struct:ImGuiWindow	typeref:typename:float
-Font_type	Graph.h	/^  enum Font_type {$/;"	g	class:Graph_lib::Font
 Fonts	imgui/imgui.h	/^    ImFontAtlas*Fonts;                          \/\/ <auto>           \/\/ Font atlas: load, ras/;"	m	struct:ImGuiIO	typeref:typename:ImFontAtlas *
 Fonts	imgui/imgui.h	/^    ImVector<ImFont*>           Fonts;              \/\/ Hold all the fonts returned by AddFont*/;"	m	struct:ImFontAtlas	typeref:typename:ImVector<ImFont * >
 Fonts Loading Instructions	imgui/docs/FONTS.md	/^## Fonts Loading Instructions$/;"	s
@@ -1316,8 +1284,6 @@ Func	imgui/imgui.cpp	/^            struct Func { static int IMGUI_CDECL WindowCo
 Funcs	imgui/imgui.cpp	/^    struct Funcs$/;"	s	function:ImGui::ShowMetricsWindow	file:
 Funcs	imgui/imgui_demo.cpp	/^            struct Funcs$/;"	s	function:ShowDemoWindowWidgets	file:
 Funcs	imgui/imgui_demo.cpp	/^        struct Funcs$/;"	s	function:ShowDemoWindowWidgets	file:
-Function	Graph.cpp	/^Function::Function(Fct f, double r1, double r2, Point xy, int count, double xscale, double yscal/;"	f	class:Graph_lib::Function
-Function	Graph.h	/^struct Function : Shape {$/;"	s	namespace:Graph_lib
 GCrc32LookupTable	imgui/imgui.cpp	/^static const ImU32 GCrc32LookupTable[256] =$/;"	v	typeref:typename:const ImU32[256]	file:
 GDataTypeInfo	imgui/imgui_widgets.cpp	/^static const ImGuiDataTypeInfo GDataTypeInfo[] =$/;"	v	typeref:typename:const ImGuiDataTypeInfo[]	file:
 GImAllocatorAllocFunc	imgui/imgui.cpp	/^static ImGuiMemAllocFunc    GImAllocatorAllocFunc = MallocWrapper;$/;"	v	typeref:typename:ImGuiMemAllocFunc	file:
@@ -1736,7 +1702,6 @@ GLuint64	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef khronos_uint64_t G
 GLuint64EXT	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef khronos_uint64_t GLuint64EXT;$/;"	t	typeref:typename:khronos_uint64_t
 GLushort	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef khronos_uint16_t GLushort;$/;"	t	typeref:typename:khronos_uint16_t
 GLvoid	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef void GLvoid;$/;"	t	typeref:typename:void
-GRAPH_GUARD	Graph.h	/^#define GRAPH_GUARD /;"	d
 GREEN	Part1_The_Basics/ch6-calc-2.cc	/^#define GREEN /;"	d	file:
 GREEN	Part1_The_Basics/ch6-calc-3.cc	/^#define GREEN /;"	d	file:
 GREEN	Part2_Data_Algorithms/ch18exercises.cpp	/^#define GREEN /;"	d	file:
@@ -1749,8 +1714,6 @@ GS	imgui/backends/imgui_impl_dx11.cpp	/^        ID3D11GeometryShader*       GS;$
 GSInstances	imgui/backends/imgui_impl_dx11.cpp	/^        ID3D11ClassInstance         *PSInstances[256], *VSInstances[256], *GSInstances[256];   \//;"	m	struct:ImGui_ImplDX11_RenderDrawData::BACKUP_DX11_STATE	typeref:typename:ID3D11ClassInstance * [256]* [256]* [256]	file:
 GSInstancesCount	imgui/backends/imgui_impl_dx11.cpp	/^        UINT                        PSInstancesCount, VSInstancesCount, GSInstancesCount;$/;"	m	struct:ImGui_ImplDX11_RenderDrawData::BACKUP_DX11_STATE	typeref:typename:UINT	file:
 GStyleVarInfo	imgui/imgui.cpp	/^static const ImGuiDataVarInfo GStyleVarInfo[] =$/;"	v	typeref:typename:const ImGuiDataVarInfo[]	file:
-GUI_GUARD	GUI.h	/^#define GUI_GUARD$/;"	d
-GUI_GUARD	Gui.h	/^#define GUI_GUARD$/;"	d
 Gallery	imgui/docs/README.md	/^### Gallery$/;"	S
 Gamma	imgui/backends/imgui_impl_wgpu.cpp	/^    float Gamma;$/;"	m	struct:Uniforms	typeref:typename:float	file:
 GcAwakeTransientWindowBuffers	imgui/imgui.cpp	/^void ImGui::GcAwakeTransientWindowBuffers(ImGuiWindow* window)$/;"	f	class:ImGui	typeref:typename:void
@@ -2009,13 +1972,6 @@ GlyphsSet	imgui/misc/freetype/imgui_freetype.cpp	/^    ImBitVector         Glyph
 GlyphsSet	imgui/misc/freetype/imgui_freetype.cpp	/^    ImBitVector         GlyphsSet;          \/\/ This is used to resolve collision when multiple/;"	m	struct:ImFontBuildDstDataFT	typeref:typename:ImBitVector	file:
 GrabMinSize	imgui/imgui.h	/^    float       GrabMinSize;                \/\/ Minimum width\/height of a grab box for slider\//;"	m	struct:ImGuiStyle	typeref:typename:float
 GrabRounding	imgui/imgui.h	/^    float       GrabRounding;               \/\/ Radius of grabs corners rounding. Set to 0.0f t/;"	m	struct:ImGuiStyle	typeref:typename:float
-Graph_lib	GUI.h	/^namespace Graph_lib {$/;"	n
-Graph_lib	Graph.cpp	/^namespace Graph_lib {$/;"	n	file:
-Graph_lib	Graph.h	/^namespace Graph_lib {$/;"	n
-Graph_lib	Gui.h	/^namespace Graph_lib {$/;"	n
-Graph_lib	Point.h	/^namespace Graph_lib {$/;"	n
-Graph_lib	Window.cpp	/^namespace Graph_lib {$/;"	n	file:
-Graph_lib	Window.h	/^namespace Graph_lib {$/;"	n
 GroupOffset	imgui/imgui_internal.h	/^    ImVec1                  GroupOffset;$/;"	m	struct:ImGuiWindowTempData	typeref:typename:ImVec1
 GroupStack	imgui/imgui_internal.h	/^    ImVector<ImGuiGroupData>    GroupStack;                     \/\/ Stack for BeginGroup()\/End/;"	m	struct:ImGuiContext	typeref:typename:ImVector<ImGuiGroupData>
 GrowIndex	imgui/imgui_draw.cpp	/^void ImFont::GrowIndex(int new_size)$/;"	f	class:ImFont	typeref:typename:void
@@ -2309,6 +2265,9 @@ INFO	Part2_Data_Algorithms/foo.cpp	/^#define INFO /;"	d	file:
 INFO	Part2_Data_Algorithms/linked_list.cpp	/^#define INFO /;"	d	file:
 INFO	Part2_Data_Algorithms/vector.h	/^#define INFO /;"	d
 INFO	Part2_Data_Algorithms/vtest.h	/^#define INFO /;"	d
+INIT_IMGUI_H	init_imgui.h	/^#define INIT_IMGUI_H$/;"	d
+INIT_IMGUI_STYLE_H	init_imgui_style.h	/^#define INIT_IMGUI_STYLE_H$/;"	d
+INIT_WINDOW_H	init_window.h	/^#define INIT_WINDOW_H$/;"	d
 IO	imgui/imgui_internal.h	/^    ImGuiIO                 IO;$/;"	m	struct:ImGuiContext	typeref:typename:ImGuiIO
 IdealMaxPos	imgui/imgui_internal.h	/^    ImVec2                  IdealMaxPos;            \/\/ Used to implicitly calculate ContentSiz/;"	m	struct:ImGuiWindowTempData	typeref:typename:ImVec2
 IdxBuffer	imgui/imgui.h	/^    ImVector<ImDrawIdx>     IdxBuffer;          \/\/ Index buffer. Each command consume ImDrawCm/;"	m	struct:ImDrawList	typeref:typename:ImVector<ImDrawIdx>
@@ -4068,8 +4027,6 @@ ImWchar	imgui/imgui.h	/^typedef ImWchar16 ImWchar;$/;"	t	typeref:typename:ImWcha
 ImWchar	imgui/imgui.h	/^typedef ImWchar32 ImWchar;$/;"	t	typeref:typename:ImWchar32
 ImWchar16	imgui/imgui.h	/^typedef unsigned short ImWchar16;   \/\/ A single decoded U16 character\/code point. We encode t/;"	t	typeref:typename:unsigned short
 ImWchar32	imgui/imgui.h	/^typedef unsigned int ImWchar32;     \/\/ A single decoded U32 character\/code point. We encode t/;"	t	typeref:typename:unsigned int
-Image	Graph.cpp	/^Image::Image(Point xy, string s, Suffix::Encoding e)$/;"	f	class:Graph_lib::Image
-Image	Graph.h	/^struct Image : Shape {$/;"	s	namespace:Graph_lib
 Image	imgui/imgui_widgets.cpp	/^void ImGui::Image(ImTextureID user_texture_id, const ImVec2& image_size, const ImVec2& uv0, cons/;"	f	class:ImGui	typeref:typename:void
 ImageAcquiredSemaphore	imgui/backends/imgui_impl_vulkan.h	/^    VkSemaphore         ImageAcquiredSemaphore;$/;"	m	struct:ImGui_ImplVulkanH_FrameSemaphores	typeref:typename:VkSemaphore
 ImageBindGroup	imgui/backends/imgui_impl_wgpu.cpp	/^    WGPUBindGroup       ImageBindGroup = nullptr;       \/\/ Default font-resource of Dear ImGui$/;"	m	struct:RenderResources	typeref:typename:WGPUBindGroup	file:
@@ -4084,10 +4041,6 @@ ImeWindowHandle	imgui/imgui.h	/^    void*       ImeWindowHandle;                
 InFlags	imgui/imgui_internal.h	/^    ImGuiItemFlags          InFlags;            \/\/ See ImGuiItemFlags_$/;"	m	struct:ImGuiLastItemData	typeref:typename:ImGuiItemFlags
 InFlags	imgui/imgui_internal.h	/^    ImGuiItemFlags          InFlags;$/;"	m	struct:ImGuiNavTreeNodeData	typeref:typename:ImGuiItemFlags
 InFlags	imgui/imgui_internal.h	/^    ImGuiItemFlags      InFlags;        \/\/ ????,Move    \/\/ Best candidate item flags$/;"	m	struct:ImGuiNavItemData	typeref:typename:ImGuiItemFlags
-In_box	GUI.h	/^  In_box(Point xy, int w, int h, const string &s) : Widget(xy, w, h, s, 0) {}$/;"	f	struct:Graph_lib::In_box
-In_box	GUI.h	/^struct In_box : Widget {$/;"	s	namespace:Graph_lib
-In_box	Gui.h	/^	In_box(Point xy, int w, int h, const string& s)$/;"	f	struct:Graph_lib::In_box
-In_box	Gui.h	/^struct In_box : Widget {$/;"	s	namespace:Graph_lib
 IncludeItemByIndex	imgui/imgui.h	/^    inline void     IncludeItemByIndex(int item_index)                  { IncludeItemsByIndex(it/;"	f	struct:ImGuiListClipper	typeref:typename:void
 IncludeItemsByIndex	imgui/imgui.cpp	/^void ImGuiListClipper::IncludeItemsByIndex(int item_begin, int item_end)$/;"	f	class:ImGuiListClipper	typeref:typename:void
 IncludeRangeByIndices	imgui/imgui.h	/^    inline void IncludeRangeByIndices(int item_begin, int item_end)      { IncludeItemsByIndex(i/;"	f	struct:ImGuiListClipper	typeref:typename:void
@@ -4355,7 +4308,6 @@ KeysData	imgui/imgui.h	/^    ImGuiKeyData  KeysData[ImGuiKey_KeysData_SIZE]; \/\
 KeysDown	imgui/imgui.h	/^    bool        KeysDown[ImGuiKey_COUNT];           \/\/ [LEGACY] Input: Keyboard keys that are /;"	m	struct:ImGuiIO	typeref:typename:bool[]
 KeysOwnerData	imgui/imgui_internal.h	/^    ImGuiKeyOwnerData       KeysOwnerData[ImGuiKey_NamedKey_COUNT];$/;"	m	struct:ImGuiContext	typeref:typename:ImGuiKeyOwnerData[]
 KeysRoutingTable	imgui/imgui_internal.h	/^    ImGuiKeyRoutingTable    KeysRoutingTable;$/;"	m	struct:ImGuiContext	typeref:typename:ImGuiKeyRoutingTable
-Kind	Gui.h	/^	enum Kind { horizontal, vertical };$/;"	g	struct:Graph_lib::Menu
 Kind	Part1_The_Basics/ch6-calc-3.cc	/^enum Kind { number };$/;"	g	file:
 Known issues	imgui/misc/freetype/README.md	/^### Known issues$/;"	S
 LDFLAGS	imgui/examples/example_emscripten_wgpu/Makefile	/^LDFLAGS =$/;"	m
@@ -4429,22 +4381,12 @@ LayoutType	imgui/imgui_internal.h	/^    ImGuiLayoutType         LayoutType;$/;"	
 LeftMostEnabledColumn	imgui/imgui_internal.h	/^    ImGuiTableColumnIdx         LeftMostEnabledColumn;      \/\/ Index of left-most non-hidden c/;"	m	struct:ImGuiTable	typeref:typename:ImGuiTableColumnIdx
 LeftMostStretchedColumn	imgui/imgui_internal.h	/^    ImGuiTableColumnIdx         LeftMostStretchedColumn;    \/\/ Index of left-most stretched co/;"	m	struct:ImGuiTable	typeref:typename:ImGuiTableColumnIdx
 License	imgui/docs/README.md	/^License$/;"	s
-Line	Graph.h	/^  Line(Point p1, Point p2) {$/;"	f	struct:Graph_lib::Line
-Line	Graph.h	/^struct Line : Shape {$/;"	s	namespace:Graph_lib
 LineGap	imgui/misc/freetype/imgui_freetype.cpp	/^        float       LineGap;            \/\/ The spacing in pixels between one row's descent and/;"	m	struct:__anon76bbacac0110::FontInfo	typeref:typename:float	file:
 LineMaxY	imgui/imgui_internal.h	/^    float               LineMinY, LineMaxY;$/;"	m	struct:ImGuiOldColumns	typeref:typename:float
 LineMinY	imgui/imgui_internal.h	/^    float               LineMinY, LineMaxY;$/;"	m	struct:ImGuiOldColumns	typeref:typename:float
 LineOffsets	imgui/imgui_demo.cpp	/^    ImVector<int>       LineOffsets; \/\/ Index to lines offset. We maintain this with AddLog() /;"	m	struct:ExampleAppLog	typeref:typename:ImVector<int>	file:
 LineOffsets	imgui/imgui_internal.h	/^    ImVector<int>   LineOffsets;$/;"	m	struct:ImGuiTextIndex	typeref:typename:ImVector<int>
 LineSpacing	imgui/misc/freetype/imgui_freetype.cpp	/^        float       LineSpacing;        \/\/ The baseline-to-baseline distance. Note that it usu/;"	m	struct:__anon76bbacac0110::FontInfo	typeref:typename:float	file:
-Line_style	Graph.h	/^  Line_style(Line_style_type lst, int ww) : s(lst), w(ww) {}$/;"	f	struct:Graph_lib::Line_style
-Line_style	Graph.h	/^  Line_style(Line_style_type ss) : s(ss), w(0) {}$/;"	f	struct:Graph_lib::Line_style
-Line_style	Graph.h	/^  Line_style(int ss) : s(ss), w(0) {}$/;"	f	struct:Graph_lib::Line_style
-Line_style	Graph.h	/^struct Line_style {$/;"	s	namespace:Graph_lib
-Line_style_type	Graph.h	/^  enum Line_style_type {$/;"	g	struct:Graph_lib::Line_style
-Lines	Graph.h	/^  Lines() {}$/;"	f	struct:Graph_lib::Lines
-Lines	Graph.h	/^  Lines(initializer_list<Point> lst) : Shape{lst} {$/;"	f	struct:Graph_lib::Lines
-Lines	Graph.h	/^struct Lines : Shape { \/\/ indepentdent lines$/;"	s	namespace:Graph_lib
 LinkProgram	imgui/backends/imgui_impl_opengl3_loader.h	/^        PFNGLLINKPROGRAMPROC              LinkProgram;$/;"	m	struct:ImGL3WProcs::__anon35e8ffa80108	typeref:typename:PFNGLLINKPROGRAMPROC
 Linux and similar Unixes	imgui/examples/example_sdl2_opengl3/README.md	/^## Linux and similar Unixes$/;"	s
 Linux and similar Unixes	imgui/examples/example_sdl3_opengl3/README.md	/^## Linux and similar Unixes$/;"	s
@@ -4527,16 +4469,9 @@ MainWindowRenderBuffers	imgui/backends/imgui_impl_vulkan.cpp	/^    ImGui_ImplVul
 MallocWrapper	imgui/imgui.cpp	/^static void*   MallocWrapper(size_t size, void* user_data)    { IM_UNUSED(user_data); IM_UNUSED(/;"	f	typeref:typename:void *	file:
 MallocWrapper	imgui/imgui.cpp	/^static void*   MallocWrapper(size_t size, void* user_data)    { IM_UNUSED(user_data); return mal/;"	f	typeref:typename:void *	file:
 Map	imgui/imgui_internal.h	/^    ImGuiStorage    Map;        \/\/ ID->Index$/;"	m	struct:ImPool	typeref:typename:ImGuiStorage
-Mark	Graph.h	/^  Mark() : Marks(string(1, 'X')){};$/;"	f	struct:Graph_lib::Mark
-Mark	Graph.h	/^  Mark(Point xy, char c) : Marks(string(1, c)) { add(xy); }$/;"	f	struct:Graph_lib::Mark
-Mark	Graph.h	/^struct Mark : Marks {$/;"	s	namespace:Graph_lib
 MarkIniSettingsDirty	imgui/imgui.cpp	/^void ImGui::MarkIniSettingsDirty()$/;"	f	class:ImGui	typeref:typename:void
 MarkIniSettingsDirty	imgui/imgui.cpp	/^void ImGui::MarkIniSettingsDirty(ImGuiWindow* window)$/;"	f	class:ImGui	typeref:typename:void
 MarkItemEdited	imgui/imgui.cpp	/^void ImGui::MarkItemEdited(ImGuiID id)$/;"	f	class:ImGui	typeref:typename:void
-Marked_polyline	Graph.h	/^  Marked_polyline(const string &m) : mark(m) {}$/;"	f	struct:Graph_lib::Marked_polyline
-Marked_polyline	Graph.h	/^struct Marked_polyline : Open_polyline {$/;"	s	namespace:Graph_lib
-Marks	Graph.h	/^  Marks(const string &m) : Marked_polyline(m) {$/;"	f	struct:Graph_lib::Marks
-Marks	Graph.h	/^struct Marks : Marked_polyline {$/;"	s	namespace:Graph_lib
 Max	imgui/imgui_internal.h	/^    ImVec2      Max;    \/\/ Lower-right$/;"	m	struct:ImRect	typeref:typename:ImVec2
 Max	imgui/imgui_internal.h	/^    int     Max;$/;"	m	struct:ImGuiListClipperRange	typeref:typename:int
 MaxAdvanceWidth	imgui/misc/freetype/imgui_freetype.cpp	/^        float       MaxAdvanceWidth;    \/\/ This field gives the maximum horizontal cursor adva/;"	m	struct:__anon76bbacac0110::FontInfo	typeref:typename:float	file:
@@ -4547,8 +4482,6 @@ MemoryCompacted	imgui/imgui_internal.h	/^    bool                        MemoryC
 MemoryCompacted	imgui/imgui_internal.h	/^    bool                    MemoryCompacted;                    \/\/ Set when window extraneous /;"	m	struct:ImGuiWindow	typeref:typename:bool
 MemoryDrawListIdxCapacity	imgui/imgui_internal.h	/^    int                     MemoryDrawListIdxCapacity;          \/\/ Backup of last idx\/vtx cou/;"	m	struct:ImGuiWindow	typeref:typename:int
 MemoryDrawListVtxCapacity	imgui/imgui_internal.h	/^    int                     MemoryDrawListVtxCapacity;$/;"	m	struct:ImGuiWindow	typeref:typename:int
-Menu	GUI.cpp	/^Menu::Menu(Point xy, int w, int h, Kind kk, const string& s)$/;"	f	class:Menu
-Menu	Gui.h	/^struct Menu : Widget {$/;"	s	namespace:Graph_lib
 MenuBarAppending	imgui/imgui_internal.h	/^    bool                    MenuBarAppending;       \/\/ FIXME: Remove this$/;"	m	struct:ImGuiWindowTempData	typeref:typename:bool
 MenuBarHeight	imgui/imgui_internal.h	/^    float       MenuBarHeight() const   { ImGuiContext& g = *Ctx; return (Flags & ImGuiWindowFla/;"	f	struct:ImGuiWindow	typeref:typename:float
 MenuBarOffset	imgui/imgui_internal.h	/^    ImVec2                  MenuBarOffset;          \/\/ MenuBarOffset.x is sort of equivalent o/;"	m	struct:ImGuiWindowTempData	typeref:typename:ImVec2
@@ -4859,12 +4792,6 @@ OpenPopupPos	imgui/imgui_internal.h	/^    ImVec2              OpenPopupPos;   \/
 OpenPopupStack	imgui/imgui_internal.h	/^    ImVector<ImGuiPopupData>    OpenPopupStack;                 \/\/ Which popups are open (pers/;"	m	struct:ImGuiContext	typeref:typename:ImVector<ImGuiPopupData>
 OpenPrev	imgui/imgui_demo.cpp	/^    bool        OpenPrev;   \/\/ Copy of Open from last update.$/;"	m	struct:MyDocument	typeref:typename:bool	file:
 OpenVal	imgui/imgui_internal.h	/^    bool                        OpenVal;            \/\/ Set by SetNextItemOpen()$/;"	m	struct:ImGuiNextItemData	typeref:typename:bool
-Open_polyline	Graph.h	/^struct Open_polyline : Shape { \/\/ open sequence of lines$/;"	s	namespace:Graph_lib
-Orientation	Graph.h	/^  enum Orientation { x, y, z };$/;"	g	struct:Graph_lib::Axis
-Out_box	GUI.h	/^  Out_box(Point xy, int w, int h, const string &s) : Widget(xy, w, h, s, 0) {}$/;"	f	struct:Graph_lib::Out_box
-Out_box	GUI.h	/^struct Out_box : Widget {$/;"	s	namespace:Graph_lib
-Out_box	Gui.h	/^	Out_box(Point xy, int w, int h, const string& s\/*, Window& win*\/)$/;"	f	struct:Graph_lib::Out_box
-Out_box	Gui.h	/^struct Out_box : Widget {$/;"	s	namespace:Graph_lib
 OuterAngle	imgui/imgui.cpp	/^    float   OuterAngle;             \/\/ Angle toward outside$/;"	m	struct:ImGuiResizeBorderDef	typeref:typename:float	file:
 OuterPaddingX	imgui/imgui_internal.h	/^    float                       OuterPaddingX;$/;"	m	struct:ImGuiTable	typeref:typename:float
 OuterRect	imgui/imgui_internal.h	/^    ImRect                      OuterRect;                  \/\/ Note: for non-scrolling table, /;"	m	struct:ImGuiTable	typeref:typename:ImRect
@@ -4955,7 +4882,6 @@ PFN_SetProcessDpiAwareness	imgui/backends/imgui_impl_win32.cpp	/^typedef HRESULT
 PFN_SetThreadDpiAwarenessContext	imgui/backends/imgui_impl_win32.cpp	/^typedef DPI_AWARENESS_CONTEXT(WINAPI* PFN_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT); /;"	t	typeref:typename:DPI_AWARENESS_CONTEXT (WINAPI *)(DPI_AWARENESS_CONTEXT)	file:
 PFN_XInputGetCapabilities	imgui/backends/imgui_impl_win32.cpp	/^typedef DWORD (WINAPI *PFN_XInputGetCapabilities)(DWORD, DWORD, XINPUT_CAPABILITIES*);$/;"	t	typeref:typename:DWORD (WINAPI *)(DWORD,DWORD,XINPUT_CAPABILITIES *)	file:
 PFN_XInputGetState	imgui/backends/imgui_impl_win32.cpp	/^typedef DWORD (WINAPI *PFN_XInputGetState)(DWORD, XINPUT_STATE*);$/;"	t	typeref:typename:DWORD (WINAPI *)(DWORD,XINPUT_STATE *)	file:
-POINT_GUARD	Point.h	/^#define POINT_GUARD$/;"	d
 PRId64	imgui/imgui_demo.cpp	/^#define PRId64 /;"	d	file:
 PRIu64	imgui/imgui_demo.cpp	/^#define PRIu64 /;"	d	file:
 PROCESS_DPI_AWARENESS	imgui/backends/imgui_impl_win32.cpp	/^typedef enum { PROCESS_DPI_UNAWARE = 0, PROCESS_SYSTEM_DPI_AWARE = 1, PROCESS_PER_MONITOR_DPI_AW/;"	t	typeref:enum:__anon371204a80103	file:
@@ -5017,11 +4943,7 @@ PlotHistogram	imgui/imgui_widgets.cpp	/^void ImGui::PlotHistogram(const char* la
 PlotLines	imgui/imgui_widgets.cpp	/^void ImGui::PlotLines(const char* label, const float* values, int values_count, int values_offse/;"	f	class:ImGui	typeref:typename:void
 PlotLines	imgui/imgui_widgets.cpp	/^void ImGui::PlotLines(const char* label, float (*values_getter)(void* data, int idx), void* data/;"	f	class:ImGui	typeref:typename:void
 Plot_ArrayGetter	imgui/imgui_widgets.cpp	/^static float Plot_ArrayGetter(void* data, int idx)$/;"	f	typeref:typename:float	file:
-Point	Point.h	/^	Point() :x(0), y(0) { }$/;"	f	struct:Graph_lib::Point
-Point	Point.h	/^	Point(int xx, int yy) : x(xx), y(yy) { }$/;"	f	struct:Graph_lib::Point
-Point	Point.h	/^struct Point {$/;"	s	namespace:Graph_lib
 PollUnicodeChars	imgui/examples/example_android_opengl3/main.cpp	/^static int PollUnicodeChars()$/;"	f	typeref:typename:int	file:
-Polygon	Graph.h	/^struct Polygon : Closed_polyline { \/\/ closed sequence of non-intersecting lines$/;"	s	namespace:Graph_lib
 PolygonMode	imgui/backends/imgui_impl_opengl3_loader.h	/^        PFNGLPOLYGONMODEPROC              PolygonMode;$/;"	m	struct:ImGL3WProcs::__anon35e8ffa80108	typeref:typename:PFNGLPOLYGONMODEPROC
 PopAllowKeyboardFocus	imgui/imgui.h	/^    static inline void  PopAllowKeyboardFocus()                                             { Po/;"	f	namespace:ImGui	typeref:typename:void
 PopButtonRepeat	imgui/imgui.cpp	/^void ImGui::PopButtonRepeat()$/;"	f	class:ImGui	typeref:typename:void
@@ -5045,7 +4967,7 @@ PopupId	imgui/imgui_internal.h	/^    ImGuiID             PopupId;        \/\/ Se
 PopupRounding	imgui/imgui.h	/^    float       PopupRounding;              \/\/ Radius of popup window corners rounding. (Note /;"	m	struct:ImGuiStyle	typeref:typename:float
 Pos	imgui.ini	/^Pos=181,325$/;"	k	section:Window
 Pos	imgui.ini	/^Pos=198,290$/;"	k	section:Window
-Pos	imgui.ini	/^Pos=206,99$/;"	k	section:Window
+Pos	imgui.ini	/^Pos=313,79$/;"	k	section:Window
 Pos	imgui.ini	/^Pos=60,60$/;"	k	section:Window
 Pos	imgui.ini	/^Pos=621,28$/;"	k	section:Window
 Pos	imgui/examples/example_sdl2_opengl2/imgui.ini	/^Pos=60,60$/;"	k	section:Window
@@ -5190,9 +5112,6 @@ Recommended Backends	imgui/docs/BACKENDS.md	/^### Recommended Backends$/;"	S
 Rect	imgui/imgui_internal.h	/^    ImRect                  Rect;               \/\/ Full rectangle$/;"	m	struct:ImGuiLastItemData	typeref:typename:ImRect
 Rect	imgui/imgui_internal.h	/^    ImRect      Rect() const            { return ImRect(Pos.x, Pos.y, Pos.x + Size.x, Pos.y + Si/;"	f	struct:ImGuiWindow	typeref:typename:ImRect
 RectRel	imgui/imgui_internal.h	/^    ImRect              RectRel;        \/\/ Init,Move    \/\/ Best candidate bounding box in wi/;"	m	struct:ImGuiNavItemData	typeref:typename:ImRect
-Rectangle	Graph.h	/^  Rectangle(Point x, Point y) : w{y.x - x.x}, h{y.y - x.y} {$/;"	f	struct:Graph_lib::Rectangle
-Rectangle	Graph.h	/^  Rectangle(Point xy, int ww, int hh) : w{ww}, h{hh} {$/;"	f	struct:Graph_lib::Rectangle
-Rectangle	Graph.h	/^struct Rectangle : Shape {$/;"	s	namespace:Graph_lib
 Rects	imgui/imgui_draw.cpp	/^    stbrp_rect*         Rects;              \/\/ Rectangle to pack. We first fill in their size /;"	m	struct:ImFontBuildSrcData	typeref:typename:stbrp_rect *	file:
 Rects	imgui/misc/freetype/imgui_freetype.cpp	/^    stbrp_rect*         Rects;              \/\/ Rectangle to pack. We first fill in their size /;"	m	struct:ImFontBuildSrcDataFT	typeref:typename:stbrp_rect *	file:
 RefFrame	imgui/imgui.h	/^    mutable int RefFrame;$/;"	m	struct:ImGuiOnceUponAFrame	typeref:typename:int
@@ -5284,8 +5203,6 @@ SDL_Event	imgui/backends/imgui_impl_sdl3.h	/^typedef union SDL_Event SDL_Event;$
 SDL_HAS_CAPTURE_AND_GLOBAL_MOUSE	imgui/backends/imgui_impl_sdl2.cpp	/^#define SDL_HAS_CAPTURE_AND_GLOBAL_MOUSE /;"	d	file:
 SDL_HAS_CAPTURE_AND_GLOBAL_MOUSE	imgui/backends/imgui_impl_sdl3.cpp	/^#define SDL_HAS_CAPTURE_AND_GLOBAL_MOUSE /;"	d	file:
 SDL_HAS_VULKAN	imgui/backends/imgui_impl_sdl2.cpp	/^#define SDL_HAS_VULKAN /;"	d	file:
-SETUP_IMGUI_H	setup_imgui.h	/^#define SETUP_IMGUI_H$/;"	d
-SETUP_WINDOW_H	setup_window.h	/^#define SETUP_WINDOW_H$/;"	d
 SOURCES	imgui/examples/example_emscripten_wgpu/Makefile	/^SOURCES = main.cpp$/;"	m
 SOURCES	imgui/examples/example_glfw_metal/Makefile	/^SOURCES = main.mm$/;"	m
 SOURCES	imgui/examples/example_glfw_opengl2/Makefile	/^SOURCES = main.cpp$/;"	m
@@ -5556,6 +5473,7 @@ SeparatorTextAlign	imgui/imgui.h	/^    ImVec2      SeparatorTextAlign;         \
 SeparatorTextBorderSize	imgui/imgui.h	/^    float       SeparatorTextBorderSize;    \/\/ Thickkness of border in SeparatorText()$/;"	m	struct:ImGuiStyle	typeref:typename:float
 SeparatorTextEx	imgui/imgui_widgets.cpp	/^void ImGui::SeparatorTextEx(ImGuiID id, const char* label, const char* label_end, float extra_w)$/;"	f	class:ImGui	typeref:typename:void
 SeparatorTextPadding	imgui/imgui.h	/^    ImVec2      SeparatorTextPadding;       \/\/ Horizontal offset of text from each edge of the/;"	m	struct:ImGuiStyle	typeref:typename:ImVec2
+SessionLoad	Session.vim	/^let SessionLoad = 1$/;"	v
 SetActiveID	imgui/imgui.cpp	/^void ImGui::SetActiveID(ImGuiID id, ImGuiWindow* window)$/;"	f	class:ImGui	typeref:typename:void
 SetActiveIdUsingAllKeyboardKeys	imgui/imgui.cpp	/^void ImGui::SetActiveIdUsingAllKeyboardKeys()$/;"	f	class:ImGui	typeref:typename:void
 SetAllBits	imgui/imgui_internal.h	/^    void            SetAllBits()                { memset(Storage, 255, sizeof(Storage)); }$/;"	f	struct:ImBitArray	typeref:typename:void
@@ -5687,9 +5605,6 @@ ShaderHandle	imgui/backends/imgui_impl_opengl3.cpp	/^    GLuint          ShaderH
 ShaderModuleFrag	imgui/backends/imgui_impl_vulkan.cpp	/^    VkShaderModule              ShaderModuleFrag;$/;"	m	struct:ImGui_ImplVulkan_Data	typeref:typename:VkShaderModule	file:
 ShaderModuleVert	imgui/backends/imgui_impl_vulkan.cpp	/^    VkShaderModule              ShaderModuleVert;$/;"	m	struct:ImGui_ImplVulkan_Data	typeref:typename:VkShaderModule	file:
 ShaderSource	imgui/backends/imgui_impl_opengl3_loader.h	/^        PFNGLSHADERSOURCEPROC             ShaderSource;$/;"	m	struct:ImGL3WProcs::__anon35e8ffa80108	typeref:typename:PFNGLSHADERSOURCEPROC
-Shape	Graph.cpp	/^Shape::Shape(initializer_list<Point> lst) {$/;"	f	class:Graph_lib::Shape
-Shape	Graph.h	/^  Shape() {}$/;"	f	class:Graph_lib::Shape
-Shape	Graph.h	/^class Shape { \/\/ deals with color and style, and holds sequence of lines$/;"	c	namespace:Graph_lib
 SharedMetalContext	imgui/backends/imgui_impl_metal.mm	/^    MetalContext*               SharedMetalContext;$/;"	E	struct:ImGui_ImplMetal_Data
 Shortcut	imgui/imgui.cpp	/^bool ImGui::Shortcut(ImGuiKeyChord key_chord, ImGuiID owner_id, ImGuiInputFlags flags)$/;"	f	class:ImGui	typeref:typename:bool
 ShowAboutWindow	imgui/imgui_demo.cpp	/^void ImGui::ShowAboutWindow(bool* p_open)$/;"	f	class:ImGui	typeref:typename:void
@@ -5872,7 +5787,6 @@ StyleColorsLight	imgui/imgui_draw.cpp	/^void ImGui::StyleColorsLight(ImGuiStyle*
 StyleVarStack	imgui/imgui_internal.h	/^    ImVector<ImGuiStyleMod>     StyleVarStack;                  \/\/ Stack for PushStyleVar()\/P/;"	m	struct:ImGuiContext	typeref:typename:ImVector<ImGuiStyleMod>
 Subpass	imgui/backends/imgui_impl_vulkan.cpp	/^    uint32_t                    Subpass;$/;"	m	struct:ImGui_ImplVulkan_Data	typeref:typename:uint32_t	file:
 Subpass	imgui/backends/imgui_impl_vulkan.h	/^    uint32_t                        Subpass;$/;"	m	struct:ImGui_ImplVulkan_InitInfo	typeref:typename:uint32_t
-Suffix	Graph.h	/^struct Suffix {$/;"	s	namespace:Graph_lib
 Support, Frequently Asked Questions (FAQ)	imgui/docs/README.md	/^### Support, Frequently Asked Questions (FAQ)$/;"	S
 Surface	imgui/backends/imgui_impl_vulkan.h	/^    VkSurfaceKHR        Surface;$/;"	m	struct:ImGui_ImplVulkanH_Window	typeref:typename:VkSurfaceKHR
 SurfaceFormat	imgui/backends/imgui_impl_vulkan.h	/^    VkSurfaceFormatKHR  SurfaceFormat;$/;"	m	struct:ImGui_ImplVulkanH_Window	typeref:typename:VkSurfaceFormatKHR
@@ -6052,8 +5966,6 @@ TexUvScale	imgui/imgui.h	/^    ImVec2                      TexUvScale;         \
 TexUvWhitePixel	imgui/imgui.h	/^    ImVec2                      TexUvWhitePixel;    \/\/ Texture coordinates to a white pixel$/;"	m	struct:ImFontAtlas	typeref:typename:ImVec2
 TexUvWhitePixel	imgui/imgui_internal.h	/^    ImVec2          TexUvWhitePixel;            \/\/ UV of white pixel in the atlas$/;"	m	struct:ImDrawListSharedData	typeref:typename:ImVec2
 TexWidth	imgui/imgui.h	/^    int                         TexWidth;           \/\/ Texture width calculated during Build()/;"	m	struct:ImFontAtlas	typeref:typename:int
-Text	Graph.h	/^  Text(Point x, const string &s) : lab{s} { add(x); }$/;"	f	struct:Graph_lib::Text
-Text	Graph.h	/^struct Text : Shape {$/;"	s	namespace:Graph_lib
 Text	imgui/imgui_internal.h	/^        ImGuiInputEventText         Text;           \/\/ if Type == ImGuiInputEventType_Text$/;"	m	union:ImGuiInputEvent::__anond8e796fc040a	typeref:typename:ImGuiInputEventText
 Text	imgui/imgui_internal.h	/^    const char*     Text;$/;"	m	struct:ImGuiLocEntry	typeref:typename:const char *
 Text	imgui/imgui_widgets.cpp	/^void ImGui::Text(const char* fmt, ...)$/;"	f	class:ImGui	typeref:typename:void
@@ -6101,7 +6013,6 @@ TouchExtraPadding	imgui/imgui.h	/^    ImVec2      TouchExtraPadding;          \/
 Translate	imgui/imgui_internal.h	/^    void        Translate(const ImVec2& d)          { Min.x += d.x; Min.y += d.y; Max.x += d.x; /;"	f	struct:ImRect	typeref:typename:void
 TranslateX	imgui/imgui_internal.h	/^    void        TranslateX(float dx)                { Min.x += dx; Max.x += dx; }$/;"	f	struct:ImRect	typeref:typename:void
 TranslateY	imgui/imgui_internal.h	/^    void        TranslateY(float dy)                { Min.y += dy; Max.y += dy; }$/;"	f	struct:ImRect	typeref:typename:void
-Transparency	Graph.h	/^  enum Transparency { invisible = 0, visible = 255 };$/;"	g	struct:Graph_lib::Color
 TreeDepth	imgui/imgui_internal.h	/^    int                     TreeDepth;              \/\/ Current tree depth.$/;"	m	struct:ImGuiWindowTempData	typeref:typename:int
 TreeJumpToParentOnPopMask	imgui/imgui_internal.h	/^    ImU32                   TreeJumpToParentOnPopMask; \/\/ Store a copy of !g.NavIdIsAlive for /;"	m	struct:ImGuiWindowTempData	typeref:typename:ImU32
 TreeNode	imgui/imgui_widgets.cpp	/^bool ImGui::TreeNode(const char* label)$/;"	f	class:ImGui	typeref:typename:bool
@@ -6270,9 +6181,6 @@ Vector	std_lib_facilities.h	/^  Vector(size_type n, const T &v) : std::vector<T>
 Vector	std_lib_facilities.h	/^  explicit Vector(size_type n) : std::vector<T>(n) {}$/;"	f	struct:Vector
 Vector	std_lib_facilities.h	/^  template <class I> Vector(I first, I last) : std::vector<T>(first, last) {}$/;"	f	struct:Vector
 Vector	std_lib_facilities.h	/^template <class T> struct Vector : public std::vector<T> {$/;"	s
-Vector_ref	Graph.h	/^  Vector_ref() {}$/;"	f	class:Graph_lib::Vector_ref
-Vector_ref	Graph.h	/^  Vector_ref(T *a, T *b = 0, T *c = 0, T *d = 0) {$/;"	f	class:Graph_lib::Vector_ref
-Vector_ref	Graph.h	/^template <class T> class Vector_ref {$/;"	c	namespace:Graph_lib
 VertexAttribPointer	imgui/backends/imgui_impl_opengl3_loader.h	/^        PFNGLVERTEXATTRIBPOINTERPROC      VertexAttribPointer;$/;"	m	struct:ImGL3WProcs::__anon35e8ffa80108	typeref:typename:PFNGLVERTEXATTRIBPOINTERPROC
 VertexBuffer	imgui/backends/imgui_impl_dx10.cpp	/^        ID3D10Buffer*               IndexBuffer, *VertexBuffer, *VSConstantBuffer;$/;"	m	struct:ImGui_ImplDX10_RenderDrawData::BACKUP_DX10_STATE	typeref:typename:ID3D10Buffer **	file:
 VertexBuffer	imgui/backends/imgui_impl_dx11.cpp	/^        ID3D11Buffer*               IndexBuffer, *VertexBuffer, *VSConstantBuffer;$/;"	m	struct:ImGui_ImplDX11_RenderDrawData::BACKUP_DX11_STATE	typeref:typename:ID3D11Buffer **	file:
@@ -6319,7 +6227,6 @@ WIN32_LEAN_AND_MEAN	imgui/imgui.cpp	/^#define WIN32_LEAN_AND_MEAN$/;"	d	file:
 WINDOWS_HOVER_PADDING	imgui/imgui.cpp	/^static const float WINDOWS_HOVER_PADDING                    = 4.0f;     \/\/ Extend outside wind/;"	v	typeref:typename:const float	file:
 WINDOWS_MOUSE_WHEEL_SCROLL_LOCK_TIMER	imgui/imgui.cpp	/^static const float WINDOWS_MOUSE_WHEEL_SCROLL_LOCK_TIMER    = 0.70f;    \/\/ Lock scrolled windo/;"	v	typeref:typename:const float	file:
 WINDOWS_RESIZE_FROM_EDGES_FEEDBACK_TIMER	imgui/imgui.cpp	/^static const float WINDOWS_RESIZE_FROM_EDGES_FEEDBACK_TIMER = 0.04f;    \/\/ Reduce visual noise/;"	v	typeref:typename:const float	file:
-WINDOW_GUARD	Window.h	/^#define WINDOW_GUARD$/;"	d
 WINGDIAPI	imgui/backends/imgui_impl_opengl2.cpp	/^#define WINGDIAPI /;"	d	file:
 WINGDIAPI	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^ #define WINGDIAPI /;"	d
 WITH_EXTRA_WARNINGS	imgui/examples/example_null/Makefile	/^WITH_EXTRA_WARNINGS ?= 0$/;"	m
@@ -6365,10 +6272,6 @@ WheelingWindowReleaseTimer	imgui/imgui_internal.h	/^    float                   
 WheelingWindowScrolledFrame	imgui/imgui_internal.h	/^    int                     WheelingWindowScrolledFrame;$/;"	m	struct:ImGuiContext	typeref:typename:int
 WheelingWindowStartFrame	imgui/imgui_internal.h	/^    int                     WheelingWindowStartFrame;           \/\/ This may be set one frame b/;"	m	struct:ImGuiContext	typeref:typename:int
 WheelingWindowWheelRemainder	imgui/imgui_internal.h	/^    ImVec2                  WheelingWindowWheelRemainder;$/;"	m	struct:ImGuiContext	typeref:typename:ImVec2
-Widget	GUI.h	/^  Widget(Point xy, int w, int h, const string &s, Callback cb)$/;"	f	class:Graph_lib::Widget
-Widget	GUI.h	/^class Widget {$/;"	c	namespace:Graph_lib
-Widget	Gui.h	/^	Widget(Point xy, int w, int h, const string& s, Callback cb)$/;"	f	class:Graph_lib::Widget
-Widget	Gui.h	/^class Widget {$/;"	c	namespace:Graph_lib
 Width	imgui/backends/imgui_impl_vulkan.h	/^    int                 Width;$/;"	m	struct:ImGui_ImplVulkanH_Window	typeref:typename:int
 Width	imgui/imgui.h	/^    unsigned short  Width, Height;  \/\/ Input    \/\/ Desired rectangle dimension$/;"	m	struct:ImFontAtlasCustomRect	typeref:typename:unsigned short
 Width	imgui/imgui_internal.h	/^    float                       Width;              \/\/ Set by SetNextItemWidth()$/;"	m	struct:ImGuiNextItemData	typeref:typename:float
@@ -6383,9 +6286,6 @@ WidthGiven	imgui/imgui_internal.h	/^    float                   WidthGiven;     
 WidthOrWeight	imgui/imgui_internal.h	/^    float                   WidthOrWeight;$/;"	m	struct:ImGuiTableColumnSettings	typeref:typename:float
 WidthRequest	imgui/imgui_internal.h	/^    float                   WidthRequest;                   \/\/ Master width absolute value whe/;"	m	struct:ImGuiTableColumn	typeref:typename:float
 Widths	imgui/imgui_internal.h	/^    ImU16       Widths[4];          \/\/ Width of:   Icon, Label, Shortcut, Mark  (accumulators /;"	m	struct:ImGuiMenuColumns	typeref:typename:ImU16[4]
-Window	Window.cpp	/^Window::Window(Point xy, int ww, int hh, const string &title)$/;"	f	class:Graph_lib::Window
-Window	Window.cpp	/^Window::Window(int ww, int hh, const string &title)$/;"	f	class:Graph_lib::Window
-Window	Window.h	/^class Window : public Fl_Window {$/;"	c	namespace:Graph_lib
 Window	imgui.ini	/^[Window][Another Window]$/;"	s
 Window	imgui.ini	/^[Window][Dear ImGui Demo]$/;"	s
 Window	imgui.ini	/^[Window][Debug##Default]$/;"	s
@@ -6529,8 +6429,6 @@ __anon371204a80203	imgui/backends/imgui_impl_win32.cpp	/^typedef enum { MDT_EFFE
 __anon5b7bc2f80102	Part2_Data_Algorithms/vector.h	/^  T operator[](int i) const { return elem[i]; }$/;"	f	class:vector	file:
 __anon5b7bc2f80202	Part2_Data_Algorithms/vector.h	/^  size_t capacity() const { return space_; }$/;"	f	class:vector	file:
 __anon5b7bc2f80302	Part2_Data_Algorithms/vector.h	/^  size_t size() const { return sz; }$/;"	f	class:vector	file:
-__anon6e2d02ad0102	Graph.h	/^  const T &operator[](int i) const { return *v[i]; }$/;"	f	class:Graph_lib::Vector_ref	file:
-__anon6e2d02ad0202	Graph.h	/^  int size() const { return v.size(); }$/;"	f	class:Graph_lib::Vector_ref	file:
 __anon76bbacac0110	imgui/misc/freetype/imgui_freetype.cpp	/^{$/;"	n	file:
 __anon78c99cd20110	Part2_Data_Algorithms/linked_list.cpp	/^namespace {$/;"	n	file:
 __anonb0b35edd0102	Part2_Data_Algorithms/ch17drills.cpp	/^  int *a{new int[10]{1, 2, 3}};$/;"	f	function:main	file:
@@ -6583,10 +6481,6 @@ _windowResizeNorthWestSouthEastCursor	imgui/backends/imgui_impl_osx.mm	/^+ (id)_
 a	tmp/foo.cpp	/^int a = 4;$/;"	v	typeref:typename:int
 acceptsFirstResponder	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
 active_head	imgui/imstb_rectpack.h	/^   stbrp_node *active_head;$/;"	m	struct:stbrp_context	typeref:typename:stbrp_node *
-add	Graph.cpp	/^void Polygon::add(Point p)$/;"	f	class:Graph_lib::Polygon	typeref:typename:void
-add	Graph.h	/^  void add(Point p) { Shape::add(p); }$/;"	f	struct:Graph_lib::Open_polyline	typeref:typename:void
-add	Graph.h	/^  void add(Point p) { points.push_back(p); }$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-add	Graph.h	/^  void add(Point p1, Point p2) {$/;"	f	struct:Graph_lib::Lines	typeref:typename:void
 add	Part2_Data_Algorithms/linked_list.cpp	/^  void add(Node<T> *n) {$/;"	f	class:List	typeref:typename:void	file:
 add	Part2_Data_Algorithms/linked_list.cpp	/^  void add(T x) {$/;"	f	class:List	typeref:typename:void	file:
 advance	imgui/imstb_truetype.h	/^   int advance;$/;"	m	struct:stbtt_kerningentry	typeref:typename:int
@@ -6621,16 +6515,6 @@ args	.vscode/tasks.json	/^            "args": [$/;"	a	object:tasks.0
 array_of_unicode_codepoints	imgui/imstb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode co/;"	m	struct:__anonea0503650508	typeref:typename:int *
 as_bytes	iostreams.cpp	/^template <class T> char *as_bytes(T &i) {$/;"	f	typeref:typename:char *
 as_bytes	std_lib_facilities.h	/^char *as_bytes(T &i) \/\/ needed for binary I\/O$/;"	f	typeref:typename:char *
-as_int	Graph.h	/^  int as_int() const { return c; }$/;"	f	struct:Graph_lib::Color	typeref:typename:int
-as_int	Graph.h	/^  int as_int() const { return f; }$/;"	f	class:Graph_lib::Font	typeref:typename:int
-attach	GUI.cpp	/^int Menu::attach(Button& b)$/;"	f	class:Menu	typeref:typename:int
-attach	GUI.cpp	/^int Menu::attach(Button* p)$/;"	f	class:Menu	typeref:typename:int
-attach	GUI.cpp	/^void Button::attach(Window& win)$/;"	f	class:Button	typeref:typename:void
-attach	GUI.cpp	/^void In_box::attach(Window& win)$/;"	f	class:In_box	typeref:typename:void
-attach	GUI.cpp	/^void Out_box::attach(Window& win)$/;"	f	class:Out_box	typeref:typename:void
-attach	Gui.h	/^	void attach(Window& win)$/;"	f	struct:Graph_lib::Menu	typeref:typename:void
-attach	Window.cpp	/^void Window::attach(Shape &s) {$/;"	f	class:Graph_lib::Window	typeref:typename:void
-attach	Window.cpp	/^void Window::attach(Widget &w) {$/;"	f	class:Graph_lib::Window	typeref:typename:void
 attributedSubstringForProposedRange:actualRange:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
 b	imgui/imgui.h	/^        const char*     b;$/;"	m	struct:ImGuiTextFilter::ImGuiTextRange	typeref:typename:const char *
 back	imgui/imgui.h	/^    inline T&           back()                              { IM_ASSERT(Size > 0); return Data[S/;"	f	struct:ImVector	typeref:typename:T &
@@ -6640,24 +6524,17 @@ begin	imgui/imgui.h	/^    inline const T*     begin() const                     
 begin	imgui/imgui_internal.h	/^    T*      begin()                     { size_t HDR_SZ = 4; if (!Buf.Data) return NULL; return /;"	f	struct:ImChunkStream	typeref:typename:T *
 begin	imgui/imgui_internal.h	/^    inline const T*     begin() const               { return Data; }$/;"	f	struct:ImSpan	typeref:typename:const T *
 binary_to_compressed_c	imgui/misc/fonts/binary_to_compressed_c.cpp	/^bool binary_to_compressed_c(const char* filename, const char* symbol, bool use_base85_encoding, /;"	f	typeref:typename:bool
-black	Graph.h	/^    black = FL_BLACK,$/;"	e	enum:Graph_lib::Color::Color_type
-blue	Graph.h	/^    blue = FL_BLUE,$/;"	e	enum:Graph_lib::Color::Color_type
 blue	Part2_Data_Algorithms/linked_list.cpp	/^string blue = "\\033[34m";   \/* Blue *\/$/;"	v	namespace:__anon78c99cd20110	typeref:typename:string
 blue	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    unsigned short* blue;$/;"	m	struct:GLFWgammaramp	typeref:typename:unsigned short *
 blueBits	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int blueBits;$/;"	m	struct:GLFWvidmode	typeref:typename:int
-bmp	Graph.h	/^  enum Encoding { none, jpg, gif, bmp };$/;"	e	enum:Graph_lib::Suffix::Encoding
 bottom_y	imgui/imstb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anonea0503651108	typeref:typename:int
 bounds	imgui/imstb_truetype.h	/^   int bounds;$/;"	m	struct:__anonea0503650f08	typeref:typename:int
 buffer	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, strong) id<MTLBuffer> buffer;$/;"	p	interface:MetalBuffer
 bufferCache	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, strong) NSMutableArray<MetalBuffer*>* bufferCache;$/;"	p	interface:MetalContext
-c	Graph.h	/^  Fl_Color c;$/;"	m	struct:Graph_lib::Color	typeref:typename:Fl_Color
 c_str	imgui/imgui.h	/^    const char*         c_str() const           { return Buf.Data ? Buf.Data : EmptyString; }$/;"	f	struct:ImGuiTextBuffer	typeref:typename:const char *
-can_open	Graph.cpp	/^bool can_open(const string& s)$/;"	f	namespace:Graph_lib	typeref:typename:bool
 capacity	imgui/imgui.h	/^    inline int          capacity() const                    { return Capacity; }$/;"	f	struct:ImVector	typeref:typename:int
 cat_dot	Part2_Data_Algorithms/ch18exercises.cpp	/^char *cat_dot(const char *s1, const char *s2, const char *sep = ".") {$/;"	f	typeref:typename:char *
 cat_dot	Part2_Data_Algorithms/ch18exercises.cpp	/^string cat_dot(const string &s1, const string &s2, const string &sep = ".") {$/;"	f	typeref:typename:string
-center	Graph.h	/^  Point center() const { return {point(0).x + r, point(0).y + r}; }$/;"	f	struct:Graph_lib::Circle	typeref:typename:Point
-center	Graph.h	/^  Point center() const { return {point(0).x + w, point(0).y + h}; }$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:Point
 cff	imgui/imstb_truetype.h	/^   stbtt__buf cff;                    \/\/ cff font data$/;"	m	struct:stbtt_fontinfo	typeref:typename:stbtt__buf
 char_storage	imgui/imstb_textedit.h	/^   int                        char_storage;$/;"	m	struct:__anon22a5596e0108	typeref:typename:int
 characterIndexForPoint:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
@@ -6685,6 +6562,7 @@ clear	imgui/imgui.h	/^    inline void         clear()                           
 clear	imgui/imgui_internal.h	/^    void            clear()                                 { LineOffsets.clear(); EndOffset = 0/;"	f	struct:ImGuiTextIndex	typeref:typename:void
 clear	imgui/imgui_internal.h	/^    void    clear()                     { Buf.clear(); }$/;"	f	struct:ImChunkStream	typeref:typename:void
 clear_color	imgui/examples/example_glut_opengl2/main.cpp	/^static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);$/;"	v	typeref:typename:ImVec4	file:
+clear_color	main.cpp	/^ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);$/;"	v	typeref:typename:ImVec4
 clear_delete	imgui/imgui.h	/^    inline void         clear_delete()                      { for (int n = 0; n < Size; n++) IM_/;"	f	struct:ImVector	typeref:typename:void
 clear_destruct	imgui/imgui.h	/^    inline void         clear_destruct()                    { for (int n = 0; n < Size; n++) Dat/;"	f	struct:ImVector	typeref:typename:void
 close_libgl	imgui/backends/imgui_impl_opengl3_loader.h	/^static void close_libgl(void) { FreeLibrary(libgl); }$/;"	f	typeref:typename:void
@@ -6692,42 +6570,24 @@ cmake.configureOnOpen	.vscode/settings.json	/^    "cmake.configureOnOpen": true$
 col	imgui/backends/imgui_impl_allegro5.cpp	/^    ALLEGRO_COLOR   col;$/;"	m	struct:ImDrawVertAllegro	typeref:typename:ALLEGRO_COLOR	file:
 col	imgui/backends/imgui_impl_dx9.cpp	/^    D3DCOLOR col;$/;"	m	struct:CUSTOMVERTEX	typeref:typename:D3DCOLOR	file:
 col	imgui/imgui.h	/^    ImU32   col;$/;"	m	struct:ImDrawVert	typeref:typename:ImU32
-color	Graph.h	/^  Color color() const { return lcolor; }$/;"	f	class:Graph_lib::Shape	typeref:typename:Color
 colorPixelFormat	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, assign) MTLPixelFormat colorPixelFormat;$/;"	p	interface:FramebufferDescriptor
 command	.vscode/tasks.json	/^            "command": "\/usr\/bin\/g++",$/;"	s	object:tasks.0
 command	compile_commands.json	/^    "command": "g++ obj\/main.o obj\/setup_window.o obj\/setup_imgui.o obj\/cleanup.o obj\/imgui/;"	s	object:0
-command:	__compile_commands.json	/^  "command:" = "-lSDL2 -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl -I\/usr\/include\/SDL2 -I./;"	z	object:0
 commandQueue	imgui/examples/example_apple_metal/main.mm	/^@property (nonatomic, strong) id <MTLCommandQueue> commandQueue;$/;"	p	interface:AppViewController
 configurations	.vscode/launch.json	/^    "configurations": []$/;"	a
 const_iterator	imgui/imgui.h	/^    typedef const value_type*   const_iterator;$/;"	t	struct:ImVector	typeref:typename:const value_type *
 contains	imgui/imgui.h	/^    inline bool         contains(const T& v) const          { const T* data = Data;  const T* da/;"	f	struct:ImVector	typeref:typename:bool
 copy	Part2_Data_Algorithms/vector.h	/^template <typename T> void copy(T *from, int sz, T *to) {$/;"	f	typeref:typename:void
 copyWithZone:	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:FramebufferDescriptor
-courier	Graph.h	/^    courier = FL_COURIER,$/;"	e	enum:Graph_lib::Font::Font_type
-courier_bold	Graph.h	/^    courier_bold = FL_COURIER_BOLD,$/;"	e	enum:Graph_lib::Font::Font_type
-courier_bold_italic	Graph.h	/^    courier_bold_italic = FL_COURIER_BOLD_ITALIC,$/;"	e	enum:Graph_lib::Font::Font_type
-courier_italic	Graph.h	/^    courier_italic = FL_COURIER_ITALIC,$/;"	e	enum:Graph_lib::Font::Font_type
 current_frame	imgui/imgui.h	/^    operator bool() const { int current_frame = ImGui::GetFrameCount(); if (RefFrame == current_/;"	m	struct:ImGuiOnceUponAFrame	typeref:typename:int
 cursor	imgui/imstb_textedit.h	/^   int cursor;$/;"	m	struct:__anon22a5596e0308	typeref:typename:int
 cursor	imgui/imstb_truetype.h	/^   int cursor;$/;"	m	struct:__anonea0503650108	typeref:typename:int
 cursor_at_end_of_line	imgui/imstb_textedit.h	/^   unsigned char cursor_at_end_of_line; \/\/ not implemented yet$/;"	m	struct:__anon22a5596e0308	typeref:typename:unsigned char
 cwd	.vscode/tasks.json	/^                "cwd": "${fileDirname}"$/;"	s	object:tasks.0.options
-cx	Graph.h	/^  int w, h, cx,$/;"	m	struct:Graph_lib::Image	typeref:typename:int
 cx	imgui/imstb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anonea0503650708	typeref:typename:stbtt_vertex_type
 cx1	imgui/imstb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anonea0503650708	typeref:typename:stbtt_vertex_type
-cy	Graph.h	/^      cy; \/\/ define "masking box" within image relative to position (cx,cy)$/;"	m	struct:Graph_lib::Image	typeref:typename:int
 cy	imgui/imstb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anonea0503650708	typeref:typename:stbtt_vertex_type
 cy1	imgui/imstb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anonea0503650708	typeref:typename:stbtt_vertex_type
-cyan	Graph.h	/^    cyan = FL_CYAN,$/;"	e	enum:Graph_lib::Color::Color_type
-dark_blue	Graph.h	/^    dark_blue = FL_DARK_BLUE,$/;"	e	enum:Graph_lib::Color::Color_type
-dark_cyan	Graph.h	/^    dark_cyan = FL_DARK_CYAN$/;"	e	enum:Graph_lib::Color::Color_type
-dark_green	Graph.h	/^    dark_green = FL_DARK_GREEN,$/;"	e	enum:Graph_lib::Color::Color_type
-dark_magenta	Graph.h	/^    dark_magenta = FL_DARK_MAGENTA,$/;"	e	enum:Graph_lib::Color::Color_type
-dark_red	Graph.h	/^    dark_red = FL_DARK_RED,$/;"	e	enum:Graph_lib::Color::Color_type
-dark_yellow	Graph.h	/^    dark_yellow = FL_DARK_YELLOW,$/;"	e	enum:Graph_lib::Color::Color_type
-dash	Graph.h	/^    dash = FL_DASH,             \/\/ - - - -$/;"	e	enum:Graph_lib::Line_style::Line_style_type
-dashdot	Graph.h	/^    dashdot = FL_DASHDOT,       \/\/ - . - .$/;"	e	enum:Graph_lib::Line_style::Line_style_type
-dashdotdot	Graph.h	/^    dashdotdot = FL_DASHDOTDOT, \/\/ -..-..$/;"	e	enum:Graph_lib::Line_style::Line_style_type
 data	Part2_Data_Algorithms/linked_list.cpp	/^  T data;$/;"	m	struct:Node	typeref:typename:T	file:
 data	imgui/imstb_truetype.h	/^   unsigned char  * data;              \/\/ pointer to .ttf file$/;"	m	struct:stbtt_fontinfo	typeref:typename:unsigned char *
 data	imgui/imstb_truetype.h	/^   unsigned char *data;$/;"	m	struct:__anonea0503650108	typeref:typename:unsigned char *
@@ -6742,37 +6602,15 @@ depthStencilFormat	imgui/backends/imgui_impl_wgpu.cpp	/^    WGPUTextureFormat   
 depthStencilState	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, strong) id<MTLDepthStencilState>      depthStencilState;$/;"	p	interface:MetalContext
 dequeueReusableBufferOfLength:device:	imgui/backends/imgui_impl_metal.mm	/^- (MetalBuffer*)dequeueReusableBufferOfLength:(NSUInteger)length device:(id<MTLDevice>)device;$/;"	m	interface:MetalContext
 dequeueReusableBufferOfLength:device:	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:MetalContext
-detach	Window.cpp	/^void Window::detach(Shape &s) {$/;"	f	class:Graph_lib::Window	typeref:typename:void
-detach	Window.cpp	/^void Window::detach(Widget &b) { b.hide(); }$/;"	f	class:Graph_lib::Window	typeref:typename:void
 detail	.vscode/tasks.json	/^            "detail": "Task generated by Debugger."$/;"	s	object:tasks.0
 device	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, strong) id<MTLDevice>                 device;$/;"	p	interface:MetalContext
 device	imgui/examples/example_apple_metal/main.mm	/^@property (nonatomic, strong) id <MTLDevice> device;$/;"	p	interface:AppViewController
 direction	imgui/imstb_truetype.h	/^   float direction;$/;"	m	struct:stbtt__active_edge	typeref:typename:float
 direction	imgui/imstb_truetype.h	/^   int direction;$/;"	m	struct:stbtt__active_edge	typeref:typename:int
-directory	__compile_commands.json	/^{ "directory": "\/home\/rsil\/cstuff\/2023PPP",$/;"	s	object:0
 directory	compile_commands.json	/^    "directory": "\/home\/rsil\/cstuff\/2023PPP",$/;"	s	object:0
 doCommandBySelector:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
-do_it	GUI.h	/^  Callback do_it;$/;"	m	class:Graph_lib::Widget	typeref:typename:Callback
-do_it	Gui.h	/^	Callback do_it;$/;"	m	class:Graph_lib::Widget	typeref:typename:Callback
-dot	Graph.h	/^    dot = FL_DOT,               \/\/ .......$/;"	e	enum:Graph_lib::Line_style::Line_style_type
-draw	Graph.cpp	/^void Shape::draw() const$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-draw	Graph.h	/^  void draw(int x, int y, int, int, int, int) { draw_empty(x, y); }$/;"	f	struct:Graph_lib::Bad_image	typeref:typename:void
-draw	Window.cpp	/^void Window::draw() {$/;"	f	class:Graph_lib::Window	typeref:typename:void
 drawInMTKView:	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
 drawRect:	imgui/examples/example_apple_opengl2/main.mm	/^-(void)drawRect:(NSRect)bounds              { [self updateAndDrawDemoView]; }$/;"	m	implementation:AppView
-draw_lines	Graph.cpp	/^void Axis::draw_lines() const$/;"	f	class:Graph_lib::Axis	typeref:typename:void
-draw_lines	Graph.cpp	/^void Circle::draw_lines() const$/;"	f	class:Graph_lib::Circle	typeref:typename:void
-draw_lines	Graph.cpp	/^void Closed_polyline::draw_lines() const$/;"	f	class:Graph_lib::Closed_polyline	typeref:typename:void
-draw_lines	Graph.cpp	/^void Ellipse::draw_lines() const$/;"	f	class:Graph_lib::Ellipse	typeref:typename:void
-draw_lines	Graph.cpp	/^void Image::draw_lines() const$/;"	f	class:Graph_lib::Image	typeref:typename:void
-draw_lines	Graph.cpp	/^void Lines::draw_lines() const$/;"	f	class:Graph_lib::Lines	typeref:typename:void
-draw_lines	Graph.cpp	/^void Marked_polyline::draw_lines() const$/;"	f	class:Graph_lib::Marked_polyline	typeref:typename:void
-draw_lines	Graph.cpp	/^void Open_polyline::draw_lines() const$/;"	f	class:Graph_lib::Open_polyline	typeref:typename:void
-draw_lines	Graph.cpp	/^void Polygon::draw_lines() const$/;"	f	class:Graph_lib::Polygon	typeref:typename:void
-draw_lines	Graph.cpp	/^void Rectangle::draw_lines() const$/;"	f	class:Graph_lib::Rectangle	typeref:typename:void
-draw_lines	Graph.cpp	/^void Shape::draw_lines() const$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-draw_lines	Graph.cpp	/^void Text::draw_lines() const$/;"	f	class:Graph_lib::Text	typeref:typename:void
-draw_mark	Graph.cpp	/^void draw_mark(Point xy, char c)$/;"	f	namespace:Graph_lib	typeref:typename:void
 dx	imgui/imstb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge	typeref:typename:int
 e	imgui/imgui.h	/^        const char*     e;$/;"	m	struct:ImGuiTextFilter::ImGuiTextRange	typeref:typename:const char *
 elem	Part2_Data_Algorithms/vector.h	/^  T *elem;$/;"	m	class:vector	typeref:typename:T *
@@ -6796,17 +6634,12 @@ error	std_lib_facilities.h	/^inline void error(const string &s, int i) {$/;"	f	t
 example_glfw_vulkan	imgui/examples/example_glfw_vulkan/CMakeLists.txt	/^add_executable(example_glfw_vulkan ${sources} ${IMGUI_DIR}\/backends\/imgui_impl_glfw.cpp ${IMGU/;"	t
 extra	imgui/imstb_rectpack.h	/^   stbrp_node extra[2]; \/\/ we allocate two extra nodes so optimal user-node-count is 'width' n/;"	m	struct:stbrp_context	typeref:typename:stbrp_node[2]
 ey	imgui/imstb_truetype.h	/^   float ey;$/;"	m	struct:stbtt__active_edge	typeref:typename:float
-f	Graph.h	/^  int f;$/;"	m	class:Graph_lib::Font	typeref:typename:int
 f	Part2_Data_Algorithms/ch18drills.cpp	/^void f(int a[], int s) {$/;"	f	typeref:typename:void
 f	Part2_Data_Algorithms/ch18drills.cpp	/^void f(vector<int> v) {$/;"	f	typeref:typename:void
 factorial	Part2_Data_Algorithms/ch18drills.cpp	/^int factorial(int n) {$/;"	f	typeref:typename:int
-fcolor	Graph.h	/^  Color fcolor;$/;"	m	struct:Graph_lib::Fill	typeref:typename:Color
-fcolor	Graph.h	/^  Color fcolor{Color::invisible};$/;"	m	class:Graph_lib::Shape	typeref:typename:Color
 fdselect	imgui/imstb_truetype.h	/^   stbtt__buf fdselect;               \/\/ map from glyph to fontdict$/;"	m	struct:stbtt_fontinfo	typeref:typename:stbtt__buf
 fdx	imgui/imstb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge	typeref:typename:float
 fdy	imgui/imstb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge	typeref:typename:float
-fill_color	Graph.h	/^  Color fill_color() const { return fcolor; }$/;"	f	class:Graph_lib::Shape	typeref:typename:Color
-fill_color	Graph.h	/^  Color fill_color() { return fcolor; }$/;"	f	struct:Graph_lib::Fill	typeref:typename:Color
 find	imgui/imgui.h	/^    inline T*           find(const T& v)                    { T* data = Data;  const T* data_end/;"	f	struct:ImVector	typeref:typename:T *
 find	imgui/imgui.h	/^    inline const T*     find(const T& v) const              { const T* data = Data;  const T* da/;"	f	struct:ImVector	typeref:typename:const T *
 find	std_lib_facilities.h	/^Iterator<C> find(C &c, Val v) {$/;"	f	typeref:typename:Iterator<C>
@@ -6822,14 +6655,7 @@ first_free	imgui/imstb_truetype.h	/^   void   *first_free;$/;"	m	struct:stbtt__h
 first_unicode_codepoint_in_range	imgui/imstb_truetype.h	/^   int first_unicode_codepoint_in_range;  \/\/ if non-zero, then the chars are continuous, and t/;"	m	struct:__anonea0503650508	typeref:typename:int
 first_x	imgui/imstb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anonea0503650f08	typeref:typename:float
 first_y	imgui/imstb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anonea0503650f08	typeref:typename:float
-fn	Graph.h	/^  Text fn;$/;"	m	struct:Graph_lib::Image	typeref:typename:Text
-fnt	Graph.h	/^  Font fnt{fl_font()};$/;"	m	struct:Graph_lib::Text	typeref:typename:Font
-fnt_sz	Graph.h	/^  int fnt_sz{(14 < fl_size()) ? fl_size() : 14}; \/\/ at least 14 point$/;"	m	struct:Graph_lib::Text	typeref:typename:int
-focus1	Graph.h	/^  Point focus1() const {$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:Point
-focus2	Graph.h	/^  Point focus2() const {$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:Point
-font	Graph.h	/^  Font font() const { return Font(fnt); }$/;"	f	struct:Graph_lib::Text	typeref:typename:Font
 fontTexture	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, strong, nullable) id<MTLTexture>      fontTexture;$/;"	p	interface:MetalContext
-font_size	Graph.h	/^  int font_size() const { return fnt_sz; }$/;"	f	struct:Graph_lib::Text	typeref:typename:int
 font_size	imgui/imstb_truetype.h	/^   float font_size;$/;"	m	struct:__anonea0503650508	typeref:typename:float
 fontdicts	imgui/imstb_truetype.h	/^   stbtt__buf fontdicts;              \/\/ array of font dicts$/;"	m	struct:stbtt_fontinfo	typeref:typename:stbtt__buf
 fontstart	imgui/imstb_truetype.h	/^   int              fontstart;         \/\/ offset of start of font$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
@@ -6920,13 +6746,9 @@ g_pd3dDeviceContext	imgui/examples/example_win32_directx11/main.cpp	/^static ID3
 g_pd3dRtvDescHeap	imgui/examples/example_win32_directx12/main.cpp	/^static ID3D12DescriptorHeap*        g_pd3dRtvDescHeap = nullptr;$/;"	v	typeref:typename:ID3D12DescriptorHeap *	file:
 g_pd3dSrvDescHeap	imgui/examples/example_win32_directx12/main.cpp	/^static ID3D12DescriptorHeap*        g_pd3dSrvDescHeap = nullptr;$/;"	v	typeref:typename:ID3D12DescriptorHeap *	file:
 ga	Part2_Data_Algorithms/ch18drills.cpp	/^int ga[3]{1, 2, 3};$/;"	v	typeref:typename:int[3]
-get_encoding	Graph.cpp	/^Suffix::Encoding get_encoding(const string& s)$/;"	f	namespace:Graph_lib	typeref:typename:Suffix::Encoding
-get_int	GUI.cpp	/^int In_box::get_int()$/;"	f	class:In_box	typeref:typename:int
 get_line_begin	imgui/imgui_internal.h	/^    const char*     get_line_begin(const char* base, int n) { return base + LineOffsets[n]; }$/;"	f	struct:ImGuiTextIndex	typeref:typename:const char *
 get_line_end	imgui/imgui_internal.h	/^    const char*     get_line_end(const char* base, int n)   { return base + (n + 1 < LineOffsets/;"	f	struct:ImGuiTextIndex	typeref:typename:const char *
 get_proc	imgui/backends/imgui_impl_opengl3_loader.h	/^static GL3WglProc get_proc(const char *proc)$/;"	f	typeref:typename:GL3WglProc
-get_string	GUI.cpp	/^string In_box::get_string()$/;"	f	class:In_box	typeref:typename:string
-gif	Graph.h	/^  enum Encoding { none, jpg, gif, bmp };$/;"	e	enum:Graph_lib::Suffix::Encoding
 gl	imgui/backends/imgui_impl_opengl3_loader.h	/^    } gl;$/;"	m	union:ImGL3WProcs	typeref:struct:ImGL3WProcs::__anon35e8ffa80108
 glActiveTexture	imgui/backends/imgui_impl_opengl3_loader.h	/^#define glActiveTexture /;"	d
 glAttachShader	imgui/backends/imgui_impl_opengl3_loader.h	/^#define glAttachShader /;"	d
@@ -7001,18 +6823,12 @@ glyph1	imgui/imstb_truetype.h	/^   int glyph1; \/\/ use stbtt_FindGlyphIndex$/;"
 glyph2	imgui/imstb_truetype.h	/^   int glyph2;$/;"	m	struct:stbtt_kerningentry	typeref:typename:int
 goofun	tmp/goo.cpp	/^void goofun() {$/;"	f	typeref:typename:void
 gpos	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
-green	Graph.h	/^    green = FL_GREEN,$/;"	e	enum:Graph_lib::Color::Color_type
 green	Part2_Data_Algorithms/linked_list.cpp	/^string green = "\\033[32m";  \/* Green *\/$/;"	v	namespace:__anon78c99cd20110	typeref:typename:string
 green	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    unsigned short* green;$/;"	m	struct:GLFWgammaramp	typeref:typename:unsigned short *
 greenBits	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int greenBits;$/;"	m	struct:GLFWvidmode	typeref:typename:int
 group	.vscode/tasks.json	/^            "group": {$/;"	o	object:tasks.0
 gsubrs	imgui/imstb_truetype.h	/^   stbtt__buf gsubrs;                 \/\/ global charstring subroutines index$/;"	m	struct:stbtt_fontinfo	typeref:typename:stbtt__buf
-gui_main	Window.cpp	/^int gui_main() { return Fl::run(); }$/;"	f	namespace:Graph_lib	typeref:typename:int
 gv	Part2_Data_Algorithms/ch18drills.cpp	/^vector<int> gv{1, 2, 3};$/;"	v	typeref:typename:vector<int>
-h	Graph.h	/^  int h; \/\/ height$/;"	m	struct:Graph_lib::Rectangle	typeref:typename:int
-h	Graph.h	/^  int h;$/;"	m	struct:Graph_lib::Ellipse	typeref:typename:int
-h	Graph.h	/^  int w, h, cx,$/;"	m	struct:Graph_lib::Image	typeref:typename:int
-h	Window.h	/^  int w, h;               \/\/ window size$/;"	m	class:Graph_lib::Window	typeref:typename:int
 h	imgui/imstb_rectpack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect	typeref:typename:stbrp_coord
 h	imgui/imstb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect	typeref:typename:int
 h	imgui/imstb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anonea0503650808	typeref:typename:int
@@ -7030,45 +6846,36 @@ hash	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:FramebufferDesc
 hash	std_lib_facilities.h	/^template <> struct hash<String> {$/;"	s	namespace:std
 head	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
 head	imgui/imstb_truetype.h	/^   struct stbtt__hheap_chunk *head;$/;"	m	struct:stbtt__hheap	typeref:struct:stbtt__hheap_chunk *
-height	GUI.h	/^  int height;$/;"	m	class:Graph_lib::Widget	typeref:typename:int
-height	Graph.h	/^  int height() const { return h; }$/;"	f	struct:Graph_lib::Rectangle	typeref:typename:int
-height	Gui.h	/^	int height;$/;"	m	class:Graph_lib::Widget	typeref:typename:int
 height	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int height;$/;"	m	struct:GLFWimage	typeref:typename:int
 height	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int height;$/;"	m	struct:GLFWvidmode	typeref:typename:int
 height	imgui/imstb_rectpack.h	/^   int height;$/;"	m	struct:stbrp_context	typeref:typename:int
 height	imgui/imstb_textedit.h	/^   float height; \/\/ height of line$/;"	m	struct:__anon22a5596e0508	typeref:typename:float
 height	imgui/imstb_truetype.h	/^   int   height;$/;"	m	struct:stbtt_pack_context	typeref:typename:int
 height	imgui/imstb_truetype.h	/^   int width,height;$/;"	m	struct:__anonea0503651108	typeref:typename:int
-helvetica	Graph.h	/^    helvetica = FL_HELVETICA,$/;"	e	enum:Graph_lib::Font::Font_type
-helvetica_bold	Graph.h	/^    helvetica_bold = FL_HELVETICA_BOLD,$/;"	e	enum:Graph_lib::Font::Font_type
-helvetica_bold_italic	Graph.h	/^    helvetica_bold_italic = FL_HELVETICA_BOLD_ITALIC,$/;"	e	enum:Graph_lib::Font::Font_type
-helvetica_italic	Graph.h	/^    helvetica_italic = FL_HELVETICA_ITALIC,$/;"	e	enum:Graph_lib::Font::Font_type
 heuristic	imgui/imstb_rectpack.h	/^   int heuristic;$/;"	m	struct:stbrp_context	typeref:typename:int
 hhea	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
-hide	GUI.h	/^  virtual void hide() { pw->hide(); }$/;"	f	class:Graph_lib::Widget	typeref:typename:void
-hide	Gui.h	/^	virtual void hide() { pw->hide(); }$/;"	f	class:Graph_lib::Widget	typeref:typename:void
-hide	Gui.h	/^	void hide() { for (int i = 0; i<selection.size(); ++i) selection[i].hide(); }$/;"	f	struct:Graph_lib::Menu	typeref:typename:void
 hmtx	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
-horizontal	Gui.h	/^	enum Kind { horizontal, vertical };$/;"	e	enum:Graph_lib::Menu::Kind
 iOS / OSX Metal example	imgui/examples/example_apple_metal/README.md	/^# iOS \/ OSX Metal example$/;"	c
 id	imgui/imstb_rectpack.h	/^   int            id;$/;"	m	struct:stbrp_rect	typeref:typename:int
 id	imgui/imstb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect	typeref:typename:int
+igio	common.h	/^  ImGuiIO igio;$/;"	m	struct:App	typeref:typename:ImGuiIO
 ignored	imgui/examples/libs/usynergy/uSynergy.h	/^typedef struct { int ignored; } *					uSynergyCookie;$/;"	m	struct:__anon1561e7070108	typeref:typename:int
 imgl3wGetProcAddress	imgui/backends/imgui_impl_opengl3_loader.h	/^GL3WglProc imgl3wGetProcAddress(const char *proc) { return get_proc(proc); }$/;"	f	typeref:typename:GL3WglProc
 imgl3wInit	imgui/backends/imgui_impl_opengl3_loader.h	/^int imgl3wInit(void)$/;"	f	typeref:typename:int
 imgl3wInit2	imgui/backends/imgui_impl_opengl3_loader.h	/^int imgl3wInit2(GL3WGetProcAddressProc proc)$/;"	f	typeref:typename:int
 imgl3wIsSupported	imgui/backends/imgui_impl_opengl3_loader.h	/^int imgl3wIsSupported(int major, int minor)$/;"	f	typeref:typename:int
 imgl3wProcs	imgui/backends/imgui_impl_opengl3_loader.h	/^GL3W_API union ImGL3WProcs imgl3wProcs;$/;"	v	typeref:union:ImGL3WProcs
-imgui_cherry_style	setup_imgui_style.cpp	/^void imgui_cherry_style() {$/;"	f	typeref:typename:void
+imgui_cherry_style	init_imgui_style.cpp	/^void imgui_cherry_style() {$/;"	f	typeref:typename:void
+imgui_dark_style	init_imgui_style.cpp	/^void imgui_dark_style() {$/;"	f	typeref:typename:void
 imgui_example_glfw_vulkan	imgui/examples/example_glfw_vulkan/CMakeLists.txt	/^project(imgui_example_glfw_vulkan C CXX)$/;"	p
 imgui_freetype	imgui/misc/freetype/README.md	/^# imgui_freetype$/;"	c
+imgui_simple_window	init_imgui.cpp	/^void imgui_simple_window() {}$/;"	f	typeref:typename:void
 index	Part2_Data_Algorithms/linked_list.cpp	/^  int index;$/;"	m	struct:Node	typeref:typename:int	file:
 index	std_lib_facilities.h	/^  int index;$/;"	m	struct:Range_error	typeref:typename:int
 indexToLocFormat	imgui/imstb_truetype.h	/^   int indexToLocFormat;              \/\/ format needed to map from glyph index to glyph$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
 index_from_ptr	imgui/imgui.h	/^    inline int          index_from_ptr(const T* it) const   { IM_ASSERT(it >= Data && it < Data /;"	f	struct:ImVector	typeref:typename:int
 index_from_ptr	imgui/imgui_internal.h	/^    inline int  index_from_ptr(const T* it) const   { IM_ASSERT(it >= Data && it < DataEnd); con/;"	f	struct:ImSpan	typeref:typename:int
 index_map	imgui/imstb_truetype.h	/^   int index_map;                     \/\/ a cmap mapping for our chosen character encoding$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
-init	Window.cpp	/^void Window::init() {$/;"	f	class:Graph_lib::Window	typeref:typename:void
 init	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:MetalContext
 init	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppDelegate
 initWithBuffer:	imgui/backends/imgui_impl_metal.mm	/^- (instancetype)initWithBuffer:(id<MTLBuffer>)buffer;$/;"	m	interface:MetalBuffer
@@ -7076,8 +6883,10 @@ initWithBuffer:	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:Meta
 initWithNibName:bundle:	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
 initWithRenderPassDescriptor:	imgui/backends/imgui_impl_metal.mm	/^- (instancetype)initWithRenderPassDescriptor:(MTLRenderPassDescriptor*)renderPassDescriptor;$/;"	m	interface:FramebufferDescriptor
 initWithRenderPassDescriptor:	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:FramebufferDescriptor
+init_imgui	init_imgui.cpp	/^void init_imgui() {$/;"	f	typeref:typename:void
+init_imgui_style	init_imgui.cpp	/^void init_imgui_style() {$/;"	f	typeref:typename:void
 init_mode	imgui/imstb_rectpack.h	/^   int init_mode;$/;"	m	struct:stbrp_context	typeref:typename:int
-init_suffix_map	Graph.cpp	/^int init_suffix_map()$/;"	f	namespace:Graph_lib	typeref:typename:int
+init_window	init_window.cpp	/^int init_window() {$/;"	f	typeref:typename:int
 initialize	imgui/examples/example_apple_opengl2/main.mm	/^{$/;"	m	implementation:AppView
 initialized	imgui/imstb_textedit.h	/^   unsigned char initialized;$/;"	m	struct:__anon22a5596e0308	typeref:typename:unsigned char
 insert	imgui/imgui.h	/^    inline T*           insert(const T* it, const T& v)     { IM_ASSERT(it >= Data && it <= Data/;"	f	struct:ImVector	typeref:typename:T *
@@ -7086,7 +6895,6 @@ insert_length	imgui/imstb_textedit.h	/^   IMSTB_TEXTEDIT_POSITIONTYPE  insert_le
 insert_mode	imgui/imstb_textedit.h	/^   unsigned char insert_mode;$/;"	m	struct:__anon22a5596e0308	typeref:typename:unsigned char
 inspect_node	Part2_Data_Algorithms/linked_list.cpp	/^void inspect_node(Node<int> *n) {$/;"	f	typeref:typename:void
 invert	imgui/imstb_truetype.h	/^   int invert;$/;"	m	struct:stbtt__edge	typeref:typename:int
-invisible	Graph.h	/^  enum Transparency { invisible = 0, visible = 255 };$/;"	e	enum:Graph_lib::Color::Transparency
 isDefault	.vscode/tasks.json	/^                "isDefault": true$/;"	b	object:tasks.0.group
 isEqual:	imgui/backends/imgui_impl_metal.mm	/^{$/;"	m	implementation:FramebufferDescriptor
 is_separator	imgui/imgui_widgets.cpp	/^static bool is_separator(unsigned int c)$/;"	f	namespace:ImStb	typeref:typename:bool	file:
@@ -7094,8 +6902,6 @@ is_word_boundary	imgui/imstb_textedit.h	/^static int is_word_boundary( IMSTB_TEX
 is_word_boundary_from_left	imgui/imgui_widgets.cpp	/^static int is_word_boundary_from_left(ImGuiInputTextState* obj, int idx)$/;"	f	namespace:ImStb	typeref:typename:int	file:
 is_word_boundary_from_right	imgui/imgui_widgets.cpp	/^static int is_word_boundary_from_right(ImGuiInputTextState* obj, int idx)$/;"	f	namespace:ImStb	typeref:typename:int	file:
 iterator	imgui/imgui.h	/^    typedef value_type*         iterator;$/;"	t	struct:ImVector	typeref:typename:value_type *
-jpg	Graph.h	/^  enum Encoding { none, jpg, gif, bmp };$/;"	e	enum:Graph_lib::Suffix::Encoding
-k	Gui.h	/^	Kind k;$/;"	m	struct:Graph_lib::Menu	typeref:typename:Kind
 keep_window_open	std_lib_facilities.h	/^inline void keep_window_open() {$/;"	f	typeref:typename:void
 keep_window_open	std_lib_facilities.h	/^inline void keep_window_open(string s) {$/;"	f	typeref:typename:void
 kern	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
@@ -7118,26 +6924,15 @@ khronos_uint64_t	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef unsigned _
 khronos_uint64_t	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef unsigned long long     khronos_uint64_t;$/;"	t	typeref:typename:unsigned long long
 khronos_uint8_t	imgui/backends/imgui_impl_opengl3_loader.h	/^typedef unsigned char          khronos_uint8_t;$/;"	t	typeref:typename:unsigned char
 kind	.vscode/tasks.json	/^                "kind": "build",$/;"	s	object:tasks.0.group
-lab	Graph.h	/^  string lab; \/\/ label$/;"	m	struct:Graph_lib::Text	typeref:typename:string
 label	.vscode/tasks.json	/^            "label": "C\/C++: g++ build active file",$/;"	s	object:tasks.0
-label	GUI.h	/^  string label;$/;"	m	class:Graph_lib::Widget	typeref:typename:string
-label	Graph.h	/^  Text label;$/;"	m	struct:Graph_lib::Axis	typeref:typename:Text
-label	Graph.h	/^  string label() const { return lab; }$/;"	f	struct:Graph_lib::Text	typeref:typename:string
-label	Gui.h	/^	string label;$/;"	m	class:Graph_lib::Widget	typeref:typename:string
 last	Part2_Data_Algorithms/linked_list.cpp	/^  Node<T> *last = nullptr;$/;"	m	class:List	typeref:typename:Node<T> *	file:
 lastBufferCachePurge	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, assign) double                        lastBufferCachePurge;$/;"	p	interface:MetalContext
 lastReuseTime	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, assign) double        lastReuseTime;$/;"	p	interface:MetalBuffer
-lcolor	Graph.h	/^  Color lcolor{fl_color()};$/;"	m	class:Graph_lib::Shape	typeref:typename:Color
 length	imgui/imstb_textedit.h	/^   int first_char, length; \/\/ first char of row, and length$/;"	m	struct:__anon22a5596e0508	typeref:typename:int
 libgl	imgui/backends/imgui_impl_opengl3_loader.h	/^static HMODULE libgl;$/;"	v	typeref:typename:HMODULE
-line_intersect	Graph.cpp	/^inline pair<double,double> line_intersect(Point p1, Point p2, Point p3, Point p4, bool& parallel/;"	f	namespace:Graph_lib	typeref:typename:pair<double,double>
-line_segment_intersect	Graph.cpp	/^bool line_segment_intersect(Point p1, Point p2, Point p3, Point p4, Point& intersection){$/;"	f	namespace:Graph_lib	typeref:typename:bool
 loadView	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
 load_procs	imgui/backends/imgui_impl_opengl3_loader.h	/^static void load_procs(GL3WGetProcAddressProc proc)$/;"	f	typeref:typename:void
-loc	GUI.h	/^  Point loc;$/;"	m	class:Graph_lib::Widget	typeref:typename:Point
-loc	Gui.h	/^	Point loc;$/;"	m	class:Graph_lib::Widget	typeref:typename:Point
 loca	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
-ls	Graph.h	/^  Line_style ls{0};$/;"	m	class:Graph_lib::Shape	typeref:typename:Line_style
 m_clientHeight	imgui/examples/libs/usynergy/uSynergy.h	/^	uint16_t						m_clientHeight;									\/* Height of screen *\/$/;"	m	struct:__anon1561e7070208	typeref:typename:uint16_t
 m_clientName	imgui/examples/libs/usynergy/uSynergy.h	/^	const char*						m_clientName;									\/* Name of Synergy Screen \/ Client *\/$/;"	m	struct:__anon1561e7070208	typeref:typename:const char *
 m_clientWidth	imgui/examples/libs/usynergy/uSynergy.h	/^	uint16_t						m_clientWidth;									\/* Width of screen *\/$/;"	m	struct:__anon1561e7070208	typeref:typename:uint16_t
@@ -7173,7 +6968,6 @@ m_sleepFunc	imgui/examples/libs/usynergy/uSynergy.h	/^	uSynergySleepFunc				m_sl
 m_traceFunc	imgui/examples/libs/usynergy/uSynergy.h	/^	uSynergyTraceFunc				m_traceFunc;									\/* Function for tracing status (can be NULL) *\/$/;"	m	struct:__anon1561e7070208	typeref:typename:uSynergyTraceFunc
 macOS	imgui/examples/example_sdl2_opengl3/README.md	/^## macOS$/;"	s
 macOS	imgui/examples/example_sdl3_opengl3/README.md	/^## macOS$/;"	s
-magenta	Graph.h	/^    magenta = FL_MAGENTA,$/;"	e	enum:Graph_lib::Color::Color_type
 main	Part1_The_Basics/ch6-calc-1.cc	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 main	Part1_The_Basics/ch6-calc-2.cc	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 main	Part1_The_Basics/ch6-calc-3.cc	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
@@ -7214,9 +7008,7 @@ main	iostreams.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:i
 main	main.cpp	/^int main(int, char **) {$/;"	f	typeref:typename:int
 main	tmp/foo.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 main_clipboard	imgui/imgui.cpp	/^static PasteboardRef main_clipboard = 0;$/;"	v	typeref:typename:PasteboardRef	file:
-major	Graph.h	/^  int major() const { return w; }$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:int
 major	imgui/backends/imgui_impl_opengl3_loader.h	/^static struct { int major, minor; } version;$/;"	m	struct:__anon35e8ffa80208	typeref:typename:int
-mark	Graph.h	/^  string mark;$/;"	m	struct:Graph_lib::Marked_polyline	typeref:typename:string
 markedRange	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
 matrix	imgui/misc/freetype/imgui_freetype.cpp	/^    lunasvg::Matrix     matrix;$/;"	m	struct:LunasvgPortState	typeref:typename:lunasvg::Matrix	file:
 max_size	imgui/imgui.h	/^    inline int          max_size() const                    { return 0x7FFFFFFF \/ (int)sizeof(T/;"	f	struct:ImVector	typeref:typename:int
@@ -7224,14 +7016,7 @@ max_x	imgui/imstb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	
 max_y	imgui/imstb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anonea0503650f08	typeref:typename:stbtt_int32
 min_x	imgui/imstb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anonea0503650f08	typeref:typename:stbtt_int32
 min_y	imgui/imstb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anonea0503650f08	typeref:typename:stbtt_int32
-minor	Graph.h	/^  int minor() const { return h; }$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:int
 minor	imgui/backends/imgui_impl_opengl3_loader.h	/^static struct { int major, minor; } version;$/;"	m	struct:__anon35e8ffa80208	typeref:typename:int
-move	GUI.h	/^  virtual void move(int dx, int dy) {$/;"	f	class:Graph_lib::Widget	typeref:typename:void
-move	Graph.cpp	/^void Axis::move(int dx, int dy)$/;"	f	class:Graph_lib::Axis	typeref:typename:void
-move	Graph.cpp	/^void Shape::move(int dx, int dy)$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-move	Graph.h	/^  void move(int dx, int dy) {$/;"	f	struct:Graph_lib::Image	typeref:typename:void
-move	Gui.h	/^	virtual void move(int dx,int dy) { hide(); pw->position(loc.x+=dx, loc.y+=dy); show(); }$/;"	f	class:Graph_lib::Widget	typeref:typename:void
-move	Gui.h	/^	void move(int dx, int dy)$/;"	f	struct:Graph_lib::Menu	typeref:typename:void
 mtkView	imgui/examples/example_apple_metal/main.mm	/^@property (nonatomic, readonly) MTKView *mtkView;$/;"	p	interface:AppViewController
 mtkView	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
 mtkView:drawableSizeWillChange:	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
@@ -7245,10 +7030,7 @@ next	imgui/imstb_rectpack.h	/^   stbrp_node  *next;$/;"	m	struct:stbrp_node	type
 next	imgui/imstb_truetype.h	/^   struct stbtt__active_edge *next;$/;"	m	struct:stbtt__active_edge	typeref:struct:stbtt__active_edge *
 next	imgui/imstb_truetype.h	/^   struct stbtt__hheap_chunk *next;$/;"	m	struct:stbtt__hheap_chunk	typeref:struct:stbtt__hheap_chunk *
 next_chunk	imgui/imgui_internal.h	/^    T*      next_chunk(T* p)            { size_t HDR_SZ = 4; IM_ASSERT(p >= begin() && p < end()/;"	f	struct:ImChunkStream	typeref:typename:T *
-no_fill	Graph.h	/^  bool no_fill;$/;"	m	struct:Graph_lib::Fill	typeref:typename:bool
 nodes	imgui/imstb_truetype.h	/^   void  *nodes;$/;"	m	struct:stbtt_pack_context	typeref:typename:void *
-none	Graph.h	/^  enum Encoding { none, jpg, gif, bmp };$/;"	e	enum:Graph_lib::Suffix::Encoding
-notches	Graph.h	/^  Lines notches;$/;"	m	struct:Graph_lib::Axis	typeref:typename:Lines
 numFramesInFlight	imgui/backends/imgui_impl_dx12.cpp	/^    UINT                        numFramesInFlight;$/;"	m	struct:ImGui_ImplDX12_Data	typeref:typename:UINT	file:
 numFramesInFlight	imgui/backends/imgui_impl_wgpu.cpp	/^    unsigned int        numFramesInFlight = 0;$/;"	m	struct:ImGui_ImplWGPU_Data	typeref:typename:unsigned int	file:
 numGlyphs	imgui/imstb_truetype.h	/^   int numGlyphs;                     \/\/ number of glyphs, needed for range checking$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
@@ -7258,15 +7040,12 @@ num_nodes	imgui/imstb_rectpack.h	/^   int num_nodes;$/;"	m	struct:stbrp_context	
 num_remaining_in_head_chunk	imgui/imstb_truetype.h	/^   int    num_remaining_in_head_chunk;$/;"	m	struct:stbtt__hheap	typeref:typename:int
 num_vertices	imgui/imstb_truetype.h	/^   int num_vertices;$/;"	m	struct:__anonea0503650f08	typeref:typename:int
 number	Part1_The_Basics/ch6-calc-3.cc	/^enum Kind { number };$/;"	e	enum:Kind	file:
-number_of_points	Graph.h	/^  int number_of_points() const { return int(points.size()); }$/;"	f	class:Graph_lib::Shape	typeref:typename:int
-offset	Gui.h	/^	int offset;$/;"	m	struct:Graph_lib::Menu	typeref:typename:int
 offset_from_ptr	imgui/imgui_internal.h	/^    int     offset_from_ptr(const T* p) { IM_ASSERT(p >= begin() && p < end()); const ptrdiff_t /;"	f	struct:ImChunkStream	typeref:typename:int
 onApplicationBecomeActive:	imgui/backends/imgui_impl_osx.mm	/^- (void)onApplicationBecomeActive:(NSNotification*)aNotification;$/;"	m	interface:ImGuiObserver
 onApplicationBecomeActive:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:ImGuiObserver
 onApplicationBecomeInactive:	imgui/backends/imgui_impl_osx.mm	/^- (void)onApplicationBecomeInactive:(NSNotification*)aNotification;$/;"	m	interface:ImGuiObserver
 onApplicationBecomeInactive:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:ImGuiObserver
 open_libgl	imgui/backends/imgui_impl_opengl3_loader.h	/^static int open_libgl(void)$/;"	f	typeref:typename:int
-operator !=	Point.h	/^inline bool operator!=(Point a, Point b) { return !(a==b); }$/;"	f	namespace:Graph_lib	typeref:typename:bool
 operator !=	imgui/imgui.h	/^static inline bool    operator!=(const ImVec2& lhs, const ImVec2& rhs)  { return lhs.x != rhs.x /;"	f	typeref:typename:bool
 operator !=	imgui/imgui.h	/^static inline bool    operator!=(const ImVec4& lhs, const ImVec4& rhs)  { return lhs.x != rhs.x /;"	f	typeref:typename:bool
 operator ()	std_lib_facilities.h	/^  size_t operator()(const String &s) const { return hash<std::string>()(s); }$/;"	f	struct:std::hash	typeref:typename:size_t
@@ -7289,10 +7068,8 @@ operator /=	imgui/imgui.h	/^static inline ImVec2& operator\/=(ImVec2& lhs, const
 operator =	Part2_Data_Algorithms/vector.h	/^  vector<T> &operator=(const vector &a) {$/;"	f	class:vector	typeref:typename:vector<T> &
 operator =	Part2_Data_Algorithms/vector.h	/^  vector<T> &operator=(vector<T> &&a) {$/;"	f	class:vector	typeref:typename:vector<T> &
 operator =	imgui/imgui.h	/^    inline ImVector<T>& operator=(const ImVector<T>& src)   { clear(); resize(src.Size); if (src/;"	f	struct:ImVector	typeref:typename:ImVector<T> &
-operator ==	Point.h	/^inline bool operator==(Point a, Point b) { return a.x==b.x && a.y==b.y; }$/;"	f	namespace:Graph_lib	typeref:typename:bool
 operator ==	imgui/imgui.h	/^static inline bool    operator==(const ImVec2& lhs, const ImVec2& rhs)  { return lhs.x == rhs.x /;"	f	typeref:typename:bool
 operator ==	imgui/imgui.h	/^static inline bool    operator==(const ImVec4& lhs, const ImVec4& rhs)  { return lhs.x == rhs.x /;"	f	typeref:typename:bool
-operator []	Graph.h	/^  T &operator[](int i) { return *v[i]; }$/;"	f	class:Graph_lib::Vector_ref	typeref:typename:T &
 operator []	Part2_Data_Algorithms/vector.h	/^  T &operator[](int i) { return elem[i]; }$/;"	f	class:vector	typeref:typename:T &
 operator []	Part2_Data_Algorithms/vector.h	/^  T operator[](int i) const { return elem[i]; }$/;"	f	class:vector	typeref:typename:T
 operator []	imgui/imgui.h	/^    inline T&           operator[](int i)                   { IM_ASSERT(i >= 0 && i < Size); ret/;"	f	struct:ImVector	typeref:typename:T &
@@ -7311,10 +7088,6 @@ or for 64-bit:	imgui/examples/example_sdl2_opengl3/README.md	/^# or for 64-bit:$
 or for 64-bit:	imgui/examples/example_sdl2_sdlrenderer2/README.md	/^# or for 64-bit:$/;"	c
 or for 64-bit:	imgui/examples/example_sdl3_opengl3/README.md	/^# or for 64-bit:$/;"	c
 outliterals	imgui/misc/fonts/binary_to_compressed_c.cpp	/^static void outliterals(stb_uchar *in, int numlit)$/;"	f	typeref:typename:void	file:
-own	GUI.h	/^  Window *own;   \/\/ every Widget belongs to a Window$/;"	m	class:Graph_lib::Widget	typeref:typename:Window *
-own	Gui.h	/^	Window* own;	\/\/ every Widget belongs to a Window$/;"	m	class:Graph_lib::Widget	typeref:typename:Window *
-owned	Graph.h	/^  vector<T *> owned;$/;"	m	class:Graph_lib::Vector_ref	typeref:typename:vector<T * >
-p	Graph.h	/^  Fl_Image *p;$/;"	m	struct:Graph_lib::Image	typeref:typename:Fl_Image *
 p	Part2_Data_Algorithms/ch17drills.cpp	/^void p(const int *a) { cout << *a << endl; }$/;"	f	typeref:typename:void
 p	Part2_Data_Algorithms/ch17drills.cpp	/^void p(int a) { cout << a << endl; }$/;"	f	typeref:typename:void
 pBlendState	imgui/backends/imgui_impl_dx10.cpp	/^    ID3D10BlendState*           pBlendState;$/;"	m	struct:ImGui_ImplDX10_Data	typeref:typename:ID3D10BlendState *	file:
@@ -7365,14 +7138,13 @@ pipelineState	imgui/backends/imgui_impl_wgpu.cpp	/^    WGPURenderPipeline  pipel
 pixels	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    unsigned char* pixels;$/;"	m	struct:GLFWimage	typeref:typename:unsigned char *
 pixels	imgui/imstb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:__anonea0503650808	typeref:typename:unsigned char *
 pixels	imgui/imstb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:stbtt_pack_context	typeref:typename:unsigned char *
-point	Graph.h	/^  Point point(int i) const { return points[i]; }$/;"	f	class:Graph_lib::Shape	typeref:typename:Point
-points	Graph.h	/^  vector<Point> points; \/\/ not used by all shapes$/;"	m	class:Graph_lib::Shape	typeref:typename:vector<Point>
 pop_back	imgui/imgui.h	/^    inline void         pop_back()                          { IM_ASSERT(Size > 0); Size--; }$/;"	f	struct:ImVector	typeref:typename:void
 pos	imgui/backends/imgui_impl_allegro5.cpp	/^    ImVec2          pos;$/;"	m	struct:ImDrawVertAllegro	typeref:typename:ImVec2	file:
 pos	imgui/backends/imgui_impl_dx9.cpp	/^    float    pos[3];$/;"	m	struct:CUSTOMVERTEX	typeref:typename:float[3]	file:
 pos	imgui/imgui.h	/^    ImVec2  pos;$/;"	m	struct:ImDrawVert	typeref:typename:ImVec2
 preferred_x	imgui/imstb_textedit.h	/^   float preferred_x; \/\/ this determines where the cursor up\/down tries to seek to along x$/;"	m	struct:__anon22a5596e0308	typeref:typename:float
 prepareOpenGL	imgui/examples/example_apple_opengl2/main.mm	/^{$/;"	m	implementation:AppView
+present_scene	draw.cpp	/^void present_scene() {$/;"	f	typeref:typename:void
 prev	Part2_Data_Algorithms/linked_list.cpp	/^  Node<T> *prev = nullptr;$/;"	m	struct:Node	typeref:typename:Node<T> *	file:
 prev_first	imgui/imstb_textedit.h	/^   int prev_first;  \/\/ first char of previous row$/;"	m	struct:__anon22a5596e0508	typeref:typename:int
 prev_link	imgui/imstb_rectpack.h	/^   stbrp_node **prev_link;$/;"	m	struct:__anond298c5900308	typeref:typename:stbrp_node **
@@ -7391,31 +7163,19 @@ proc_names	imgui/backends/imgui_impl_opengl3_loader.h	/^static const char *proc_
 proggy_clean_ttf_compressed_data_base85	imgui/imgui_draw.cpp	/^static const char proggy_clean_ttf_compressed_data_base85[11980 + 1] =$/;"	v	typeref:typename:const char[]	file:
 ptr	imgui/backends/imgui_impl_opengl3_loader.h	/^    GL3WglProc ptr[59];$/;"	m	union:ImGL3WProcs	typeref:typename:GL3WglProc[59]
 ptr_from_offset	imgui/imgui_internal.h	/^    T*      ptr_from_offset(int off)    { IM_ASSERT(off >= 4 && off < Buf.Size); return (T*)(voi/;"	f	struct:ImChunkStream	typeref:typename:T *
-push_back	Graph.h	/^  void push_back(T &s) { v.push_back(&s); }$/;"	f	class:Graph_lib::Vector_ref	typeref:typename:void
-push_back	Graph.h	/^  void push_back(T *p) {$/;"	f	class:Graph_lib::Vector_ref	typeref:typename:void
 push_back	Part2_Data_Algorithms/vector.h	/^  void push_back(T d) {$/;"	f	class:vector	typeref:typename:void
 push_back	imgui/imgui.h	/^    inline void         push_back(const T& v)               { if (Size == Capacity) reserve(_gro/;"	f	struct:ImVector	typeref:typename:void
 push_front	imgui/imgui.h	/^    inline void         push_front(const T& v)              { if (Size == 0) push_back(v); else /;"	f	struct:ImVector	typeref:typename:void
-put	GUI.cpp	/^void Out_box::put(const string& s)$/;"	f	class:Out_box	typeref:typename:void
-put	GUI.cpp	/^void Out_box::put(int i)$/;"	f	class:Out_box	typeref:typename:void
-put_on_top	Window.cpp	/^void Window::put_on_top(Shape &p) {$/;"	f	class:Graph_lib::Window	typeref:typename:void
 pvertices	imgui/imstb_truetype.h	/^   stbtt_vertex *pvertices;$/;"	m	struct:__anonea0503650f08	typeref:typename:stbtt_vertex *
-pw	GUI.h	/^  Fl_Widget *pw; \/\/ connection to the FLTK Widget$/;"	m	class:Graph_lib::Widget	typeref:typename:Fl_Widget *
-pw	Gui.h	/^	Fl_Widget* pw;$/;"	m	class:Graph_lib::Widget	typeref:typename:Fl_Widget *
-r	Graph.h	/^  int r;$/;"	m	struct:Graph_lib::Circle	typeref:typename:int
-radius	Graph.h	/^  int radius() const { return r; }$/;"	f	struct:Graph_lib::Circle	typeref:typename:int
 randint	std_lib_facilities.h	/^inline int randint(int max) { return randint(0, max); }$/;"	f	typeref:typename:int
 randint	std_lib_facilities.h	/^inline int randint(int min, int max) {$/;"	f	typeref:typename:int
 rect_height_compare	imgui/imstb_rectpack.h	/^static int STBRP__CDECL rect_height_compare(const void *a, const void *b)$/;"	f	typeref:typename:int STBRP__CDECL
 rect_original_order	imgui/imstb_rectpack.h	/^static int STBRP__CDECL rect_original_order(const void *a, const void *b)$/;"	f	typeref:typename:int STBRP__CDECL
-red	Graph.h	/^    red = FL_RED,$/;"	e	enum:Graph_lib::Color::Color_type
 red	Part2_Data_Algorithms/linked_list.cpp	/^string red = "\\033[31m";    \/* Red *\/$/;"	v	namespace:__anon78c99cd20110	typeref:typename:string
 red	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    unsigned short* red;$/;"	m	struct:GLFWgammaramp	typeref:typename:unsigned short *
 redBits	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int redBits;$/;"	m	struct:GLFWvidmode	typeref:typename:int
 redo_char_point	imgui/imstb_textedit.h	/^   int undo_char_point, redo_char_point;$/;"	m	struct:__anon22a5596e0208	typeref:typename:int
 redo_point	imgui/imstb_textedit.h	/^   short undo_point, redo_point;$/;"	m	struct:__anon22a5596e0208	typeref:typename:short
-reference_to	GUI.h	/^W &reference_to(Address pw)$/;"	f	namespace:Graph_lib	typeref:typename:W &
-reference_to	Gui.h	/^template<class W> W& reference_to(Address pw)$/;"	f	namespace:Graph_lib	typeref:typename:W &
 refreshRate	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int refreshRate;$/;"	m	struct:GLFWvidmode	typeref:typename:int
 renderPipelineStateCache	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, strong) NSMutableDictionary*          renderPipelineStateCache; \/\/ pipel/;"	p	interface:MetalContext
 renderPipelineStateForFramebufferDescriptor:device:	imgui/backends/imgui_impl_metal.mm	/^- (id<MTLRenderPipelineState>)renderPipelineStateForFramebufferDescriptor:(FramebufferDescriptor/;"	m	interface:MetalContext
@@ -7428,15 +7188,25 @@ reserve_discard	imgui/imgui.h	/^    inline void         reserve_discard(int new_
 reset	Part2_Data_Algorithms/linked_list.cpp	/^string reset = "\\033[0m";$/;"	v	namespace:__anon78c99cd20110	typeref:typename:string
 reshape	imgui/examples/example_apple_opengl2/main.mm	/^-(void)reshape                              { [super reshape]; [[self openGLContext] update]; [s/;"	m	implementation:AppView
 resize	Part2_Data_Algorithms/vector.h	/^  void resize(size_t newsize, T default_ = T()) {$/;"	f	class:vector	typeref:typename:void
-resize	Window.h	/^  void resize(int ww, int hh) {$/;"	f	class:Graph_lib::Window	typeref:typename:void
 resize	imgui/imgui.h	/^    inline void         resize(int new_size)                { if (new_size > Capacity) reserve(_/;"	f	struct:ImVector	typeref:typename:void
 resize	imgui/imgui.h	/^    inline void         resize(int new_size, const T& v)    { if (new_size > Capacity) reserve(_/;"	f	struct:ImVector	typeref:typename:void
 resize_border_def	imgui/imgui.cpp	/^static const ImGuiResizeBorderDef resize_border_def[4] =$/;"	v	typeref:typename:const ImGuiResizeBorderDef[4]	file:
 resize_grip_def	imgui/imgui.cpp	/^static const ImGuiResizeGripDef resize_grip_def[4] =$/;"	v	typeref:typename:const ImGuiResizeGripDef[4]	file:
 row_count_per_page	imgui/imstb_textedit.h	/^   int row_count_per_page;$/;"	m	struct:__anon22a5596e0308	typeref:typename:int
-s	Graph.h	/^  int s;$/;"	m	struct:Graph_lib::Line_style	typeref:typename:int
 s0	imgui/imstb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anonea0503650308	typeref:typename:float
 s1	imgui/imstb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anonea0503650308	typeref:typename:float
+s:l	Session.vim	/^let s:l = 1288 - ((44 * winheight(0) + 24) \/ 49)$/;"	v
+s:l	Session.vim	/^let s:l = 25 - ((24 * winheight(0) + 19) \/ 38)$/;"	v
+s:l	Session.vim	/^let s:l = 29 - ((6 * winheight(0) + 6) \/ 13)$/;"	v
+s:l	Session.vim	/^let s:l = 32 - ((8 * winheight(0) + 11) \/ 23)$/;"	v
+s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
+s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
+s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v
+s:save_winminwidth	Session.vim	/^let s:save_winminwidth = &winminwidth$/;"	v
+s:shortmess_save	Session.vim	/^let s:shortmess_save = &shortmess$/;"	v
+s:so_save	Session.vim	/^let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1$/;"	v
+s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
 sAddString	imgui/examples/libs/usynergy/uSynergy.c	/^static void sAddString(uSynergyContext *context, const char *string)$/;"	f	typeref:typename:void	file:
 sAddUInt16	imgui/examples/libs/usynergy/uSynergy.c	/^static void sAddUInt16(uSynergyContext *context, uint16_t value)$/;"	f	typeref:typename:void	file:
 sAddUInt32	imgui/examples/libs/usynergy/uSynergy.c	/^static void sAddUInt32(uSynergyContext *context, uint32_t value)$/;"	f	typeref:typename:void	file:
@@ -7454,39 +7224,15 @@ sUpdateContext	imgui/examples/libs/usynergy/uSynergy.c	/^static void sUpdateCont
 s_current_sort_specs	imgui/imgui_demo.cpp	/^    static const ImGuiTableSortSpecs* s_current_sort_specs;$/;"	m	struct:__anone28545ff0210::MyItem	typeref:typename:const ImGuiTableSortSpecs *	file:
 s_current_sort_specs	imgui/imgui_demo.cpp	/^const ImGuiTableSortSpecs* MyItem::s_current_sort_specs = NULL;$/;"	m	class:__anone28545ff0210::MyItem	typeref:typename:const ImGuiTableSortSpecs *
 sampleCount	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, assign) unsigned long  sampleCount;$/;"	p	interface:FramebufferDescriptor
-screen	Graph.h	/^    screen = FL_SCREEN,$/;"	e	enum:Graph_lib::Font::Font_type
-screen_bold	Graph.h	/^    screen_bold = FL_SCREEN_BOLD,$/;"	e	enum:Graph_lib::Font::Font_type
 select_end	imgui/imstb_textedit.h	/^   int select_end;$/;"	m	struct:__anon22a5596e0308	typeref:typename:int
 select_start	imgui/imstb_textedit.h	/^   int select_start;          \/\/ selection start point$/;"	m	struct:__anon22a5596e0308	typeref:typename:int
 selectedRange	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
-selection	Gui.h	/^	Vector_ref<Button> selection;$/;"	m	struct:Graph_lib::Menu	typeref:typename:Vector_ref<Button>
 serve	imgui/examples/example_emscripten_wgpu/Makefile	/^serve: all$/;"	t
 set	imgui/imgui_internal.h	/^    inline void         set(T* data, T* data_end)   { Data = data; DataEnd = data_end; }$/;"	f	struct:ImSpan	typeref:typename:void
 set	imgui/imgui_internal.h	/^    inline void         set(T* data, int size)      { Data = data; DataEnd = data + size; }$/;"	f	struct:ImSpan	typeref:typename:void
 setImePosX:imePosY:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
 setMarkedText:selectedRange:replacementRange:	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
-set_color	Graph.cpp	/^void Axis::set_color(Color c)$/;"	f	class:Graph_lib::Axis	typeref:typename:void
-set_color	Graph.h	/^  void set_color(Color col) { lcolor = col; }$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-set_fill_color	Graph.h	/^  void set_fill_color(Color col) { fcolor = col; }$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-set_fill_color	Graph.h	/^  void set_fill_color(Color col) { fcolor = col; }$/;"	f	struct:Graph_lib::Fill	typeref:typename:void
-set_font	Graph.h	/^  void set_font(Font f) { fnt = f; }$/;"	f	struct:Graph_lib::Text	typeref:typename:void
-set_font_size	Graph.h	/^  void set_font_size(int s) { fnt_sz = s; }$/;"	f	struct:Graph_lib::Text	typeref:typename:void
-set_label	Graph.h	/^  void set_label(const string &s) { lab = s; }$/;"	f	struct:Graph_lib::Text	typeref:typename:void
-set_label	Window.h	/^  void set_label(const string &s) { label(s.c_str()); }$/;"	f	class:Graph_lib::Window	typeref:typename:void
-set_major	Graph.h	/^  void set_major(int ww) { w = ww; }$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:void
-set_mask	Graph.h	/^  void set_mask(Point xy, int ww, int hh) {$/;"	f	struct:Graph_lib::Image	typeref:typename:void
-set_minor	Graph.h	/^  void set_minor(int hh) { h = hh; }$/;"	f	struct:Graph_lib::Ellipse	typeref:typename:void
-set_point	Graph.h	/^  void set_point(int i, Point p) { points[i] = p; }$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-set_radius	Graph.h	/^  void set_radius(int rr) { r = rr; }$/;"	f	struct:Graph_lib::Circle	typeref:typename:void
-set_style	Graph.h	/^  void set_style(Line_style sty) { ls = sty; }$/;"	f	class:Graph_lib::Shape	typeref:typename:void
-set_visibility	Graph.h	/^  void set_visibility(Transparency vv) { v = vv; }$/;"	f	struct:Graph_lib::Color	typeref:typename:void
 setupMenu	imgui/examples/example_apple_opengl2/main.mm	/^{$/;"	m	implementation:AppDelegate
-setup_imgui	setup_imgui.cpp	/^void setup_imgui() {$/;"	f	typeref:typename:void
-setup_window	setup_window.cpp	/^int setup_window() {$/;"	f	typeref:typename:int
-shapes	Window.h	/^  vector<Shape *> shapes; \/\/ shapes attached to window$/;"	m	class:Graph_lib::Window	typeref:typename:vector<Shape * >
-show	GUI.h	/^  virtual void show() { pw->show(); }$/;"	f	class:Graph_lib::Widget	typeref:typename:void
-show	Gui.h	/^	virtual void show() { pw->show(); }$/;"	f	class:Graph_lib::Widget	typeref:typename:void
-show	Gui.h	/^	void show() { for (int i = 0; i<selection.size(); ++i) selection[i].show(); }$/;"	f	struct:Graph_lib::Menu	typeref:typename:void
 show_another_window	imgui/examples/example_glut_opengl2/main.cpp	/^static bool show_another_window = false;$/;"	v	typeref:typename:bool	file:
 show_demo_window	imgui/examples/example_glut_opengl2/main.cpp	/^static bool show_demo_window = true;$/;"	v	typeref:typename:bool	file:
 shrink	imgui/imgui.h	/^    inline void         shrink(int new_size)                { IM_ASSERT(new_size <= Size); Size /;"	f	struct:ImVector	typeref:typename:void
@@ -7504,7 +7250,6 @@ size_type	std_lib_facilities.h	/^  using size_type = std::string::size_type;$/;"
 size_type	std_lib_facilities.h	/^  using size_type = typename std::vector<T>::size_type;$/;"	t	struct:Vector	typeref:typename:std::vector<T>::size_type
 skip_missing	imgui/imstb_truetype.h	/^   int   skip_missing;$/;"	m	struct:stbtt_pack_context	typeref:typename:int
 snprintf	imgui/imgui_demo.cpp	/^#define snprintf /;"	d	file:
-solid	Graph.h	/^    solid = FL_SOLID,           \/\/ -------$/;"	e	enum:Graph_lib::Line_style::Line_style_type
 sort	std_lib_facilities.h	/^void sort(C &c) {$/;"	f	typeref:typename:void
 sort	std_lib_facilities.h	/^void sort(C &c, Pred p) {$/;"	f	typeref:typename:void
 space	Part2_Data_Algorithms/vtest.h	/^  size_t space;$/;"	m	class:Foo	typeref:typename:size_t
@@ -7773,16 +7518,12 @@ stencilPixelFormat	imgui/backends/imgui_impl_metal.mm	/^@property (nonatomic, as
 strdup	Part2_Data_Algorithms/ch18exercises.cpp	/^char *strdup(const char *c) {$/;"	f	typeref:typename:char *
 stride	imgui/imstb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anonea0503650808	typeref:typename:int
 stride_in_bytes	imgui/imstb_truetype.h	/^   int   stride_in_bytes;$/;"	m	struct:stbtt_pack_context	typeref:typename:int
-style	Graph.h	/^  Line_style style() const { return ls; }$/;"	f	class:Graph_lib::Shape	typeref:typename:Line_style
-style	Graph.h	/^  int style() const { return s; }$/;"	f	struct:Graph_lib::Line_style	typeref:typename:int
 subrs	imgui/imstb_truetype.h	/^   stbtt__buf subrs;                  \/\/ private charstring subroutines index$/;"	m	struct:stbtt_fontinfo	typeref:typename:stbtt__buf
-suffix_map	Graph.cpp	/^std::map<string,Suffix::Encoding> suffix_map;$/;"	v	namespace:Graph_lib	typeref:typename:std::map<string,Suffix::Encoding>
 svg	imgui/imstb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo	typeref:typename:int
 svg	imgui/misc/freetype/imgui_freetype.cpp	/^    std::unique_ptr<lunasvg::Document> svg = nullptr;$/;"	m	struct:LunasvgPortState	typeref:typename:std::unique_ptr<lunasvg::Document>	file:
 swap	imgui/imgui.h	/^    inline void         swap(ImVector<T>& rhs)              { int rhs_size = rhs.Size; rhs.Size /;"	f	struct:ImVector	typeref:typename:void
 swap	imgui/imgui_internal.h	/^    void    swap(ImChunkStream<T>& rhs) { rhs.Buf.swap(Buf); }$/;"	f	struct:ImChunkStream	typeref:typename:void
 sy	imgui/imstb_truetype.h	/^   float sy;$/;"	m	struct:stbtt__active_edge	typeref:typename:float
-symbol	Graph.h	/^    symbol = FL_SYMBOL,$/;"	e	enum:Graph_lib::Font::Font_type
 sz	Part2_Data_Algorithms/linked_list.cpp	/^  int sz = 0;$/;"	m	class:List	typeref:typename:int	file:
 sz	Part2_Data_Algorithms/vector.h	/^  size_t sz;$/;"	m	class:vector	typeref:typename:size_t
 sz	Part2_Data_Algorithms/vtest.h	/^  size_t sz;$/;"	m	class:Foo	typeref:typename:size_t
@@ -7790,10 +7531,6 @@ sz	Part2_Data_Algorithms/vtest.h	/^  size_t sz;$/;"	m	class:vector	typeref:typen
 t0	imgui/imstb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anonea0503650308	typeref:typename:float
 t1	imgui/imstb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anonea0503650308	typeref:typename:float
 tasks	.vscode/tasks.json	/^    "tasks": [$/;"	a
-times	Graph.h	/^    times = FL_TIMES,$/;"	e	enum:Graph_lib::Font::Font_type
-times_bold	Graph.h	/^    times_bold = FL_TIMES_BOLD,$/;"	e	enum:Graph_lib::Font::Font_type
-times_bold_italic	Graph.h	/^    times_bold_italic = FL_TIMES_BOLD_ITALIC,$/;"	e	enum:Graph_lib::Font::Font_type
-times_italic	Graph.h	/^    times_italic = FL_TIMES_ITALIC,$/;"	e	enum:Graph_lib::Font::Font_type
 to_string	std_lib_facilities.h	/^template <class T> string to_string(const T &t) {$/;"	f	typeref:typename:string
 touchesBegan:withEvent:	imgui/examples/example_apple_metal/main.mm	/^-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event      { [self updateIO/;"	m	implementation:AppViewController
 touchesCancelled:withEvent:	imgui/examples/example_apple_metal/main.mm	/^-(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event  { [self updateIO/;"	m	implementation:AppViewController
@@ -7840,8 +7577,6 @@ userdata	imgui/imstb_truetype.h	/^   void           * userdata;$/;"	m	struct:stb
 uv	imgui/backends/imgui_impl_allegro5.cpp	/^    ImVec2          uv;$/;"	m	struct:ImDrawVertAllegro	typeref:typename:ImVec2	file:
 uv	imgui/backends/imgui_impl_dx9.cpp	/^    float    uv[2];$/;"	m	struct:CUSTOMVERTEX	typeref:typename:float[2]	file:
 uv	imgui/imgui.h	/^    ImVec2  uv;$/;"	m	struct:ImDrawVert	typeref:typename:ImVec2
-v	Graph.h	/^  unsigned char v; \/\/ 0 or 1 for now$/;"	m	struct:Graph_lib::Color	typeref:typename:unsigned char
-v	Graph.h	/^  vector<T *> v;$/;"	m	class:Graph_lib::Vector_ref	typeref:typename:vector<T * >
 v_oversample	imgui/imstb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anonea0503650508	typeref:typename:unsigned char
 v_oversample	imgui/imstb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context	typeref:typename:unsigned int
 va_copy	imgui/imgui.cpp	/^#define va_copy(/;"	d	file:
@@ -7862,19 +7597,11 @@ vector	Part2_Data_Algorithms/vtest.h	/^template <typename T> class vector {$/;"	
 vector	std_lib_facilities.h	/^#define vector /;"	d
 version	.vscode/tasks.json	/^    "version": "2.0.0"$/;"	s
 version	imgui/backends/imgui_impl_opengl3_loader.h	/^static struct { int major, minor; } version;$/;"	v	typeref:struct:__anon35e8ffa80208
-vertical	Gui.h	/^	enum Kind { horizontal, vertical };$/;"	e	enum:Graph_lib::Menu::Kind
 viewDidLoad	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
 viewDidMoveToWindow	imgui/backends/imgui_impl_osx.mm	/^{$/;"	m	implementation:KeyEventResponder
 viewWillAppear	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
-visibility	Graph.h	/^  char visibility() const { return v; }$/;"	f	struct:Graph_lib::Color	typeref:typename:char
-visible	Graph.h	/^  enum Transparency { invisible = 0, visible = 255 };$/;"	e	enum:Graph_lib::Color::Transparency
 vsnprintf	imgui/imgui.cpp	/^#define vsnprintf /;"	d	file:
 vsnprintf	imgui/imgui_demo.cpp	/^#define vsnprintf /;"	d	file:
-w	Graph.h	/^  int w, h, cx,$/;"	m	struct:Graph_lib::Image	typeref:typename:int
-w	Graph.h	/^  int w; \/\/ width$/;"	m	struct:Graph_lib::Rectangle	typeref:typename:int
-w	Graph.h	/^  int w;$/;"	m	struct:Graph_lib::Ellipse	typeref:typename:int
-w	Graph.h	/^  int w;$/;"	m	struct:Graph_lib::Line_style	typeref:typename:int
-w	Window.h	/^  int w, h;               \/\/ window size$/;"	m	class:Graph_lib::Window	typeref:typename:int
 w	imgui/imgui.h	/^    float                                                     x, y, z, w;$/;"	m	struct:ImVec4	typeref:typename:float
 w	imgui/imstb_rectpack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect	typeref:typename:stbrp_coord
 w	imgui/imstb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect	typeref:typename:int
@@ -7890,11 +7617,6 @@ wgpu_swap_chain	imgui/examples/example_emscripten_wgpu/main.cpp	/^static WGPUSwa
 wgpu_swap_chain_height	imgui/examples/example_emscripten_wgpu/main.cpp	/^static int               wgpu_swap_chain_height = 0;$/;"	v	typeref:typename:int	file:
 wgpu_swap_chain_width	imgui/examples/example_emscripten_wgpu/main.cpp	/^static int               wgpu_swap_chain_width = 0;$/;"	v	typeref:typename:int	file:
 where	imgui/imstb_textedit.h	/^   IMSTB_TEXTEDIT_POSITIONTYPE  where;$/;"	m	struct:__anon22a5596e0108	typeref:typename:IMSTB_TEXTEDIT_POSITIONTYPE
-white	Graph.h	/^    white = FL_WHITE,$/;"	e	enum:Graph_lib::Color::Color_type
-width	GUI.h	/^  int width;$/;"	m	class:Graph_lib::Widget	typeref:typename:int
-width	Graph.h	/^  int width() const { return w; }$/;"	f	struct:Graph_lib::Line_style	typeref:typename:int
-width	Graph.h	/^  int width() const { return w; }$/;"	f	struct:Graph_lib::Rectangle	typeref:typename:int
-width	Gui.h	/^	int width;$/;"	m	class:Graph_lib::Widget	typeref:typename:int
 width	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int width;$/;"	m	struct:GLFWimage	typeref:typename:int
 width	imgui/examples/libs/glfw/include/GLFW/glfw3.h	/^    int width;$/;"	m	struct:GLFWvidmode	typeref:typename:int
 width	imgui/imstb_rectpack.h	/^   int width;$/;"	m	struct:stbrp_context	typeref:typename:int
@@ -7906,8 +7628,6 @@ window	imgui/examples/example_apple_metal/main.mm	/^@property (strong, nonatomic
 window	imgui/examples/example_apple_opengl2/main.mm	/^@property (nonatomic, readonly) NSWindow* window;$/;"	p	interface:AppDelegate
 window	imgui/examples/example_apple_opengl2/main.mm	/^{$/;"	m	implementation:AppDelegate
 windowWillClose:	imgui/examples/example_apple_metal/main.mm	/^{$/;"	m	implementation:AppViewController
-x	Graph.h	/^  enum Orientation { x, y, z };$/;"	e	enum:Graph_lib::Axis::Orientation
-x	Point.h	/^	int x,y;$/;"	m	struct:Graph_lib::Point	typeref:typename:int
 x	imgui/imgui.h	/^    float                                                     x, y, z, w;$/;"	m	struct:ImVec4	typeref:typename:float
 x	imgui/imgui.h	/^    float                                   x, y;$/;"	m	struct:ImVec2	typeref:typename:float
 x	imgui/imgui_internal.h	/^    float   x;$/;"	m	struct:ImVec1	typeref:typename:float
@@ -7933,15 +7653,11 @@ x1	imgui/imstb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge	type
 x1	imgui/imstb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anonea0503650308	typeref:typename:float
 x1	imgui/imstb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anonea0503650208	typeref:typename:unsigned short
 x1	imgui/imstb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anonea0503650408	typeref:typename:unsigned short
-x_max	Window.h	/^  int x_max() const { return w; }$/;"	f	class:Graph_lib::Window	typeref:typename:int
-x_max	Window.h	/^inline int x_max() { return Fl::w(); } \/\/ width of screen in pixels$/;"	f	namespace:Graph_lib	typeref:typename:int
 xadvance	imgui/imstb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anonea0503650208	typeref:typename:float
 xadvance	imgui/imstb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anonea0503650408	typeref:typename:float
 xoff	imgui/imstb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anonea0503650208	typeref:typename:float
 xoff	imgui/imstb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anonea0503650408	typeref:typename:float
 xoff2	imgui/imstb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anonea0503650408	typeref:typename:float
-y	Graph.h	/^  enum Orientation { x, y, z };$/;"	e	enum:Graph_lib::Axis::Orientation
-y	Point.h	/^	int x,y;$/;"	m	struct:Graph_lib::Point	typeref:typename:int
 y	imgui/imgui.h	/^    float                                                     x, y, z, w;$/;"	m	struct:ImVec4	typeref:typename:float
 y	imgui/imgui.h	/^    float                                   x, y;$/;"	m	struct:ImVec2	typeref:typename:float
 y	imgui/imgui_internal.h	/^    short   x, y;$/;"	m	struct:ImVec2ih	typeref:typename:short
@@ -7962,18 +7678,13 @@ y1	imgui/imstb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge	type
 y1	imgui/imstb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anonea0503650308	typeref:typename:float
 y1	imgui/imstb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anonea0503650208	typeref:typename:unsigned short
 y1	imgui/imstb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anonea0503650408	typeref:typename:unsigned short
-y_max	Window.h	/^  int y_max() const { return h; }$/;"	f	class:Graph_lib::Window	typeref:typename:int
-y_max	Window.h	/^inline int y_max() { return Fl::h(); } \/\/ height of screen in pixels$/;"	f	namespace:Graph_lib	typeref:typename:int
-yellow	Graph.h	/^    yellow = FL_YELLOW,$/;"	e	enum:Graph_lib::Color::Color_type
 yellow	Part2_Data_Algorithms/linked_list.cpp	/^string yellow = "\\033[33m"; \/* Yellow *\/$/;"	v	namespace:__anon78c99cd20110	typeref:typename:string
 ymax	imgui/imstb_textedit.h	/^   float ymin,ymax;         \/\/ height of row above and below baseline$/;"	m	struct:__anon22a5596e0408	typeref:typename:float
 ymin	imgui/imstb_textedit.h	/^   float ymin,ymax;         \/\/ height of row above and below baseline$/;"	m	struct:__anon22a5596e0408	typeref:typename:float
 yoff	imgui/imstb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anonea0503650208	typeref:typename:float
 yoff	imgui/imstb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anonea0503650408	typeref:typename:float
 yoff2	imgui/imstb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anonea0503650408	typeref:typename:float
-z	Graph.h	/^  enum Orientation { x, y, z };$/;"	e	enum:Graph_lib::Axis::Orientation
 z	imgui/imgui.h	/^    float                                                     x, y, z, w;$/;"	m	struct:ImVec4	typeref:typename:float
-zapf_dingbats	Graph.h	/^    zapf_dingbats = FL_ZAPF_DINGBATS$/;"	e	enum:Graph_lib::Font::Font_type
 ~ExampleAppConsole	imgui/imgui_demo.cpp	/^    ~ExampleAppConsole()$/;"	f	struct:ExampleAppConsole	file:
 ~FreeTypeFont	imgui/misc/freetype/imgui_freetype.cpp	/^        ~FreeTypeFont()         { CloseFont(); }$/;"	f	struct:__anon76bbacac0110::FreeTypeFont	file:
 ~ImDrawList	imgui/imgui.h	/^    ~ImDrawList() { _ClearFreeMemory(); }$/;"	f	struct:ImDrawList
@@ -7986,10 +7697,4 @@ zapf_dingbats	Graph.h	/^    zapf_dingbats = FL_ZAPF_DINGBATS$/;"	e	enum:Graph_li
 ~ImGuiWindow	imgui/imgui.cpp	/^ImGuiWindow::~ImGuiWindow()$/;"	f	class:ImGuiWindow
 ~ImPool	imgui/imgui_internal.h	/^    ~ImPool()   { Clear(); }$/;"	f	struct:ImPool
 ~ImVector	imgui/imgui.h	/^    inline ~ImVector()                                      { if (Data) IM_FREE(Data); } \/\/ Im/;"	f	struct:ImVector
-~Image	Graph.h	/^  ~Image() { delete p; }$/;"	f	struct:Graph_lib::Image
-~Shape	Graph.h	/^  virtual ~Shape() {}$/;"	f	class:Graph_lib::Shape
-~Vector_ref	Graph.h	/^  ~Vector_ref() {$/;"	f	class:Graph_lib::Vector_ref
-~Widget	GUI.h	/^  virtual ~Widget() {}$/;"	f	class:Graph_lib::Widget
-~Widget	Gui.h	/^	virtual ~Widget() { }$/;"	f	class:Graph_lib::Widget
-~Window	Window.h	/^  virtual ~Window() {}$/;"	f	class:Graph_lib::Window
 ~vector	Part2_Data_Algorithms/vector.h	/^  ~vector() {$/;"	f	class:vector

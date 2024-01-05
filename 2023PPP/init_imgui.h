@@ -5,5 +5,6 @@
 
 extern App app;
 void init_imgui();
+void imgui_simple_window();
 void change_style();
-#endif // !SETUP_IMGUI_H
+#endif // !INIT_IMGUI_H

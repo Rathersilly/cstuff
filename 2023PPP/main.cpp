@@ -1,43 +1,27 @@
 /* #include "setup_imgui.h" */
 #include "cleanup.h"
+#include "draw.h"
+#include "init_imgui.h"
 #include "init_imgui_style.h"
 #include "init_window.h"
-// These are in the imgui example file
-// - thought they would suppress clangd errors but nope
-/* #pragma clang diagnostic ignored "-Wunknown-warning-option" */
-/* #pragma clang diagnostic ignored "-Wunknown-pragmas" */
 
 App app;
+ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+#include <iostream>
 // Main code
 int main(int, char **) {
+  // sometimes get "Invalid operands to binary expression
+  // ('ostream' (aka 'int') and 'const char[]')
+  // when putting couts in a different cpp file
+  std::cout << "hi" << std::endl;
   init_window();
+  init_imgui();
 
-  /* setup_imgui(); */
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  ImGuiIO &io = ImGui::GetIO();
-  // https://stackoverflow.com/questions/34288844/what-does-casting-to-void-really-do
-  // casting to void apparently is to suppress compiler warnings
-  (void)io;
-  io.ConfigFlags |=
-      ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-  io.ConfigFlags |=
-      ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
-
-  // Setup Dear ImGui style
-  ImGui::StyleColorsDark();
-  // ImGui::StyleColorsLight();
-  imgui_cherry_style();
-
-  // Setup Platform/Renderer backends
-  ImGui_ImplSDL2_InitForOpenGL(app.win, app.gl_context);
-  ImGui_ImplOpenGL3_Init(app.glsl_version);
-  // Our state
+  // ImGui state
   bool show_demo_window = true;
   show_demo_window = false;
   bool show_another_window = false;
-  ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
   // Main loop
   bool done = false;
@@ -67,6 +51,12 @@ int main(int, char **) {
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
+    // need to think of where to store bools of what imgui windows to keep open
+    // in this file its a local bool
+    // what data structure? map? tuple?
+    // app.state.imgui
+    // app.state.sdl etc
+    //
     // 1. Show the big demo window (Most of the sample code is in
     // ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear
     // ImGui!).
@@ -101,8 +91,8 @@ int main(int, char **) {
       ImGui::SameLine();
       ImGui::Text("counter = %d", counter);
 
-      ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-                  1000.0f / io.Framerate, io.Framerate);
+      /* ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", */
+      /*             1000.0f / io.Framerate, io.Framerate); */
       ImGui::End();
     }
     mygui();
@@ -120,14 +110,7 @@ int main(int, char **) {
       ImGui::End();
     }
 
-    // Rendering
-    ImGui::Render();
-    glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
-    glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w,
-                 clear_color.z * clear_color.w, clear_color.w);
-    glClear(GL_COLOR_BUFFER_BIT);
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    SDL_GL_SwapWindow(app.win);
+    present_scene();
   }
 
   cleanup();

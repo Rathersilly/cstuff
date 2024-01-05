@@ -24,6 +24,7 @@ struct App {
   /* ImGuiIO &temp_imgui_io; */
   SDL_GLContext gl_context;
   const char *glsl_version;
+  ImGuiIO igio;
 };
 extern App app;
 #endif // !COMMON_H

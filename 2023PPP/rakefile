@@ -30,6 +30,7 @@ SRC_FILES.include 'main.cpp'
 SRC_FILES.include 'init_window.cpp'
 SRC_FILES.include 'init_imgui.cpp'
 SRC_FILES.include 'init_imgui_style.cpp'
+SRC_FILES.include 'draw.cpp'
 SRC_FILES.include 'cleanup.cpp'
 SRC_FILES.include "#{IMGUI_DIR}/imgui*.cpp"
 SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp"
