@@ -1,11 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#define RESET "\033[0m"
-#define RED "\033[31m"    /* Red */
-#define GREEN "\033[32m"  /* Green */
-#define YELLOW "\033[33m" /* Yellow */
-#define BLUE "\033[34m"   /* Blue */
 #define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
 /* #define INFO */
 
@@ -15,6 +10,7 @@
 #include <iostream>
 using std::cout;
 using std::endl;
+// forward declarations not currently needed
 /* template <typename T> void copy(T *from, int sz, T *to); */
 /* template <typename T> void print_vector(const vector<T> &v); */
 
@@ -24,8 +20,10 @@ template <typename T> void copy(T *from, int sz, T *to) {
     to[i] = from[i];
   }
 }
-/* template <typename T, typename A = allocator<T>> class vector; */
 template <typename T, typename A = allocator<T>> class vector;
+
+// print_vector function may not print all on one line as expected
+// if PFUN is used because of buffering
 template <typename T, typename A = allocator<T>>
 void print_vector(const vector<T> &v) {
   for (auto i = 0; i < v.size(); ++i) {
@@ -71,13 +69,16 @@ public:
 
   // copy constructor
   vector(const vector &arg) : sz{arg.sz}, elem{new T[sz]}, space_{arg.sz} {
+    cout << "copy ctor ";
     INFO;
+
     copy(arg.elem, arg.sz, elem);
   }
 
   // copy assignment ( 19.2.5 - doesnt make extra space_ )
   // make 1 vector's elements  = to another's
   vector<T> &operator=(const vector &a) {
+    INFO;
     if (this == &a) { // same vector - nothing to do
       return *this;
     }
@@ -99,9 +100,14 @@ public:
     return *this;
   }
   // move constructor (&& is rvalue reference)
+  // - called when an object is initialized from rvalue, eg:
+  // T a = std::move(b);  // b being type T
+  // f(std::move(a));     // a being type T and f is void f(T t);
+  // return a;            // a being type T and in T f();
   vector(vector<T> &&a) : sz{a.sz}, elem{a.elem} {
     // move constructor is used as fuction arg, so is deleted
     // when it goes out of scope
+    cout << "move ctor ";
     INFO;
     a.sz = 0;
     a.space_ = 0;
@@ -110,6 +116,8 @@ public:
 
   // move assignment
   vector<T> &operator=(vector<T> &&a) {
+    cout << "move assign ";
+    INFO;
     INFO;
     delete[] elem;
     sz = a.sz;
@@ -128,9 +136,28 @@ public:
   ///////////////////
   //// Access
   // without the &, this allows reading but not writing
-  T &operator[](int i) { return elem[i]; }
-  // we want to be able to read const element
-  T operator[](int i) const { return elem[i]; }
+  // because we wouldnt have it's address, just it's value
+
+  T &operator[](int i) {
+    INFO;
+    return elem[i];
+  }
+
+  // we also want to be able to read const element
+  // eg.
+  const T &operator[](int i) const {
+    INFO;
+    return elem[i];
+  }
+
+  // at is [] but with range checking
+  T &at(int i) {
+    INFO;
+    if (i < 0 || i >= sz) {
+      throw std::range_error("out of range");
+    }
+    return elem[i];
+  }
 
   ///////////////////
   //// Current Size
@@ -140,6 +167,10 @@ public:
   ///////////////////
   //// Space
   // reserve function using custom allocator
+  // basically new and delete operations are done
+  // by the allocator.
+  // construct and destroy are to be deprecated in c++20
+  // so idk what if anything replaces them
   void reserve_with_allocator(size_t newalloc) {
     INFO;
     if (newalloc <= space_) {

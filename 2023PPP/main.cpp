@@ -1,9 +1,14 @@
 /* #include "setup_imgui.h" */
 #include "cleanup.h"
+#include "color_macros.h"
 #include "draw.h"
 #include "init_imgui.h"
 #include "init_imgui_style.h"
 #include "init_window.h"
+#include <chrono> // imtrying to get framerate
+#include <iostream>
+using std::cout;
+using std::endl;
 
 App app;
 ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -14,17 +19,28 @@ int main(int, char **) {
   // sometimes get "Invalid operands to binary expression
   // ('ostream' (aka 'int') and 'const char[]')
   // when putting couts in a different cpp file
-  std::cout << "hi" << std::endl;
   init_window();
   init_imgui();
 
   // ImGui state
   bool show_demo_window = true;
   show_demo_window = false;
+  show_demo_window = true;
   bool show_another_window = false;
+  show_another_window = true;
 
   // Main loop
   bool done = false;
+  int ticks = 0;
+  int tickspersec = 0;
+
+  auto start{std::chrono::high_resolution_clock::now()};
+  auto end{std::chrono::high_resolution_clock::now()};
+  std::chrono::duration<double> elapsed{end - start};
+  int frame_flag = 0;
+
+  std::cout << elapsed.count() << '\n'; // C++20's chrono::duration operator<<
+                                        //
   while (!done) {
     // Poll and handle events (inputs, window resize, etc.)
     // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to
@@ -105,6 +121,28 @@ int main(int, char **) {
                                  // window will have a closing button that will
                                  // clear the bool when clicked)
       ImGui::Text("Hello from another window!");
+      ++ticks;
+      ++tickspersec;
+      /* std::cout << app.igio.Framerate << std::endl; */
+      /* std::cout << frame_count << std::endl; */
+
+      end = std::chrono::high_resolution_clock::now();
+      elapsed = end - start;
+      if (elapsed.count() > 1) {
+        start = std::chrono::high_resolution_clock::now();
+        std::cout << elapsed.count() << std::endl;
+        std::cout << tickspersec << std::endl;
+        tickspersec = 0;
+        std::cout << GREEN << app.igio.DeltaTime << RESET << std::endl;
+        std::cout << BLUE << app.igio.Framerate << RESET << std::endl;
+      }
+      // bonj - this says 0 fps whats up - i copied it from example file
+      // ImGui::Text takes variadic args - used to format string it seems
+      // where does it update?
+      ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+                  1000.0f / app.igio.Framerate, app.igio.Framerate);
+
+      /* std::cout << elapsed.count() << std::endl; */
       if (ImGui::Button("Close Me"))
         show_another_window = false;
       ImGui::End();

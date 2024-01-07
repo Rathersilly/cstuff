@@ -1,5 +1,9 @@
 # SRC = 'linked_list.cpp'
 SRC = 'foo.cpp'
+CC = 'g++'
+CC = 'clang++'
+# OPTS = '-fno-elide-constructors'
+OPTS = ''
 task :default do
-  sh "g++ #{SRC} -g3 -O0"
+  sh "#{CC} #{SRC} #{OPTS} -g3 -O0"
 end
