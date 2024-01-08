@@ -1,13 +1,16 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <iterator>
 #define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
 /* #define INFO */
 
-#include "allocator.h"
+#include "vector_allocator.h"
+#include "vector_iterator.h"
 #include <algorithm>
 #include <cstddef>
 #include <iostream>
+#include <iterator>
 using std::cout;
 using std::endl;
 // forward declarations not currently needed
@@ -21,16 +24,6 @@ template <typename T> void copy(T *from, int sz, T *to) {
   }
 }
 template <typename T, typename A = allocator<T>> class vector;
-
-// print_vector function may not print all on one line as expected
-// if PFUN is used because of buffering
-template <typename T, typename A = allocator<T>>
-void print_vector(const vector<T> &v) {
-  for (auto i = 0; i < v.size(); ++i) {
-    std::cout << v[i] << " ";
-  }
-  cout << endl;
-}
 
 template <typename T, typename A> class vector {
   /* template <typename T, typename A = allocator<T>> class vector { */
@@ -46,6 +39,40 @@ template <typename T, typename A> class vector {
   size_t space_;
 
 public:
+  ///////////////////
+  /// Iterator
+
+  // this was super unnecessary and std::iterator is to be deprecated
+  /* class iter : std::iterator<std::random_access_iterator_tag, T,
+   * std::ptrdiff_t, T *, T &> { */
+  class iter {
+  private:
+    T *curr;
+
+  public:
+    iter(T *t) : curr{t} {}
+
+    iter &operator++() {
+      curr += 1;
+      return *this;
+    }
+    iter &operator--() {
+      curr -= 1;
+      return *this;
+    }
+    iter &next() { return ++curr; }
+    iter &prev() { return --curr; }
+
+    bool operator==(iter i) { return (i.curr == curr); }
+    bool operator!=(iter i) { return (i.curr != curr); }
+    T &operator*() { return *curr; }
+  };
+
+  iter begin() { return elem; }
+  const iter begin() const { return elem; }
+  iter end() { return elem + sz; }
+  const iter end() const { return elem + sz; }
+
   ///////////////////
   //// Constructors (default, args, copy, move, destructor) see 18.4
   // default constructor
@@ -222,5 +249,28 @@ public:
     ++sz;
   }
 };
+// print_vector function may not print all on one line as expected
+// if PFUN is used because of buffering
+template <typename T, typename A = allocator<T>>
+void print_vector(const vector<T> &v) {
+  for (auto i = 0; i < v.size(); ++i) {
+    std::cout << v[i] << " ";
+  }
+  cout << endl;
+}
 
+// https://stackoverflow.com/questions/610245/where-and-why-do-i-have-to-put-the-template-and-typename-keywords
+// the typename keyword is needed here so that compiler knows its a type
+// - it can be ambiguous i guess?
+// also this gives various errors - i think
+// the compiler cant determine somevec.begin()'s type
+
+template <typename T, typename A = allocator<T>>
+void recursive_print_vector(typename vector<T>::iter b,
+                            typename vector<T>::iter e) {
+  if (b != e) {
+    cout << *b << endl;
+    recursive_print_vector(++b, e);
+  }
+}
 #endif

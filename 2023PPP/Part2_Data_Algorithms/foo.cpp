@@ -48,9 +48,8 @@ int main(int argc, char *argv[]) {
   const int ci = cv[0]; // const T &operator=
 
   int foo = a.at(0);
-  // will correctly throw std::range_error
+  // at() will correctly throw std::range_error
   /* int bar = a.at(5); */
-  return 0;
 
   cout << GREEN << "Testing Space" << RESET << endl;
   vector<int> *c = new vector<int>;
@@ -81,10 +80,21 @@ int main(int argc, char *argv[]) {
     cout << "caught a vector!" << endl;
     print_vector<int>(e);
   }
-
-  // this requires more work to get working
-  /* vector<const int> ca{1, 2, 3}; */
-  /* cout << ca[1]; */
+  cout << BLUE << BOLD << "testing iterator" << RESET << endl;
+  for (auto i = a.begin(); i != a.end(); ++i) {
+    cout << *i << " ";
+  }
+  cout << BLUE << BOLD << "testing iterator math" << RESET << endl;
+  auto an_iter = a.begin();
+  ++an_iter;
+  cout << *an_iter;
+  --an_iter;
+  cout << *an_iter << endl;
+  cout << BLUE << BOLD << "testing recursive print" << RESET << endl;
+  // doesnt work yet - see implementation comments
+  /* recursive_print_vector(a.begin(), a.end()); */
+  /* recursive_print_vector<int>(a.begin(), a.end()); */
+  cout << typeid(a.begin()).name() << endl;
 
   return 0;
 }
