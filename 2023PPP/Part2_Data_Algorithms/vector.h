@@ -6,7 +6,7 @@
 /* #define INFO */
 
 #include "vector_allocator.h"
-#include "vector_iterator.h"
+/* #include "vector_iterator.h" */
 #include <algorithm>
 #include <cstddef>
 #include <iostream>
@@ -14,42 +14,56 @@
 using std::cout;
 using std::endl;
 // forward declarations not currently needed
-/* template <typename T> void copy(T *from, int sz, T *to); */
+/* template <typename T> void copy(T *from, int size_, T *to); */
 /* template <typename T> void print_vector(const vector<T> &v); */
 
 // simple copy function without using iterators
-template <typename T> void copy(T *from, int sz, T *to) {
-  for (int i = 0; i < sz; ++i) {
+template <typename T> void copy(T *from, int size_, T *to) {
+  for (int i = 0; i < size_; ++i) {
     to[i] = from[i];
   }
 }
+// copy with iterators
+template <class T, class I> void copy(I from, I to, T t) {}
 template <typename T, typename A = allocator<T>> class vector;
 
 template <typename T, typename A> class vector {
   /* template <typename T, typename A = allocator<T>> class vector { */
   /* invariant:
-     if 0<=n<sz, elem[n] is element n
-     sz <= space_
-     if sz < space_ thre is space for (space-sz) doubles after elem[sz-1]
+     if 0<=n<size_, elem[n] is element n
+     size_ <= space_
+     if size_ < space_ thre is space for (space-size_) doubles after
+     elem[size_-1]
   */
 
-  A alloc;
-  size_t sz;
   T *elem;
-  size_t space_;
+  A alloc;
+  size_t size_;  // number of elements
+  size_t space_; // maximum number of elements
+
+  // constant or function to control how big to automatically resize
+  /* constexpr size_t autoreserve_size = 10; */
+  inline size_t autoreserve_size() { return size_ + size_ / 2; }
+  inline void autoreserve() { reserve(autoreserve_size()); }
 
 public:
   ///////////////////
   /// Iterator
 
-  // this was super unnecessary and std::iterator is to be deprecated
-  /* class iter : std::iterator<std::random_access_iterator_tag, T,
-   * std::ptrdiff_t, T *, T &> { */
   class iter {
+    using iterator_concept [[maybe_unused]] = std::random_access_iterator_tag;
+    using difference_type = std::ptrdiff_t;
+    using value_type = T;
+    using element_type = T;
+    using pointer = element_type *;
+    using reference = element_type &;
+
   private:
     T *curr;
 
   public:
+    // an iterator (for a vector) could have an index - seems optional
+    /* iter(T *t,size_t idx) : curr{t} {} */
     iter(T *t) : curr{t} {}
 
     iter &operator++() {
@@ -68,38 +82,39 @@ public:
     T &operator*() { return *curr; }
   };
 
-  iter begin() { return elem; }
-  const iter begin() const { return elem; }
-  iter end() { return elem + sz; }
-  const iter end() const { return elem + sz; }
+  iter begin() { return iter(elem); }
+  const iter begin() const { return iter(elem); }
+  iter end() { return iter(elem + size_); }
+  const iter end() const { return iter(elem + size_); }
 
   ///////////////////
   //// Constructors (default, args, copy, move, destructor) see 18.4
   // default constructor
-  vector() : sz{0}, elem{nullptr}, space_{0} { INFO; }
+  vector() : size_{0}, elem{nullptr}, space_{0} { INFO; }
 
   // default constructor from args
-  vector(size_t s) : sz{s}, elem{new T[s]}, space_{s} { INFO; }
+  vector(size_t s) : size_{s}, elem{new T[s]}, space_{s} { INFO; }
 
   vector(int s)
-      : sz{static_cast<size_t>(s)}, elem{new T[s]},
+      : size_{static_cast<size_t>(s)}, elem{new T[s]},
         space_{static_cast<size_t>(s)} {
     INFO;
   }
 
   // list initialization
   vector(std::initializer_list<T> lst)
-      : sz{lst.size()}, elem{new T[sz]}, space_{lst.size()} {
+      : size_{lst.size()}, elem{new T[lst.size()]}, space_{lst.size()} {
     INFO;
     std::copy(lst.begin(), lst.end(), elem);
   }
 
   // copy constructor
-  vector(const vector &arg) : sz{arg.sz}, elem{new T[sz]}, space_{arg.sz} {
+  vector(const vector &arg)
+      : size_{arg.size()}, elem{new T[arg.size()]}, space_{arg.size()} {
     cout << "copy ctor ";
     INFO;
 
-    copy(arg.elem, arg.sz, elem);
+    copy(arg.begin(), arg.end(), elem);
   }
 
   // copy assignment ( 19.2.5 - doesnt make extra space_ )
@@ -109,20 +124,20 @@ public:
     if (this == &a) { // same vector - nothing to do
       return *this;
     }
-    if (a.sz > space_) { // enough space already
-      for (int i = 0; i < a.sz; ++i) {
+    if (a.size_ > space_) { // enough space already
+      for (int i = 0; i < a.size_; ++i) {
         elem[i] = a.elem[i];
       }
     }
 
     // create new elem array with no extra reserved space_
-    T *p = new T[a.sz];
-    for (int i = 0; i < a.sz; ++i) {
+    T *p = new T[a.size_];
+    for (int i = 0; i < a.size_; ++i) {
       elem[i] = a.elem[i];
     }
     delete[] elem;
     elem = p;
-    space_ = sz = a.sz;
+    space_ = size_ = a.size_;
 
     return *this;
   }
@@ -131,12 +146,12 @@ public:
   // T a = std::move(b);  // b being type T
   // f(std::move(a));     // a being type T and f is void f(T t);
   // return a;            // a being type T and in T f();
-  vector(vector<T> &&a) : sz{a.sz}, elem{a.elem} {
+  vector(vector<T> &&a) : size_{a.size_}, elem{a.elem} {
     // move constructor is used as fuction arg, so is deleted
     // when it goes out of scope
     cout << "move ctor ";
     INFO;
-    a.sz = 0;
+    a.size_ = 0;
     a.space_ = 0;
     a.elem = nullptr;
   }
@@ -147,10 +162,10 @@ public:
     INFO;
     INFO;
     delete[] elem;
-    sz = a.sz;
+    size_ = a.size_;
     elem = a.elem;
     a.elem = nullptr;
-    a.sz = 0;
+    a.size_ = 0;
     a.space_ = 0;
     return *this;
   }
@@ -165,22 +180,16 @@ public:
   // without the &, this allows reading but not writing
   // because we wouldnt have it's address, just it's value
 
-  T &operator[](int i) {
-    INFO;
-    return elem[i];
-  }
+  T &operator[](int i) { return elem[i]; }
 
   // we also want to be able to read const element
   // eg.
-  const T &operator[](int i) const {
-    INFO;
-    return elem[i];
-  }
+  const T &operator[](int i) const { return elem[i]; }
 
   // at is [] but with range checking
   T &at(int i) {
     INFO;
-    if (i < 0 || i >= sz) {
+    if (i < 0 || i >= size_) {
       throw std::range_error("out of range");
     }
     return elem[i];
@@ -189,7 +198,7 @@ public:
   ///////////////////
   //// Current Size
   size_t capacity() const { return space_; }
-  size_t size() const { return sz; }
+  size_t size() const { return size_; }
 
   ///////////////////
   //// Space
@@ -205,11 +214,11 @@ public:
     }
     T *p = alloc.allocate(newalloc);
     /* T *p = new T[newalloc]; */
-    for (size_t i = 0; i < sz; ++i) {
+    for (size_t i = 0; i < size_; ++i) {
       alloc.construct(&p[i], elem[i]);
       /* p[i] = elem[i]; */
     }
-    for (size_t i = 0; i < sz; ++i) {
+    for (size_t i = 0; i < size_; ++i) {
       alloc.destroy(&elem[i]);
     }
     alloc.deallocate(elem, space_);
@@ -225,7 +234,7 @@ public:
       return;
     }
     T *p = new T[newalloc];
-    for (size_t i = 0; i < sz; ++i) {
+    for (size_t i = 0; i < size_; ++i) {
       p[i] = elem[i];
     }
     delete[] elem;
@@ -233,20 +242,33 @@ public:
     space_ = newalloc;
   }
 
+  // reserves if newsize is greater, initializing new element to 0
+  // won't decrease space, just size - will 0 out "deleted" elements
   void resize(size_t newsize) {
     reserve(newsize);
-    for (auto i = sz; i < newsize; ++i) {
+    for (auto i = size_; i < newsize; ++i) {
       elem[i] = 0;
     }
-    sz = newsize;
+    size_ = newsize;
   }
 
   void push_back(T d) {
     if (space_ == 0) {
       reserve(sizeof(T));
     }
-    elem[sz] = d;
-    ++sz;
+    elem[size_] = d;
+    ++size_;
+  }
+  void insert(T data, int index) {
+    INFO;
+    if (space_ == size_) {
+      autoreserve();
+    }
+    for (int i = size_; i >= index; --i) {
+      elem[i] = elem[i - 1];
+    }
+    size_ += 1;
+    elem[index] = data;
   }
 };
 // print_vector function may not print all on one line as expected

@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
   z = std::move(y);             // move assignment
 
   cout << GREEN << "Testing Access" << RESET << endl;
-  b[1] = 7; // T &operator[]
+  a[1] = 7; // T &operator[]
   const vector<int> cv{1};
   const int ci = cv[0]; // const T &operator=
 
@@ -95,6 +95,16 @@ int main(int argc, char *argv[]) {
   /* recursive_print_vector(a.begin(), a.end()); */
   /* recursive_print_vector<int>(a.begin(), a.end()); */
   cout << typeid(a.begin()).name() << endl;
+  cout << BLUE << BOLD << "testing insert " << RESET << endl;
+  a = {1, 2, 3, 4, 5};
+  print_vector<int>(a);
+  a.insert(7, 3);
+  print_vector<int>(a);
+  cout << BLUE << BOLD << "testing insert at max size" << RESET << endl;
+  a.resize(3);
+  print_vector<int>(a);
+  a.insert(99, 0);
+  print_vector<int>(a);
 
   return 0;
 }

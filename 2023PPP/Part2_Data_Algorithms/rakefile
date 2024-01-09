@@ -1,9 +1,28 @@
-# SRC = 'linked_list.cpp'
-SRC = 'foo.cpp'
-CC = 'g++'
-CC = 'clang++'
-# OPTS = '-fno-elide-constructors'
-OPTS = ''
-task :default do
-  sh "#{CC} #{SRC} #{OPTS} -g3 -O0"
+# src = 'linked_list.cpp'
+src = 'foo.cpp'
+cc = 'g++'
+cc = 'clang++'
+# opts = '-fno-elide-constructors'
+opts = '-std=c++20'
+outfile = '-o a.out'
+
+desc 'build MyVector file'
+task :vector do
+  # sh "#{cc} -o #{outfile} #{src} #{opts} -g3 -o0"
+  sh "#{cc} #{outfile} #{src} #{opts} -g3 -O0"
+end
+task default: :vector
+
+desc 'build MyList file'
+task :list do
+  src = 'my_linked_list.cpp'
+  outfile = 'b.out'
+  sh "#{cc} #{outfile} #{src} #{opts} -g3 -O0"
+end
+
+desc 'TODO'
+task :todo do
+  puts 'add tests and functionality to MyContainers'
+  puts 'refresh minitest, create your own c++ test'
+  puts 'framework, then see what simple c++ test libs exist'
 end

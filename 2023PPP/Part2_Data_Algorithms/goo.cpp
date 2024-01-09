@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string_view>
 #include <vector>
 
 void copy(int *a, int *b, int *c) {
@@ -16,5 +17,9 @@ int main(int argc, char *argv[]) {
   int *b = new int[3];
   copy(a, a + 2, b);
   cout << b[1];
+
+  auto s = "hello"sv;
+  cout << "hihihi";
+  cout << s.size();
   return 0;
 }

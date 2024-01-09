@@ -20,7 +20,8 @@ string blue = "\033[34m";   /* Blue */
 template <typename T> struct Node {
 
   T data;
-  int index;
+  int index; // this will be really hard to update cheaply
+             // theres a reason lists dont have indexes
 
   Node<T> *prev = nullptr;
   Node<T> *next = nullptr;
