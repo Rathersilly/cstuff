@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <iterator>
+#include <stdexcept>
 #define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
 /* #define INFO */
 
@@ -24,10 +24,16 @@ template <typename T> void copy(T *from, int size_, T *to) {
   }
 }
 // copy with iterators
-template <class T, class I> void copy(I from, I to, T t) {}
-template <typename T, typename A = allocator<T>> class vector;
+template <class I> void copy(I from, I to, I target) {
 
-template <typename T, typename A> class vector {
+  for (auto i = from; i != to; ++i) {
+    *target = *i;
+    ++target;
+  }
+}
+
+namespace my {
+template <typename T, typename A = allocator<T>> class vector {
   /* template <typename T, typename A = allocator<T>> class vector { */
   /* invariant:
      if 0<=n<size_, elem[n] is element n
@@ -114,20 +120,23 @@ public:
     cout << "copy ctor ";
     INFO;
 
-    copy(arg.begin(), arg.end(), elem);
+    copy(arg.begin(), arg.end(), begin());
   }
 
   // copy assignment ( 19.2.5 - doesnt make extra space_ )
   // make 1 vector's elements  = to another's
   vector<T> &operator=(const vector &a) {
+    cout << "copy assignment " << endl;
     INFO;
     if (this == &a) { // same vector - nothing to do
       return *this;
     }
-    if (a.size_ > space_) { // enough space already
+    if (a.size_ <= space_) { // enough space already
       for (int i = 0; i < a.size_; ++i) {
         elem[i] = a.elem[i];
       }
+      size_ = a.size_;
+      return *this;
     }
 
     // create new elem array with no extra reserved space_
@@ -261,6 +270,9 @@ public:
   }
   void insert(T data, int index) {
     INFO;
+    if (index > size_) {
+      throw(std::out_of_range("invalid index"));
+    }
     if (space_ == size_) {
       autoreserve();
     }
@@ -295,4 +307,5 @@ void recursive_print_vector(typename vector<T>::iter b,
     recursive_print_vector(++b, e);
   }
 }
+} // namespace my
 #endif

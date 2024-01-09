@@ -1,13 +1,14 @@
 #include "color_macros.h"
 #include "vector.h"
+using my::vector;
 
-vector<int> make_vector(int i) {
+my::vector<int> make_vector(int i) {
   PFUNGREEN
   vector<int> v{i};
   return v;
 }
 
-vector<int> mv_vector_demo(vector<int> a) {
+my::vector<int> mv_vector_demo(vector<int> a) {
   PFUNGREEN
   return a;
 }
@@ -15,7 +16,8 @@ vector<int> mv_vector_demo(vector<int> a) {
 int main(int argc, char *argv[]) {
   // testing constructors
   cout << GREEN << "Testing Constructors" << RESET << endl;
-  vector<int> asdf;       // default
+  vector<int> asdf; // default
+  //
   vector<int> v(4);       // args
   vector<int> a{1, 2, 3}; // init list
   print_vector<int>(v);

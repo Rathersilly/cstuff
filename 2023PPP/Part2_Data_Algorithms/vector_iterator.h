@@ -1,8 +1,9 @@
-template <typename T, typename A = allocator<T>> class vector;
+template <typename T, typename A = allocator<T>> class my::vector;
 
-/* template <typename T, typename A = allocator<T>> class vector<T, A>::iter {
+/* template <typename T, typename A = allocator<T>> class my::vector<T, A>::iter
+ * {
  */
-template <typename T, typename A = allocator<T>> class vector<T, A>::iter {
+template <typename T, typename A = allocator<T>> class my::vector<T, A>::iter {
 private:
   T *curr;
 
