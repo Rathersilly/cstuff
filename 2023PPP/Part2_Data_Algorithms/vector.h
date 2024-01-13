@@ -95,6 +95,7 @@ public:
 
   ///////////////////
   //// Constructors (default, args, copy, move, destructor) see 18.4
+
   // default constructor
   vector() : size_{0}, elem{nullptr}, space_{0} { INFO; }
 
@@ -155,7 +156,9 @@ public:
   // T a = std::move(b);  // b being type T
   // f(std::move(a));     // a being type T and f is void f(T t);
   // return a;            // a being type T and in T f();
+  // This might not be called due to copy elision
   vector(vector<T> &&a) : size_{a.size_}, elem{a.elem} {
+
     // move constructor is used as fuction arg, so is deleted
     // when it goes out of scope
     cout << "move ctor ";
@@ -186,6 +189,7 @@ public:
 
   ///////////////////
   //// Access
+
   // without the &, this allows reading but not writing
   // because we wouldnt have it's address, just it's value
 
@@ -206,11 +210,13 @@ public:
 
   ///////////////////
   //// Current Size
+
   size_t capacity() const { return space_; }
   size_t size() const { return size_; }
 
   ///////////////////
   //// Space
+
   // reserve function using custom allocator
   // basically new and delete operations are done
   // by the allocator.
@@ -260,6 +266,16 @@ public:
     }
     size_ = newsize;
   }
+  // free unused space
+  void shrink_to_fit() {
+    T *p = new T[size_];
+    for (size_t i = 0; i < size_; ++i) {
+      p[i] = elem[i];
+    }
+    delete[] elem;
+    elem = p;
+    space_ = size_;
+  }
 
   void push_back(T d) {
     if (space_ == 0) {
@@ -268,7 +284,8 @@ public:
     elem[size_] = d;
     ++size_;
   }
-  void insert(T data, int index) {
+  // Insert element at index
+  iter insert(int index, T data) {
     INFO;
     if (index > size_) {
       throw(std::out_of_range("invalid index"));
@@ -281,6 +298,33 @@ public:
     }
     size_ += 1;
     elem[index] = data;
+    return iter(elem + index);
+  }
+  // TODO: this seems tricky and doesnt work yet
+  // Emplace is like insert, but you may construct an object
+  // in its args to avoid making an extra copy
+  // T must be MoveAssignable, MoveInsertable, MoveConstructable
+  void emplace(int index, T &data) {
+    if (index > size_) {
+      throw(std::out_of_range("invalid index"));
+    }
+    if (space_ == size_)
+      autoreserve();
+    for (int i = size_; i >= index; --i) {
+      elem[i] = elem[i - 1];
+    }
+    size_ += 1;
+    elem[index] = data;
+  }
+  void erase(int index) {
+    if (index > size_ - 1) {
+      throw(std::out_of_range("invalid index"));
+    }
+
+    for (int i = index; i < size_ - 1; ++i) {
+      elem[i] = elem[i + 1];
+    }
+    size_ -= 1;
   }
 };
 // print_vector function may not print all on one line as expected
