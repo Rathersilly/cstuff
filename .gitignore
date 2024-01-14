@@ -2,7 +2,7 @@
 # https://github.com/github/gitignore/blob/master/C%2B%2B.gitignore
 
 # dear imgui
-2023PPP/imgui
+2023PPP/gui/imgui
 # vscode configs
 .vscode/
 

@@ -1,5 +1,5 @@
 #include "color_macros.h"
-#include "vector.h"
+#include "my_vector.h"
 using my::vector;
 
 my::vector<int> make_vector(int i) {
@@ -100,12 +100,12 @@ int main(int argc, char *argv[]) {
   cout << BLUE << BOLD << "testing insert " << RESET << endl;
   a = {1, 2, 3, 4, 5};
   print_vector<int>(a);
-  a.insert(7, 3);
+  a.insert(3, 7);
   print_vector<int>(a);
   cout << BLUE << BOLD << "testing insert at max size" << RESET << endl;
   a.resize(3);
   print_vector<int>(a);
-  a.insert(99, 0);
+  a.insert(0, 99);
   print_vector<int>(a);
 
   return 0;

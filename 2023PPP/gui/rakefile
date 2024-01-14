@@ -9,7 +9,7 @@ require 'json'
 # TODO: add task to update ctags based on SRC_FILES maybe
 
 CXX = 'g++'
-PROJECT_ROOT = '/home/rsil/cstuff/2023PPP'
+PROJECT_ROOT = '/home/rsil/cstuff/2023PPP/gui'
 IMGUI_DIR = 'imgui'
 OBJ_DIR = 'obj'
 #

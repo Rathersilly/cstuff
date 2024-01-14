@@ -8,6 +8,10 @@ using my::vector;
 // in function args, __builtin_FUNCTION will return caller
 // https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
 // could keep passing it maybe
+void test_iterator(const char *str = __builtin_FUNCTION()) {
+  // vector iterator needs *,++,--,[]
+}
+
 void test_insert(const char *str = __builtin_FUNCTION()) {
   my::vector<int> qwer = {1, 2, 3, 4, 5};
   qwer.insert(3, 7);

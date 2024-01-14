@@ -1,3 +1,6 @@
+// TODO make this work with concepts
+// make this work with sort (currently it gives error missing operator- function
+// i think this is where difference_type and functions become relevant
 template <typename T, typename A = allocator<T>> class my::vector;
 
 /* template <typename T, typename A = allocator<T>> class my::vector<T, A>::iter

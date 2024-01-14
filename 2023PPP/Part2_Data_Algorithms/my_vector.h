@@ -1,5 +1,9 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+// TODO figure out iterator concepts/requirements etc
+// learn more about allocator & their concepts too
+// add additional functions from stl::vector and maybe
+// from ruby arrays
+#ifndef MY_VECTOR_H
+#define MY_VECTOR_H
 
 #include <stdexcept>
 #define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
@@ -33,8 +37,7 @@ template <class I> void copy(I from, I to, I target) {
 }
 
 namespace my {
-template <typename T, typename A = allocator<T>> class vector {
-  /* template <typename T, typename A = allocator<T>> class vector { */
+template <typename T, typename A = my::allocator<T>> class vector {
   /* invariant:
      if 0<=n<size_, elem[n] is element n
      size_ <= space_
@@ -284,6 +287,12 @@ public:
     elem[size_] = d;
     ++size_;
   }
+
+  /* void operator<<(T t) { push_back(t); }; */
+  // definition at EOF
+  void operator<<(T t);
+  void hi();
+  //
   // Insert element at index
   iter insert(int index, T data) {
     INFO;
@@ -327,6 +336,12 @@ public:
     size_ -= 1;
   }
 };
+
+// operator<<() is alias of push_back()
+template <class T, class A> void my::vector<T, A>::operator<<(T t) {
+  push_back(t);
+}
+
 // print_vector function may not print all on one line as expected
 // if PFUN is used because of buffering
 template <typename T, typename A = allocator<T>>
