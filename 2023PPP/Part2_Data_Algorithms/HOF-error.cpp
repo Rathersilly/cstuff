@@ -1,4 +1,4 @@
-// TODO contains MyError class, and examples of throw and try/catch
+// Exceptios, MyError class, and examples of throw and try/catch
 #include <exception>
 #define INFO                                                                   \
   cout << "\t"                                                                 \

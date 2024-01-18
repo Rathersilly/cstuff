@@ -1,5 +1,6 @@
 #include "init_imgui.h"
 #include "init_imgui_style.h"
+#include <iostream>
 
 extern App app;
 
@@ -8,6 +9,7 @@ void init_imgui() {
   IMGUI_CHECKVERSION();
   // This sets the imgui global variable ImGuiContext *GImGui
   ImGui::CreateContext();
+  std::cout << ImGui::GImGui << endl;
   app.igio = ImGui::GetIO();
 
   // https://stackoverflow.com/questions/34288844/what-does-casting-to-void-really-do

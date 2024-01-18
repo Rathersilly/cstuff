@@ -48,44 +48,32 @@ string find_last_word(string str) {
     return vstr[0];
   } else {
     sort(vstr.begin(), vstr.end());
+    /* print_vector(vstr); */
     return *(vstr.end() - 1);
   }
 }
 
-// TODO this would be a great thing to constrain with concept/requirement
-// not sure why this template doesnt work but the explicit version
-// says "could not deduce template parameter A
-/* template <class A, class B> */
-/* std::vector<A> list_to_vector(const std::list<B> &lst) { */
-std::vector<double> list_to_vector(const std::list<int> &lst) {
-  std::vector<double> vec;
-  /* std::vector<A> vec; */
-  for (auto a : lst) {
-    /* for (auto a = lst.begin(); a != lst.end(); ++a) { */
-    vec.push_back(a);
+// TODO maybe concept/require something here
+//
+// you pass template params from <> in function call, if they cant be deduced
+// you dont need <> in the function definition, except where they replace
+// what would normally be a type
+// the static_cast is not necessary since we were explicit in the call.
+template <class A, class B>
+std::vector<B> list_to_vector(const std::list<A> &lst) {
+  std::vector<B> vec;
+  /* for (auto a : lst) { */
+  for (auto a = lst.begin(); a != lst.end(); ++a) {
+    /* vec.push_back(static_cast<B>(*a)); */
+    vec.push_back(*a);
   }
   return vec;
 }
-
 // this version works fine, but probably better off returning void and changing
 // args
 template <class A, class B>
 std::vector<B> list_to_vector2(const std::list<A> &lst, std::vector<B> &vec) {
   for (auto a : lst) {
-    /* for (auto a = lst.begin(); a != lst.end(); ++a) { */
-    vec.push_back(a);
-  }
-  return vec;
-}
-// error: no matching function call
-// gives this function as candidate, but template argument deduction failed
-// couldn't deduce parameter B
-// i guess the return value in the function is not enough to go on
-template <class A, class B>
-std::vector<B> list_to_vector3(const std::list<A> &lst) {
-  std::vector<B> vec;
-  for (auto a : lst) {
-    /* for (auto a = lst.begin(); a != lst.end(); ++a) { */
     vec.push_back(a);
   }
   return vec;
@@ -98,23 +86,6 @@ template <class A, class B> std::vector<B> asdf(const std::list<A> &lst) {
   return vec;
 }
 
-// this works fine
-template <class A> std::vector<double> foo(const std::list<A> &lst) {
-  std::vector<double> v;
-  return v;
-}
-// error "couldnt deduce template parameter A"
-template <class A> std::vector<A> bar(const std::list<int> &lst) {
-  std::vector<A> v;
-  return v;
-}
-// error "non-class, non-variable partial specialization 'baz<A>' is not allowed
-/* template <class A> std::vector<A> baz<A>(const std::list<int> &lst) { */
-/*   std::vector<A> v; */
-/*   return v; */
-/* } */
-
-// why does this work fine, however
 template <class A, class B>
 bool compare_list_vector(const std::list<A> &lst, const std::vector<B> &vec) {
   if (lst.size() != vec.size())
@@ -138,24 +109,16 @@ int main(int argc, char *argv[]) {
 
   // Ex 11 - copy list<int> into vector<double> and verify
   std::list<int> lint{1, 2, 3, 4, 5, 99, 100};
-  std::vector<double> vdouble = list_to_vector(lint);
+  std::vector<double> vdouble = list_to_vector<int, double>(lint);
+  vdouble = list_to_vector<int, double>(lint);
   print_vector(vdouble);
   cout << compare_list_vector(lint, vdouble);
   vdouble.push_back(3);
   cout << compare_list_vector(lint, vdouble);
   std::vector<double> vdouble2;
   vdouble2 = list_to_vector2(lint, vdouble2);
-  cout << "222" << endl;
+  cout << "---" << endl;
   print_vector(vdouble2);
-
-  std::vector<double> vdouble3;
-  vdouble3 = list_to_vector3(lint);
-  print_vector(vdouble3);
-
-  /* vdouble = asdf(lint); */
-  /* vdouble = foo(lint); */
-  /* vdouble = bar(lint); */
-  /* vdouble = baz<double>(lint); */
 
   my::vector<int> v = {1, 2, 3, 4, 5};
   std::cout << v;

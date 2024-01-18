@@ -5,6 +5,7 @@
 #include "init_imgui.h"
 #include "init_imgui_style.h"
 #include "init_window.h"
+#include "mygui.h"
 #include <chrono> // imtrying to get framerate
 #include <iostream>
 using std::cout;
@@ -135,6 +136,7 @@ int main(int, char **) {
         tickspersec = 0;
         std::cout << GREEN << app.igio.DeltaTime << RESET << std::endl;
         std::cout << BLUE << app.igio.Framerate << RESET << std::endl;
+        // std::cout << ImGui::GImGui << std::endl; gimgui doesnt exist here
       }
       // bonj - this says 0 fps whats up - i copied it from example file
       // ImGui::Text takes variadic args - used to format string it seems

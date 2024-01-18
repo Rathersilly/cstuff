@@ -10,10 +10,3 @@ void cleanup() {
   SDL_DestroyWindow(app.win);
   SDL_Quit();
 }
-void mygui() {
-  bool showx = true;
-  ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
-  ImGui::Begin("MY WINDOW", &showx);
-  ImGui::Text("HIIIIIIIIIIIIIIIII");
-  ImGui::End();
-}

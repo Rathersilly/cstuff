@@ -1,7 +1,9 @@
 #include "my_vector.h"
+#include <color_macros.h>
 
 static int foos = 0;
 static int goos = 0;
+
 class Foo {
 public:
   int *elem;
@@ -48,9 +50,9 @@ int main(int argc, char *argv[]) {
   // can mess with the destructors to see what happens in valgrind
   make_stuff();
   count();
-  vector<Foo> f{3};
+  my::vector<Foo> f{3};
   count();
-  vector<Goo> g{3};
+  my::vector<Goo> g{3};
   count();
   return 0;
 }

@@ -1,4 +1,4 @@
-#include "../Part2_Data_Algorithms/vector.h"
+#include "../Part2_Data_Algorithms/my_vector.h"
 #include "human.h"
 #include "test.h"
 #include <exception>
@@ -30,6 +30,7 @@ void test_insert(const char *str = __builtin_FUNCTION()) {
   // assert proper iterator is returned
   assert_equal(*it, 99);
 }
+
 void test_erase(const char *str = __builtin_FUNCTION()) {
   my::vector<int> qwer = {1, 2, 3, 4, 5};
   qwer.erase(3);

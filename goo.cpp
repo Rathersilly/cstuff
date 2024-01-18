@@ -1,105 +1,42 @@
-// https://exercism.org/tracks/cpp/exercises/robot-simulator
 #include <color_macros.h>
 
+#include <initializer_list>
 #include <queue>
 #include <sstream>
 #include <string>
 #include <string_view>
 #include <utility>
+#include <vector>
 /* using std::string; */
 /* using std::stringstream; */
+
 using namespace std;
-
-enum Dir { n = 1, e = 2, s = 3, w = 4 };
-
-class Robot {
-private:
-  // position stdpair
-  int x_;
-  int y_;
-  int dir_; // NESW
-  /* stringstream cmdbuf_; */
-  // would use queue, but must copy queue to print it
-  vector<char> cmdbuf_;
-
-  void turn_left() {
-    dir_ -= 1;
-    if (dir_ == 0)
-      dir_ = 4;
-  }
-  void turn_right() {
-    dir_ += 1;
-    if (dir_ == 5)
-      dir_ = 1;
-  }
-  void advance() {
-    switch (dir_) {
-    case 'n':
-      y_ += 1;
-      break;
-    case 'e':
-      x_ += 1;
-      break;
-    case 's':
-      y_ += 1;
-      break;
-    case 'w':
-      x_ += 1;
-      break;
-    }
-  }
+class Dog {};
+template <class T> class myvector {
+  T *elem;
 
 public:
-  void act() {
-    // take a char from cmdbuf and take appropriate action
-    char cmd;
-    cmd = cmdbuf_.front();
-    /* char cmd = cmdbuf_.pop(); */
-    switch (cmd) {
-    case 'R':
-      turn_right();
-      break;
-    case 'L':
-      turn_left();
-      break;
-    case 'A':
-      advance();
-      break;
+  myvector(std::initializer_list<T> lst) {
+    /* for(auto a = lst.begin */
+    elem = new T[lst.size()];
+    int i = 0;
+    for (auto a : lst) {
+      elem[i] = *a;
+      ++i;
     }
-  }
-  void act_all() {}
-
-  Robot(int x, int y, Dir d) : x_{x}, y_{y} { dir_ = d; }
-
-  void command(string cmd) {
-    PFUN;
-    for (char c : cmd) {
-      cmdbuf_.push(c);
-    }
-  }
-  void status() {
-    cout << "Position: " << x_ << "," << y_ << endl;
-    cout << "Direction: " << dir_ << endl;
-    stringstream ss(cmdbuf_.str());
-    cout << "Command buffer: " << cmdbuf_.str() << endl;
-    cout << "Command buffer: " << ss.str() << endl;
   }
 };
 
+template <class T> void meow(T t) { cout << "meow"; }
+
 int main(int argc, char *argv[]) {
-  string command_string = "RAALAL";
-  Robot bob(7, 3, Dir::n);
-  bob.command(command_string);
-  cout << "---" << endl;
-  bob.status();
-  cout << "---" << endl;
-  bob.status();
-  /* bob.status(); */
-  /* bob.act(); */
-  /* bob.status(); */
-  /* bob.act(); */
-  /* bob.status(); */
-  /* bob.act(); */
-  /* bob.status(); */
+  // dont have to specify meow<int> - template arg deduction
+  meow(2);
+  // these aren't deduced, however, even without the (ints)
+  /* vector<int> v{(int)1, (int)2, (int)3}; */
+  /* vector<int> v2{1, 2, 3}; */
+  /* Dog a; */
+  /* myvector myv{a}; */
+
   return 0;
 }

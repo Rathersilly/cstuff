@@ -1,5 +1,6 @@
 // HOF TODO - how to initialize vectors
 
+#include "my_vector.h"
 #include <iostream>
 #include <vector>
 
@@ -22,5 +23,12 @@ int main(int argc, char *argv[]) {
   v.resize(6);           // v is 110000
   v.clear();             // v has size 0
   v.resize(6, {2});      // v is 222222
+
+  // this will call myvector(initializer_list<int>)
+  // but if that constructor doesnt exist,
+  // it will call myvector(int)
+  my::vector<int> myvec{1};
+  // this will ofc call myvector(initializer_list<int>)
+  my::vector<int> myvec2{1, 2};
   return 0;
 }

@@ -17,9 +17,6 @@
 #include <iterator>
 using std::cout;
 using std::endl;
-// forward declarations not currently needed
-/* template <typename T> void copy(T *from, int size_, T *to); */
-/* template <typename T> void print_vector(const vector<T> &v); */
 
 // simple copy function without using iterators
 template <typename T> void copy(T *from, int size_, T *to) {
@@ -41,8 +38,8 @@ template <typename T, typename A = my::allocator<T>> class vector {
   /* invariant:
      if 0<=n<size_, elem[n] is element n
      size_ <= space_
-     if size_ < space_ thre is space for (space-size_) doubles after
-     elem[size_-1]
+     if size_ < space_ there is space for (space_ - size_) doubles after
+     elem[size_ - 1]
   */
 
   T *elem;
@@ -102,7 +99,7 @@ public:
   // default constructor
   vector() : size_{0}, elem{nullptr}, space_{0} { INFO; }
 
-  // default constructor from args
+  // specific constructors
   vector(size_t s) : size_{s}, elem{new T[s]}, space_{s} { INFO; }
 
   vector(int s)
@@ -128,7 +125,7 @@ public:
   }
 
   // copy assignment ( 19.2.5 - doesnt make extra space_ )
-  // make 1 vector's elements  = to another's
+  // make 1 vector's elements = to another's
   vector<T> &operator=(const vector &a) {
     cout << "copy assignment " << endl;
     INFO;
@@ -139,7 +136,7 @@ public:
       for (int i = 0; i < a.size_; ++i) {
         elem[i] = a.elem[i];
       }
-      size_ = a.size_;
+      size_ = a.size_; // maybe should zero the orphaned T's
       return *this;
     }
 
@@ -184,6 +181,7 @@ public:
     a.space_ = 0;
     return *this;
   }
+
   // 7. destructor
   ~vector() {
     INFO;
@@ -199,7 +197,6 @@ public:
   T &operator[](int i) { return elem[i]; }
 
   // we also want to be able to read const element
-  // eg.
   const T &operator[](int i) const { return elem[i]; }
 
   // at is [] but with range checking
@@ -221,10 +218,9 @@ public:
   //// Space
 
   // reserve function using custom allocator
-  // basically new and delete operations are done
-  // by the allocator.
-  // construct and destroy are to be deprecated in c++20
-  // so idk what if anything replaces them
+  // basically new and delete operations are done by the allocator.
+  // allocator construct and destroy are to be deprecated in c++20
+  // idk what if anything replaces them
   void reserve_with_allocator(size_t newalloc) {
     INFO;
     if (newalloc <= space_) {
@@ -269,7 +265,7 @@ public:
     }
     size_ = newsize;
   }
-  // free unused space
+  // free unused space TODO see if you can do this without new
   void shrink_to_fit() {
     T *p = new T[size_];
     for (size_t i = 0; i < size_; ++i) {
