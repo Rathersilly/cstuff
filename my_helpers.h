@@ -2,6 +2,7 @@
 #define MY_HELPERS_H
 
 #include <iostream>
+#include <map>
 #include <vector>
 namespace my {
 
@@ -11,6 +12,12 @@ template <typename T> void print_vector(const std::vector<T> &v) {
   }
   std::cout << std::endl;
 }
+template <typename T, typename U> void print_map(const std::map<T, U> &m) {
+  for (auto a = m.begin(); a != m.end(); ++a) {
+    std::cout << a->first << "\t\t" << a->second << std::endl;
+  }
+}
+
 /* template <typename T, typename U> */
 /* void print_range(const T<U>::iterator first, const T<U>::iterator last, ) {
  */
