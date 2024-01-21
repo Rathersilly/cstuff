@@ -3,8 +3,6 @@
 
 #include "common.h"
 
-/* ImGuiIo temp_imgui_io; */
-
 int init_window();
 
 #endif

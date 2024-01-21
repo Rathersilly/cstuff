@@ -3,7 +3,6 @@
 
 #include "common.h"
 
-extern App app;
 void init_imgui();
 void imgui_simple_window();
 void change_style();

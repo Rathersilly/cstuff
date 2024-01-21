@@ -7,10 +7,11 @@
 // available to that class.
 
 // not covered here: multiple inheritance, virtual base classes,
-// slicing, dynamic_cast, combining friend and virtual functions
+// slicing, dynamic_cast, combining friend and virtual functions,
+// pointers to members/data members
+//
 #include "my_helpers.h"
-#include <color_macros.h>
-#include <iomanip> // setprecision(n), setw
+#include <color_macros.h> // for PFUN (prints __PRETTY_FUNCTION__) etc.
 #include <iostream>
 #include <string>
 #include <typeinfo> // for typeid(foo).base_data()
@@ -32,7 +33,8 @@ public:
 
   // make destructors virtual if derived class might have to
   // deallocate resources.
-  // but remember: a class with virtual function(s) has slight overhead
+  // but remember: a class with virtual function(s) in it's hierarchy
+  // has slight vtable overhead
   virtual ~Base() {}
 
   void function_to_delete(); // = delete in Derived to delete
@@ -63,19 +65,19 @@ public:
 // :public Base means public members in Base remain public
 // :private Base would mean public members become private
 // :protected Base would mean public members become protected
-class Derived final
-    : public Base { // final means virtual lookups stop at this class
+// final means virtual lookups stop at this class
+class Derived final : public Base {
 private:
   // https://stackoverflow.com/questions/180601/using-super-in-c
   typedef Base super; // can use super::super::somefunc without knowing names
-  typedef Base inherited; // common alternative to super ^^
+  typedef Base inherited; // common alternative to super
 
   using Base::some_public_variable; // change access of member to private
   string derived_data_;
 
 public:
-  // using gives public access to a protected fn (cant for private,
-  // because subclass doesnt have access
+  // using gives public access to a protected fn
+  // (can't do this for private fn, because subclass doesnt have access)
   using Base::base_protected_fn;
 
   Derived(){PFUN} // this will call Base() then Derived()
@@ -113,6 +115,7 @@ public:
 
   friend ostream &operator<<(ostream &, const Derived &);
 };
+
 ostream &operator<<(ostream &os, const Base &base) {
   return os << "base_data: " << base.base_data_ << endl;
 }

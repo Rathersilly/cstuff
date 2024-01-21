@@ -6,7 +6,7 @@ void cleanup() {
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
 
-  SDL_GL_DeleteContext(app.gl_context);
-  SDL_DestroyWindow(app.win);
+  SDL_GL_DeleteContext(gl_context);
+  SDL_DestroyWindow(screen);
   SDL_Quit();
 }

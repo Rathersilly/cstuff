@@ -8,10 +8,14 @@ require 'json'
 
 # TODO: add task to update ctags based on SRC_FILES maybe
 
-CXX = 'g++'
-PROJECT_ROOT = '/home/rsil/cstuff/2023PPP/gui'
+# CXX = 'g++'
+CXX = 'clang++'
+# CPP_VERSION = '-std=c++2a '
+CPP_VERSION = '-std=c++20 '
+PROJECT_ROOT = '/home/rsil/cstuff/gui'
 IMGUI_DIR = 'imgui'
 OBJ_DIR = 'obj'
+OUT_STR = '-o gui.out'
 #
 # when debugging, include -g3 -O0, according to this:
 # https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
@@ -23,7 +27,7 @@ LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm '\
           "-I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends"
 
 CFLAGS =  "`sdl2-config --cxxflags` #{DEBUG_STR if debugging} -Wall "\
-          " -std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends  -I/usr/include/SDL2"
+          " -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends  -I/usr/include/SDL2"
 
 SRC_FILES = Rake::FileList.new
 SRC_FILES.include 'main.cpp'
@@ -54,7 +58,7 @@ OBJ_FILES.each.with_index do |objfile, i|
   end
 end
 
-COMMAND = "g++ #{OBJ_FILES} #{CFLAGS} #{LDFLAGS}"
+COMMAND = "#{CXX} #{CPP_VERSION} #{OBJ_FILES} #{CFLAGS} #{LDFLAGS} #{OUT_STR}"
 # CXXFLAGS = "-std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends "
 # CXXFLAGS += '-g -Wall -Wformat'
 
@@ -89,4 +93,5 @@ desc 'remove object files and directory'
 task :clean do
   sh 'rm -rf ./obj'
   sh 'rm *.o'
+  sh 'rm a.out'
 end
