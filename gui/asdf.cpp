@@ -1,43 +1,23 @@
-#include <functional>
+#include <chrono>
 #include <iostream>
-#include <vector>
-
-struct GuiElement {
-  bool active = true;
-
-  virtual void go() {
-    /* std::cout << "GuiElement virtual void go()" << std::endl; */
-  }
-};
-
-// for calling ImGui functions like ShowDemoWindow
-struct GuiFunction : public GuiElement {
-  const char *name_ = "GuiFunction";
-
-  std::function<void(bool)> go_function;
-
-  void go() override { go_function(active); }
-
-  GuiFunction(std::function<void(bool)> fun) : go_function{fun} {}
-};
-
-struct AppState {
-  std::vector<GuiElement> GuiState;
-};
-
-AppState State;
+#include <thread>
+using namespace std;
 
 int main(int argc, char *argv[]) {
 
-  GuiFunction foo([](bool) { ImGui::ShowDemoWindow(); });
-  State.GuiState.push_back(foo);
-  // simplified, abstract version of the main loop
-  while (true) {
-    for (auto &a : State.GuiState) {
+  auto start = std::chrono::steady_clock::now();
+  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  auto end = std::chrono::steady_clock::now();
+  /* auto diff = end_time - start_time; */
+  const std::chrono::duration<double> diff = end - start;
+  cout << diff.count();
+  cout << diff.count() << endl;
 
-      a.go();
-    }
-    foo.go();
-  }
+  cout << std::chrono::duration_cast<std::chrono::seconds>(diff).count()
+       << endl;
+  ;
+  cout << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count()
+       << endl;
+
   return 0;
 }

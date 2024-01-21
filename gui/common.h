@@ -61,12 +61,8 @@ struct MyElement;
 struct GuiFunction;
 
 struct AppState {
-  /* std::vector<GuiElement> GuiState; */
+  // TODO should these be unique_ptrs?
   std::vector<GuiElement *> GuiState;
-  /* std::vector<std::reference_wrapper<GuiFunction>> GuiState; */
-  /* std::vector<GuiFunction> GuiState; */
-  // vector of gui structs?
-  //
 };
 extern AppState State;
 

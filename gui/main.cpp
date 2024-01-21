@@ -9,56 +9,37 @@
 #include "init_imgui_style.h"
 #include "init_window.h"
 #include "mygui.h"
-#include <chrono> // imtrying to get framerate
+#include <chrono> // steady_clock
 #include <iostream>
-using std::cout;
-using std::endl;
+using std::chrono::steady_clock;
 
 ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 AppState State;
+void cap_framerate();
 #include <iostream>
-// Main code
+
 int main(int, char **) {
-  // sometimes get "Invalid operands to binary expression
-  // ('ostream' (aka 'int') and 'const char[]')
-  // when putting couts in a different cpp file
   init_window();
   init_imgui();
 
   // ImGui state
+  // TODO create a gui element that manages the others
+  // have it create a label and checkbox for each one
+  // can combine these 2 lines somehow with emplace_back()
+
   GuiFunction foo([](bool) { ImGui::ShowDemoWindow(); });
   State.GuiState.push_back(&foo);
   MyGuiElement bar;
   SimpleTestWindow baz;
   State.GuiState.push_back(&bar);
   State.GuiState.push_back(&baz);
-  /* State.GuiState.push_back(&ImGui::ShowDemoWindow); */
-  /* State.GuiState.push_back(GuiFunction([](bool) { ImGui::ShowDemoWindow();
-   * })); */
-  /* State.GuiState.push_back(MyGuiElement{}); */
-  bool show_demo_window = true;
-  /* show_demo_window = false; */
-  /* show_demo_window = true; */
-  bool show_another_window = false;
-  show_another_window = true;
 
   // Main loop
   bool done = false;
-  int frames_elapsed = 0;
-  int frames_this_second = 0;
-  int ticks_this_frame = 0;
-  int fps = 0;
-  int desired_framerate = 60;
-  double desired_ticks_per_frame = 1 / desired_framerate;
-  /* Uint32  */
 
-  auto start{std::chrono::high_resolution_clock::now()};
-  auto end{std::chrono::high_resolution_clock::now()};
-  std::chrono::duration<double> elapsed{end - start};
-
-  std::cout << "Elapsed time: " << elapsed.count()
-            << '\n'; // C++20's chrono::duration operator<<
+  int target_framerate = 60;
+  std::chrono::milliseconds target_frame_duration(1000 / target_framerate);
 
   // unused - not sure exactly how/whether to use this since context is not part
   // of imgui api (its implementation instead)
@@ -66,6 +47,7 @@ int main(int, char **) {
   ImGuiContext *context = ImGui::GetCurrentContext();
 
   while (!done) {
+    auto start_time = std::chrono::steady_clock::now();
     // Poll and handle events (inputs, window resize, etc.)
     // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to
     // tell if dear imgui wants to use your inputs.
@@ -93,49 +75,24 @@ int main(int, char **) {
 
     bool metrics = true;
     ImGui::ShowMetricsWindow(&metrics);
-    ////////////////// some random nonsense - deletable
-    int i = 0;
+    // show active Gui Elements
     for (auto a : State.GuiState) {
 
-      /* cout << i << " " << a->active << " : "; */
       a->go();
-    }
-    /* foo.go(); */
-    /* cout << SDL_GetTicks() << " "; */
-
-    //////////////////////
-
-    ///////////// timing nonsense
-    /* std::cout << guio.Framerate << std::endl; */
-    /* std::cout << frame_count << std::endl; */
-
-    ++frames_elapsed;
-    ++frames_this_second;
-    ++ticks_this_frame;
-    /* std::cout << GREEN << frames_elapsed << RESET << std::endl; */
-
-    end = std::chrono::high_resolution_clock::now();
-    elapsed = end - start;
-    // SDL_TICKS_PASSED(A, B)
-    // /* if you want to wait 100 ms, you could do this: */
-    // Uint32 timeout = SDL_GetTicks() + 100;
-    // while (!SDL_TICKS_PASSED(SDL_GetTicks(), timeout)) {
-    /* ... do work until timeout has elapsed */
-    if (ticks_this_frame >= desired_ticks_per_frame) {
-
-      std::cout << GREEN << "Updating: " << frames_this_second << endl;
-      std::cout << YELLOW << "frames_this_second: " << frames_this_second
-                << RESET << std::endl;
-      frames_this_second = 0;
-      ticks_this_frame = 0;
-      start = std::chrono::high_resolution_clock::now();
-      /* std::cout << elapsed.count() << std::endl; */
-      /* std::cout << tickspersec << std::endl; */
-      /* std::cout << GREEN << guio.DeltaTime << RESET << std::endl; */
-      /* std::cout << BLUE << guio.Framerate << RESET << std::endl; */
     }
 
     present_scene();
+    //
+    // TODO move this to function
+    auto end_time = std::chrono::steady_clock::now();
+    auto frame_duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+        end_time - start_time);
+
+    auto sleep_duration = target_frame_duration - frame_duration;
+
+    if (sleep_duration > std::chrono::milliseconds(0)) {
+      SDL_Delay(sleep_duration.count());
+    }
   }
 
   cleanup();
