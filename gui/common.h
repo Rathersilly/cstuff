@@ -6,6 +6,8 @@
 #include <functional>
 #include <iostream>
 #include <stdio.h>
+#include <string>
+#include <string_view>
 #include <vector>
 
 #include "imgui.h"
@@ -33,6 +35,7 @@ extern ImGuiIO guio;
 
 // base class for gui elements you create. begin...end goes in the go() function
 struct GuiElement {
+  std::string_view s;
   bool active = true;
   void activate() { active = true; }
   void deactivate() { active = false; }

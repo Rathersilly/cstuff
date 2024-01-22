@@ -3,79 +3,77 @@
 # rake --help to show compile_commands
 #
 
+require 'rake/clean' # to auto clean/clobber
 require 'colorize'
 require 'json'
 
 # TODO: add task to update ctags based on SRC_FILES maybe
 
-# CXX = 'g++'
-CXX = 'clang++'
+Rake.application.options.trace_rules = true
+# Conditions
+debugging = true
+
+# CC = 'g++'
 # CPP_VERSION = '-std=c++2a '
+CC = 'clang++'
 CPP_VERSION = '-std=c++20 '
 PROJECT_ROOT = '/home/rsil/cstuff/gui'
 IMGUI_DIR = 'imgui'
+
 OBJ_DIR = 'obj'
-OUT_STR = '-o gui.out'
-#
+OUT_FILE = 'gui.out'
+OUT_STR = "-o #{OUT_FILE}"
+
 # when debugging, include -g3 -O0, according to this:
 # https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
 DEBUG_STR = '-g3 -O0'
-debugging = true
-LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm '\
-          '-lglfw -lGL -ldl -I/usr/include/SDL2 '\
-          "-I. -I.. -Iimgui -Iimgui/backends -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
-          "-I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends"
 
-CFLAGS =  "`sdl2-config --cxxflags` #{DEBUG_STR if debugging} -Wall "\
-          " -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends  -I/usr/include/SDL2"
+LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl'
 
-SRC_FILES = Rake::FileList.new
-SRC_FILES.include 'main.cpp'
-SRC_FILES.include 'init_window.cpp'
-SRC_FILES.include 'init_imgui.cpp'
-SRC_FILES.include 'init_imgui_style.cpp'
-SRC_FILES.include 'draw.cpp'
-SRC_FILES.include 'mygui.cpp'
-SRC_FILES.include 'cleanup.cpp'
-SRC_FILES.include "#{IMGUI_DIR}/imgui*.cpp"
-SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp"
-SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp"
-SRC_FILES.include "#{IMGUI_DIR}/backends/imgui_impl_glfw.cpp"
+CFLAGS =  "`sdl2-config --cflags` -Wall -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
+          " -I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends "\
+          "#{DEBUG_STR if debugging}"
+# CFLAGS =  "`sdl2-config --cflags`  -Wall -I#{IMGUI_DIR} -I##{IMGUI_DIR}/backends"
+
+MAIN_FILE = 'main.cpp'
+SRC_FILES = Rake::FileList.new(MAIN_FILE, 'init_window.cpp', 'init_imgui.cpp',
+                               'init_imgui_style.cpp', 'draw.cpp',
+                               'mygui.cpp', 'cleanup.cpp',
+                               "#{IMGUI_DIR}/imgui*.cpp",
+                               "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp",
+                               "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp",
+                               "#{IMGUI_DIR}/backends/imgui_impl_glfw.cpp")
 # puts "SRC_FILES : #{SRC_FILES}".light_green
 
 OBJ_FILES = SRC_FILES.pathmap('obj/%X.o')
 # puts "OBJ_FILES : #{OBJ_FILES}".light_green
-
-OBJ_FILES.each.with_index do |objfile, i|
-  srcfile = SRC_FILES[i]
-  rule objfile => srcfile do |t|
-    puts 'IN RULE'.yellow
-    p objfile
-    p t
-    sh "g++ -c #{srcfile} #{CFLAGS} #{LDFLAGS}"
-    sh "mkdir -p #{objfile.pathmap('%d')}"
-    sh "mv #{objfile.pathmap('%f')} #{objfile}"
+def source(obj_file)
+  SRC_FILES.find do |src_file|
+    src_file.pathmap('%f').ext('') == obj_file.pathmap('%f').ext('')
   end
 end
 
-COMMAND = "#{CXX} #{CPP_VERSION} #{OBJ_FILES} #{CFLAGS} #{LDFLAGS} #{OUT_STR}"
-# CXXFLAGS = "-std=c++11 -I#{IMGUI_DIR} -I#{IMGUI_DIR}/backends "
-# CXXFLAGS += '-g -Wall -Wformat'
+rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
+  # ftask is a FileTask < Task object
+  # FileTasks are not run unless needed
+  sh "mkdir -p #{ftask.name.pathmap('%d')}"
 
-# task binary: OBJ_FILES do
-task binary: OBJ_FILES do
-  puts 'in binary'.light_blue
-  sh COMMAND
-  # sh "g++ #{OBJ_FILES}"
+  # sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} #{LDFLAGS} "\
+  sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} "\
+    "-o #{ftask.name}"
 end
 
-# rule '.o' => '.cpp' do |task|
-#   puts 'in rule'.light_blue
-#   sh "echo 'IN RULE'"
-#   sh "#{CXX} -c #{task.source}  #{CFLAGS} #{LDFLAGS}"
-# end
-desc 'compile main program'
-task default: :binary
+# Link task
+desc 'Link object files'
+file OUT_FILE => OBJ_FILES do |f|
+  p f
+  p f.class
+  p f.name
+  sh "#{CC} #{CPP_VERSION} #{OBJ_FILES} #{CFLAGS} #{LDFLAGS} -o #{OUT_FILE}"
+end
+
+# Default task
+task default: OUT_FILE
 
 # clangd config - generate compile_commands.json"
 desc 'clangd config - generate compile_commands.json'
@@ -84,14 +82,13 @@ task :cconfig do
   config_string = {}
   config_string['directory'] = PROJECT_ROOT
   config_string['command'] = COMMAND
+  config_string['file'] = MAIN_FILE
+
   File.open('compile_commands.json', 'w') do |f|
     f.write JSON.pretty_generate([config_string])
   end
 end
 
-desc 'remove object files and directory'
-task :clean do
-  sh 'rm -rf ./obj'
-  sh 'rm *.o'
-  sh 'rm a.out'
-end
+# Clean task
+CLEAN.include(OBJ_DIR, OUT_FILE)
+CLOBBER.include(OBJ_DIR, OUT_FILE)

@@ -4,8 +4,9 @@
 # dear imgui
 2023PPP/gui/imgui
 /gui/imgui
-# vscode configs
-.vscode/
+#
+# clangd cache
+.cache/
 
 # logs
 *.log
@@ -51,3 +52,7 @@
 
 # Core Dumps
 *core.a*
+
+# vscode configs
+.vscode/
+
