@@ -1,9 +1,20 @@
 #include "mygui.h"
 #include "common.h"
 #include "imgui.h"
-#include <string>
-#include <string_view>
 
+void GuiControlElement::go() {
+  if (!active)
+    return;
+
+  ImGui::Begin(name, &active);
+  for (auto a : State.GuiState) {
+
+    // ImGui::Text("%s", a->name);
+    ImGui::Checkbox(a->name, &a->active);
+  }
+
+  ImGui::End();
+}
 void MyGuiElement::go() {
   if (!active)
     return;
@@ -20,7 +31,7 @@ void MyGuiElement::go() {
   ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
 
   static int vector_max_size = 0;
-  ImGui::Begin(name_, &active);
+  ImGui::Begin(name, &active);
   ImGui::TextWrapped("This is some useful text."); // Display some text (you can
   ImGui::TextWrapped(
       "This Elements in Vectoraaaafd fd fds fds aaaaaaaaaaa dsfsadfsdfds fis "
@@ -39,6 +50,8 @@ void MyGuiElement::go() {
 }
 
 void SimpleTestWindow::go() {
+  if (!active)
+    return;
   // 2. Show a simple window that we create ourselves. We use a Begin/End pair
   // to create a named window.
   {

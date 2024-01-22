@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# rake --help to show compile_commands
-#
-
 require 'rake/clean' # to auto clean/clobber
 require 'colorize'
 require 'json'
@@ -30,9 +27,9 @@ DEBUG_STR = '-g3 -O0'
 
 LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl'
 
-CFLAGS =  "`sdl2-config --cflags` -Wall -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
+CFLAGS =  " `sdl2-config --cflags` -Wall -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
           " -I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends "\
-          "#{DEBUG_STR if debugging}"
+          " #{DEBUG_STR if debugging} "
 # CFLAGS =  "`sdl2-config --cflags`  -Wall -I#{IMGUI_DIR} -I##{IMGUI_DIR}/backends"
 
 MAIN_FILE = 'main.cpp'
@@ -47,12 +44,15 @@ SRC_FILES = Rake::FileList.new(MAIN_FILE, 'init_window.cpp', 'init_imgui.cpp',
 
 OBJ_FILES = SRC_FILES.pathmap('obj/%X.o')
 # puts "OBJ_FILES : #{OBJ_FILES}".light_green
+
+# find the source file needed for an object file
 def source(obj_file)
   SRC_FILES.find do |src_file|
     src_file.pathmap('%f').ext('') == obj_file.pathmap('%f').ext('')
   end
 end
 
+# Compile source files
 rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
   # ftask is a FileTask < Task object
   # FileTasks are not run unless needed
@@ -63,7 +63,6 @@ rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
     "-o #{ftask.name}"
 end
 
-# Link task
 desc 'Link object files'
 file OUT_FILE => OBJ_FILES do |f|
   p f

@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 #include <SDL_opengl.h>
+
+#include <chrono> // steady_clock
 #include <functional>
 #include <iostream>
 #include <stdio.h>
@@ -14,6 +16,10 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl2.h"
 
+using std::string_view;
+using namespace std::literals;
+using namespace std::chrono_literals;
+
 // SDL and OpenGL handles
 extern SDL_Window *screen;
 extern SDL_GLContext gl_context;
@@ -21,6 +27,10 @@ extern const char *glsl_version;
 
 // ImGui handles
 extern ImGuiIO guio;
+
+static int kTarget_framerate = 60;
+static std::chrono::milliseconds kTarget_frame_duration(1000ms /
+                                                        kTarget_framerate);
 
 // State.GuiState is a vector of GuiElements
 // A GuiElement contains what ImGui refers to as a ImGuiWindow,
@@ -35,7 +45,7 @@ extern ImGuiIO guio;
 
 // base class for gui elements you create. begin...end goes in the go() function
 struct GuiElement {
-  std::string_view s;
+  const char *name;
   bool active = true;
   void activate() { active = true; }
   void deactivate() { active = false; }
@@ -45,19 +55,20 @@ struct GuiElement {
   virtual void go() {
     std::cout << "GuiElement virtual void go()" << std::endl;
   }
+  GuiElement(const char *n = "Unnamed Gui Element") : name{n} {}
   /* virtual GuiElement() {} */
 };
 
 // for calling ImGui functions like ShowDemoWindow, but being able to store
 // them in the same array as GuiElements you create
 struct GuiFunction : public GuiElement {
-  const char *name_ = "GuiFunction";
-  /* const char *name() override { return name_; }; */
-  std::function<void(bool)> go_function;
 
+  std::function<void(bool)> go_function;
   void go() override { go_function(active); }
 
-  GuiFunction(std::function<void(bool)> fun) : go_function{fun} {}
+  GuiFunction(std::function<void(bool)> fun,
+              const char *n = "Unnamed GuiFunction")
+      : GuiElement(n), go_function{fun} {}
 };
 
 struct MyElement;

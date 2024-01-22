@@ -2,6 +2,10 @@
 #include <iostream>
 #include <thread>
 using namespace std;
+using ms = std::chrono::milliseconds;
+
+static std::chrono::milliseconds asdf(1000 / 60);
+ms foo(1000);
 
 int main(int argc, char *argv[]) {
 
