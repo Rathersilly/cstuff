@@ -14,32 +14,28 @@ debugging = true
 # CPP_VERSION = '-std=c++2a '
 CC = 'clang++'
 CPP_VERSION = '-std=c++20 '
-PROJECT_ROOT = '/home/rsil/cstuff/gui'
+PROJECT_ROOT = '/home/rsil/cstuff/sdl_proj'
 IMGUI_DIR = 'imgui'
 
 OBJ_DIR = 'obj'
-OUT_FILE = 'gui.out'
+OUT_FILE = 'a.out'
 OUT_STR = "-o #{OUT_FILE}"
 
 # when debugging, include -g3 -O0, according to this:
 # https://developers.redhat.com/blog/2021/04/30/the-gdb-developers-gnu-debugger-tutorial-part-1-getting-started-with-the-debugger#compiler_options
 DEBUG_STR = '-g3 -O0'
 
+# LDFLAGS = ' `sdl2-config --libs` -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl'
 LDFLAGS = " #{`sdl2-config --libs`.chomp} -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl"
 
-CFLAGS =  " #{`sdl2-config --cflags`.chomp} -Wall -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
-          " -I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends "\
-          " #{DEBUG_STR if debugging} "
+CFLAGS =  " #{`sdl2-config --cflags`.chomp} -Wall #{DEBUG_STR if debugging} "
+# CFLAGS =  " `sdl2-config --cflags` -Wall -I#{PROJECT_ROOT}/#{IMGUI_DIR} "\
+# " -I#{PROJECT_ROOT}/#{IMGUI_DIR}/backends "\
 # CFLAGS =  "`sdl2-config --cflags`  -Wall -I#{IMGUI_DIR} -I##{IMGUI_DIR}/backends"
 
 MAIN_FILE = 'main.cpp'
-SRC_FILES = Rake::FileList.new(MAIN_FILE, 'init_window.cpp', 'init_imgui.cpp',
-                               'init_imgui_style.cpp', 'draw.cpp',
-                               'mygui.cpp', 'cleanup.cpp',
-                               "#{IMGUI_DIR}/imgui*.cpp",
-                               "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp",
-                               "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp",
-                               "#{IMGUI_DIR}/backends/imgui_impl_glfw.cpp")
+SRC_FILES = Rake::FileList.new(MAIN_FILE, 'init_window.cpp',
+                               'draw.cpp', 'cleanup.cpp')
 # puts "SRC_FILES : #{SRC_FILES}".light_green
 
 OBJ_FILES = SRC_FILES.pathmap('obj/%X.o')
@@ -61,8 +57,8 @@ rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
   sh "mkdir -p #{ftask.name.pathmap('%d')}"
 
   # sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} #{LDFLAGS} "\
-  sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} "\
-    "-o #{ftask.name}"
+  sh LINK_COMMAND
+  "-o #{ftask.name}"
 end
 
 desc 'Link object files'
@@ -70,13 +66,14 @@ file OUT_FILE => OBJ_FILES do |f|
   p f
   p f.class
   p f.name
-  sh LINK_COMMAND
+  sh "#{CC} #{CPP_VERSION} #{OBJ_FILES} #{CFLAGS} #{LDFLAGS} -o #{OUT_FILE}"
 end
 
 # Default task
 task default: OUT_FILE
 
 # clangd config - generate compile_commands.json"
+COMMAND = "#{CC} #{CPP_VERSION} #{OBJ_FILES} #{CFLAGS} #{LDFLAGS} -o #{OUT_FILE}"
 desc 'clangd config - generate compile_commands.json'
 task :cconfig do
   puts 'cconfig'.blue

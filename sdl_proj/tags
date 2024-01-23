@@ -1,0 +1,43 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+0	compile_commands.json	/^  {$/;"	o
+COMMON_H	common.h	/^#define COMMON_H$/;"	d
+DRAW_H	draw.h	/^#define DRAW_H$/;"	d
+GuiElement	sandbox.cpp	/^struct GuiElement {$/;"	s	file:
+GuiFunction	sandbox.cpp	/^  GuiFunction(std::function<void(bool)> fun) : go_function{fun} {}$/;"	f	struct:GuiFunction	file:
+GuiFunction	sandbox.cpp	/^struct GuiFunction : public GuiElement {$/;"	s	file:
+INIT_WINDOW_H	init_window.h	/^#define INIT_WINDOW_H$/;"	d
+__anon368e31850102	sandbox.cpp	/^  GuiFunction foo([](bool) { demo(); });$/;"	f	function:main	file:
+activate	sandbox.cpp	/^  void activate() { active = true; }$/;"	f	struct:GuiElement	typeref:typename:void	file:
+active	sandbox.cpp	/^  bool active = true;$/;"	m	struct:GuiElement	typeref:typename:bool	file:
+asdf	asdf.cpp	/^static std::chrono::milliseconds asdf(1000 \/ 60);$/;"	v	typeref:typename:std::chrono::milliseconds	file:
+cap_framerate	framerate.h	/^void cap_framerate(std::chrono::steady_clock::time_point start_time) {$/;"	f	typeref:typename:void
+cleanup	cleanup.cpp	/^void cleanup() {$/;"	f	typeref:typename:void
+command	compile_commands.json	/^    "command": "clang++ -std=c++20  obj\/main.o obj\/init_window.o obj\/draw.o obj\/cleanup.o  `/;"	s	object:0
+deactivate	sandbox.cpp	/^  void deactivate() { active = false; }$/;"	f	struct:GuiElement	typeref:typename:void	file:
+demo	sandbox.cpp	/^void demo(bool arg = true) { cout << "demo" << endl; }$/;"	f	typeref:typename:void
+directory	compile_commands.json	/^    "directory": "\/home\/rsil\/cstuff\/sdl_proj",$/;"	s	object:0
+file	compile_commands.json	/^    "file": "main.cpp"$/;"	s	object:0
+foo	asdf.cpp	/^ms foo(1000);$/;"	v	typeref:typename:ms
+gl_context	init_window.cpp	/^SDL_GLContext gl_context;$/;"	v	typeref:typename:SDL_GLContext
+glsl_version	init_window.cpp	/^const char *glsl_version;$/;"	v	typeref:typename:const char *
+go	sandbox.cpp	/^  virtual void go() {}$/;"	f	struct:GuiElement	typeref:typename:void	file:
+go	sandbox.cpp	/^  void go() override { go_function(active); }$/;"	f	struct:GuiFunction	typeref:typename:void	file:
+go_function	sandbox.cpp	/^  std::function<void(bool)> go_function;$/;"	m	struct:GuiFunction	typeref:typename:std::function<void (bool)>	file:
+init_window	init_window.cpp	/^int init_window() {$/;"	f	typeref:typename:int
+kTarget_frame_duration	common.h	/^static std::chrono::milliseconds kTarget_frame_duration(1000ms \/$/;"	v	typeref:typename:std::chrono::milliseconds
+kTarget_framerate	common.h	/^static int kTarget_framerate = 60;$/;"	v	typeref:typename:int
+main	asdf.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+main	main.cpp	/^int main(int, char **) {$/;"	f	typeref:typename:int
+main	sandbox.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+ms	asdf.cpp	/^using ms = std::chrono::milliseconds;$/;"	t	typeref:typename:std::chrono::milliseconds	file:
+present_scene	draw.cpp	/^void present_scene() {}$/;"	f	typeref:typename:void
+screenSurface	init_window.cpp	/^SDL_Surface screenSurface; \/\/ used in tutoral - prob avoid surfaces$/;"	v	typeref:typename:SDL_Surface
+toggle	sandbox.cpp	/^  void toggle() { active == true ? active = false : active = true; }$/;"	f	struct:GuiElement	typeref:typename:void	file:
+window	init_window.cpp	/^SDL_Window *window;$/;"	v	typeref:typename:SDL_Window *
+~GuiElement	sandbox.cpp	/^  virtual ~GuiElement() {}$/;"	f	struct:GuiElement	file:
