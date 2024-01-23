@@ -57,8 +57,7 @@ rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
   sh "mkdir -p #{ftask.name.pathmap('%d')}"
 
   # sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} #{LDFLAGS} "\
-  sh LINK_COMMAND
-  "-o #{ftask.name}"
+  sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} -o #{ftask.name}"
 end
 
 desc 'Link object files'
@@ -66,7 +65,7 @@ file OUT_FILE => OBJ_FILES do |f|
   p f
   p f.class
   p f.name
-  sh "#{CC} #{CPP_VERSION} #{OBJ_FILES} #{CFLAGS} #{LDFLAGS} -o #{OUT_FILE}"
+  sh LINK_COMMAND
 end
 
 # Default task
