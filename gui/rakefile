@@ -40,6 +40,7 @@ SRC_FILES = Rake::FileList.new(MAIN_FILE, 'init_window.cpp', 'init_imgui.cpp',
                                "#{IMGUI_DIR}/backends/imgui_impl_sdl2.cpp",
                                "#{IMGUI_DIR}/backends/imgui_impl_opengl3.cpp",
                                "#{IMGUI_DIR}/backends/imgui_impl_glfw.cpp")
+HEADER_FILES = FileList["#{PROJECT_ROOT}/*.h"]
 # puts "SRC_FILES : #{SRC_FILES}".light_green
 
 OBJ_FILES = SRC_FILES.pathmap('obj/%X.o')
@@ -55,7 +56,15 @@ def source(obj_file)
 end
 
 # Compile source files
-rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
+# rule '.o' => ->(obj_file) { source(obj_file) } do |ftask|
+#   # ftask is a FileTask < Task object
+#   # FileTasks are not run unless needed
+#   sh "mkdir -p #{ftask.name.pathmap('%d')}"
+#
+#   # sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} #{LDFLAGS} "\
+#   sh "#{CC} #{CPP_VERSION} -c #{ftask.source} #{CFLAGS} -o #{ftask.name}"
+# end
+rule '.o' => [->(obj_file) { source(obj_file) }, *HEADER_FILES] do |ftask|
   # ftask is a FileTask < Task object
   # FileTasks are not run unless needed
   sh "mkdir -p #{ftask.name.pathmap('%d')}"

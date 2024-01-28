@@ -18,6 +18,14 @@ template <typename T, typename U> void print_map(const std::map<T, U> &m) {
   }
 }
 
+template <typename T> // print vector fn from learncpp
+std::ostream &operator<<(std::ostream &s, const std::vector<T> &v) {
+  s.put('{');
+  for (char comma[]{'\0', ' ', '\0'}; const auto &e : v)
+    s << comma << e, comma[0] = ',';
+  return s << "}\n";
+}
+
 /* template <typename T, typename U> */
 /* void print_range(const T<U>::iterator first, const T<U>::iterator last, ) {
  */
@@ -27,4 +35,5 @@ template <typename T, typename U> void print_map(const std::map<T, U> &m) {
 /*   std::cout << std::endl; */
 /* } */
 } // namespace my
+
 #endif // !MY_HELPERS_H

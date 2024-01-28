@@ -1,7 +1,0 @@
-[
-  {
-    "directory": "/home/rsil/cstuff/sdl_proj",
-    "command": "clang++ -std=c++20  obj/main.o obj/init_window.o obj/draw.o obj/cleanup.o  -I/usr/include/SDL2 -D_REENTRANT -Wall -g3 -O0   -lSDL2 -lSDL2_image -lXext -lX11 -lm -lglfw -lGL -ldl -o a.out",
-    "file": "main.cpp"
-  }
-]

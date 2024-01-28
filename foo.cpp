@@ -1,53 +1,53 @@
-#include <typeinfo>
-#define INFO cout << "\t" << __PRETTY_FUNCTION__ << endl;
-#define RESET "\033[0m"
-#define RED "\033[31m"    /* Red */
-#define GREEN "\033[32m"  /* Green */
-#define YELLOW "\033[33m" /* Yellow */
-#define BLUE "\033[34m"   /* Blue */
-#include <string>
-// #include <string.h>
-// #include <sstream>
-// #include <fstream>
-// #include <vector>
-// #include <fstream>
-#include <iomanip> // setprecision(n), setw
 #include <iostream>
-// #include <list>
-// #include <cmath>
-// #include "goo.h"
-// #include <unistd.h>
-// #include <climits>          /// INT_MAX
-// #include <algorithm>
-// #include <unistd.h> 		// usleep
+#include <string>
 #include <typeinfo> // for typeid(foo).name()
 #include <vector>
-// #include <stdlib.h> 		// srand, rand
-// #include <typeinfo>			// typeid
 
 using namespace std;
-template <class T> void print_vector(vector<T> v) {
-  for (int i = 0; i < v.size(); ++i) {
-    cout << v[i] << " ";
-  }
-  cout << endl;
-}
+class Point2D {
+private:
+  int m_x;
+  int m_y;
 
-class Foo {
 public:
-  Foo() { cout << "Constructing Foo"; }
-  void fun() { cout << "Foo fun"; }
-};
-class Goo : Foo {
-public:
-  Goo() { cout << "Constructing Goo"; }
-  void fun() {
-    cout << "Goo fun";
-    Foo::fun();
+  // A default constructor
+  Point2D() : m_x{0}, m_y{0} {}
+
+  // A specific constructor
+  Point2D(int x, int y) : m_x{x}, m_y{y} {}
+
+  // An overloaded output operator
+  friend std::ostream &operator<<(std::ostream &out, const Point2D &point) {
+    out << '(' << point.m_x << ", " << point.m_y << ')';
+    return out;
+  }
+
+  // Access functions
+  void setPoint(int x, int y) {
+    m_x = x;
+    m_y = y;
   }
 };
+class Creature {
+private:
+public:
+  std::string m_name;
+  Point2D m_location;
+  Creature(std::string_view name, const Point2D &location)
+      : m_name{name}, m_location{location} {}
+
+  friend std::ostream &operator<<(std::ostream &out, const Creature &creature) {
+    out << creature.m_name << " is at " << creature.m_location;
+    return out;
+  }
+
+  void moveTo(int x, int y) { m_location.setPoint(x, y); }
+};
+
 int main() {
-  Goo g;
-  g.fun();
-  ;
+  Creature bob{"bob", Point2D(2, 3)};
+  Creature foo = bob;
+  cout << foo.m_name;
+
+  return 0;
 }

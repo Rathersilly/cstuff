@@ -20,19 +20,31 @@ template <class T> vector<T> merge(const vector<T> &a, const vector<T> &b) {
   auto iter_a = a.begin();
   auto iter_b = b.begin();
   vector<T> memo;
-  while (true) {
-
-    if (iter_a == a.end()) {
-      if (iter_b == b.end()) {
-        break;
-      } else {
-        memo.push_back(*iter_b);
-        ++iter_b;
-      }
-    } else if (iter_b == b.end()) {
-      memo.push_back(*iter_a);
-      ++iter_a;
-    } else if (*iter_a < *iter_b) {
+  // this is more verbose than needed
+  // while (true) {
+  //
+  //   if (iter_a == a.end()) {
+  //     if (iter_b == b.end()) {
+  //       break;
+  //     } else {
+  //       memo.push_back(*iter_b);
+  //       ++iter_b;
+  //     }
+  //   } else if (iter_b == b.end()) {
+  //     memo.push_back(*iter_a);
+  //     ++iter_a;
+  //   } else if (*iter_a < *iter_b) {
+  //     memo.push_back(*iter_a);
+  //     ++iter_a;
+  //   } else {
+  //     memo.push_back(*iter_b);
+  //     ++iter_b;
+  //   }
+  // }
+  //
+  // add to memo until one of the iterators hits the end
+  while (iter_a != a.end() && iter_b != b.end()) {
+    if (*iter_a < *iter_b) {
       memo.push_back(*iter_a);
       ++iter_a;
     } else {
@@ -40,6 +52,9 @@ template <class T> vector<T> merge(const vector<T> &a, const vector<T> &b) {
       ++iter_b;
     }
   }
+  // add the remaining elements (one of these is sorted, the other is empty)
+  memo.insert(memo.end(), iter_a, a.end());
+  memo.insert(memo.end(), iter_b, b.end());
 
   /* std::cout << GREEN; */
   /* print_vector(memo); */
@@ -48,15 +63,14 @@ template <class T> vector<T> merge(const vector<T> &a, const vector<T> &b) {
 }
 
 template <class T>
-vector<T> merge_sort(typename vector<T>::iterator first,
-                     typename vector<T>::iterator last) {
+vector<T> merge_sort(typename vector<T>::const_iterator first,
+                     typename vector<T>::const_iterator last) {
   PFUN;
   auto size = last - first;
   if (size < 2)
     return vector<T>(first, last);
-  /* cout << "first last-1 size: " << *first << " " << *(last - 1) << " " <<
-   * size */
-  /*      << endl; */
+  // cout << "first last-1 size: " << *first << " " << *(last - 1) << " " <<
+  // size << endl;
   return merge(merge_sort<T>(first, first + size / 2),
                merge_sort<T>(first + size / 2, last));
 }

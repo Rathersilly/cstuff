@@ -1,4 +1,4 @@
-#include "../Part2_Data_Algorithms/my_vector.h"
+#include "../2023PPP/Part2_Data_Algorithms/my_vector.h"
 #include "human.h"
 #include "test.h"
 #include <exception>
@@ -18,7 +18,7 @@ void test_insert(const char *str = __builtin_FUNCTION()) {
   assert_equal(7, qwer[3]);
   qwer.resize(3);
   try {
-    // this is super erroneous
+    // this is super erroeous
     /* qwer.insert(99, 10); */
   } catch (std::exception &e) {
     cout << YELLOW << "caught error: " << e.what() << RESET << endl;

@@ -16,7 +16,8 @@ using std::stringstream;
 static int passed = 0;
 static int failed = 0;
 static int assertions = 0;
-void report(bool success, string caller, string msg = "") {
+
+inline void report(bool success, string caller, string msg = "") {
   if (success) {
     cout << BOLD << GREEN << assertions << ". " << caller << " passed. "
          << RESET << endl;
