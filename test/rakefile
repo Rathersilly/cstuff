@@ -1,11 +1,15 @@
-src = 'test_vector.cpp'
+src = 'test_my_vector.cpp'
 cc = 'g++'
 cc = 'clang++'
 # opts = '-fno-elide-constructors'
 opts = '-std=c++20'
 outfile = '-o a.out'
 
-desc 'build test_vector.cpp'
+desc 'build test_my_vector.cpp'
 task :default do
+  sh "#{cc} #{outfile} #{src} #{opts} -g3 -O0"
+end
+task :array do
+  src = 'test_my_array.cpp'
   sh "#{cc} #{outfile} #{src} #{opts} -g3 -O0"
 end

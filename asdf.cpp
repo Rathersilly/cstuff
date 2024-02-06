@@ -1,24 +1,28 @@
-#include <chrono>
-#include <iostream>
+  // copy assignment
+  array operator=(const array arg) {
+    size_ = arg.size();
+    std::copy(arg.begin(), arg.end(), elem);
+  }
+  // move assignment
+  array &operator=(array &&other) {
+    delete[] elem;
+    size_ = other.size_;
+    elem = other.elem;
+    other.elem = nullptr;
+    other.size_ = 0;
+    return *this;
+  }
+  
+  hoo = std::move(foo);
 
-int main() {
-  using namespace std::chrono_literals;
+  template <typename T>
+bool assert_equal(T a, T b, string msg = "",
+                  string caller = __builtin_FUNCTION()) {
 
-  std::chrono::seconds halfmin = 30s;
-  std::cout << "Half a minute is " << halfmin.count()
-            << " seconds"
-               " ("
-            << halfmin
-            << ").\n"
-               "A minute and a second is "
-            << (1min + 1s).count() << " seconds.\n";
-
-  std::chrono::duration moment = 0.1s;
-  std::cout << "A moment is " << moment.count()
-            << " seconds"
-               " ("
-            << moment
-            << ").\n"
-               "And thrice as much is "
-            << (moment + 0.2s).count() << " seconds.\n";
+  stringstream local_msg;
+  if (a != b)
+    local_msg << "Expected " << a << " = " << b << "\n";
+  return assert(a == b, local_msg.str() + msg, caller);
 }
+
+  assert_equal(foo.data(), nullptr);

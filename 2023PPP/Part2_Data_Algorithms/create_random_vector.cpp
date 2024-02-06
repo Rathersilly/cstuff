@@ -19,6 +19,9 @@ int main(int argc, char *argv[]) {
   // can use std::mt19937(some seed),
   std::mt19937 mt{
       std::chrono::high_resolution_clock::now().time_since_epoch().count()};
+  // might need this to avoid narrowing error:
+  // std::mt19937::result_type mt = static_cast<std::mt19937::result_type>(
+  //     std::chrono::high_resolution_clock::now().time_since_epoch().count());
   // a function to convert random number from a to b
   std::uniform_int_distribution<> die12{1, 12};
   std::uniform_int_distribution<> die10{1, 10};
