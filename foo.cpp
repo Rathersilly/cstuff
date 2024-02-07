@@ -1,21 +1,26 @@
-#include <algorithm> // std::shuffle, sort
-#include <array>
-#include <chrono> // std::chrono::high_resolution_clock
+#include <functional> // std:;function
 #include <iostream>
-#include <memory>
-#include <random> // std::mt19937, uniform_int_distribution
-#include <vector>
 
-using namespace std;
-int main(int argc, char *argv[]) {
-  array<int, 4> arr1{0, 1, 2, 3};
-  array<int, 4> arr2{0, 1, 2, 3};
-  array<int, 5> arr3{0, 1, 2, 3};
-  arr2 = arr1;
-  cout << arr3[4] << endl;
-  array<int, 0> a;
-  cout << a.front();
-  cout << a.back();
+int main() {
+  int x = 0; // Assuming x is defined somewhere in your code
+
+  auto fun_with_reference = [&](int a, int b) {
+    // x = 7;
+    // return a + b + x;
+    return 1;
+  };
+
+  using LambdaType = decltype(fun_with_reference);
+
+  LambdaType foo = [&](int a, int b) {
+    x = 7;
+    std::cout << "hi" << std::endl;
+    return a; // Same return type as fun_with_reference
+  };
+
+  // Now you can call both lambdas
+  std::cout << fun_with_reference(2, 3) << std::endl; // Outputs: 12
+  std::cout << foo(42, 0) << std::endl;               // Outputs: hi\n42
 
   return 0;
 }

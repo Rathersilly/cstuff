@@ -23,17 +23,18 @@ int main(int argc, char *argv[]) {
     v.push_back(i * 2);
   }
 
-  // find
+  // NOTE: find
   auto item = std::find(v.begin(), v.end(), 4);
   print_vector(v);
   cout << *item << endl; // 4
   cout << (item - v.begin()) << endl;
-  // find if
+
+  // NOTE: find if
   cout << "find_if()" << endl;
   item = std::find_if(v.begin(), v.end(), equals8);
   cout << *item << endl;
 
-  // sort
+  // NOTE: sort
   sort(v.begin(), v.end());
   print_vector(v);
 
