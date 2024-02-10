@@ -1,7 +1,0 @@
-task :default do
-  puts "hi from default"
-end
-
-task :hi do
-  puts "hi"
-end

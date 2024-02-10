@@ -1,26 +1,36 @@
-#include <functional> // std:;function
 #include <iostream>
+#include <memory>
+using namespace std;
+void deleter(int *i) {}
 
-int main() {
-  int x = 0; // Assuming x is defined somewhere in your code
-
-  auto fun_with_reference = [&](int a, int b) {
-    // x = 7;
-    // return a + b + x;
-    return 1;
+struct Foo {};
+struct D // deleter
+{
+  D(){};
+  D(const D &) { std::cout << "D copy ctor\n"; }
+  D(D &) { std::cout << "D non-const copy ctor\n"; }
+  D(D &&) { std::cout << "D move ctor \n"; }
+  void operator()(Foo *p) const {
+    std::cout << "D is deleting a Foo\n";
+    delete p;
   };
+};
+struct E {
+  E() {}
+  void operator()() {}
+};
 
-  using LambdaType = decltype(fun_with_reference);
-
-  LambdaType foo = [&](int a, int b) {
-    x = 7;
-    std::cout << "hi" << std::endl;
-    return a; // Same return type as fun_with_reference
-  };
-
-  // Now you can call both lambdas
-  std::cout << fun_with_reference(2, 3) << std::endl; // Outputs: 12
-  std::cout << foo(42, 0) << std::endl;               // Outputs: hi\n42
-
+int main(int argc, char *argv[]) {
+  int a;
+  int *b;
+  // auto p = unique_ptr<int, decltype(deleter)>(a, deleter);
+  // auto q = unique_ptr<int, decltype(deleter)>(a, deleter);
+  // auto r = unique_ptr<int, E>(a, deleter);
+  D d;
+  Foo *f;
+  {
+    auto s = unique_ptr<Foo, D>(f, d);
+    auto t = make_unique<int>();
+  }
   return 0;
 }
