@@ -125,6 +125,6 @@ public:
   size_t size() const { return size_; }
 };
 // NOTE: non-member functions
-template <typename I, typename T, typename N> T &get(array<T, N> &arr) {}
+// template <typename I, typename T, typename N> T &get(array<T, N> &arr) {}
 
 } // namespace my

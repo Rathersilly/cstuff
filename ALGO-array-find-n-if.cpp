@@ -99,9 +99,11 @@ int find_2nd_largest(const array<int, Array_size> &arr) {
 int main(int argc, char *argv[]) {
 
   constexpr int s = 20;
-  array<int, s> a;
-  for (int i = 0; i < s; ++i)
-    a[i] = i;
+  auto a = create_random_array<int, s>();
+  // array<int, s> a;
+  // for (int i = 0; i < s; ++i)
+  //   a[i] = i;
+
   std::shuffle(a.begin(), a.end(), mt);
   print(a);
   auto b = find_3_largest(a);

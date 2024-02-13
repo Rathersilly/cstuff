@@ -1,4 +1,4 @@
-// NOTE: First HOOK file: Hall of OK
+// NOTE: First ETC file: interesting but not HOF
 //
 // NOTE: writing class and iterators with wrong functions to see
 // if i can still use range for loop on them

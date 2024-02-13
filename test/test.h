@@ -118,8 +118,8 @@ bool assert_throw(const ExceptionType &expect_exception, Callable callable,
 void test_results() {
   cout << "\t" << CYAN << BOLD << "Tests complete: " << endl;
   if (failed == 0 && passed > 0) {
-    cout << "\t" << BOLD << GREEN << "All " << assertions << " " << passed
-         << " tests passed." << RESET << endl;
+    cout << "\t" << BOLD << GREEN << "All " << assertions << " tests passed."
+         << RESET << endl;
     /* cout << "\t" << BOLD << GREEN << RAPID_BLINK << "GREAT JOB!" << RESET
      */
     cout << "\t" << BOLD << GREEN << "GREAT JOB!" << RESET << endl;
