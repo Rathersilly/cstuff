@@ -4,8 +4,9 @@ CC = g++
 # compiler flags:
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
+#  -Werror treats warnings as errors
 
-CFLAGS  = -g -ggdb -Wall
+CFLAGS  = -g -ggdb -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -std=c++20
 LDFLAGS =
 OBJFILES = foo.cpp #goo.cpp
 # the build target executable:

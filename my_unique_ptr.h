@@ -3,7 +3,7 @@
 //
 // TODO: so much
 //
-#include <color_macros.h>
+//
 #include <functional> // std::function
 #include <iostream>
 #include <string>

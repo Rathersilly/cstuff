@@ -99,7 +99,7 @@ int find_2nd_largest(const array<int, Array_size> &arr) {
 int main(int argc, char *argv[]) {
 
   constexpr int s = 20;
-  auto a = create_random_array<int, s>();
+  auto a = create_array<int, s>();
   // array<int, s> a;
   // for (int i = 0; i < s; ++i)
   //   a[i] = i;

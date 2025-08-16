@@ -1,8 +1,9 @@
 // Exceptios, MyError class, and examples of throw and try/catch
+#include "color_macros.h"
 #include <exception>
 #define INFO                                                                   \
-  cout << "\t"                                                                 \
-       << "In function: " << __PRETTY_FUNCTION__ << endl;
+  std::cout << "\t"                                                                 \
+       << "In function: " << __PRETTY_FUNCTION__ << std::endl;
 #include <iostream>
 #include <string>
 /* #include <string_view> // c++17 */
