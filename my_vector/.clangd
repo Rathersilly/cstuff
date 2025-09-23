@@ -1,0 +1,17 @@
+CompileFlags:
+  Add: [-std=c++20]
+  Remove: [-x, c++]
+
+If:
+  # PathMatch: ".*\\.tpp"
+  PathMatch: '.*\.tpp'
+CompileFlags:
+  Add: [-xc++-header]
+
+If:
+  PathMatch: '.*\.tpp$'
+CompileFlags:
+  Remove: [-x]
+
+PathExclude:
+  - "**.tpp"
