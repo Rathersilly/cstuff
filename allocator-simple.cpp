@@ -35,6 +35,10 @@ public:
       reserve_allocate(mCapacity);
     }
   }
+  ~Vector() {
+    TRACE_RED();
+    mAllocator.deallocate(mData);
+  }
 
   void reserve(int space) {
     if (space <= mCapacity) {

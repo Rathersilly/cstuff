@@ -1,13 +1,33 @@
-#include "my_vector.h"
-#include "ruby_vector.h"
-#include <cassert>
+#include <iostream>
+#include <vector>
 
-void test_subscript() {
-  rubyVector<int> a;
-  cout << a.size() << endl;
-  myVector<int> v{1, 2, 3, 4, 5};
-  rubyVector<int> r{1, 2, 3, 4, 5};
-  assert(r[-1] == 5);
-  cout << r[-2];
+int main() {
+  std::vector<int> v;
+  v.reserve(1000);
+
+  std::cout << "Before shrink: " << static_cast<const void *>(v.data())
+            << " capacity=" << v.capacity() << "\n";
+
+  v.resize(10);
+  v.shrink_to_fit();
+
+  std::cout << "After shrink:  " << static_cast<const void *>(v.data())
+            << " capacity=" << v.capacity() << "\n";
+
+  v.reserve(1000);
+
+  std::cout << "Before shrink: " << v.data() << " capacity=" << v.capacity()
+            << "\n";
+
+  v.resize(10);
+  v.shrink_to_fit();
+
+  std::cout << "After shrink:  " << v.data() << " capacity=" << v.capacity()
+            << "\n";
+
+  char str[] = "hello";
+  std::cout << "no cast: " << str
+            << "\nwith cast: " << static_cast<const void *>(str) << "\n";
+  std::cout << "no cast: " << str << "\nwith cast: " << static_cast<void *>(str)
+            << "\n";
 }
-int main(int argc, char *argv[]) { return 0; }

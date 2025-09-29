@@ -1,4 +1,7 @@
-
+// TODO: std::variant - a modern c++ typesafe union
+// - useful if union isnt trivially constructible
+// - show what happens - does it properly const/dest when switching?
+// - also show std::get and std::visit which are related
 #include <iostream>
 #include <string>
 using namespace std;
@@ -12,14 +15,7 @@ TypeofThing foo = TypeofThing::cat;
 // can crowd the namespace
 enum { cat, lawyer };
 auto goo = cat;
-
-// classes for Tagged Union demo
-struct Cat {
-  TypeofThing type;
-};
-struct Lawyer {
-  TypeofThing type;
-};
+int hoo = cat;
 
 // example of enums and unions in SDL3
 typedef enum SDL_EventType {  // This is a scoped enumeration
@@ -34,9 +30,10 @@ typedef struct SDL_KeyboardEvent {
   // SDL_Keycode key;       /**< SDL virtual key code */
   // SDL_Keymod mod;        /**< current key modifiers */
 
-  bool down;   /**< true if the key is pressed */
-  bool repeat; /**< true if this is a key repeat */
-} SDL_KeyboardEvent;
+  bool down;         /**< true if the key is pressed */
+  bool repeat;       /**< true if this is a key repeat */
+} SDL_KeyboardEvent; // in C typedef struct is needed so you dont have to type
+                     // struct Foo everywhere
 
 // union Event {
 //   Uint32 type; /**< Event type, shared with all events, Uint32 to cover user
@@ -48,13 +45,28 @@ typedef struct SDL_KeyboardEvent {
 //   SDL_KeyboardEvent key;           /**< Keyboard event data */
 // };
 
+// classes for Tagged Union demo
+struct Cat {
+  TypeofThing type;
+};
+struct Lawyer {
+  TypeofThing type;
+};
+struct Foo {
+  int a;
+};
+typedef struct Goo {
+
+  int a;
+} Goo;
+
 int main() {
 
   // union will have a (minimum) size = to size of largest member
   union Number { // this union has size 4 (short is 2, int is 4)
     short s;
     int i;
-  } num; // this is same as having Number num; on the next line
+  } num; // this/ isFoo same as having Number num; on the next line
 
   // assigning to non-first union member will overwrite earlier members
   num.i = 0xaabbccdd;

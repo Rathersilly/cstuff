@@ -1,5 +1,6 @@
 #include "my_vector.h"
 #include "ruby_vector.h"
+#include <algorithm>
 #include <cassert>
 #include <color_macros.h>
 #include <iostream>
@@ -70,6 +71,24 @@ void test_iterator() {
   assert(*(v.begin() + 2) == 3);
   assert(*(2 + v.begin()) == 3);
 }
+void test_input_iterator() {
+  myVector<int> v(5);
+  std::generate_n(v.begin(), 5, [i = 0]() mutable { return i++; });
+  print_vector(v);
+}
+
+void test_back_inserter() {
+  TRACE_GREEN();
+  myVector<int> v{1, 2, 3, 4, 5};
+  cout << v.size() << " " << v.capacity() << " " << endl;
+  cout << v.size() << " " << v.capacity() << " " << endl;
+  myVector<int>::myBackInserter ins(&v);
+  for (int i = 6; i < 10; ++i) {
+    cout << v.size() << " " << v.capacity() << endl;
+    ins = i;
+  }
+  print_vector(v);
+}
 
 int main(int argc, char **argv) {
   // test_reserve();
@@ -78,5 +97,7 @@ int main(int argc, char **argv) {
   // print_vector<int>(v);
   // test_copy();
   // test_move();
-  test_iterator();
+  // test_iterator();
+  // test_back_inserter();
+  test_input_iterator();
 }

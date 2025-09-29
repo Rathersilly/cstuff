@@ -1,10 +1,20 @@
 // NOTE: Function Objects (aka Functors) with a side of Lambdas
+#include <algorithm>
 #include <color_macros.h>
+#include <cstdlib>
 #include <functional> // std::function
 #include <iostream>
 using namespace std;
 
-// NOTE:
+void print_int_vector(const vector<int> v) {
+  for (auto &a : v)
+    cout << a << " ";
+  cout << endl;
+}
+
+// NOTE: a functor is a struct/class that has an operator()
+// it can be passed to functions like std::sort
+// it can contain state
 template <typename T> class Add {
 public:
   Add() {}
@@ -19,12 +29,12 @@ public:
   T operator()(T a, T b) { return a > value_ && b > value_; }
 };
 
-template <typename T, typename F> int do_something_to_ts(T a, T b, F fun) {
+template <typename T, typename F> int binary_op(T a, T b, F fun) {
   return fun(a, b);
 }
 int main(int argc, char *argv[]) {
   Add<int> add;
-  CheckIfAbove<int> cia(0);
+  CheckIfAbove<int> check_if_above(0);
   int a = 1, b = 2;
   int x = 10;
   int y = 100;
@@ -34,15 +44,54 @@ int main(int argc, char *argv[]) {
   // operations of a general algorithm are often referred to as
   // policy objects (cf Strategy Pattern aka Policy Pattern)
 
-  cout << do_something_to_ts(a, b, add) << endl; // <int> is deduced
-  cout << do_something_to_ts<double>(a, b, add) << endl;
-  cout << do_something_to_ts(a, b, cia) << endl;
-  cout << do_something_to_ts(-1, b, cia) << endl;
-  cout << "using lambda: " << do_something_to_ts(a, b, [&](int a, int b) {
-    return a > 0 && b > 0;
-  }) << endl;
+  cout << binary_op(a, b, add) << endl; // <int> is deduced
+  cout << binary_op<double>(a, b, add) << endl;
+  cout << binary_op(a, b, check_if_above) << endl;
+  cout << binary_op(-1, b, check_if_above) << endl;
+  cout << "using lambda: "
+       << binary_op(a, b, [&](int a, int b) { return a > 0 && b > 0; }) << endl;
   auto fun = [&](int a, int b) { return a > 0 && b > 0; };
-  cout << "lambda stored: " << do_something_to_ts(a, b, fun) << endl;
+  cout << "lambda stored: " << binary_op(a, b, fun) << endl;
+
+  // NOTE:filling a vector with 9-0 using a lambda
+  vector<int> vec(10);
+  std::generate(vec.begin(), vec.end(),
+                [i = 9]() mutable -> int { return i--; });
+
+  // NOTE:another example: filling a vector with random #s
+  vector<int> random_vec(10);
+  std::generate(random_vec.begin(), random_vec.end(),
+                []() { return rand() % 10; });
+  print_int_vector(random_vec);
+
+  // NOTE: std::sort with certain # first then evens then odds using a functor:
+  struct WeirdComp {
+    int num;
+    WeirdComp(int n) : num{n} {}
+
+    bool operator()(const int &a, const int &b) const {
+      // cout << a << " " << b << endl;
+      if (a == num)
+        return true;
+      if (b == num)
+        return false;
+      if (a % 2 == 0 && b % 2 == 0)
+        return a < b;
+      if (a % 2 == 0)
+        return true;
+      if (b % 2 == 0)
+        return false;
+      else
+        return a < b;
+    }
+  };
+  WeirdComp sevens_then_evens{7};
+
+  cout << "sorting with sevens then evens first: " << endl;
+  ;
+  print_int_vector(vec);
+  std::sort(vec.begin(), vec.end(), sevens_then_evens);
+  print_int_vector(vec);
 
   // NOTE: Lambda Functions
   // [] is capture group - like the members of a function object
@@ -118,6 +167,21 @@ int main(int argc, char *argv[]) {
   // pointer to a function of an appropriate type
 
   int (*p)(int) = [](int a) { return a * a; };
+
+  // NOTE: You can define a variable in []. change it with mutable keyword
+  auto print_hi = [str = "hi"]() { cout << str << endl; };
+  auto count = [i = 0]() mutable -> int { return i++; };
+  cout << count() << endl; // 0
+  cout << count() << endl; // 1
+
+  struct Warrior {
+    string name;
+    string warcry;
+  };
+  auto print_warcry = [w{Warrior{"bob", "grr"}}]() {
+    cout << w.warcry << endl;
+  };
+  print_warcry();
 
   return 0;
 }
