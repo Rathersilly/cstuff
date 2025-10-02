@@ -25,7 +25,7 @@ static int assertions = 0;
 
 inline void report(bool success, string caller, string msg = "") {
   if (success) {
-    cout << BOLD << GREEN << assertions << ". " << caller << " passed. "
+    cout << BOLD << GREEN << assertions << ". " << caller << " passed. " << msg
          << RESET << endl;
   } else {
     cout << BOLD << RED << assertions << ". " << caller << " failed: " << msg
@@ -104,7 +104,7 @@ bool assert_throw(const ExceptionType &expect_exception, Callable callable,
 
   catch (const ExceptionType &e) {
     msg = "Correct exception caught: "s + typeid(e).name() + " \"" +
-          string(e.what());
+          string(e.what()) + "\"";
     return assert(true, msg, caller);
   } catch (std::exception &e) {
     msg = "Wrong exception caught: "s + typeid(e).name() + " \"" +

@@ -3,11 +3,6 @@
 // also remove observers - also test
 // maybe subject gives "dying breath" in destructor
 // maybe observer removes itself in destructor
-//
-// in the case of logging/profiling could just have a function rather
-// than inherit observed.
-// that function could then pass on to whatever else, and use
-//
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -15,6 +10,7 @@
 #include <cstdint>
 #include <deque>
 #include <iostream>
+#include <memory>
 #include <random>
 #include <string>
 #include <thread>
@@ -28,16 +24,13 @@ std::mt19937 mt{std::random_device{}()};
 using Tick = uint_fast64_t;
 using Code = uint_fast64_t;
 using ID = int_fast64_t;
-// temporary - will be unneeded when systems are member of Game
-struct Entity {
-  ID id;
-  void notify(Code code) {
-    cout << "Entity " << id << " notified of code " << code << endl;
-    std::this_thread::sleep_for(100ms);
-  }
+
+struct Event {
+  Tick timestamp;
+  string type;
 };
 
-struct KeyboardEvent {
+struct KeyboardEvent : Event {
   Tick timestamp;
   string type = "KeyboardEvent"s;
   Code code;
@@ -64,15 +57,15 @@ struct KeyboardEvent {
 
 class EventGenerator {
 public:
-  static KeyboardEvent create_random_event() {
+  static unique_ptr<Event> create_random_event() {
 
-    auto e = KeyboardEvent{static_cast<Code>(mt() % 2)};
-    cout << "creating KeyboardEvent w/ code = " << e.code << endl;
+    auto e = make_unique<KeyboardEvent>(static_cast<Code>(mt() % 2));
+    cout << "creating KeyboardEvent w/ code = " << e->code << endl;
     return e;
     TRACE_GREEN();
     switch (mt() % 3) {
     case 0:
-      return KeyboardEvent{static_cast<Code>(mt() % 2)};
+      return make_unique<KeyboardEvent>(static_cast<Code>(mt() % 2));
       break;
     case 1:
       // return MouseEvent{};
@@ -81,7 +74,7 @@ public:
       // return WindowEvent{};
       break;
     }
-    return KeyboardEvent{0};
+    return make_unique<KeyboardEvent>(0);
   }
 
   static void add_events(std::deque<KeyboardEvent> &queue) {
@@ -93,18 +86,27 @@ public:
   }
 };
 
-// class Observer {
-//   virtual on_notify(event){}
-// };
-// class ObserverSubject {
-// public:
-//   vector<Observer *> observers;
-//
-// protected:
-//   virtual void notify();
-//   // entity id
-//   // data?
-// };
+class Observer {
+  virtual void on_notify(int event) {}
+};
+class ObserverSubject {
+public:
+  vector<Observer *> observers;
+
+protected:
+  virtual void notify();
+  // entity id
+  // data?
+};
+
+// temporary - will be unneeded when systems are member of Game
+struct Entity : public Observer {
+  ID id;
+  void notify(Code code) {
+    cout << "Entity " << id << " notified of code " << code << endl;
+    std::this_thread::sleep_for(100ms);
+  }
+};
 
 struct KeyObservers {
   Code code;

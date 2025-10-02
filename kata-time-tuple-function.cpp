@@ -1,6 +1,7 @@
 // just a kata file with simple benchmarking, tuples, std::function, time
 #include <algorithm>
 #include <chrono>
+#include <ctime>
 #include <fstream>
 #include <functional>
 #include <iomanip>
@@ -52,6 +53,7 @@ string distortcout(string s) {
   string result{};
   while (!s.empty()) {
     int c = mt() % s.length();
+    // int c = rand() % s.length();
     cout << s[c];
     s.erase(s.begin() + c);
   }
@@ -68,7 +70,7 @@ string distortreturn(string s) {
   return result;
 }
 
-string distortbest(string s) {
+string distortswap(string s) {
   string result{};
   result.reserve(s.size());
 
@@ -78,6 +80,24 @@ string distortbest(string s) {
     std::swap(s[c], s.back());
     s.pop_back();
   }
+  return result;
+}
+string distortbool(const string &s) {
+  string result{};
+  result.reserve(s.length());
+  vector<int> indices(s.length());
+  std::iota(indices.begin(), indices.end(), 0);
+  std::shuffle(indices.begin(), indices.end(), mt);
+  for (auto &i : indices) {
+    result.push_back(s[i]);
+  }
+  return result;
+}
+
+string distortshufflemt(const string &s) {
+  string result{s};
+  std::shuffle(result.begin(), result.end(), mt);
+
   return result;
 }
 
@@ -142,8 +162,16 @@ void print_results(const TestResult &result) {
 }
 
 int main() {
+  std::srand(std::time({})); // use current time as seed for random generator
+
   TestResult result{"orig", distortorig};
-  string test_string = "donkey";
+  // string test_string = "donkey";
+  // string test_string = "hey whats going on over here asdfjkl;asdfjkl;";
+  string hello = "hello world";
+  stringstream ss;
+  for (int i = 0; i < 100; ++i)
+    ss << hello;
+  string test_string = ss.str();
 
   cout << '\n'
        << setw(20) << "name" << setw(10) << "avg time" << setw(10) << "max time"
@@ -161,19 +189,26 @@ int main() {
   result = TestResult{"distort cout", distortcout};
   old_buf = std::cout.rdbuf();      // save old buffer
   std::cout.rdbuf(nullout.rdbuf()); // redirect cout
-  test_distort("donkey", result);
+  test_distort(test_string, result);
   std::cout.rdbuf(old_buf); // restore original buffer
   print_results(result);
 
   result = TestResult{"distort return", distortreturn};
-  test_distort("donkey", result);
+  test_distort(test_string, result);
   print_results(result);
 
-  result = TestResult{"distort best", distortbest};
-  test_distort("donkey", result);
+  result = TestResult{"distort swap", distortswap};
+  test_distort(test_string, result);
   print_results(result);
 
-  TestResultTuple result_tuple{"distort best", distortbest, {}, {}, {}};
-  test_distort_tuple("donkey", result_tuple);
+  TestResultTuple result_tuple{"tuple distort swap", distortswap, {}, {}, {}};
+  test_distort_tuple(test_string, result_tuple);
   print_results(result_tuple);
+
+  result = TestResult{"distort bool", distortbool};
+  test_distort(test_string, result);
+  print_results(result);
+  result = TestResult{"distort shuffle mt", distortshufflemt};
+  test_distort(test_string, result);
+  print_results(result);
 }

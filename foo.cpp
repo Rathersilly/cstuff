@@ -1,64 +1,60 @@
-#include <algorithm>
-#include <chrono>
-#include <deque>
 #include <iostream>
-#include <typeinfo>
+#include <string>
 using namespace std;
-// A function to demonstrate using a deque as a sliding
-// window over data.
-void processInSlidingWindow(const std::deque<int> &data, size_t windowSize) {
-  for (size_t i = 0; i <= data.size() - windowSize; ++i) {
-    int sum = 0;
-    for (size_t j = i; j < i + windowSize; ++j) {
-      sum += data[j];
-    }
-    std::cout << "Average of window starting at index " << i << ": "
-              << static_cast<double>(sum) / windowSize << "\n";
-  }
-}
-int main() {
-  using namespace std::chrono;
-  auto clock = steady_clock{};
-  // auto foo = clock.now();
-  // auto goo = foo.time_since_epoch();
-  // cout << typeid(foo).name() << endl;
-  // cout << typeid(goo).name() << endl;
-  // cout << goo.count();
 
-  auto asdf = 100ns;
-  auto start = steady_clock::now();
-  cout << typeid(asdf).name() << endl;
-  cout << asdf.count() << endl;
-  ;
-  auto end = steady_clock::now();
-  auto diff = end - start;
-  cout << typeid(diff).name() << endl;
-  cout << diff.count() << endl;
-
-  auto steady = steady_clock::now();
-  cout << typeid(steady).name() << endl;
-  cout << steady.time_since_epoch().count() << endl;
-
-  auto hr = high_resolution_clock::now();
-  cout << typeid(hr).name() << endl;
-  cout << hr.time_since_epoch().count() << endl;
-  auto system = system_clock::now();
-  cout << typeid(system).name() << endl;
-  cout << system.time_since_epoch().count() << endl;
-  auto dur = duration_cast<seconds>(system.time_since_epoch());
-  cout << dur / 60 / 60 / 24 / 365 << endl;
-
-  cout << decltype(diff)::period::num << endl;
-  cout << decltype(diff)::period::den << endl;
-  auto bleh = 100ms;
-  duration<double> dub = bleh;
-  cout << dub.count() << endl;
-  ;
-  //   duration_cast<seconds> → truncates to integer seconds.
-  // duration<double> → allows fractional seconds.
-  duration<double> wert = 100ms;
-  cout << wert.count() << endl;
-
-  cout << decltype(start)::period::num << "/" << decltype(start)::period::den
-       << endl;
+// Prototype interface
+class Shape {
+public:
+  virtual Shape *clone() = 0; // Make a copy of itself
+  virtual void draw() = 0;    // Draw the shape
 };
+
+// Concrete prototype
+class Circle : public Shape {
+private:
+  string color;
+
+public:
+  Circle(string color) : color(color) {}
+
+  // This creates a copy of the circle.
+  Shape *clone() override { return new Circle(this->color); }
+
+  // This is how a circle draws itself.
+  void draw() override { cout << "Drawing a " << color << " circle." << endl; }
+};
+
+// Client code
+class ShapeClient {
+private:
+  Shape *shapePrototype;
+
+public:
+  ShapeClient(Shape *shapePrototype) : shapePrototype(shapePrototype) {}
+
+  // This method creates a new shape using the prototype.
+  Shape *createShape() { return shapePrototype->clone(); }
+};
+
+// Main class
+int main() {
+  // Create a concrete prototype (a red circle).
+  Shape *circlePrototype = new Circle("red");
+
+  // Create a client and give it the prototype.
+  ShapeClient client(circlePrototype);
+
+  // Use the prototype to create a new shape (a red circle).
+  Shape *redCircle = client.createShape();
+
+  // Draw the newly created red circle.
+  redCircle->draw();
+
+  Shape *other = circlePrototype->clone();
+
+  other->draw();
+
+  delete circlePrototype;
+  delete redCircle;
+  return 0;
+}

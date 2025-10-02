@@ -36,6 +36,7 @@ void test_access() {
   assert_equal(foo.back(), 4);
   assert_equal(foo.at(2), 2);
   assert_throw(std::out_of_range("hi"), [&]() { foo.at(7); });
+  assert_throw(std::invalid_argument("hi"), [&]() { foo.at(7); });
   assert_equal(foo.at(2), 2);
 }
 
