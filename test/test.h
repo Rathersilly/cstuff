@@ -2,9 +2,19 @@
 // custom assertions for testing
 // TODO: find a more elegant way to pass caller to assertions than
 // void test_iterator(const char *str = __builtin_FUNCTION()) {
+
+// TODO:also the assertions are numbered, not the tests - should change it
+// - probably best to make a test class/assertion class
+// - they have state to keep (function name, line number, etc)
+// - test should have subheadings of assertions
+// - set info level somewhere - config variable/file, test_foo(verbosity)
+
+// TODO: generalize functions eg pass function to be tested.
+// - dont need test_insertion_sort and test_selection_sort
 #ifndef TEST_H
 #define TEST_H
 
+#include <algorithm>
 #include <color_macros.h>
 #include <exception>
 #include <iostream>
@@ -23,16 +33,6 @@ static int passed = 0;
 static int failed = 0;
 static int assertions = 0;
 
-inline void report(bool success, string caller, string msg = "") {
-  if (success) {
-    cout << BOLD << GREEN << assertions << ". " << caller << " passed. " << msg
-         << RESET << endl;
-  } else {
-    cout << BOLD << RED << assertions << ". " << caller << " failed: " << msg
-         << RESET << endl;
-  }
-}
-
 // NOTE: __builtin_FUNCTION() is a compiler specific macro. It returns
 // function name as const char[], just like __FUNCTION__,
 // but does not give warning (a good thing?)
@@ -45,18 +45,31 @@ inline void report(bool success, string caller, string msg = "") {
 // #define assert_equal(a, b, msg) assert_equal_impl(a, b, msg, __func__)
 // #define PASS_FUNC const char *str = __builtin_FUNCTION()
 
+// caller should will return the test name eg test_push_back
+
+inline void report(bool success, string msg = "",
+                   string caller = __builtin_FUNCTION()) {
+  if (success) {
+    cout << BOLD << GREEN << assertions << ". " << caller << " passed. " << msg
+         << RESET << endl;
+  } else {
+    cout << BOLD << RED << assertions << ". " << caller << " failed: " << msg
+         << RESET << endl;
+  }
+}
+
 template <typename T>
 bool assert(T a, string msg = "", string caller = __builtin_FUNCTION()) {
   if (!a) {
 
     ++failed;
     ++assertions;
-    report(false, caller, msg);
+    report(false, msg, caller);
     return false;
   } else {
     ++passed;
     ++assertions;
-    report(true, caller, msg);
+    report(true, msg, caller);
     return true;
   }
 }
@@ -113,6 +126,12 @@ bool assert_throw(const ExceptionType &expect_exception, Callable callable,
   }
   msg = "No assertion thrown";
   return assert(false, msg, caller);
+}
+
+template <class Iterator, class Compare = std::less<>>
+bool assert_sorted(Iterator first, Iterator last, Compare cmp = Compare{},
+                   string msg = "", string caller = __builtin_FUNCTION()) {
+  return assert(std::is_sorted(first, last, cmp), "", caller);
 }
 
 void test_results() {

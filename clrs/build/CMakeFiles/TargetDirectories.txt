@@ -1,0 +1,3 @@
+/home/rsil/code/cstuff/clrs/build/CMakeFiles/foo.dir
+/home/rsil/code/cstuff/clrs/build/CMakeFiles/edit_cache.dir
+/home/rsil/code/cstuff/clrs/build/CMakeFiles/rebuild_cache.dir

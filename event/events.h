@@ -1,4 +1,6 @@
 #pragma once
+// Implementation of Observer Pattern for an Event Queue
+//
 // TODO: maybe the scancode should be the subject, not the event system
 // also remove observers - also test
 // maybe subject gives "dying breath" in destructor
@@ -8,6 +10,24 @@
 // than inherit observed.
 // that function could then pass on to whatever else, and use
 //
+// TODO: Implement Logging - that could actually use Observer classes
+// // Alternate implementation - having obbservation properties be inherited
+// // - Doesnt really work here
+// // - the Subject(KeyCode) is not the notifier, the System is
+// // - This causes some extra coupling but is justified here for O() reasons
+//
+// class Observer {
+//   virtual on_notify(event){}
+// };
+// class ObserverSubject {
+// public:
+//   vector<Observer *> observers;
+//
+// protected:
+//   virtual void notify();
+//   // entity id
+//   // data?
+// };
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -23,11 +43,12 @@
 using namespace std;
 using namespace std::chrono_literals;
 using namespace std::chrono;
-std::mt19937 mt{std::random_device{}()};
+inline std::mt19937 mt{std::random_device{}()};
 
 using Tick = uint_fast64_t;
 using Code = uint_fast64_t;
 using ID = int_fast64_t;
+
 // temporary - will be unneeded when systems are member of Game
 struct Entity {
   ID id;
@@ -62,12 +83,16 @@ struct KeyboardEvent {
 // };
 // using Event = std::variant<KeyboardEvent, MouseEvent, WindowEvent>;
 
+// Mock Object that generates events for the queue that EventSystem will handle
+// in practice this will be done by by SDL with API like SDL_PollEvent
 class EventGenerator {
 public:
+  // only creating KeyboardEvent atm
   static KeyboardEvent create_random_event() {
 
     auto e = KeyboardEvent{static_cast<Code>(mt() % 2)};
     cout << "creating KeyboardEvent w/ code = " << e.code << endl;
+
     return e;
     TRACE_GREEN();
     switch (mt() % 3) {
@@ -86,31 +111,25 @@ public:
 
   static void add_events(std::deque<KeyboardEvent> &queue) {
     TRACE_BLUE();
-    for (int i = 0; i < mt() % 3; ++i) {
+    int events_to_create = 3;
+    for (int i = 0; i < mt() % events_to_create; ++i) {
 
       queue.emplace_back(create_random_event());
     }
   }
 };
 
-// class Observer {
-//   virtual on_notify(event){}
-// };
-// class ObserverSubject {
-// public:
-//   vector<Observer *> observers;
-//
-// protected:
-//   virtual void notify();
-//   // entity id
-//   // data?
-// };
-
+// KeyObservers contains the observers of a particular event code
+// - the Observers are notified by the EventSystem
 struct KeyObservers {
+
   Code code;
   vector<ID> observers;
 };
 
+// EventObservatory keeps track of all observers of all keys.
+// - EventSystem loops through this so we only have to
+// - iterate through events that something cares about
 struct EventObservatory {
   vector<KeyObservers> entries;
 
@@ -138,16 +157,24 @@ struct EventObservatory {
   }
 };
 
+// EventSystem distributes events to the components that observe that event
 class EventSystem {
-  // is OBSERVED SUBJECT of observer pattern
-  // is OBSERVED BY OBSERVERS (eg input_component)
 
-  // each interesting code has a list of observers
+  // EventSystem has 2 inputs:
+  // - event queue (dependency injected) (maybe better aggregated)
+  // - Observatory (contains observed events + their observers)
+
+  // EventSystem has 1 output:
+  // - needs access to the main entity list (in Game or Global)
   EventObservatory observatory;
 
 public:
   array<Entity, 10> *ents;
+
+  // could put this in Observatory - reduce coupling
+  // - OR have all event interaction go through the System - uniform interface
   void add_observer(Code code, ID obs) { observatory.push_back(code, obs); }
+
   void print_observers() {
     TRACE_GREEN();
     for (auto &entry : observatory.entries) {
@@ -163,19 +190,16 @@ public:
     KeyboardEvent e;
     while (poll_event(&e, queue)) {
       cout << "handling event:" << e.type << endl;
-      // loop container of interesting scancodes
+      // loop container of interesting scancodes in EventObservatory
       // notify observers of that scancode
-      // but want to limit O(n)
       for (auto &entry : observatory.entries) {
         // TODO: make Event inheritance work
         if (e.code == entry.code)
           cout << "code is observed" << endl;
         for (auto obs : entry.observers) {
           // how to send notification with just an ID
-          // the game has an EventSystem
-          // and also a list of Entities
-          // obs.notify(code);
-          // notify observers of that code
+          // game has an EventSystem and a list of Entities
+          // obs.notify(code) - notify observers of that code
           cout << " should notify entity: " << obs << endl;
           (*ents)[obs].notify(entry.code);
         }
@@ -192,8 +216,8 @@ public:
   }
 
   void print_events(const std::deque<KeyboardEvent> &queue) {
-
     TRACE_YELLOW();
+
     for (auto &e : queue) {
       cout << e.type << " ";
     }

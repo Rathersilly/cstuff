@@ -7,11 +7,13 @@
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-CATCH_REGISTER_TAG_ALIAS("[ObjectNotHidden]", "[Object]~[.]");
+CATCH_REGISTER_TAG_ALIAS("[@PoolTemplate]", "[ObjectPool][Object]~[.]");
 // TEST_CASE("Correct Object Pool Size", "[ObjectPool]") {
-TEMPLATE_TEST_CASE("ObjectPool Test", "[ObjectPool][Object][template]",
-                   Object /*, int, (std::tuple<int,float>)*/) {
 
+using MyTypes = std::tuple<int, char, float>;
+TEMPLATE_LIST_TEST_CASE("Test w/ above types", "[template][list]", MyTypes) {}
+
+TEMPLATE_TEST_CASE("ObjectPool Test", "[ObjectPool]", Object /*, int */) {
   // for each section, this code is executed anew
   // ie this is the setup section
 
@@ -38,7 +40,9 @@ TEMPLATE_TEST_CASE("ObjectPool Test", "[ObjectPool][Object][template]",
 
   // SECTION has aliases SCENARIO, GIVEN, WHEN, THEN,
   //                     AND_GIVEN, AND_WHEN, AND_THEN
-  SECTION("Create") {
+  SECTION("Create Uninitialized Pool", "[ObjectPool]") {
+    ObjectPool<TestType> u_pool(10);
+    CHECK(pool)
 
     CHECK(pool.size_ == pool_size);
     cout << pool.check_name(0) << endl;
