@@ -1,0 +1,9 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c"
+    ],
+    "directory": "/home/rsil/code/cstuff/object_pool"
+  }
+]

@@ -1,102 +1,119 @@
 #include <algorithm>
+#include <cstddef>
+#include <cstdlib>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <vector>
 using namespace std;
 
 struct Object {
-  string name_ = "***uninitialized***";
-  int id_;
-  bool in_use_ = false;
+  string name = "none";
+  int id;
+  bool in_use = false;
+  Object *next_free;
 
-  Object *next_unused_;
   Object() {}
-  Object(Object *next_unused) : next_unused_{next_unused} {}
-  Object(Object *next_unused, string name)
-      : next_unused_{next_unused}, name_{name} {}
-  Object(string name, int id) : name_{name}, id_{id} {}
+  Object(Object *next) : next_free{next} {}
+  Object(Object *next, string name) : next_free{next}, name{name} {}
+  Object(string n, int i) : name{n}, id{i} {}
 
-  void create(string name, int id) {
-    name_ = name;
-    id_ = id;
-    in_use_ = true;
+  void reset() { in_use = true; }
+  void reset(string n, int i) {
+    name = n;
+    id = i;
+    in_use = true;
   }
+  void display() { cout << name << " " << id << endl; }
 
-  bool operator<(const Object &s) const { return id_ < s.id_; }
+  bool operator<(const Object &s) const { return id < s.id; }
 };
 
 template <class T> struct ObjectPool {
 public:
-  ObjectPool(int size, bool initialize_ = false) : size_{size} {
-    data_ = static_cast<T *>(malloc(size_ * sizeof(T)));
+  ObjectPool(size_t capacity, bool initialize_ = false)
+      : capacity_{capacity}, num_used_{0} {
+    // this will be delegated to MemoryArena class
+    data_ = static_cast<T *>(malloc(capacity_ * sizeof(T)));
     if (initialize_)
       initialize();
     else
-      first_unused_ = nullptr;
+      free_objects = nullptr;
   }
   ~ObjectPool() { std::free(data_); }
 
-  template <class... Args> T *create(Args &&...args) {
+  template <class... Args> T *acquire(Args &&...args) {
+    if (num_used_ == capacity_)
+      return nullptr;
 
-    if (first_unused_) {
-      auto next_unused_ = first_unused_.next_unused_;
+    T *obj;
+    if (free_objects) { // object exists already
+      obj = free_objects;
+
+    } else { // allocate object into free space
+      obj = new (free_objects) T(std::forward<Args>(args)...);
+      num_allocated_ += 1;
+    }
+    obj->reset(std::forward<Args>(args)...);
+    obj->next_free = free_objects->next_free;
+    free_objects = obj->next_free;
+    ++num_used_;
+    return obj;
+  }
+
+  void release(T *obj) {
+    if (!obj || obj->in_use == false)
+      return;
+    obj->in_use = false;
+    obj->next_free = free_objects;
+    free_objects = obj;
+    --num_used_;
+  }
+
+  void release_all() {
+    for (int i = 0; i < num_allocated_; ++i) {
+      if (data_[i].in_use == true)
+        release(&data_[i]);
     }
   }
 
-  string check_name(int offset) { return (data_[offset].name_); }
-  // create function for if we dont create them all initially
-  //   template <typename... Args>
-  // T* create(Args&&... args) {
-  //     if (used_ >= size_) {
-  //         throw std::bad_alloc(); // pool full
-  //     }
-  //     // placement new constructs in pre-allocated memory
-  //     T* obj = new (&raw[used_]) T(std::forward<Args>(args)...);
-  //     ++used_;
-  //     return obj;
-  // }
-
-// ways of allowing test framework access:
-// remember to compile with -DUNIT_TEST
-#if !defined(UNIT_TEST)
 public:
-#else
-private:
-#endif
-  int max_size_;
-  int size_;
+  // private:
   T *data_;
-  T *first_unused_;
+  T *free_objects;           // linked list of free objects for O(1) acquisition
+  size_t capacity_ = 0;      // maximum num_allocated
+  size_t num_allocated_ = 0; // objects created
+  size_t num_used_ = 0;      // objects in use
 
   // fill our empty memory with blank objects,
   // linked together with "free list" to O(1) find an usable object
-  // TODO: need many validations here
-  // void initialize() {
-  //
-  //   for (int i = 0; i < size_ - 1; ++i) {
-  //     T *temp = new (&data_[i]) T();
-  //     temp->next_unused_ = &data_[i + 1];
-  //     temp->id_ = i;
-  //   }
-  //   T *last = new (&data_[size_ - 1]) T();
-  //   last->next_unused_ = nullptr;
-  //   last->id_ = size_ - 1;
-  //
-  //   first_unused_ = &data_[0];
-  // }
-  // initialize should work if data has 0 objects or max_size -1 objects
-  void initialize() {
-    for (int i = 0; i < size_ - 1; ++i) {
+  void initialize(std::optional<size_t> init_size = nullopt) {
+    size_t free_slots = capacity_ - num_allocated_;
+    if (free_slots == 0)
+      return;
+
+    size_t slots_to_init = init_size.value_or(free_slots);
+
+    for (int i = num_allocated_; i < (num_allocated_ + slots_to_init - 1);
+         ++i) {
       T *temp = new (&data_[i]) T();
-      temp->id_ = i;
-      temp->next_unused_ = &data_[i + 1]; // always valid inside loop
+      temp->id = i;
+      temp->next_free = &data_[i + 1];
     }
 
     // handle last element separately
-    T *last = new (&data_[size_ - 1]) T();
-    last->id_ = size_ - 1;
-    last->next_unused_ = nullptr;
+    T *last = new (&data_[num_allocated_ + slots_to_init - 1]) T();
+    last->id = num_allocated_ + slots_to_init - 1;
+    last->next_free = nullptr;
 
-    first_unused_ = &data_[0];
+    num_allocated_ += slots_to_init;
+    free_objects = &data_[0]; // NOPE what if its in use
   }
+  size_t num_used() const { return num_used_; }
+  size_t capacity() const { return capacity_; }
+  size_t num_free() const { return num_allocated_ - num_used_; }
+  bool is_empty() const { return num_used_ == 0; }
+  bool is_full() const { return capacity_ - num_used_ == 0; }
+  T *data() { return data_; }
+  T *first() { return (num_used_ > 0) ? &data_[0] : nullptr; }
 };

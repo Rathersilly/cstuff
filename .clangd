@@ -1,12 +1,3 @@
-# Top-level flags applied to all files
 CompileFlags:
-  Add: [-std=c++20, -I.]
-
-# Uncommenting this section seems to not work - gives errors on c++20 features
-# Conditional flags for .tpp template files
-# If:
-#   PathMatch: '.*\.tpp$'   # match any .tpp file
-#   CompileFlags:
-#     # Treat .tpp files as C++ headers so clangd parses them correctly
-#     Add: [-xc++-header, -std=c++20, -I.]
-
+  Compiler: clang++
+  Add: [-std=c++20, -I/home/rsil/code/cstuff]
