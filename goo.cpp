@@ -1,23 +1,54 @@
 #include "object_pool.h"
 #include <cstdint>
+#include <fmt/base.h>
 #include <iostream>
+#include <memory>
 
-union S {
-  std::int32_t n;     // occupies 4 bytes
-  std::uint16_t s[2]; // occupies 4 bytes
-  std::uint8_t c;     // occupies 1 byte
-}; // the whole union occupies 4 bytes
+using namespace std;
+using namespace fmt;
+
+class Texture {
+public:
+  int a;
+  int b;
+  Texture() {}
+  Texture(int aa, int bb) : a{aa}, b{bb} { print("ctr\n"); }
+  Texture(Texture const &t) {
+    print("copy ctr\n");
+    a = t.a;
+    b = t.b;
+  }
+  Texture &operator=(const Texture &t) {
+    print("copy ass\n");
+
+    this->a = t.a;
+    this->b = t.b;
+
+    return *this;
+  }
+  Texture(Texture &&t) { print("move ctr\n"); }
+  Texture &operator=(Texture &&t) {
+    print("move ass\n");
+    return *this;
+  }
+};
+template <class T> std::remove_reference_t<T> &&mv(T &other) {
+  return static_cast<std::remove_reference<T> &&>(other);
+}
+
+void delete_texture(Texture &t) { printf("deleting texture\n"); }
 
 int main() {
-  S s = {
-      0x12345678}; // initializes the first member, s.n is now the active member
-  // At this point, reading from s.s or s.c is undefined behavior,
-  // but most compilers define it.
-  std::cout << std::hex << "s.n = " << s.n << '\n';
-
-  s.s[0] = 0x0011; // s.s is now the active member
-  // At this point, reading from s.n or s.c is undefined behavior,
-  // but most compilers define it.
-  std::cout << "s.c is now " << +s.c << '\n' // 11 or 00, depending on platform
-            << "s.n is now " << s.n << '\n'; // 12340011 or 00115678
+  // unique_ptr<Texture, decltype(delete_texture)> ptr;
+  Texture a{1, 2};
+  Texture b{a};
+  Texture c;
+  c = a;
+  Texture d = std::move(a);
+  c = std::move(b);
+  d = std::move(c);
+  fmt::print("{}\n", a.a);
+  fmt::print("{}\n", b.a);
+  fmt::print("{}\n", c.a);
+  fmt::print("{}\n", d.a);
 }

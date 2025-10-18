@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/foo.dir/foo.cpp.o -o foo  /usr/local/lib/libspdlog.a 

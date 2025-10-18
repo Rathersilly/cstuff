@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
   // Period is fraction of second per tick
   // eg duration<double,std::micro> foo
   //
-  // duration<long long,std::nano> asdf = 100ns;
+  // duration<long long,std::nano> asdf{100};
   //   is equivalent to
   // auto foo = 100ns;
   // (std::nano == std::ratio<1,1'000'000'000>')

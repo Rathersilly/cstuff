@@ -1,6 +1,11 @@
+// NOTE: Linking Catch2:
 // g++ -std=c++20 foo.cpp -lCatch2Main -lCatch2
-// This can be a demo of Catch2 - symlinked to Catch2demo.cpp
-#include "object_pool.h"
+
+// TODO: make this an incomplete test of my_vector but show off Catch2 features
+#include "../my_deque/my_deque.h"
+         "
+#include "../my_vector/my_vector.h"
+         "
 #include <clocale>
 #include <color_macros.h>
 

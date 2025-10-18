@@ -1,3 +1,6 @@
+// TODO: show trailing return type and when it might be useful
+// - this was a get/set demo but can be cannibalized
+// - https://google.github.io/styleguide/cppguide.html#Functions
 #include <iostream>
 #include <string>
 #include <vector>

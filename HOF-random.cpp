@@ -11,10 +11,10 @@ using std::cout, std::endl, std::setw;
 
 std::mt19937 _mt{std::random_device{}()};
 
-template <typename N, typename T, typename U>
-void printRandoms(N n, T t, U u = _mt) {
+template <typename N, typename Distribution, typename Generator>
+void printRandoms(N n, Distribution dist, Generator gen = _mt) {
   for (int i = 0; i < 5; ++i) {
-    cout << setw(3) << t(u);
+    cout << setw(3) << dist(gen);
   }
   cout << endl;
 }

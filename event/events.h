@@ -50,6 +50,7 @@ using Code = uint_fast64_t;
 using ID = int_fast64_t;
 
 // temporary - will be unneeded when systems are member of Game
+// Entity is Observer of a code (from an event). It is notified by EventSystem
 struct Entity {
   ID id;
   void notify(Code code) {

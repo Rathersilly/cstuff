@@ -1,12 +1,10 @@
-#include <fstream>
+// super basic roman numerals - no error checking or anything
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
 
-// super basic roman numerals - no error checking or anything
-
 string int_to_roman(int n);
+
 class Roman_int {
 
 public:
