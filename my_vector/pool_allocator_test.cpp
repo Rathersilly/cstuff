@@ -1,4 +1,5 @@
-// TODO: figure out how memory pools work first
+// TODO: create my_pool_allocator.h
+// figure out how memory pools work first
 // could have array of bools with open spaces and allocate to first open space
 // or attempt to keep things contiguous by cache line
 

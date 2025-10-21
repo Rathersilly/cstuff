@@ -2,10 +2,12 @@
 // g++ -std=c++20 foo.cpp -lCatch2Main -lCatch2
 
 // TODO: make this an incomplete test of my_vector but show off Catch2 features
+// take best things from other catch2 files youve made (objectpool, myVector)
+// - plan is to benchmark myVector and myDeque with algorithms
+//
 #include "../my_deque/my_deque.h"
-         "
 #include "../my_vector/my_vector.h"
-         "
+"
 #include <clocale>
 #include <color_macros.h>
 
@@ -13,25 +15,26 @@
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-// template <typename T>
-// void check_node(const T &node, bool expected_in_use, T *expected_next) {
-//   REQUIRE(node.in_use == expected_in_use);
-//   REQUIRE(node.next_free == expected_next);
-// }
-//
-// template <typename T>
-// void check_pool_state(const ObjectPool<T> &pool, size_t expected_used) {
-//   REQUIRE(pool.num_used() == expected_used);
-//   REQUIRE(verify_pool(pool));
-// }
+    // template <typename T>
+    // void check_node(const T &node, bool expected_in_use, T *expected_next) {
+    //   REQUIRE(node.in_use == expected_in_use);
+    //   REQUIRE(node.next_free == expected_next);
+    // }
+    //
+    // template <typename T>
+    // void check_pool_state(const ObjectPool<T> &pool, size_t expected_used) {
+    //   REQUIRE(pool.num_used() == expected_used);
+    //   REQUIRE(verify_pool(pool));
+    // }
 
-// Things to test
-// - Invariants - sizes, list integrity
-// - state changes - acquire, release
-// - edge cases and boundary conditions
-// - errors/misuse - invalid inputs, double release
+    // Things to test
+    // - Invariants - sizes, list integrity
+    // - state changes - acquire, release
+    // - edge cases and boundary conditions
+    // - errors/misuse - invalid inputs, double release
 
-template <typename T> bool verify_pool_invariants(const ObjectPool<T> &pool) {
+    template <typename T>
+    bool verify_pool_invariants(const ObjectPool<T> &pool) {
   CHECK(check_freelist_integrity(pool));
   return pool.num_used() + pool.num_free() == pool.num_allocated();
 }

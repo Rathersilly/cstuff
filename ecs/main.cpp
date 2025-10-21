@@ -15,7 +15,7 @@ public:
   // this should be a type variable
   // OR systems could have a concept/requirements that determine if entity is
   // viewed
-  Component *type
+  Component *type;
 };
 struct PositionComponent {};
 struct TextureComponent {};

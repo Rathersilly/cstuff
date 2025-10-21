@@ -1,5 +1,7 @@
 // g++ -std=c++20 foo.cpp -lCatch2Main -lCatch2
 
+#include <algorithm>
+#include <iterator>
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_test_macros.hpp>
@@ -8,6 +10,8 @@
 #include <random>
 
 std::mt19937 mt{std::random_device{}()};
+std::uniform_int_distribution<int> int_range(0, 9);
+int rdigit() { return int_range(mt); }
 
 TEST_CASE("Merge two sorted vectors", "[merge]") {
 
@@ -55,8 +59,6 @@ TEST_CASE("Merge two sorted vectors", "[merge]") {
 
 TEST_CASE("merge_sort", "[merge_sort]") {
 
-  std::uniform_int_distribution<int> int_range(0, 9);
-  auto rd_num = [int_range]() mutable { return int_range(mt); };
   std::vector<int> a = {1, 3, 2, 5, 4, 7};
   auto b = merge_sort(a);
   // print("{}", a);
@@ -65,21 +67,31 @@ TEST_CASE("merge_sort", "[merge_sort]") {
 
 TEST_CASE("merge_sort_inplace", "[merge_sort]") {
 
-  std::uniform_int_distribution<int> int_range(0, 9);
-  auto rd_num = [int_range]() mutable { return int_range(mt); };
   std::vector<int> a(20);
-  std::generate(a.begin(), a.end(), rd_num);
-  fmt::print("{}", a);
+  std::generate(a.begin(), a.end(), rdigit);
+  // fmt::print("{}", a);
   merge_sort_inplace(a);
   // print("{}", a);
   CHECK(ranges::is_sorted(a));
 }
-TEST_CASE("merge sort benchmark") {
-  std::uniform_int_distribution<int> int_range(0, 9);
-  auto rd_num = [int_range]() mutable { return int_range(mt); };
+TEST_CASE("merge sort benchmark", "[!benchmark]") {
   std::vector<int> a(20);
-  std::generate(a.begin(), a.end(), rd_num);
+  std::generate(a.begin(), a.end(), rdigit);
   auto b = a;
+
   BENCHMARK("Naive Merge Sort") { return merge_sort(a); };
   BENCHMARK("In Place Merge Sort") { return merge_sort_inplace(b); };
+}
+
+TEST_CASE("Merge Sort with Insertion Sort(for small n)", "[insertion_sort]") {
+  vector<int> arr;
+  generate_n(back_inserter(arr), 30, rdigit);
+  print("{}\n", arr);
+
+  auto sorted_arr = merge_and_insertion_sort(arr);
+  print("{}\n", sorted_arr);
+
+  CHECK(std::is_sorted(sorted_arr.begin(), sorted_arr.end()));
+  CHECK(arr.size() == sorted_arr.size());
+  CHECK(std::is_permutation(sorted_arr.begin(), sorted_arr.end(), arr.begin()));
 }

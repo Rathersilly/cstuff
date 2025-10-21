@@ -22,21 +22,6 @@ void print_array(array<int, 8> arr) {
   cout << endl;
 }
 template <class T, class Allocator = std::allocator<T>> class myDeque {
-private:
-public:
-  Allocator m_allocator;
-  static constexpr int block_size = 8;
-  // std::array<array<T, block_size> *, 64> block_map{nullptr};
-  std::array<unique_ptr<array<T, block_size>>, 64> block_map{nullptr};
-  int m_size = 0;
-  int f_block = 32;
-  int b_block = 32;
-
-  int f_index = 0;
-  int watershed = 32; // what if they are all push_fronted?
-  int b_index = 0;
-  void print();
-
 public:
   myDeque() {
     // T *temp = m_allocator.allocate(m_page_size);
@@ -99,9 +84,25 @@ public:
     }
     --m_size;
   }
-  // void push_front(T item) { f_block.push_back(item); }
+
+  // Accessors
   T &front() { return (*block_map[f_block])[f_index]; }
   T &back() { return (*block_map[b_block])[b_index]; }
+
+private:
+public:
+  Allocator m_allocator;
+  static constexpr int block_size = 8;
+  // std::array<array<T, block_size> *, 64> block_map{nullptr};
+  std::array<unique_ptr<array<T, block_size>>, 64> block_map{nullptr};
+  int m_size = 0;
+  int f_block = 32;
+  int b_block = 32;
+
+  int f_index = 0;
+  int watershed = 32; // what if they are all push_fronted?
+  int b_index = 0;
+  void print();
 };
 
 template <class T, class Allocator> void myDeque<T, Allocator>::print() {

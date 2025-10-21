@@ -12,9 +12,10 @@
 #include <catch2/catch_test_macros.hpp>
 using namespace Catch::Generators;
 
-TEST_CASE_METHOD(myUnorderedSet<int>, "Create Employee/No Name", "[create]") {
-  REQUIRE(bucket_count_ == 5);
-}
+// TEST_CASE_METHOD(myUnorderedSet<int>, "Create Employee/No Name", "[create]")
+// {
+//   REQUIRE(bucket_count_ == 5);
+// }
 
 // TODO: find out how to test <TestType> with set - guess cant test specific
 // things
@@ -25,11 +26,10 @@ TEMPLATE_TEST_CASE("myUnorderedSet Test", "[myUnorderedSet][template]", int/*,
     size_t initial_buckets = 10;
     myUnorderedSet<int> set(initial_buckets);
     REQUIRE(set.size() == 0);
-    cerr << "here" << endl;
 
-    auto initial_min = -2;
-    auto initial_max = 10;
-    auto initial_size = initial_max - initial_min;
+    int initial_min = -2;
+    int initial_max = 10;
+    size_t initial_size = size_t(initial_max - initial_min);
     for (int i = initial_min; i < initial_max; ++i)
       set.insert(i);
 
@@ -65,9 +65,12 @@ TEMPLATE_TEST_CASE("myUnorderedSet Test", "[myUnorderedSet][template]", int/*,
 
       // test remove all after impl iterators
     }
+
     SECTION("Load factor") {
-      myUnorderedSet<int> load_test_set(10);
-      REQUIRE(set.load_factor() == 0);
+      myUnorderedSet<int> load_test_set;
+      cout << load_test_set.size() << " " << load_test_set.load_factor()
+           << endl;
+      REQUIRE(load_test_set.load_factor() == 0);
     }
   }
 

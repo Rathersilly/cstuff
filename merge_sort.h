@@ -7,6 +7,18 @@
 
 using namespace std;
 using namespace fmt;
+vector<int> insertion_sort(vector<int> &arr) {
+  // a..i-1 is sorted
+  for (size_t i = 1; i < arr.size(); ++i) {
+    auto key = arr[i]; // value to place into sorted arr
+    size_t j = i - 1;  // j is last sorted index
+    while (j >= 0 && key < arr[j]) {
+      arr[j + 1] = arr[j];
+      --j;
+    }
+    arr[j + 1] = key;
+  }
+}
 
 vector<int> merge(vector<int> &a, vector<int> &b) {
 
@@ -49,6 +61,26 @@ vector<int> merge_sort(vector<int> &arr) {
   return merge(left, right);
 }
 
+vector<int> merge_and_insertion_sort(vector<int> &arr) {
+  // print("merge sort: {}", arr);
+  if (arr.size() <= 1)
+    return arr;
+  if (arr.size() <= 10)
+    return insertion_sort(arr);
+
+  auto mid = arr.begin() + arr.size() / 2;
+
+  vector<int> left(arr.begin(), mid);
+  vector<int> right(mid, arr.end());
+
+  left = merge_sort(left);
+  right = merge_sort(right);
+  // print("{}", left);
+  // print("{}", right);
+  return merge(left, right);
+}
+
+// In place merge sort implementation - uses temp array of size n
 template <typename T>
 void merge_impl(std::vector<T> &arr, size_t left, size_t mid, size_t right,
                 std::vector<T> &temp) {

@@ -1,33 +1,45 @@
 #include <iostream>
+#include <memory>
 #include <vector>
+template <typename T> class CustomAllocator {
+public:
+  using value_type = T;
+  CustomAllocator() noexcept {}
+
+  template <typename U> CustomAllocator(const CustomAllocator<U> &) noexcept {
+    std::cout << "WHAT" << std::endl;
+  }
+
+  T *allocate(std::size_t n) {
+    std::cout << "Allocating " << n << " objects of size " << sizeof(T)
+              << " bytes.\n";
+    return static_cast<T *>(::operator new(n * sizeof(T)));
+  }
+
+  void deallocate(T *p, std::size_t) noexcept {
+    std::cout << "Deallocating memory.\n";
+    ::operator delete(p);
+  }
+
+  template <typename U, typename... Args> void construct(U *p, Args &&...args) {
+    std::cout << "Constructing object.\n";
+    new (p) U(std::forward<Args>(args)...);
+  }
+
+  template <typename U> void destroy(U *p) {
+    std::cout << "Destroying object.\n";
+    p->~U();
+  }
+};
 
 int main() {
-  std::vector<int> v;
-  v.reserve(1000);
+  std::vector<int, CustomAllocator<int>> numbers;
+  std::cout << "Pushing back numbers 1 to 5:\n";
+  for (int i = 1; i <= 5; ++i) {
+    numbers.push_back(i);
+  }
+  std::cout << "\nClearing the vector:\n";
+  numbers.clear();
 
-  std::cout << "Before shrink: " << static_cast<const void *>(v.data())
-            << " capacity=" << v.capacity() << "\n";
-
-  v.resize(10);
-  v.shrink_to_fit();
-
-  std::cout << "After shrink:  " << static_cast<const void *>(v.data())
-            << " capacity=" << v.capacity() << "\n";
-
-  v.reserve(1000);
-
-  std::cout << "Before shrink: " << v.data() << " capacity=" << v.capacity()
-            << "\n";
-
-  v.resize(10);
-  v.shrink_to_fit();
-
-  std::cout << "After shrink:  " << v.data() << " capacity=" << v.capacity()
-            << "\n";
-
-  char str[] = "hello";
-  std::cout << "no cast: " << str
-            << "\nwith cast: " << static_cast<const void *>(str) << "\n";
-  std::cout << "no cast: " << str << "\nwith cast: " << static_cast<void *>(str)
-            << "\n";
+  return 0;
 }

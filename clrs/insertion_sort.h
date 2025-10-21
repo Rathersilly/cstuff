@@ -62,6 +62,8 @@ void insertion_sort(vector<T> &vec, Compare cmp = Compare{}) {
       vec[j + 1] = vec[j]; // key is smaller: shift the tested item up 1
       --j;
     }
-    vec[j + 1] = key; // we've found the proper index for key
+    // we've found the proper index for key
+    // and need to re-increment j since it went 1 too low
+    vec[j + 1] = key;
   }
 }

@@ -1,3 +1,5 @@
+// NOTE: idea here is to make c++ vector with ruby features
+// eg negative indices, manipulating subarrays easily
 #include "my_vector.h"
 #include <vector>
 
