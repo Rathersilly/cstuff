@@ -53,6 +53,7 @@ public:
       mCapacity = space;
     }
   }
+
   void reserve_allocate(int space) {
     TRACE_GREEN();
 

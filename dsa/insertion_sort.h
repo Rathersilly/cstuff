@@ -37,9 +37,9 @@ template <class RandomIt,
               std::less<typename std::iterator_traits<RandomIt>::value_type>>
 void insertion_sort(RandomIt first, RandomIt last, Compare cmp = Compare{}) {
   // TRACE_GREEN();
-  if (first + 1 == last)
+  if (++first == last)
     return;
-  for (auto i = first + 1; i != last; ++i) { // sorted subarray [first,i - 1)
+  for (auto i = first; i != last; ++i) { // sorted subarray [first,i - 1)
     auto key = *i;
     auto j = i;
     while (j != first && cmp(key, *(j - 1))) {
@@ -55,7 +55,7 @@ void insertion_sort(vector<T> &vec, Compare cmp = Compare{}) {
   if (vec.size() <= 1)
     return;
   // loop invariant: A[0,i-1] = sorted subarray
-  for (int i = 1; i < vec.size(); ++i) {
+  for (size_t i = 1; i < vec.size(); ++i) {
     int key = vec[i]; // key is the item to be inserted into sorted subarray
     int j = i - 1;    // j will iterate backward through sorted subarray
     while (j >= 0 && cmp(key, vec[j])) {

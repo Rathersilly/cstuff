@@ -18,6 +18,8 @@ using namespace std;
 
 // TODO: emplace_back
 // reverse iterator
+// make compatible with std algos
+// make logging cleaner - use spdlog i guess
 namespace debug {
 static bool verbosity = true;
 }
@@ -44,7 +46,7 @@ public:
   // Accessors
   const size_t size() const { return m_size; }
   const size_t capacity() const { return m_capacity; }
-  const size_t reserve_factor() const { return m_reserve_factor; }
+  size_t reserve_factor() { return m_reserve_factor; }
 
   virtual T &operator[](size_t index) { return m_data[index]; }
   virtual const T &operator[](size_t index) const { return m_data[index]; }
@@ -162,11 +164,12 @@ template <class T, class Allocator> myVector<T, Allocator>::~myVector() {
     cout << "destructor: ";
     FTRACE_RED();
   }
+
   // destroy each item
   for (size_t i = 0; i < m_size; ++i) {
     std::allocator_traits<Allocator>::destroy(allocator, m_data + i);
   }
-  // free memory
+
   allocator.deallocate(m_data, m_capacity);
 }
 
