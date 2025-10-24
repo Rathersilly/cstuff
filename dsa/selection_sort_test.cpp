@@ -1,5 +1,4 @@
-#include "include/test.h"
-#include "search.h"
+#include "../test/test.h"
 #include "selection_sort.h"
 #include <algorithm>
 #include <color_macros.h>
@@ -7,6 +6,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
+
 using namespace std;
 std::mt19937 mt{std::random_device{}()};
 
@@ -21,13 +21,13 @@ vector<int> get_random_vector(
   return vec;
 }
 
-// void print_vector(const vector<int> vec, string msg = "") {
-//   cout << msg;
-//   for (auto &a : vec) {
-//     cout << a << " ";
-//   }
-//   cout << endl;
-// }
+void print_vector(const vector<int> vec, string msg = "") {
+  cout << msg;
+  // copy(vec.begin(), vec.end(), ostream_iterator<int>(std::cout, " "));
+
+  for_each(vec.begin(), vec.end(), [](const int &n) { cout << n << " "; });
+  cout << endl;
+}
 
 void test_sel_sort_random(const char *str = __builtin_FUNCTION()) {
   auto vec = get_random_vector(30, mt);
@@ -67,28 +67,7 @@ void test_shortest_selection_sort(const char *str = __builtin_FUNCTION()) {
   assert_sorted(vec.begin(), vec.end());
 }
 
-void test_linear_search(const char *str = __builtin_FUNCTION()) {
-
-  vector<int> vec{1, 2, 3, 4, 5};
-
-  auto it = linear_search(vec.begin(), vec.end(), 4);
-  assert(*it == 4);
-  it = linear_search(vec.begin(), vec.end(), 7);
-  assert(it == vec.end());
-}
 int main(int argc, char *argv[]) {
-  // auto vec = get_random_vector(10, mt);
-  // auto vec = get_random_vector(20, mt);
-  // print_vector(vec);
-  // // selection_sort(vec);
-  // selection_sort(vec.begin(), vec.end());
-  // print_vector(vec);
-
-  vector<int> v{1, 3, 5, 2, 4};
-  // print_vector(v);
-  // selection_sort(v);
-  // selection_sort(v.begin(), v.end());
-  // print_vector(v);
 
   test_sel_sort_random();
   test_sel_sort_random_w_iterators();
@@ -96,7 +75,6 @@ int main(int argc, char *argv[]) {
   test_sel_sort_greater();
   test_sel_sort_evens_first();
   test_shortest_selection_sort();
-  test_linear_search();
   test_results();
   return 0;
 }

@@ -26,7 +26,7 @@ public:
   myDeque() {
     // T *temp = m_allocator.allocate(m_page_size);
     block_map[b_block] = make_unique<array<T, block_size>>();
-    m_size == 0;
+    m_size = 0;
   };
   void push_back(T item) {
     // find the correct block

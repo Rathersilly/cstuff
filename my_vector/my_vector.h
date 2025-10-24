@@ -1,10 +1,13 @@
 #pragma once
 
+#include "my_allocator.h"
+// #include "my_log.h"
 #include <color_macros.h>
 #include <initializer_list>
 #include <iostream>
 #include <iterator>
 #include <memory>
+
 using namespace std;
 // TODO: figure out how to split this file and have them still
 // be recognized by clangd
@@ -15,8 +18,8 @@ using namespace std;
 
 // TODO: emplace_back
 // reverse iterator
-namespace my {
-static bool verbosity = false;
+namespace debug {
+static bool verbosity = true;
 }
 template <class T, class Allocator = std::allocator<T>> class myVector {
 public:
@@ -66,16 +69,15 @@ protected:
 // Constructors
 template <class T, class Allocator>
 myVector<T, Allocator>::myVector() : m_size{0}, m_capacity(0), m_data{nullptr} {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "default constructor: ";
-    TRACE_GREEN();
     FTRACE_GREEN();
   }
 }
 
 template <class T, class Allocator>
 myVector<T, Allocator>::myVector(size_t s) : m_size{s}, m_capacity{s} {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "size & default init constructor: ";
     TRACE_GREEN();
   }
@@ -90,17 +92,22 @@ template <class T, class Allocator>
 myVector<T, Allocator>::myVector(std::initializer_list<T> list)
     : m_size{list.size()}, m_capacity(m_size),
       m_data{allocator.allocate(m_size)} {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "initializer_list constructor: ";
     FTRACE_GREEN();
   }
-  std::copy(list.begin(), list.end(), m_data);
+  // std::copy(list.begin(), list.end(), m_data);
+  auto current = m_data;
+  for (const T &item : list) {
+    std::allocator_traits<Allocator>::construct(allocator, current, item);
+    ++current;
+  }
 }
 
 template <class T, class Allocator>
 myVector<T, Allocator>::myVector(const myVector &a)
     : m_size{a.m_size}, m_capacity{m_size}, m_data{allocator.allocate(m_size)} {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "copy constructor: ";
     FTRACE_GREEN();
   }
@@ -110,7 +117,7 @@ myVector<T, Allocator>::myVector(const myVector &a)
 template <class T, class Allocator>
 myVector<T, Allocator>::myVector(myVector &&a)
     : m_size{a.m_size}, m_capacity{a.m_size}, m_data{a.m_data} {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "move constructor: ";
     FTRACE_GREEN();
   }
@@ -119,18 +126,10 @@ myVector<T, Allocator>::myVector(myVector &&a)
   a.m_data = nullptr;
 }
 
-// Destructor
-template <class T, class Allocator> myVector<T, Allocator>::~myVector() {
-  if (my::verbosity) {
-    TRACE_RED();
-  }
-  delete[] m_data;
-}
-
 // copy assignment
 template <class T, class Allocator>
 myVector<T, Allocator> &myVector<T, Allocator>::operator=(const myVector &a) {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "copy assignment: ";
     FTRACE_GREEN();
   }
@@ -145,7 +144,7 @@ myVector<T, Allocator> &myVector<T, Allocator>::operator=(const myVector &a) {
 // move assignment
 template <class T, class Allocator>
 myVector<T, Allocator> &myVector<T, Allocator>::operator=(myVector &&a) {
-  if (my::verbosity) {
+  if (debug::verbosity) {
     cout << "move assignment: ";
     FTRACE_GREEN();
   }
@@ -157,6 +156,20 @@ myVector<T, Allocator> &myVector<T, Allocator>::operator=(myVector &&a) {
   return *this;
 }
 
+// Destructor
+template <class T, class Allocator> myVector<T, Allocator>::~myVector() {
+  if (debug::verbosity) {
+    cout << "destructor: ";
+    FTRACE_RED();
+  }
+  // destroy each item
+  for (size_t i = 0; i < m_size; ++i) {
+    std::allocator_traits<Allocator>::destroy(allocator, m_data + i);
+  }
+  // free memory
+  allocator.deallocate(m_data, m_capacity);
+}
+
 template <class T, class Allocator>
 void myVector<T, Allocator>::reserve(size_t new_capacity) {
   if (new_capacity <= m_capacity) {
@@ -164,9 +177,9 @@ void myVector<T, Allocator>::reserve(size_t new_capacity) {
   }
   T *new_data = allocator.allocate(new_capacity);
   for (size_t i = 0; i < m_size; ++i) {
-    new_data[i] = m_data[i];
+    new_data[i] = std::move(m_data[i]);
   }
-  delete[] m_data;
+  allocator.deallocate(m_data, m_capacity);
   m_data = new_data;
   m_capacity = new_capacity;
 }
@@ -230,11 +243,13 @@ public:
 
   T &operator*() { return *m_pointer; }
   const T &operator*() const { return *m_pointer; }
+
   // pre-increment
   myIterator &operator++() {
     ++m_pointer;
     return *this;
   }
+
   // post-increment
   myIterator operator++(int) {
     myIterator temp = *this;

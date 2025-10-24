@@ -1,26 +1,9 @@
-
-// #include "../test/test.h"
 #include <algorithm>
 #include <color_macros.h>
 #include <iostream>
-#include <thread>
 #include <vector>
 using namespace std;
-inline void print_vector(const vector<int> vec, string msg = "") {
-  cout << msg;
-  for (auto &a : vec) {
-    cout << a << " ";
-  }
-  cout << endl;
-}
-inline void print_vector(const vector<int>::iterator first,
-                         const vector<int>::iterator last, string msg = "") {
-  cout << msg;
-  for (auto a = first; a != last; ++a) {
-    cout << *a << " ";
-  }
-  cout << endl;
-}
+
 template <class Iterator>
 void shortest_selection_sort(Iterator first, Iterator last) {
   for (auto it = first; it != last; ++it) {
@@ -35,7 +18,6 @@ void selection_sort(Iterator first, Iterator last, Compare cmp = Compare{}) {
 
   if (first + 1 >= last)
     return;
-
   for (auto i = first; i != last - 1; ++i) {
     auto smallest_it = i;
     for (auto j = i + 1; j != last; ++j) {
@@ -47,7 +29,6 @@ void selection_sort(Iterator first, Iterator last, Compare cmp = Compare{}) {
     }
     // std::swap(*smallest_it, *i);
     std::iter_swap(smallest_it, i);
-    print_vector(first, last);
   }
 }
 
@@ -67,6 +48,5 @@ void selection_sort(vector<T> &vec, Compare cmp = Compare{}) {
     // printf("Swap: %i, %i\n", vec[smallest_index], vec[i]);
 
     std::swap(vec[smallest_index], vec[i]);
-    // print_vector(vec);
   }
 }

@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace fmt;
-vector<int> insertion_sort(vector<int> &arr) {
+void insertion_sort(vector<int> &arr) {
   // a..i-1 is sorted
   for (size_t i = 1; i < arr.size(); ++i) {
     auto key = arr[i]; // value to place into sorted arr
@@ -66,7 +66,8 @@ vector<int> merge_and_insertion_sort(vector<int> &arr) {
   if (arr.size() <= 1)
     return arr;
   if (arr.size() <= 10)
-    return insertion_sort(arr);
+    insertion_sort(arr);
+  return arr;
 
   auto mid = arr.begin() + arr.size() / 2;
 

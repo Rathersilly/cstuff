@@ -46,7 +46,6 @@ struct my_iterator_traits<T *, std::enable_if_t<std::is_object_v<T>>> {
   using value_type = T;
   using pointer = T *;
   using reference = T &;
-  using iterator_category = std::random_access_iterator_tag;
 };
 
 template <class BidirIt> void my_reverse(BidirIt first, BidirIt last) {

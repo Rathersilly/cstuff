@@ -1,17 +1,26 @@
 // g++ -std=c++20 foo.cpp -lCatch2Main -lCatch2
 
+#include "merge_sort.h"
+
 #include <algorithm>
 #include <iterator>
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "merge_sort.h"
+#include <fmt/base.h> // NOTE: link -lfmt
+#include <fmt/ranges.h>
 #include <random>
 
 std::mt19937 mt{std::random_device{}()};
 std::uniform_int_distribution<int> int_range(0, 9);
 int rdigit() { return int_range(mt); }
+
+void print_v(const vector<int> vec) {
+
+  for_each(vec.begin(), vec.end(), [](const int &n) { printf("%d ", n); });
+  printf("\n");
+}
 
 TEST_CASE("Merge two sorted vectors", "[merge]") {
 
@@ -25,24 +34,18 @@ TEST_CASE("Merge two sorted vectors", "[merge]") {
   CHECK(ranges::is_sorted(result));
   CHECK(result.size() == a.size() + b.size());
 
-  // print("{}", a);
-  // print("{}", b);
-  // result = merge(a, c);
-  // CHECK(ranges::is_sorted(result));
-  // CHECK(result.size() == a.size() + c.size());
-  // result = merge(b, c);
-  // CHECK(ranges::is_sorted(result));
-  // CHECK(result.size() == b.size() + c.size());
-  // result = merge(a, d);
-  // CHECK(ranges::is_sorted(result));
-  // CHECK(result.size() == a.size() + d.size());
-  // result = merge(b, d);
-  // CHECK(ranges::is_sorted(result));
-  // CHECK(result.size() == b.size() + d.size());
-  // c = {};
-  // result = merge(c, d);
-  // CHECK(ranges::is_sorted(result));
-  // CHECK(result.size() == c.size() + d.size());
+  for (int i = 0; i < 10; ++i) {
+    std::vector<int> a;
+    std::vector<int> b;
+    a.reserve(200);
+    b.reserve(200);
+    std::generate(a.begin(), a.end(), rdigit);
+    std::generate(b.begin(), b.end(), rdigit);
+    std::sort(a.begin(), a.end());
+    std::sort(b.begin(), b.end());
+    auto c = merge(a, b);
+    CHECK(is_sorted(c.begin(), c.end()));
+  }
 
   auto rd_increment = [count = 0]() mutable { return count += mt() % 10; };
   for (int i = 0; i < 10; ++i) {
@@ -74,6 +77,7 @@ TEST_CASE("merge_sort_inplace", "[merge_sort]") {
   // print("{}", a);
   CHECK(ranges::is_sorted(a));
 }
+
 TEST_CASE("merge sort benchmark", "[!benchmark]") {
   std::vector<int> a(20);
   std::generate(a.begin(), a.end(), rdigit);
@@ -84,12 +88,27 @@ TEST_CASE("merge sort benchmark", "[!benchmark]") {
 }
 
 TEST_CASE("Merge Sort with Insertion Sort(for small n)", "[insertion_sort]") {
+
+  SECTION("Small Array only uses insertion_sort") {
+
+    vector<int> arr;
+    generate_n(back_inserter(arr), 5, rdigit);
+    print("sorted: {}\n", arr);
+    auto sorted_arr = merge_and_insertion_sort(arr);
+    print("sorted: {}\n", sorted_arr);
+    CHECK(std::is_sorted(sorted_arr.begin(), sorted_arr.end()));
+    CHECK(arr.size() == sorted_arr.size());
+    CHECK(
+        std::is_permutation(sorted_arr.begin(), sorted_arr.end(), arr.begin()));
+  }
+
   vector<int> arr;
   generate_n(back_inserter(arr), 30, rdigit);
-  print("{}\n", arr);
+  print("array: {}\n", arr);
 
   auto sorted_arr = merge_and_insertion_sort(arr);
-  print("{}\n", sorted_arr);
+  print("sorted: {}\n", sorted_arr);
+  print_v(sorted_arr);
 
   CHECK(std::is_sorted(sorted_arr.begin(), sorted_arr.end()));
   CHECK(arr.size() == sorted_arr.size());

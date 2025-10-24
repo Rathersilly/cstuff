@@ -1,6 +1,6 @@
 // #include "insertion_sort.h"
 
-#include "../foo.h"
+#include "insertion_sort.h"
 #include <algorithm>
 #include <fmt/color.h>
 #include <fmt/format.h>
@@ -23,13 +23,5 @@ TEST_CASE("Insertion Sort") {
   print("{}", arr);
   insertion_sort(arr);
   print("{}", arr);
-  CHECK(std::is_sorted(arr.begin(), arr.end()));
-}
-TEST_CASE("Merge Sort with Insertion Sort") {
-  vector<int> arr;
-  generate_n(back_inserter(arr), 30, [] { return mt() % 10; });
-  print("{}\n", arr);
-  arr = merge_sort(arr);
-  print("{}\n", arr);
   CHECK(std::is_sorted(arr.begin(), arr.end()));
 }
