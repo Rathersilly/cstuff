@@ -131,9 +131,16 @@ int main() {
 
   shapes.push_back([&] { circle.draw(); });
   shapes.push_back([&] { square.draw(); });
+  // TODO: add std::any - since std::function<void()> is for only for one fn sig
 
   for (auto &draw_fn : shapes)
     draw_fn();
+
+  // NOTE:recall how class member functions are translated by the compiler:
+  // circle.draw() becomes draw(&circle)
+  // eg the circle.draw() has an implicit "this" as the first argument
+  // so we can store a member function like so:
+  auto bound_member_callback = std::bind(&Circle::draw, &circle);
 
   // this achieves something that is natural for dynamic typed languages
   // eg in ruby:

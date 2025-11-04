@@ -122,6 +122,7 @@ public:
 
 // KeyObservers contains the observers of a particular event code
 // - the Observers are notified by the EventSystem
+// - TODO: this could be a std::map in EventObservatory
 struct KeyObservers {
 
   Code code;
@@ -131,10 +132,14 @@ struct KeyObservers {
 // EventObservatory keeps track of all observers of all keys.
 // - EventSystem loops through this so we only have to
 // - iterate through events that something cares about
+// -
 struct EventObservatory {
+
   vector<KeyObservers> entries;
 
+  // this could be called "subscribe"
   void push_back(Code code, ID id) {
+
     // find entry with code == code
     for (auto &entry : entries) {
       // code is being observed by something

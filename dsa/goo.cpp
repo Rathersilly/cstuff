@@ -5,6 +5,7 @@
 #include <iostream>
 #include <numeric>
 #include <random>
+#include <stack>
 #include <vector>
 using namespace fmt;
 using namespace std;
@@ -35,19 +36,12 @@ private:
 };
 
 int main(int argc, char *argv[]) {
-  vector<int> v(10);
-  std::iota(v.begin(), v.end(), 0);
-  std::shuffle(v.begin(), v.end(), mt);
-  vector<int> v2(10);
-  std::generate(v2.begin(), v2.end(), [] { return mt() % 1000; });
-  // auto sorted = some_sort(v);
 
-  vector<int> memo(10);
-  for (size_t i = 0; i < v2.size(); ++i) {
-    memo[(v2[i] / 1) % 10]++;
-  }
-  print("{}\n", v2);
-  print("{}\n", memo);
-  //
-  ////
+  std::stack<int> s;
+  s.push(1);
+  print("{}", s.top());
+  s.pop();
+  print("{}", s.top());
+  s.pop();
+  print("{}", s.top());
 }

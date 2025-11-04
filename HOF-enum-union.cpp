@@ -3,7 +3,6 @@
 // - show what happens - does it properly const/dest when switching?
 // - also show std::get and std::visit which are related
 #include <iostream>
-#include <string>
 using namespace std;
 
 // scoped enum
@@ -66,7 +65,7 @@ int main() {
   union Number { // this union has size 4 (short is 2, int is 4)
     short s;
     int i;
-  } num; // this/ isFoo same as having Number num; on the next line
+  } num; // this is the same as having Number num; on the next line
 
   // assigning to non-first union member will overwrite earlier members
   num.i = 0xaabbccdd;
@@ -108,7 +107,7 @@ int main() {
   // eg switch(event.type)
   // case SDL_EVENT_KEY_DOWN
 
-  // unions can be anonymous
+  // unions can be anonymous - best used in a class or namespace
   union {
     short a;
     int i;
