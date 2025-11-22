@@ -10,7 +10,6 @@
 // slicing, dynamic_cast, combining friend and virtual functions,
 // pointers to members/data members
 //
-#include "my_helpers.h"
 #include <color_macros.h> // for PFUN (prints __PRETTY_FUNCTION__) etc.
 #include <iostream>
 #include <string>

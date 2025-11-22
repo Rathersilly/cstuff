@@ -1,7 +1,7 @@
 // simple implementation of Godot-like signals with callbacks
 // tag observer pattern
 //
-// TODO: create this funcitonality:
+// TODO: create this functionality:
 // player.hit.connect(_on_player_hit.bind("sword", 100))
 // 	- will need the signal to be an object with a connect function
 #include <any>

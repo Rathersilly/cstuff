@@ -3,13 +3,11 @@
 //
 // duplicate keys are INVALID; duplicate values are VALID
 // keys are stored in order - in red black tree
-#include "my_helpers.h"
 #include <algorithm>
 #include <iostream>
 #include <map>
 
 using namespace std;
-using namespace my;
 
 int main(int argc, char *argv[]) {
   map<int, string> students;

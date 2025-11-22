@@ -4,6 +4,7 @@
 // TODO: so much
 //
 //
+#include <color_macros.h>
 #include <functional> // std::function
 #include <iostream>
 #include <string>
@@ -31,12 +32,12 @@ private:
 
 public:
   my_unique_ptr(T *t = nullptr) : curr{t}, deleter{my_default_deleter<T>{}} {
-    PFUN;
+    TRACE();
     cout << "my_unique_ptr (T *t) ctor" << endl;
   }
 
   my_unique_ptr(T *t, D d) : curr{t}, deleter{d} {
-    PFUN;
+    TRACE();
     cout << "my_unique_ptr (T *t, D d) ctor" << endl;
   }
   // copying is no bueno. It's my_UNIQUE_ptr

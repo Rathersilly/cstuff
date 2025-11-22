@@ -7,6 +7,8 @@
 #include <unordered_set>
 using namespace std;
 // TODO: find out how to use this as/with custom allocator
+// poolable? should that be an aggregate to another class?
+//
 
 struct Object {
   Object *next_free = nullptr;

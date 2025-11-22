@@ -57,3 +57,5 @@ logs/
 # vscode configs
 .vscode/
 
+_REVIEW_LIST.txt
+

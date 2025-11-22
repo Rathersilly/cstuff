@@ -1,11 +1,15 @@
 #pragma once
 #include <array>
 #include <color_macros.h>
-#include <filesystem>
 #include <iostream>
 #include <memory>
-#include <vector>
+
+// TODO: implement and test push_front
+// make watershed like floating point or circular
+// currently watershed just puts half the blocks before
+// and half after the first inserted item
 using namespace std;
+
 // multiple ways to implement deque
 // std::deque apparently keeps array of pointers to blocks
 // stores first pointer halfway up the array to allow push_front to allocate

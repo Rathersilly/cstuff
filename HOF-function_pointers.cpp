@@ -110,6 +110,8 @@ int main() {
   } functor;
 
   // 1. std::function interface allows different callables in a container:
+  // TODO: add std::any - since std::function<void()> is for only for one fn sig
+
   std::vector<std::function<void(int)>> vec;
   vec.push_back(foo);
   vec.push_back(lambda);
@@ -131,7 +133,6 @@ int main() {
 
   shapes.push_back([&] { circle.draw(); });
   shapes.push_back([&] { square.draw(); });
-  // TODO: add std::any - since std::function<void()> is for only for one fn sig
 
   for (auto &draw_fn : shapes)
     draw_fn();

@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <concepts>
 #include <fmt/format.h>
 #include <fmt/ranges.h>
 #include <random>
@@ -11,9 +12,14 @@ std::mt19937 mt{random_device{}()};
 std::uniform_int_distribution<int> d3(0, 3);
 int r3() { return d3(mt); };
 
-// Move zeros to endo of container
-// -- TODO: make this require T be comparable to 0 with concept
-template <typename T, int N> void move_zeros_to_end(array<T, N> &arr) {
+template <typename T>
+concept ZeroComparable = requires(T t) {
+  { t == 0 } -> std::convertible_to<bool>;
+  { 0 == t } -> std::convertible_to<bool>;
+};
+
+// Move zeros to end of container
+template <ZeroComparable T, size_t N> void move_zeros_to_end(array<T, N> &arr) {
 
   auto last_nonzero_index = arr.size() - 1;
   while (last_nonzero_index >= 0 && arr[last_nonzero_index] == 0)

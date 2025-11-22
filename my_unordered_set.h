@@ -26,10 +26,10 @@ template <class T> void print_vector(const vector<T> &v) {
 
 template <class Key, class Hash = std::hash<Key>,
           class KeyEqual = std::equal_to<Key>>
-class myUnorderedSet {
+class MyUnorderedSet {
 
 public:
-  myUnorderedSet(size_t buckets = 5) : m_size{0}, m_bucket_count{buckets} {
+  MyUnorderedSet(size_t buckets = 5) : m_size{0}, m_bucket_count{buckets} {
     m_table.resize(buckets);
   }
 

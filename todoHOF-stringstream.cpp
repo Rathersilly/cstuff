@@ -1,6 +1,7 @@
 // todo - learn about state
 // find out if this would make a good queue
 #include <color_macros.h>
+#include <iostream>
 #include <sstream>
 #include <string>
 /* #include <string_view> */

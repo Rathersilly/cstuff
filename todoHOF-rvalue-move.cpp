@@ -26,21 +26,21 @@ public:
 };
 
 int main(int argc, char *argv[]) {
-  Foo foo;
+  Foo foo{8};
   Foo foo2;
   int a = 2;
   int b = a;
-  cout << a << endl;
-  cout << b << endl;
+  cout << a << endl; // 2
+  cout << b << endl; // 2
 
   // this does same as int c = a.
   // a is unaffected
   int c = static_cast<int &&>(a);
-  cout << a << endl;
-  cout << c << endl;
+  cout << a << endl; // 2
+  cout << c << endl; // 2
   a = 7;
-  cout << a << endl;
-  cout << c << endl;
+  cout << a << endl; // 7
+  cout << c << endl; // 2
   foo2 = static_cast<Foo &&>(foo);
   cout << foo.x;
   cout << foo2.x;
@@ -53,18 +53,19 @@ int main(int argc, char *argv[]) {
   Goo goo2(goo); // goo2's elem points to goo's
   Goo goo3 = static_cast<Goo &&>(goo);
   Goo goo4 = std::move(goo);
-  cout << goo.elem[2];
-  cout << goo2.elem[2];
-  cout << goo3.elem[2];
+  cout << goo.elem[2];  // 2
+  cout << goo2.elem[2]; // 2
+  cout << goo3.elem[2]; // 2
+  cout << "\n*****" << endl;
   goo2.elem[2] = 7;
   goo3.elem[2] = 9;
-  cout << goo.elem[2];
-  cout << goo2.elem[2];
-  cout << goo3.elem[2];
+  cout << goo.elem[2];  // 9
+  cout << goo2.elem[2]; // 9
+  cout << goo3.elem[2]; // 9
   goo4.elem[2] = 8;
-  cout << goo.elem[2];
-  cout << goo2.elem[2];
-  cout << goo3.elem[2];
+  cout << goo.elem[2];  // 8
+  cout << goo2.elem[2]; // 8
+  cout << goo3.elem[2]; // 8
   std::string str = "Salut";
   std::vector<std::string> v;
 
@@ -72,7 +73,7 @@ int main(int argc, char *argv[]) {
   // uses the push_back(const T&) overload, which means
   // we'll incur the cost of copying str
   v.push_back(str);
-  std::cout << "After copy, str is " << std::quoted(str) << '\n';
+  std::cout << "\nAfter copy, str is " << std::quoted(str) << '\n';
 
   // uses the rvalue reference push_back(T&&) overload,
   // which means no strings will be copied; instead, the contents

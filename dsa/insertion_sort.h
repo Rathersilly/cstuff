@@ -25,7 +25,7 @@ void insertion_sort(BidirIt first, BidirIt last, Compare cmp = Compare{}) {
   if (second == last)
     return;
   for (auto i = second; i != last; ++i) { // sorted subarray [first,i - 1)
-    auto key = *i;                        // key is value we are inserting
+    auto key = *i;                        // key is val// ue we are inserting
     auto key_pos = i;        // current position of value we are inserting
     auto test_pos = key_pos; // we compare test_pos vs key_pos
     --test_pos;              // test_pos is index to left of key_pos

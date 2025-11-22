@@ -59,6 +59,8 @@ struct Entity {
   }
 };
 
+// Godot i think just calls similar structures "Actions"
+// they are a string that's linked to a keypress, mouse click, etc
 struct KeyboardEvent {
   Tick timestamp;
   string type = "KeyboardEvent"s;

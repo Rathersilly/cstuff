@@ -1,102 +1,156 @@
-// simple implementation of Godot-like signals with callbacks
-// tag observer pattern
-//
-// TODO: create this funcitonality:
-// player.hit.connect(_on_player_hit.bind("sword", 100))
-// 	- will need the signal to be an object with a connect function
-#include <any>
-#include <functional>
 #include <iostream>
-#include <list>
-#include <unordered_map>
-#include <vector>
-
+#include <queue>
+#include <stack>
 using namespace std;
+class BinaryTree {
 
-// struct Signal {
-//   enum Type { qwer, asdf };
-//   Type type;
-// };
-// Signal is not needed, it can just be a string
-enum class Signal { qwer, asdf, zxcv };
-using Callback = std::function<void()>;
-class Object;
+  struct Node {
+    char data;
+    Node *left = nullptr;
+    Node *right = nullptr;
+  };
 
-// consider any with any_cast to have callbacks with different signatures
-// using Callback = std::any;
-
-// since observer, signal, and callback are linked logically, struct seems good
-struct Connection {
-  Object *observer;
-  Signal signal;
-  Callback fun;
-};
-
-// or alternatively to Connection,
-// struct Subscriber {
-//   Object *watcher;
-//   Callback fun;
-// };
-//
-// and then in Object, have container:
-// std::unordered_map<Signal, std::list<Subscriber>> signal_subscribers;
-// or we can make signal be a string:
-// std::unordered_map<std::string, std::list<Subscriber>> signal_subscribers;
-
-class Object {
+private:
+  Node *root;
+  void preorder(Node *ptr);
+  void inorder(Node *ptr);
+  void postorder(Node *ptr);
+  int height(Node *ptr);
+  void display(Node *ptr, int level);
+  Node *construct(char *in, char *pre, int num);
+  Node *construct1(char *in, char *post, int num);
 
 public:
-  std::list<Connection> connections;
-  void emit(const Signal &signal) {
-    for (auto &conn : connections) {
-      if (conn.signal == signal) {
-        conn.fun();
-      }
-    }
-  };
+  BinaryTree() : root{nullptr} {}
+  ~BinaryTree() {};
+  bool isEmpty();
+  void createTree();
+  void preorder();
+  void inorder();
+  void postorder();
+  void levelOrder();
+  int height();
+  void nrecPreorder();
+  void nrecInorder();
+  void nrecPostorder();
+  void construct(char *in, char *pre);
+  void construct1(char *in, char *post);
+  void display();
+  void nrec_preorder();
+  void nrec_inorder();
+  // void nrec_postorder();
+  void nrec_postorder_two_stack();
+  void levelorder();
 
-  void connect_to(Object &other, Signal signal, Callback fun) {
-    other.connections.emplace_back(&other, signal, std::move(fun));
-  }
-
-  static void print_int(int num) {
-    cout << num << "\t\t" << __PRETTY_FUNCTION__ << endl;
-  }
-  void say_hi() { cout << "hi from " << __PRETTY_FUNCTION__ << endl; }
-  static void some_static_function() {
-    cout << "hi from " << __PRETTY_FUNCTION__ << endl;
-  }
+  void visit(Node *n) { cout << n->data; };
 };
 
-int main(int argc, char *argv[]) {
-  Object foo;
-  Object bar;
-  auto fun = [] {
-    cout << "hi" << endl;
-    return;
-  };
-  Signal qwer{Signal::qwer};
-  Signal asdf{Signal::asdf};
-  Signal zxcv{Signal::zxcv};
-  bar.connect_to(foo, qwer, fun);
-  foo.emit(qwer);
+void BinaryTree::createTree() {
+  // root = new Node('P');
+  // root->left = new Node('Q');
+  // root->right = new Node('R');
+  // root->left->left = new Node('A');
+  // root->left->right = new Node('B');
+  // root->right->left = new Node('X');
+  // Srivistava pg 519
+  root = new Node('A');
+  root->left = new Node('B');
+  root->right = new Node('C');
+  root->left->left = new Node('D');
+  root->left->right = new Node('E');
+  root->right->left = new Node('F');
+  root->right->right = new Node('G');
 
-  bar.connect_to(foo, asdf, Object::some_static_function);
-  foo.emit(asdf);
+  root->left->left->right = new Node('H');
+  root->right->left->left = new Node('I');
+  root->right->right->left = new Node('J');
+  root->right->right->right = new Node('K');
+} // End of createTree(
 
-  // to use Class member function as a callback:
-  // 1. Lambda
-  auto lambda_member_callback = [&foo]() { foo.say_hi(); };
+void BinaryTree::preorder() {
+  Node *ptr = root;
+  stack<Node *> s;
+  s.push(ptr);
+  while (!s.empty()) {
+    ptr = s.top();
+    s.pop();
+    visit(ptr);
 
-  // 2. std::bind
-  // class member functions have an implicit "this" as first argument
-  // eg compiler translates bar.say_hi() to say_hi(&bar)
-  Callback bound_member_callback = std::bind(&Object::say_hi, &bar);
+    if (ptr->right)
+      s.push(ptr->right);
+    if (ptr->left)
+      s.push(ptr->left);
+  }
+  cout << '\n';
+}
 
-  bar.connect_to(foo, zxcv, bound_member_callback);
-  bar.connect_to(foo, zxcv, lambda_member_callback);
-  bar.connect_to(foo, zxcv, std::bind(Object::print_int, 2));
+void BinaryTree::inorder() {
+  Node *ptr = root;
+  stack<Node *> s;
+  while (ptr || !s.empty()) {
+    while (ptr) {
+      s.push(ptr);
+      ptr = ptr->left;
+    }
+    ptr = s.top();
+    s.pop();
+    visit(ptr);
 
-  foo.emit(zxcv);
-  return 0;
+    ptr = ptr->right;
+  }
+  cout << '\n';
+}
+
+void BinaryTree::postorder() {
+  Node *ptr = root;
+  stack<Node *> s;
+  stack<Node *> output;
+  s.push(ptr);
+  while (!s.empty()) {
+    ptr = s.top();
+    s.pop();
+    output.push(ptr);
+
+    if (ptr->left)
+      s.push(ptr->left);
+    if (ptr->right)
+      s.push(ptr->right);
+  }
+  while (!output.empty()) {
+
+    cout << output.top()->data;
+    output.pop();
+  }
+  cout << '\n';
+}
+
+void BinaryTree::levelorder() {
+  Node *ptr = root;
+  queue<Node *> q;
+  q.push(ptr);
+  while (!q.empty()) {
+    ptr = q.front();
+    q.pop();
+    visit(ptr);
+    if (ptr->left)
+      q.push(ptr->left);
+    if (ptr->right)
+      q.push(ptr->right);
+  }
+  cout << '\n';
+}
+
+int main() {
+  BinaryTree tree;
+  tree.createTree();
+  tree.preorder();   // ABDHECFIGJK
+  tree.inorder();    // DHBEAIFCJGK
+  tree.postorder();  // HDEBIFJKGCA
+  tree.levelorder(); // ABCDEFGHIJK
+
+  string inorder_string = " ABDHECFIGJK"; // sriv p 537
+  string preorder_string = "DHBEAIFCJGK";
+
+  string inorder_string2 = "HIDJEBKFGCA";
+  string post_order_string2 = "HDIBEJAKFCG";
 }

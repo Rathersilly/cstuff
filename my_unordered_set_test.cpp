@@ -1,30 +1,37 @@
 // g++ -std=c++20 foo.cpp -lCatch2Main -lCatch2
 // NOTE: this could become reference for Catch2
 #include "my_unordered_set.h"
+#include <algorithm>
 #include <catch2/generators/catch_generators.hpp>
 #include <catch2/generators/catch_generators_adapters.hpp>
 #include <catch2/internal/catch_section.hpp>
 #include <color_macros.h>
+#include <fstream>
 #include <limits>
+#include <random>
+std::mt19937 mt{std::random_device{}()};
+std::uniform_int_distribution rd_char{65, 90};
 
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_test_macros.hpp>
+using std::string;
+
 using namespace Catch::Generators;
 
-// TEST_CASE_METHOD(myUnorderedSet<int>, "Create Employee/No Name", "[create]")
+// TEST_CASE_METHOD(MyUnorderedSet<int>, "Create Employee/No Name", "[create]")
 // {
 //   REQUIRE(bucket_count_ == 5);
 // }
 
 // TODO: find out how to test <TestType> with set - guess cant test specific
 // things
-TEMPLATE_TEST_CASE("myUnorderedSet Test", "[myUnorderedSet][template]", int/*,
-                   string , int, (std::tuple<int,float>)*/) {
+TEMPLATE_TEST_CASE("MyUnorderedSet Test", "[MyUnorderedSet][template]", int/*,
+                   std::string , int, (std::tuple<int,float>)*/) {
 
   SECTION("Integers") {
     size_t initial_buckets = 10;
-    myUnorderedSet<int> set(initial_buckets);
+    MyUnorderedSet<int> set(initial_buckets);
     REQUIRE(set.size() == 0);
 
     int initial_min = -2;
@@ -67,7 +74,7 @@ TEMPLATE_TEST_CASE("myUnorderedSet Test", "[myUnorderedSet][template]", int/*,
     }
 
     SECTION("Load factor") {
-      myUnorderedSet<int> load_test_set;
+      MyUnorderedSet<int> load_test_set;
       cout << load_test_set.size() << " " << load_test_set.load_factor()
            << endl;
       REQUIRE(load_test_set.load_factor() == 0);
@@ -75,7 +82,7 @@ TEMPLATE_TEST_CASE("myUnorderedSet Test", "[myUnorderedSet][template]", int/*,
   }
 
   // SECTION("Strings") {}
-  // myUnorderedSet<string> sset;
+  // MyUnorderedSet<string> sset;
   // sset.insert("hello");
   // sset.insert("hi");
   // sset.insert("whatsup");
@@ -91,4 +98,40 @@ TEMPLATE_TEST_CASE("myUnorderedSet Test", "[myUnorderedSet][template]", int/*,
       // cout << "sections can be nested to share setup" << endl;
     }
   }
+}
+TEST_CASE("Strings", "[MyUnorderedSet][string]") {
+  auto dict_filename = "/usr/share/dict/american-english";
+  std::ifstream dict{dict_filename};
+
+  vector<std::string> words;
+  std::string current_word;
+  while (std::getline(dict, current_word)) {
+    words.push_back(current_word);
+  }
+
+  auto invalid_word = [](const std::string &word) -> bool {
+    if (word.size() < 2)
+      return false;
+    char second_last = word[word.size() - 2];
+    char last = word[word.size() - 1];
+    bool invalid = second_last == '\'' && last == 's';
+    // cout << second_last << last << " " << invalid << endl;
+    return invalid;
+  };
+  words.erase(std::remove_if(words.begin(), words.end(), invalid_word),
+              words.end());
+
+  vector<std::string> word_vector;
+  std::sample(words.begin(), words.end(), std::back_inserter(word_vector), 10,
+              mt);
+  for (auto w : word_vector) {
+    cout << w << " ";
+  }
+
+  size_t initial_buckets = 10;
+
+  MyUnorderedSet<string> set(initial_buckets);
+
+  set.insert("alice");
+  CHECK(set.contains("alice") == true);
 }

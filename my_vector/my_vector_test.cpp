@@ -1,6 +1,5 @@
 #include "my_vector.h"
 #include "ruby_vector.h"
-#include <catch2/matchers/catch_matchers.hpp>
 #include <color_macros.h>
 #include <cstdio>
 #include <initializer_list>
@@ -11,6 +10,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers.hpp>
 using namespace Catch::Matchers; // for StartsWith()
 
 // TODO: this is only half done

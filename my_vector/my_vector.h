@@ -19,7 +19,7 @@ using namespace std;
 // TODO: emplace_back
 // reverse iterator
 // make compatible with std algos
-// make logging cleaner - use spdlog i guess
+// make logging? - use spdlog i guess
 namespace debug {
 static bool verbosity = true;
 }
@@ -48,8 +48,8 @@ public:
   const size_t capacity() const { return m_capacity; }
   size_t reserve_factor() { return m_reserve_factor; }
 
-  virtual T &operator[](size_t index) { return m_data[index]; }
-  virtual const T &operator[](size_t index) const { return m_data[index]; }
+  T &operator[](size_t index) { return m_data[index]; }
+  const T &operator[](size_t index) const { return m_data[index]; }
 
   // Member Functions
   void reserve(size_t new_capacity);
